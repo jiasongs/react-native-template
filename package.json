@@ -1,0 +1,51 @@
+{
+    "name": "template",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node node_modules/react-native/local-cli/cli.js start",
+        "test": "jest"
+    },
+    "dependencies": {
+        "jcore-react-native": "^1.2.6",
+        "jpush-react-native": "^2.2.3",
+        "jshare-react-native": "^1.3.2",
+        "mobx": "^4.3.0",
+        "mobx-react": "^5.1.2",
+        "moment": "^2.22.1",
+        "query-string": "^6.1.0",
+        "react": "^16.3.1",
+        "react-native": "0.55.4",
+        "react-native-camera": "^1.1.4",
+        "react-native-device-info": "^0.21.5",
+        "react-native-fetch-blob": "^0.10.8",
+        "react-native-fs": "^2.9.12",
+        "react-native-iap": "^1.0.6",
+        "react-native-image-picker": "^0.26.10",
+        "react-native-orientation": "^3.1.3",
+        "react-native-permissions": "^1.1.1",
+        "react-native-puti-pay": "^1.0.2",
+        "react-native-qr-scanner": "^1.2.2",
+        "react-native-shake-event": "^4.0.1",
+        "react-native-slider": "^0.11.0",
+        "react-native-spinkit": "^1.1.1",
+        "react-native-splash-screen": "^3.0.6",
+        "react-native-storage": "^0.2.2",
+        "react-native-syan-image-picker": "^0.1.6",
+        "react-native-video": "^2.0.0",
+        "react-navigation": "^2.0.4",
+        "teaset": "^0.5.6"
+    },
+    "devDependencies": {
+        "babel-jest": "23.0.1",
+        "babel-plugin-transform-decorators-legacy": "^1.3.4",
+        "babel-preset-react-native": "4.0.0",
+        "babel-preset-react-native-stage-0": "^1.0.1",
+        "babel-preset-stage-2": "^6.24.1",
+        "jest": "23.0.1",
+        "react-test-renderer": "^16.3.1"
+    },
+    "jest": {
+        "preset": "react-native"
+    }
+}

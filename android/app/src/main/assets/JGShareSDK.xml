@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevInfor>
+
+    <!-- 如果不需要支持某平台，可缺省该平台的配置-->
+
+    <SinaWeibo
+        AppKey="新浪微博的 AppKey"
+        AppSecret="新浪微博 AppSecret"
+        RedirectUrl="微博开放平台填写的授权回调页"/>
+
+    <QQ
+        AppId="QQ 的 AppId"
+        AppKey="QQ 的 AppKey"/>
+
+    <Wechat
+        AppId="微信的 AppId"
+        AppSecret="微信的 AppSectet"/>
+
+    <Facebook
+        AppId="facebook 的 appId"
+        AppName="facebook 后台填写的名称"
+    />
+
+</DevInfor>

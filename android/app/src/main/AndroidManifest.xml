@@ -1,0 +1,68 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.template">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="26"
+        tools:STRICT="com.facebook.react"/>
+
+    <application
+      android:name=".MainApplication"
+      android:label="@string/app_name"
+      android:icon="@mipmap/ic_launcher"
+      android:allowBackup="true"
+        tools:replace="icon,label,theme"
+      android:theme="@style/AppTheme">
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
+      <activity
+        android:name=".MainActivity"
+        android:label="@string/app_name"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+          android:launchMode="singleTask"
+        android:windowSoftInputMode="adjustResize">
+
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+            <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+        </intent-filter>
+
+      </activity>
+
+        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+        <!-- Required. For publish channel feature -->
+        <!-- JPUSH_CHANNEL 是为了方便开发者统计APK分发渠道。-->
+        <!-- 例如: -->
+        <!-- 发到 Google Play 的APK可以设置为 google-play; -->
+        <!-- 发到其他市场的 APK 可以设置为 xxx-market。 -->
+        <!-- 目前这个渠道统计功能的报表还未开放。-->
+        <meta-data android:name="JPUSH_CHANNEL" android:value="${APP_CHANNEL}"/>
+        <meta-data android:name="JPUSH_APPKEY" android:value="${JPUSH_APPKEY}"/>
+        <!-- Optional 微信分享回调,wxapi必须在包名路径下，否则回调不成功-->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="true" />
+        <!-- Optional facebook配置,authorities必须为com.facebook.app.FacebookContentProvider+APP_ID-->
+        <!--<provider-->
+            <!--android:authorities="com.facebook.app.FacebookContentProvider177776412817787"-->
+            <!--android:name="cn.jiguang.share.facebook.FacebookContentProvider"-->
+            <!--android:exported="true" />-->
+
+    </application>
+
+</manifest>
