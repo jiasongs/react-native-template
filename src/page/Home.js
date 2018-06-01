@@ -14,6 +14,8 @@ import ImagePicker from 'react-native-image-picker';
 import PayManager from '../config/PayManager'
 import Stepper from '../component/Stepper'
 import { QRscanner } from 'react-native-qr-scanner';
+
+
 // create a component
 @inject('ceshiStore')
 @observer
@@ -37,6 +39,7 @@ class Home extends Component {
             this.setState({ data: dataSource.data });
             this.flatList.stopRefresh()
         })
+
 
 
     }
@@ -79,6 +82,7 @@ class Home extends Component {
     };
     _onScroll = () => {
         // console.log('z')
+
     };
 
 
