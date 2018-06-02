@@ -8,6 +8,7 @@ import { Button } from 'teaset'
 import FlatListView from '../component/FlatListView'
 import AreaContent from '../component/AreaContent'
 import Container from '../component/Container';
+import Countdown from '../component/Countdown';
 import { action } from 'mobx';
 import SyanImagePicker from 'react-native-syan-image-picker';
 import ImagePicker from 'react-native-image-picker';
@@ -37,7 +38,7 @@ class Home extends Component {
             let dataSource = data[0];
             // console.log(dataSource.data);
             this.setState({ data: dataSource.data });
-            this.flatList.stopRefresh()
+            // this.flatList.stopRefresh()
         })
 
 
@@ -124,7 +125,8 @@ class Home extends Component {
                     leftView={null}
                     rightViewOnPress={this.rightOnPress}
                 />
-                <Stepper
+                <Countdown />
+                {/* <Stepper
                     style={{ marginTop: 40, height: ScaleSize(50), width: 100, borderWidth: StyleSheet.hairlineWidth, }}
                     defaultValue={1}
                     value={this.state.value}
@@ -132,7 +134,7 @@ class Home extends Component {
                     min={1}
                     valueStyle={{ minWidth: 60 }}
                     onChange={this._onChange}
-                />
+                /> */}
                 {/* <Button ref={v => this.button = v} title={'测试'} onPress={this.onPress} />
                 <SegmentedView
                     indicatorLineColor="red"

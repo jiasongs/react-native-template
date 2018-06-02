@@ -218,6 +218,26 @@ const sec_to_time = (seconds) => {
     return arr.join(":").replace(/\b(\d)\b/g, "0$1");
 }
 /**
+   * 时间秒数格式化
+   * @param s 时间戳（单位：秒）
+   * @returns {*} 格式化后的天时分秒
+   */
+const sec_to_time_day = (seconds) => {
+    let h = parseInt(seconds / 60 / 60)
+    let day = 0
+    if (h > 24) {
+        day = parseInt(h / 24)
+        h = h - day * 24
+    }
+    let arr = [
+        day,
+        h,
+        parseInt(seconds / 60 % 60),
+        parseInt(seconds % 60)
+    ]
+    return arr;
+}
+/**
  * 过滤掉false, null, 0, "", undefined, and NaN
  * @param {*} arr 
  */
@@ -240,5 +260,6 @@ export {
     factorial,
     sec_to_time,
     bouncer,
-    isNumber
+    isNumber,
+    sec_to_time_day
 }
