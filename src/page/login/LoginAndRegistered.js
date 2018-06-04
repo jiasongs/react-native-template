@@ -6,9 +6,9 @@ import {
     StyleSheet
 } from 'react-native';
 import NavigationBar from '../../component/NavigationBar'
+import Container from '../../component/Container';
 import SegmentedView from '../../component/SegmentedView'
 import LRComponent from './LRComponent'
-import Container from '../../component/Container';
 // create a component
 class LoginAndRegistered extends React.PureComponent {
 

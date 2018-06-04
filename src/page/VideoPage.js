@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Orientation from 'react-native-orientation';
 import NavigationBar from '../component/NavigationBar'
+import Container from '../component/Container';
 import VideoPlayer from '../component/Video/index'
 import { Button } from 'teaset';
 
@@ -66,7 +67,7 @@ class VideoPage extends React.PureComponent {
     render() {
         console.log('render')
         return (
-            <View style={styles.container}>
+            <Container style={styles.container}>
                 {/* <Button style={{ marginTop: 50, }} title={'测试'} onPress={this.onPress} /> */}
                 {/* <NavigationBar
                     style={styles.navBar}
@@ -82,7 +83,7 @@ class VideoPage extends React.PureComponent {
                     source={require('../asset/video/broadchurch.mp4')}
                     videoStyle={this.state.videoStyle}
                 />
-            </View>
+            </Container>
         );
     }
 }

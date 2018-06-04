@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types'
 import dismissKeyboard from 'dismissKeyboard' // 键盘miss的方法
 
@@ -14,12 +14,15 @@ class Container extends React.PureComponent {
     static propTypes = {
         fitIPhoneX: PropTypes.bool,
         fitIPhoneXType: PropTypes.oneOf(['padding', 'margin']),
-        keyboardShouldPersistTaps: PropTypes.bool // 点击键盘是否落下
+        // 点击空白视图层落下键盘,如果你的组件是scrollview或者列表就务必要设置false,
+        // 因为父组件的点击手势会影响子组件的滚动,且列表组件自带键盘落下的特性。
+        keyboardShouldPersistTaps: PropTypes.bool
+
     };
     static defaultProps = {
         fitIPhoneX: true,
         fitIPhoneXType: 'padding',
-        keyboardShouldPersistTaps: true
+        keyboardShouldPersistTaps: false
     };
 
     constructor(props) {
@@ -28,10 +31,8 @@ class Container extends React.PureComponent {
     };
 
     _onPresssContainer = () => {
-        const { keyboardShouldPersistTaps } = this.props
-        if (keyboardShouldPersistTaps) {
-            dismissKeyboard()
-        }
+        dismissKeyboard()
+        console.log('_onPresssContainer')
     }
 
     buildProps = () => {
@@ -48,10 +49,10 @@ class Container extends React.PureComponent {
     };
 
     render() {
-        const { children, style } = this.props
+        const { children, style, keyboardShouldPersistTaps } = this.props
         const { iphoneXStyle } = this.buildProps()
         return (
-            <TouchableWithoutFeedback onPress={this._onPresssContainer}>
+            <TouchableWithoutFeedback disabled={!keyboardShouldPersistTaps} onPress={this._onPresssContainer}>
                 <View style={[styles.container, iphoneXStyle, style]}>
                     {children}
                 </View>
