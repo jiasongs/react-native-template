@@ -33,3 +33,6 @@ allprojects {
         google()
     }
 }
+//project.ext {
+//    glideVersion = "4.6.1"
+//}

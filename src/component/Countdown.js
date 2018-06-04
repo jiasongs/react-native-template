@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import BackgroundTimer from 'react-native-background-timer';
 import { sec_to_time_day } from '../util/Tool';
 
-// create a component
+// 倒计时组件
 class Countdown extends React.PureComponent {
 
     static propTypes = {

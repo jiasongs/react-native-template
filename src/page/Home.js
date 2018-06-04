@@ -1,8 +1,9 @@
 //import liraries
 import React, { Component } from 'react'
-import { Animated, ScrollView, StyleSheet, Text, View, Image, Alert } from 'react-native'
+import { Animated, ScrollView, StyleSheet, Text, View, Image, Alert, TextInput } from 'react-native'
 import NavigationBar from '../component/NavigationBar'
 import SegmentedView from '../component/SegmentedView/index'
+import ImageView from '../component/ImageView'
 import { inject, observer } from 'mobx-react'
 import { Button } from 'teaset'
 import FlatListView from '../component/FlatListView'
@@ -126,6 +127,10 @@ class Home extends Component {
                     rightViewOnPress={this.rightOnPress}
                 />
                 <Countdown />
+                <TextInput style={{ height: 40, width: 100, backgroundColor: 'red' }} />
+                <TextInput style={{ height: 40, width: 100, backgroundColor: 'blue' }} />
+                <TextInput style={{ height: 40, width: 100, backgroundColor: 'green' }} />
+                <ImageView style={{ width: 30, height: 30 }} source={Images.icon_bottom_pause} />
                 {/* <Stepper
                     style={{ marginTop: 40, height: ScaleSize(50), width: 100, borderWidth: StyleSheet.hairlineWidth, }}
                     defaultValue={1}
