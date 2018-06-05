@@ -17,7 +17,8 @@ class SegmentedBar extends React.PureComponent {
         indicatorType: PropTypes.oneOf(['none', 'boxWidth', 'itemWidth']),
         indicatorPosition: PropTypes.oneOf(['top', 'bottom']),
         indicatorLineColor: PropTypes.string,
-        indicatorLineWidth: PropTypes.number,
+        indicatorLineWidth: PropTypes.number, // 指示器的高度
+        indicatorWidth: PropTypes.number, // 指示器的宽度
         indicatorPositionPadding: PropTypes.number,
         animated: PropTypes.bool,
         autoScroll: PropTypes.bool,
@@ -78,16 +79,23 @@ class SegmentedBar extends React.PureComponent {
     }
 
     get indicatorXValue() {
+        let offset = 0
+        if (this.props.indicatorWidth != undefined) {
+            offset = (this._itemsLayout[this._activeIndex].width - this.props.indicatorWidth) / 2
+        }
         switch (this.props.indicatorType) {
             case 'boxWidth':
                 return this._buttonsLayout[this._activeIndex].x;
             case 'itemWidth':
-                return this._buttonsLayout[this._activeIndex].x + this._itemsLayout[this._activeIndex].x + this._itemsAddWidth[this._activeIndex] / 2;
+                return offset + this._buttonsLayout[this._activeIndex].x + this._itemsLayout[this._activeIndex].x + this._itemsAddWidth[this._activeIndex] / 2;
         }
         return 0;
     }
 
     get indicatorWidthValue() {
+        if (this.props.indicatorWidth != undefined) {
+            return this.props.indicatorWidth
+        }
         switch (this.props.indicatorType) {
             case 'boxWidth':
                 return this._buttonsLayout[this.activeIndex].width;

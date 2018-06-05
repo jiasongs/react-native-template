@@ -19,6 +19,7 @@ class Container extends React.PureComponent {
         keyboardShouldPersistTaps: PropTypes.bool
 
     };
+    
     static defaultProps = {
         fitIPhoneX: true,
         fitIPhoneXType: 'padding',
