@@ -7,10 +7,11 @@
 import React, { Component } from 'react'
 import { Platform, } from 'react-native'
 import './src/config/Global'
-import { Provider, } from 'mobx-react'
+import { Provider } from 'mobx-react'
 import stores from './src/store/index'
 import Navigation from './src/router/Navigation'
 
+console.log(stores)
 class App extends Component {
 
     render() {

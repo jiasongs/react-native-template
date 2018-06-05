@@ -5,7 +5,7 @@ configure({ enforceActions: true });
 class BaseStore {
 
     @observable loading = true;
-    @observable error = { isError, errorMsg };
+    @observable error = { isError: '', errorMsg: '' };
 
     constructor(params) {
 

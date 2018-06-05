@@ -1,4 +1,4 @@
-import {action, observable} from 'mobx'
+import { action, observable } from 'mobx'
 import BaseStore from './baseStore'
 
 class SearchStore extends BaseStore {
@@ -15,4 +15,4 @@ class SearchStore extends BaseStore {
     }
 }
 
-export default new SearchStore();
+export default SearchStore;

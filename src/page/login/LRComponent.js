@@ -15,7 +15,7 @@ import SpinnerLoading from '../../component/SpinnerLoading'
 import moduleName from 'jshare-react-native';
 import { checkMobile, checkPassword } from '../../util/Tool';
 
-// create a component
+
 class LRComponent extends React.PureComponent {
     static propTypes = {
         type: PropTypes.oneOf(['登陆', '注册'])
@@ -112,9 +112,9 @@ class LRComponent extends React.PureComponent {
                 </View>
                 <View style={styles.fastContainer}>
                     <Text style={styles.fastMarkText}>
-                        <Text style={styles.fastMarkTextLine}>{'——————    '}</Text>
+                        <Text style={styles.fastMarkTextLine}>{'————    '}</Text>
                         使用以下账号快速登陆
-                <Text style={styles.fastMarkTextLine}>{'    ——————'}</Text>
+                <Text style={styles.fastMarkTextLine}>{'    ————'}</Text>
                     </Text>
                     <View style={styles.qqWeiXinContainer}>
                         <TouchableOpacity onPress={this._onPressWeiXin}>

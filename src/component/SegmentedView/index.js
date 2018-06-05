@@ -5,13 +5,15 @@ import {
     StyleSheet,
     ScrollView,
     ViewPagerAndroid,
-    Image
+    Image,
+    ImageBackground
 } from 'react-native';
 import PropTypes from 'prop-types'
 import SegmentedBar from './SegmentedBar'
 import StickyHeader from '../StickyHeader';
 
 class CusSegmentedView extends PureComponent {
+
     static propTypes = {
         ...SegmentedBar.propTypes,
         showSegmentedBar: PropTypes.bool,
@@ -237,10 +239,10 @@ class CusSegmentedBar extends PureComponent {
             customBar = <this.props.renderCustomBar />
         }
         return (
-            <View style={[styles.barStyleContainer, barStyle]}>
-                <Image style={[styles.segmentedBarImage]} source={backgroundImage} />
+            <View style={styles.barStyleContainer}>
+                <ImageBackground style={styles.segmentedBarImage} source={backgroundImage} />
                 <SegmentedBar
-                    style={styles.barStyle}
+                    style={[styles.barStyle, barStyle]}
                     activeIndex={this.state.activeIndex}
                     onChange={this._onChangeBar}
                     {...others}
@@ -306,18 +308,18 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     barStyle: {
-        flex: 1,
+        height: 30,
         backgroundColor: 'transparent',
+        // backgroundColor: 'red',
     },
     segmentedBarImage: {
         position: 'absolute',
         left: 0,
         right: 0,
         bottom: 0,
-        top: 0
+        top: 0,
     },
     barStyleContainer: {
-        height: 30,
         overflow: 'hidden',
         backgroundColor: '#fff',
     }
