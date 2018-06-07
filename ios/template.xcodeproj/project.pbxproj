@@ -52,6 +52,7 @@
 		7A13B73D208825CF00AA758D /* RCTJShareConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A13B73C208825CF00AA758D /* RCTJShareConfig.plist */; };
 		7A13B73F208825CF00AA758D /* RCTJShareConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A13B73C208825CF00AA758D /* RCTJShareConfig.plist */; };
 		7A13B740208825CF00AA758D /* RCTJShareConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A13B73C208825CF00AA758D /* RCTJShareConfig.plist */; };
+		7A57DD2B20C9056F007865C2 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A57DCEC20C90556007865C2 /* libART.a */; };
 		7AB0080320BF915F00C04FC2 /* TZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7AB0080220BF915F00C04FC2 /* TZImagePickerController.bundle */; };
 		7AB0080520BF915F00C04FC2 /* TZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7AB0080220BF915F00C04FC2 /* TZImagePickerController.bundle */; };
 		7AB0080620BF915F00C04FC2 /* TZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7AB0080220BF915F00C04FC2 /* TZImagePickerController.bundle */; };
@@ -418,6 +419,20 @@
 			remoteGlobalIDString = 6456441F1EB8DA9100672408;
 			remoteInfo = "RNFS-tvOS";
 		};
+		7A57DCEB20C90556007865C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A57DCE620C90556007865C2 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
+		};
+		7A57DCED20C90556007865C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A57DCE620C90556007865C2 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 323A12871E5F266B004975B8;
+			remoteInfo = "ART-tvOS";
+		};
 		7A862DE520A831DC00BE87DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 136C5F39C9CA4F2785C39CFE /* RCTOrientation.xcodeproj */;
@@ -575,6 +590,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7A13B73C208825CF00AA758D /* RCTJShareConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RCTJShareConfig.plist; sourceTree = "<group>"; };
 		7A13B741208825F900AA758D /* template.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = template.entitlements; path = template/template.entitlements; sourceTree = "<group>"; };
+		7A57DCE620C90556007865C2 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		7AB0080220BF915F00C04FC2 /* TZImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TZImagePickerController.bundle; path = "../../../node_modules/react-native-syan-image-picker/ios/TZImagePickerController/TZImagePickerController.bundle"; sourceTree = "<group>"; };
 		7AB008C120BF981A00C04FC2 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		7AB008C220BF981A00C04FC2 /* RCTXPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTXPay.m; sourceTree = "<group>"; };
@@ -677,6 +693,7 @@
 				58DD373F52014155B93A4365 /* libReactNativePermissions.a in Frameworks */,
 				FAF8C07286D54DB385E785FE /* libRNBackgroundTimer.a in Frameworks */,
 				660BA76E0681487394410977 /* libFastImage.a in Frameworks */,
+				7A57DD2B20C9056F007865C2 /* libART.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -965,6 +982,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7A57DCE720C90556007865C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A57DCEC20C90556007865C2 /* libART.a */,
+				7A57DCEE20C90556007865C2 /* libART-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7A862DE220A831DB00BE87DA /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1078,6 +1104,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				7A57DCE620C90556007865C2 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -1255,6 +1282,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 7A57DCE720C90556007865C2 /* Products */;
+					ProjectRef = 7A57DCE620C90556007865C2 /* ART.xcodeproj */;
+				},
 				{
 					ProductGroup = 7A07EA7320C4C91C001211C4 /* Products */;
 					ProjectRef = 81022312684C4CCFAAB6B338 /* FastImage.xcodeproj */;
@@ -1699,6 +1730,20 @@
 			fileType = archive.ar;
 			path = libRNFS.a;
 			remoteRef = 7A47ADBB20B44B20008B0313 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7A57DCEC20C90556007865C2 /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = 7A57DCEB20C90556007865C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7A57DCEE20C90556007865C2 /* libART-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libART-tvOS.a";
+			remoteRef = 7A57DCED20C90556007865C2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		7A862DE620A831DC00BE87DA /* libRCTOrientation.a */ = {

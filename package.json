@@ -35,7 +35,7 @@
         "react-native-storage": "^0.2.2",
         "react-native-syan-image-picker": "^0.1.6",
         "react-native-video": "^2.0.0",
-        "react-navigation": "^2.0.4",
+        "react-navigation": "^2.2.0",
         "teaset": "^0.5.6"
     },
     "devDependencies": {
