@@ -78,7 +78,7 @@ class PlayerTools extends React.PureComponent {
         }
         if (this.state.isEnlarge) {
             this.setState({ isEnlarge: !this.state.isEnlarge })
-            onPressLeft && onPressRight()
+            onPressRight && onPressRight()
         } else {
             onPressBack && onPressBack()
         }
