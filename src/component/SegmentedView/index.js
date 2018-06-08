@@ -238,8 +238,9 @@ class CusSegmentedBar extends PureComponent {
         } else if (typeof renderCustomBar == 'function') {
             customBar = <this.props.renderCustomBar />
         }
+
         return (
-            <View style={styles.barStyleContainer}>
+            <View style={styles.barStyleContainer} >
                 <ImageBackground style={styles.segmentedBarImage} source={backgroundImage} />
                 <SegmentedBar
                     style={[styles.barStyle, barStyle]}
@@ -256,7 +257,7 @@ class CusSegmentedBar extends PureComponent {
                     }
                     )}
                 </SegmentedBar>
-            </View>
+            </View >
         );
     }
 }
