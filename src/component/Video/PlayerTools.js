@@ -22,8 +22,8 @@ class PlayerTools extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = { isPaused: props.defaultPaused, isEnlarge: props.defaultEnlarge }
-        this.opacity = new Animated.Value(0)
-        this.isHidden = true // 是否隐藏，默认隐藏
+        this.opacity = new Animated.Value(props.defaultPaused ? 1 : 0)
+        this.isHidden = !props.defaultPaused // 是否隐藏，默认隐藏
     };
 
     startFadeAnimated = () => {
@@ -58,6 +58,10 @@ class PlayerTools extends React.PureComponent {
 
     _onPressRight = () => {
         const { onPressRight } = this.props
+        if (this.isHidden) {
+            this.startFadeAnimated()
+            return;
+        }
         this.setState({ isEnlarge: !this.state.isEnlarge })
         onPressRight && onPressRight()
     };
@@ -67,12 +71,16 @@ class PlayerTools extends React.PureComponent {
     };
 
     _onPressBack = () => {
-        const { onPressRight } = this.props
+        const { onPressRight, onPressBack } = this.props
+        if (this.isHidden) {
+            this.startFadeAnimated()
+            return;
+        }
         if (this.state.isEnlarge) {
             this.setState({ isEnlarge: !this.state.isEnlarge })
-            onPressRight && onPressRight()
+            onPressLeft && onPressRight()
         } else {
-            alert('返回到前一个页面')
+            onPressBack && onPressBack()
         }
     };
 
@@ -97,7 +105,6 @@ class PlayerTools extends React.PureComponent {
                         </Text>
                         <Slider
                             debugTouchArea={debugTouchArea}
-                            // thumbTouchSize={{ width: 40, height: 40 }}
                             style={sliderStyle}
                             step={step}
                             value={value}

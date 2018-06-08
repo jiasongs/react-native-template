@@ -24,6 +24,7 @@ class VideoPlayer extends React.PureComponent {
         ...Video.propTypes,
         defaultPaused: PropTypes.bool
     };
+
     static defaultProps = {
         ...Video.defaultProps,
         repeat: false,
@@ -34,6 +35,7 @@ class VideoPlayer extends React.PureComponent {
         resizeMode: 'contain',
         defaultPaused: false
     };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -46,6 +48,7 @@ class VideoPlayer extends React.PureComponent {
         this.totalDuration = 0 // 总的播放量
         this.currentDuration = 0 // 当前播放量
     };
+
 
     setPresentFullscreenPlayer = () => {
         if (this._videoRef) {

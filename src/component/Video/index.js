@@ -8,7 +8,6 @@ import VideoPlayer from './VideoPlayer';
 
 import PlayerTools from './PlayerTools';
 
-const total = 23
 // create a component
 class index extends React.PureComponent {
 
@@ -16,10 +15,13 @@ class index extends React.PureComponent {
         source: PropTypes.number.isRequired,
         videoStyle: PropTypes.object,
         style: PropTypes.object,
+        defaultPaused: PropTypes.bool,
+        totalDuration: PropTypes.number
     }
 
     static defaultProps = {
-
+        defaultPaused: false,
+        totalDuration: 0
     }
 
     constructor(props) {
@@ -56,8 +58,9 @@ class index extends React.PureComponent {
     }
 
     _end = () => {
+        const { totalDuration } = this.props
         // 播放结束
-        this.setState({ sliderValue: total })
+        this.setState({ sliderValue: totalDuration })
         this._toolsRef.changePaused(true)
     }
 
@@ -107,7 +110,7 @@ class index extends React.PureComponent {
     }
 
     render() {
-        const { source, style, videoStyle, } = this.props
+        const { source, style, videoStyle, onPressBack, defaultPaused, totalDuration } = this.props
         return (
             <View style={style}>
                 <VideoPlayer
@@ -116,14 +119,14 @@ class index extends React.PureComponent {
                     style={this.state.videoStyle}
                     onProgress={this._onProgress}
                     onEnd={this._end}
-                    defaultPaused={false}
+                    defaultPaused={defaultPaused}
                 />
                 <PlayerTools
                     style={styles.playerTools}
                     ref={this._captureToolsRef}
                     currentDuration={Math.ceil(this.state.sliderValue)}
-                    totalDuration={total}
-                    defaultPaused={false}
+                    totalDuration={totalDuration}
+                    defaultPaused={defaultPaused}
                     defaultEnlarge={false}
                     onPressLeft={this._onPressLeft}
                     onPressRight={this._onPressRight}
@@ -132,9 +135,10 @@ class index extends React.PureComponent {
                     step={0.1}
                     value={this.state.sliderValue}
                     minimumValue={0}
-                    maximumValue={total}
+                    maximumValue={totalDuration}
                     onSlidingStart={this._onSlidingStart}
                     onSlidingComplete={this._onSlidingComplete}
+                    onPressBack={onPressBack}
                 />
             </View>
         );
