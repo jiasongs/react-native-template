@@ -12,7 +12,7 @@ import PlayerTools from './PlayerTools';
 class index extends React.PureComponent {
 
     static propTypes = {
-        source: PropTypes.number.isRequired,
+        source: PropTypes.oneOfType([PropTypes.number.isRequired, PropTypes.shape({ uri: PropTypes.string })]),
         videoStyle: PropTypes.object,
         style: PropTypes.object,
         defaultPaused: PropTypes.bool,
