@@ -23,7 +23,7 @@ const Nav = createStackNavigator({
         VideoPage: { screen: VideoPage },
     })
 }, {
-        initialRouteName: 'LoginAndRegistered',
+        initialRouteName: 'Tab',
         cardStyle: {
             shadowOpacity: 0,
             shadowRadius: 0,

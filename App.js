@@ -11,7 +11,6 @@ import { Provider } from 'mobx-react'
 import stores from './src/store/index'
 import Navigation from './src/router/Navigation'
 
-console.log(stores)
 class App extends Component {
 
     render() {

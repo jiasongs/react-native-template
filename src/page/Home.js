@@ -19,7 +19,7 @@ import { QRscanner } from 'react-native-qr-scanner';
 
 
 // create a component
-@inject('ceshiStore')
+@inject('ceshiStore111111')
 @observer
 class Home extends Component {
     constructor(props) {
@@ -119,7 +119,7 @@ class Home extends Component {
     }
     render() {
         return (
-            <Container fitIPhoneX={false}>
+            <Container fitIPhoneX={false} keyboardShouldPersistTaps={true}>
                 <NavigationBar
                     title={'首页'}
                     hidden={this.state.hidden}
