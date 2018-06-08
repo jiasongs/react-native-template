@@ -19,7 +19,7 @@ class Container extends React.PureComponent {
         keyboardShouldPersistTaps: PropTypes.bool
 
     };
-    
+
     static defaultProps = {
         fitIPhoneX: true,
         fitIPhoneXType: 'padding',
@@ -66,8 +66,8 @@ class Container extends React.PureComponent {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexGrow: 1,
-        flexShrink: 1,
+        // flexGrow: 1,
+        // flexShrink: 1,
         backgroundColor: Theme.pageBackgroundColor,
     },
 });

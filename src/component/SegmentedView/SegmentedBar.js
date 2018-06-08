@@ -14,11 +14,11 @@ class SegmentedBar extends React.PureComponent {
     static propTypes = {
         ...ViewPropTypes,
         justifyItem: PropTypes.oneOf(['fixed', 'scrollable']),
-        indicatorType: PropTypes.oneOf(['none', 'boxWidth', 'itemWidth']),
+        indicatorType: PropTypes.oneOf(['none', 'boxWidth', 'itemWidth', 'customWidth']),
         indicatorPosition: PropTypes.oneOf(['top', 'bottom']),
         indicatorLineColor: PropTypes.string,
         indicatorLineWidth: PropTypes.number, // 指示器的高度
-        indicatorWidth: PropTypes.number, // 指示器的宽度
+        indicatorWidth: PropTypes.number, // 指示器的宽度,indicatorType=customWidth时有效
         indicatorPositionPadding: PropTypes.number,
         animated: PropTypes.bool,
         autoScroll: PropTypes.bool,
@@ -33,6 +33,7 @@ class SegmentedBar extends React.PureComponent {
         indicatorPosition: 'bottom',
         animated: true,
         autoScroll: true,
+        indicatorWidth: 0
     };
 
     static Item = SegmentedItem;
@@ -46,6 +47,7 @@ class SegmentedBar extends React.PureComponent {
         this._indicatorX = 0;
         this._indicatorWidth = 0;
         this._scrollViewWidth = 0;
+        this._scrollViewContentWidth = 0
     }
 
     componentWillReceiveProps(nextProps) {
@@ -79,28 +81,26 @@ class SegmentedBar extends React.PureComponent {
     }
 
     get indicatorXValue() {
-        let offset = 0
-        if (this.props.indicatorWidth != undefined) {
-            offset = (this._itemsLayout[this._activeIndex].width - this.props.indicatorWidth) / 2
-        }
         switch (this.props.indicatorType) {
             case 'boxWidth':
                 return this._buttonsLayout[this._activeIndex].x;
             case 'itemWidth':
+                return this._buttonsLayout[this._activeIndex].x + this._itemsLayout[this._activeIndex].x + this._itemsAddWidth[this._activeIndex] / 2;
+            case 'customWidth':
+                let offset = (this._itemsLayout[this._activeIndex].width - this.props.indicatorWidth) / 2
                 return offset + this._buttonsLayout[this._activeIndex].x + this._itemsLayout[this._activeIndex].x + this._itemsAddWidth[this._activeIndex] / 2;
         }
         return 0;
     }
 
     get indicatorWidthValue() {
-        if (this.props.indicatorWidth != undefined) {
-            return this.props.indicatorWidth
-        }
         switch (this.props.indicatorType) {
             case 'boxWidth':
                 return this._buttonsLayout[this.activeIndex].width;
             case 'itemWidth':
                 return this._itemsLayout[this.activeIndex].width - this._itemsAddWidth[this._activeIndex];
+            case 'customWidth':
+                return this.props.indicatorWidth
         }
         return 0;
     }
@@ -149,10 +149,13 @@ class SegmentedBar extends React.PureComponent {
         if (this.props.autoScroll && this.refs.scrollView) {
             let contextWidth = 0;
             this._buttonsLayout.map(item => contextWidth += item.width);
-            let x = indicatorXValue + indicatorWidthValue / 2 - this._scrollViewWidth / 2;
+            let x = indicatorXValue + indicatorWidthValue / 2 - this._scrollViewWidth / 2
             if (x < 0) {
                 x = 0;
-            } else if (x > contextWidth - this._scrollViewWidth) {
+            } else if (this._scrollViewWidth > this._scrollViewContentWidth) {
+                x = 0
+            }
+            else if (x > contextWidth - this._scrollViewWidth && this._scrollViewWidth < this._scrollViewContentWidth) {
                 x = contextWidth - this._scrollViewWidth;
             }
             this.refs.scrollView.scrollTo({ x: x, y: 0, animated: this.props.animated });
@@ -169,6 +172,12 @@ class SegmentedBar extends React.PureComponent {
 
     onButtonLayout(index, e) {
         let { layout } = e.nativeEvent;
+        layout = {
+            x: layout.x,
+            y: layout.y,
+            width: Math.round(layout.width),
+            height: Math.round(layout.height),
+        }
         if (!this.isEqualLayout(layout, this._buttonsLayout[index])) {
             this._buttonsLayout[index] = layout;
             this.checkInitIndicator();
@@ -177,17 +186,26 @@ class SegmentedBar extends React.PureComponent {
 
     onItemLayout(index, e) {
         let { layout } = e.nativeEvent;
+        layout = {
+            x: layout.x,
+            y: layout.y,
+            width: Math.round(layout.width),
+            height: Math.round(layout.height),
+        }
         if (!this.isEqualLayout(layout, this._itemsLayout[index])) {
             this._itemsLayout[index] = layout;
             this.checkInitIndicator();
         }
     }
 
-    onScrollViewLayout(e) {
+    onScrollViewLayout = (e) => {
         this._scrollViewWidth = e.nativeEvent.layout.width;
         this.props.onLayout && this.props.onLayout(e);
     }
-
+    onContentSizeChange = (contentWidth, contentHeight) => {
+        this._scrollViewContentWidth = contentWidth
+        this.props.onContentSizeChange && this.props.onContentSizeChange(contentWidth, contentHeight);
+    }
     renderItem(item, index) {
         let saveOnLayout = item.props.onLayout;
         let newItem = React.cloneElement(item, {
@@ -275,8 +293,9 @@ class SegmentedBar extends React.PureComponent {
                 showsHorizontalScrollIndicator={false}
                 scrollsToTop={false}
                 removeClippedSubviews={false}
-                onLayout={e => this.onScrollViewLayout(e)}
+                onLayout={this.onScrollViewLayout}
                 ref='scrollView'
+                onContentSizeChange={this.onContentSizeChange}
                 {...others}
             >
                 {children.map((item, index) => {

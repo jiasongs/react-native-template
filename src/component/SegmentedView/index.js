@@ -38,7 +38,7 @@ class CusSegmentedView extends PureComponent {
         lazyDelay: 0,
         pageHeight: -1,
         showSegmentedBar: true,
-        backgroundImage: Images.img_bg_navbar
+        // backgroundImage: Images.img_bg_navbar
     }
     constructor(props) {
         super(props);
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     },
     barStyle: {
         height: 30,
-        backgroundColor: 'transparent',
+        backgroundColor: '#fff',
         // backgroundColor: 'red',
     },
     segmentedBarImage: {
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     },
     barStyleContainer: {
         overflow: 'hidden',
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
     }
 });
 
