@@ -34,7 +34,7 @@ class HTMLView extends React.PureComponent {
                 maxImageWidth={maxImageWidth}
             />
         )
-    }
+    };
 
     render() {
         const { renderers, imageStyle, imageDefaultSize, maxImageWidth, ...others } = this.props

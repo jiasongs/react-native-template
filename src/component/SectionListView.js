@@ -67,12 +67,12 @@ class SectionListView extends React.PureComponent {
         if (this._secionListRef) {
             this._secionListRef.setNativeProps(props);
         }
-    }
+    };
     scrollToLocation = (option = { animated: true, itemIndex: 0, sectionIndex: 0, viewOffset: 0, viewPosition: 0 }) => {
         if (this._secionListRef) {
             this._secionListRef.scrollToLocation(option)
         }
-    }
+    };
     scrollToOffset = (option = { offset: 0, animated: true }) => {
         if (this._secionListRef) {
             this._secionListRef.scrollToOffset(option)

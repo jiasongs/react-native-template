@@ -25,10 +25,15 @@ class Countdown extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.state = { time: '' }
         this.intervalId = null
         this.currentTime = Moment().format('X')
-        this.difference = 0
+        this.difference = props.deadline - this.currentTime
+        let timeArr = [0, 0, 0, 0]
+        console.log('this.difference', this.difference)
+        if (this.difference >= 0) {
+            timeArr = sec_to_time_day(this.difference)
+        }
+        this.state = { time: `${timeArr[0]}天 ${timeArr[1]}小时 ${timeArr[2]}分 ${timeArr[3]}秒` }
     };
 
     componentDidMount() {
@@ -54,6 +59,7 @@ class Countdown extends React.PureComponent {
             BackgroundTimer.stop()
         }
         BackgroundTimer.clearInterval(this.intervalId)
+        this.intervalId = null
         onIntervalStop && onIntervalStop(this.difference)
     };
 

@@ -131,36 +131,44 @@ note:如果想使用`Redux`，请自行引入。
 
 >播放视频，暂停视频，拖动播放，放大缩小视频等等
 
-
-# 后续添加计划 （待整理）
-
 - SectionListView （封装sectionList）
 
->目前已完成大部分，还剩余优化细节，初始化sections，设置默认的sectionHeader等等
-
-- 封装聊天组件
-
->
+>增加了上拉刷新，下拉刷新等功能，可以利用props开启或者关闭
 
 - 支付宝、微信支付 （可选）
 
 >目前用的是  https://github.com/puti94/react-native-puti-pay
 
-- nativebase (可选，UI库，暂时不集成)
+- HTMLView显示富文本
 
->目前项目中用的UI库是teaset，nativebase组件很多，基本app开发的UI组件都有，但文档不足，且非常“重”。如果要集成需要多方面考虑。
+>基于react-native-render-html封装
 
 - 图片多选 (可选)
 
 >使用 https://github.com/syanbo/react-native-syan-image-picker
 
+- 图片，视频单选
+
+>使用 https://github.com/syanbo/react-native-image-picker
+
+# 后续添加计划 （待整理）
+
+
+- 封装聊天组件
+
+>
+
+- nativebase (可选，UI库，暂时不集成)
+
+>目前项目中用的UI库是teaset，nativebase组件很多，基本app开发的UI组件都有，但文档不足，且非常“重”。如果要集成需要多方面考虑。
+
+
+
 - 图片查看
 
 >类似微信查看大图的功能，目前还没有想好实现方案。可以基于react-native-lightbox封装一个
 
-- 显示富文本
 
->已知的组件（ https://github.com/jsdf/react-native-htmlview , https://github.com/archriss/react-native-render-html），都不太理想。可以基于react-native-render-html封装一个。
 
 # 协议
 

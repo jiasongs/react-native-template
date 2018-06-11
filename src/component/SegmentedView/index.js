@@ -50,12 +50,19 @@ class CusSegmentedView extends PureComponent {
             setTimeout(() => this._onChangeBar(this.props.initialPage, false), 50);
         }
     }
+
+    setNativeProps(props) {
+        if (__IOS__ && this._scrollRef) {
+            this._scrollRef.setNativeProps(props);
+        }
+    };
+
     changeScrollPage = (index, animated) => {
         const { width } = this.state
         if (__IOS__) {
-            this.scrollView.scrollTo({ x: width * index, y: 0, animated: animated });
+            this._scrollRef.scrollTo({ x: width * index, y: 0, animated: animated });
         } else {
-            animated ? this.viewPagerAndroid.setPage(index) : this.viewPagerAndroid.setPageWithoutAnimation(index)
+            animated ? this._scrollRef.setPage(index) : this._scrollRef.setPageWithoutAnimation(index)
         }
     }
 
@@ -101,12 +108,17 @@ class CusSegmentedView extends PureComponent {
         const height = e.nativeEvent.layout.height
         this.setState({ width, height })
     }
+
+    _captureRef = (v) => {
+        this._scrollRef = v
+    }
+
     _renderScrollView = () => {
         const { children, scrollEnabled, initialPage, lazy, keyboardShouldPersistTaps } = this.props
         const { width, activeIndex } = this.state
         return (
             <ScrollView
-                ref={v => this.scrollView = v}
+                ref={this._captureRef}
                 horizontal={true}
                 pagingEnabled={true}
                 showsHorizontalScrollIndicator={false}
@@ -138,9 +150,9 @@ class CusSegmentedView extends PureComponent {
         let h = pageHeight != -1 ? { height: pageHeight } : {}
         return (
             <ViewPagerAndroid
+                ref={this._captureRef}
                 style={[styles.viewPagerAndroid, h]}
                 initialPage={initialPage}
-                ref={v => this.viewPagerAndroid = v}
                 onPageScroll={this._onPageScroll}
                 onPageSelected={this._onPageSelected}
                 scrollEnabled={scrollEnabled}

@@ -67,7 +67,7 @@ class FlatListView extends React.PureComponent {
         if (this._flatListRef) {
             this._flatListRef.setNativeProps(props);
         }
-    }
+    };
     scrollToOffset = (option = { offset: 0, animated: true }) => {
         if (this._flatListRef) {
             this._flatListRef.scrollToOffset(option)
