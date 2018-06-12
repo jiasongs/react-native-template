@@ -12,18 +12,18 @@ import Setting from '../page/Setting'
 import LoginAndRegistered from '../page/login/LoginAndRegistered'
 import RecoverPwd from '../page/login/RecoverPwd'
 import VideoPage from '../page/VideoPage';
+import Chat from '../page/Chat';
 
-const Nav = createStackNavigator({
-    ...configRoute({
-        Tab: { screen: TabNavigation },
-        Mine: { screen: Mine },
-        Setting: { screen: Setting },
-        LoginAndRegistered: { screen: LoginAndRegistered },
-        RecoverPwd: { screen: RecoverPwd },
-        VideoPage: { screen: VideoPage },
-    })
-}, {
-        initialRouteName: 'Tab',
+const Nav = createStackNavigator(configRoute({
+    Tab: { screen: TabNavigation },
+    Mine: { screen: Mine },
+    Setting: { screen: Setting },
+    LoginAndRegistered: { screen: LoginAndRegistered },
+    RecoverPwd: { screen: RecoverPwd },
+    VideoPage: { screen: VideoPage },
+    Chat: { screen: Chat },
+}), {
+        initialRouteName: 'Chat',
         cardStyle: {
             shadowOpacity: 0,
             shadowRadius: 0,

@@ -1,8 +1,8 @@
 'use strict'
 import React from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, Keyboard } from 'react-native';
 import PropTypes from 'prop-types'
-import dismissKeyboard from 'dismissKeyboard' // 键盘miss的方法
+
 
 /**
     // 每个页面最外层的View，
@@ -32,7 +32,7 @@ class Container extends React.PureComponent {
     };
 
     _onPresssContainer = () => {
-        dismissKeyboard()
+        Keyboard.dismiss()
         console.log('_onPresssContainer')
     }
 

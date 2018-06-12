@@ -158,7 +158,6 @@ class FlatListView extends React.PureComponent {
         }
     };
     _onEndReached = (params) => {
-
         const { data, enableLoadMore } = this.props;
         const { isRefreshing, isEndReached } = this.state;
         // 统一解决_onEndReached回调不正确的Bug,以下条件满足之一都不会触发startEndReached，
@@ -187,13 +186,14 @@ class FlatListView extends React.PureComponent {
         if (this._currentContentSize.contentHeight <= this._currentListSize.height) {
             return
         }
+
         console.log('_onEndReached')
         this.startEndReached();
         this.props.onEndReached && this.props.onEndReached(this.stopEndReached)
     };
     startEndReached = () => {
         if (!this.state.isEndReached) {
-            // console.log('startEndReached');
+            console.log('startEndReached');
             this._currentEndReachedStatus = EndReachedStatus.START_LOADED;
             this.setState({ isEndReached: true }, () => {
                 // 问题所在，不能显示到视图最底层
@@ -221,6 +221,7 @@ class FlatListView extends React.PureComponent {
         const { data } = this.props;
         const { isEndReached } = this.state;
         const status = this._currentEndReachedStatus === EndReachedStatus.ALL_LOADED;
+        console.log(isEndReached)
         if (isEndReached === false || data.length === 0) {
             if (status) {
                 return <FooterComponent loading={this.state.isEndReached} allLoad={status} />
@@ -245,18 +246,17 @@ class FlatListView extends React.PureComponent {
         this._currentContentSize = { contentWidth, contentHeight }
         onContentSizeChange && onContentSizeChange(contentWidth, contentHeight)
     };
-    _onLayout = (event) => {
-        const { onLayout } = this.props
-        console.log(event.nativeEvent.layout.height)
-        if (event.nativeEvent.layout.height != 0 && event.nativeEvent.layout.width != 0) {
-            this._currentListSize = { width: event.nativeEvent.layout.width, height: event.nativeEvent.layout.height }
-        }
-        onLayout && onLayout(event)
-    };
     _onScroll = (event) => {
         const { onScroll } = this.props
         this._currentContentOffset = event.nativeEvent.contentOffset
         onScroll && onScroll(event)
+    };
+    _onLayout = (event) => {
+        const { onLayout } = this.props
+        if (event.nativeEvent.layout.height != 0 && event.nativeEvent.layout.width != 0) {
+            this._currentListSize = { width: event.nativeEvent.layout.width, height: event.nativeEvent.layout.height }
+        }
+        onLayout && onLayout(event)
     };
     _captureRef = (v) => {
         this._flatListRef = v
@@ -298,7 +298,7 @@ class FooterComponent extends React.PureComponent {
 
     render() {
         const { loading, allLoad } = this.props;
-        // console.log('FooterComponent');
+        console.log('FooterComponent');
         return (
             <View style={styles.footerContainer}>
                 {!allLoad ? (

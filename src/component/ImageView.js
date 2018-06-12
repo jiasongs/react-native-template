@@ -11,6 +11,7 @@ class ImageView extends React.PureComponent {
         ...Image.propTypes,
         maxImageWidth: PropTypes.number,
         defaultSize: PropTypes.shape({ width: PropTypes.number, height: PropTypes.number, }),
+        useMaxImage: PropTypes.bool,
         useFastImage: PropTypes.bool
     };
 
@@ -19,6 +20,7 @@ class ImageView extends React.PureComponent {
         maxImageWidth: SCREEN_WIDTH,
         defaultSize: { width: 0, height: 0 },
         useFastImage: false,
+        useMaxImage: false
     };
 
     constructor(props) {
@@ -28,8 +30,10 @@ class ImageView extends React.PureComponent {
     };
 
     componentDidMount() {
-        const { useFastImage } = this.props
-        !useFastImage && this._loadImage()
+        const { useFastImage, useMaxImage } = this.props
+        if (!useFastImage && useMaxImage) {
+            this._loadImage()
+        }
     }
 
     componentWillUnmount() {

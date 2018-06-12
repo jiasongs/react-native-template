@@ -1,8 +1,8 @@
 'use strict';
 //import liraries
-import React, {PureComponent} from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import {Animated, StyleSheet,} from 'react-native'
+import { Animated, StyleSheet, } from 'react-native'
 
 // create a component
 export default class StickyHeader extends PureComponent {
@@ -32,8 +32,8 @@ export default class StickyHeader extends PureComponent {
     }
 
     render() {
-        const {stickyHeaderY, stickyScrollY, children, style} = this.props;
-        const {stickyLayoutY} = this.state;
+        const { stickyHeaderY, stickyScrollY, children, style } = this.props;
+        const { stickyLayoutY } = this.state;
         let y = stickyHeaderY != -1 ? stickyHeaderY : stickyLayoutY;
         const translateY = stickyScrollY.interpolate({
             inputRange: [-1, 0, y, y + 1],
@@ -45,9 +45,8 @@ export default class StickyHeader extends PureComponent {
                 style={[
                     style,
                     styles.container,
-                    {transform: [{translateY}]}
-                ]
-                }
+                    { transform: [{ translateY }] }
+                ]}
             >
                 {children}
             </Animated.View>

@@ -7,7 +7,6 @@ import android.content.res.Resources;
 import android.support.multidex.MultiDex;
 
 import com.facebook.react.ReactApplication;
-//import com.dylanvann.fastimage.FastImageViewPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import org.reactnative.camera.RNCameraPackage;
@@ -74,7 +73,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-//            new FastImageViewPackage(),
             new BackgroundTimerPackage(),
             new RNDeviceInfo(),
             new RNCameraPackage(),

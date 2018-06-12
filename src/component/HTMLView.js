@@ -28,6 +28,7 @@ class HTMLView extends React.PureComponent {
         return (
             <ImageView
                 style={imageStyle}
+                useMaxImage={true}
                 key={`html_image_${passProps.nodeIndex}`}
                 source={{ uri: htmlAttribs.src }}
                 defaultSize={imageDefaultSize}
