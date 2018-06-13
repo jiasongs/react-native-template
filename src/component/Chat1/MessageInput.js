@@ -13,6 +13,21 @@ class MessageInput extends React.PureComponent {
 
     };
 
+    constructor(props) {
+        super(props);
+        this.state = { text: '' }
+    }
+
+    setText = (text) => {
+        this.setState({ text })
+    };
+
+    focus = () => {
+        if (!this.textInputRef.isFocused()) {
+            this.textInputRef.focus()
+        }
+    };
+
     blur = () => {
         if (this.textInputRef.isFocused()) {
             this.textInputRef.blur()
@@ -23,17 +38,27 @@ class MessageInput extends React.PureComponent {
         this.textInputRef.clear()
     };
 
+    _onChangeText = (text) => {
+        const { onChangeText } = this.props
+        this.setText(text)
+        onChangeText && onChangeText(text)
+    }
+
     _captureRef = (v) => {
         this.textInputRef = v
     };
 
     render() {
+        const { onChangeText, ...others } = this.props
         return (
             <TextInput
                 ref={this._captureRef}
                 style={styles.textInput}
                 placeholder={'请输入信息'}
                 underlineColorAndroid={'transparent'}
+                value={this.state.text}
+                onChangeText={this._onChangeText}
+                {...others}
             />
         );
     }

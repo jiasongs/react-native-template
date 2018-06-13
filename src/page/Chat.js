@@ -86,7 +86,7 @@ class Chat extends React.PureComponent {
         }
     }
 
-    _onPress = () => {
+    _onPressSend = (text) => {
         const messages = ChatPage.appendMessages(this.state.messages, [{
             type: 1,// 消息类型 1 2 3 4 5 6 ...
             message_id: Math.random(),
@@ -98,7 +98,7 @@ class Chat extends React.PureComponent {
             to_user: {
                 id: 5
             },
-            content: `${Math.random()}`,
+            content: `${text}`,
             img_width: 200,
             img_height: 200,
             img_size: 1431231,
@@ -116,7 +116,11 @@ class Chat extends React.PureComponent {
         return (
             <Container keyboardShouldPersistTaps={false}>
                 <NavigationBar title={'聊天'} rightView={<TouchableOpacity onPress={this._onPress}><Text>测试发送</Text></TouchableOpacity>} />
-                <ChatPage user={this.user} messages={this.state.messages} />
+                <ChatPage
+                    user={this.user}
+                    messages={this.state.messages}
+                    onPressSend={this._onPressSend}
+                />
             </Container>
         );
     }

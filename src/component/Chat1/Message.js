@@ -40,7 +40,6 @@ class Message extends React.PureComponent {
     renderPositionRight = () => {
         const { info, user } = this.props
         const { content, from_user } = info.item
-        console.log('renderPositionRight')
         return (
             <View style={styles.containerRight}>
                 <View style={styles.messageContentRight}>

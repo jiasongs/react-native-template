@@ -261,7 +261,6 @@ class FlatListView extends React.PureComponent {
     _captureRef = (v) => {
         this._flatListRef = v
     };
-
     render() {
         const { onRefresh, onEndReached, onLayout, onContentSizeChange, enableRefresh, enableLoadMore, ...others } = this.props;
         // console.log('render');
@@ -320,6 +319,7 @@ class FooterComponent extends React.PureComponent {
 
 // create a component
 class EmptyComponent extends React.PureComponent {
+
     static propTypes = {
 
     };

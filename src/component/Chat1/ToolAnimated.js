@@ -7,7 +7,8 @@ import PropTypes from 'prop-types';
 class ToolAnimated extends React.PureComponent {
 
     static propTypes = {
-        initTranslateY: PropTypes.number
+        initTranslateY: PropTypes.number,
+        barHeight: PropTypes.number
     };
 
     static defaultProps = {
@@ -47,9 +48,10 @@ class ToolAnimated extends React.PureComponent {
     };
 
     render() {
-        const { style, children } = this.props
+        const { style, children, barHeight, initTranslateY } = this.props
+        console.log('zzz')
         return (
-            <Animated.View style={[style, {
+            <Animated.View style={[styles.container, { height: barHeight + initTranslateY }, style, {
                 transform: [
                     { translateY: this.translateY, }
                 ]
@@ -61,7 +63,13 @@ class ToolAnimated extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+        position: 'absolute',
+        backgroundColor: '#fff',
+        left: 0,
+        right: 0,
+        bottom: 0,
+    }
 });
 
 export default ToolAnimated

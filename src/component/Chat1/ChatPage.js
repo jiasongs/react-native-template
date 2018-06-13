@@ -4,10 +4,11 @@ import { View, Text, StyleSheet, Keyboard, Animated } from 'react-native';
 import PropTypes from 'prop-types';
 import MessagesManager from './MessagesManager'
 import MessageContainer from './MessageContainer'
-import Toolbar from './Toolbar';
+import ToolContainer from './ToolContainer';
 
 
-const ToolbarHeight = 53
+const ToolBarHeight = 53
+const ContentHeight = 250
 const Status = {
     KeyboardUp: 'KeyboardUp',
     KeyboardDown: 'KeyboardDown',
@@ -17,6 +18,7 @@ class ChatPage extends React.PureComponent {
     static propTypes = {
         messages: PropTypes.array,
         user: PropTypes.shape({ id: PropTypes.number, nick_name: PropTypes.string, avatar: PropTypes.string, }).isRequired,
+        onPressSend: PropTypes.func
     };
 
     static defaultProps = {
@@ -53,7 +55,6 @@ class ChatPage extends React.PureComponent {
         }).start()
     }
 
-
     _onToolbarWillShow = (info) => {
         // if (info.duration != 0) {
         //     console.log('_onKeyboardWillShow', info)
@@ -63,8 +64,10 @@ class ChatPage extends React.PureComponent {
         //         this._keyboardStatus = Status.KeyboardUp
         //     }
         // }
-        this.startTimingAnimated(this._contaierLayout.height - info.endCoordinates.height - ToolbarHeight)
-        this.messageRef.scrollToTop()
+        if (this._contaierLayout) {
+            this.startTimingAnimated(this._contaierLayout.height - info.endCoordinates.height - ToolBarHeight)
+            this.messageRef.scrollToTop()
+        }
     };
 
     _onToolbarWillHide = (info) => {
@@ -72,7 +75,9 @@ class ChatPage extends React.PureComponent {
 
         //     this._keyboardStatus = Status.KeyboardDown
         // }
-        this.startTimingAnimated(this._contaierLayout.height - ToolbarHeight)
+        if (this._contaierLayout) {
+            this.startTimingAnimated(this._contaierLayout.height - ToolBarHeight)
+        }
     };
 
 
@@ -82,9 +87,8 @@ class ChatPage extends React.PureComponent {
     };
 
     _onLayout = (event) => {
-        console.log(event.nativeEvent.layout)
         this._contaierLayout = event.nativeEvent.layout
-        this._messageContainerHeight.setValue(this._contaierLayout.height - ToolbarHeight)
+        this._messageContainerHeight.setValue(this._contaierLayout.height - ToolBarHeight)
     };
 
     _captureToolbarRef = (v) => {
@@ -96,7 +100,7 @@ class ChatPage extends React.PureComponent {
     };
 
     render() {
-        const { messages, user } = this.props
+        const { messages, user, onPressSend } = this.props
         return (
             <View style={styles.container} onLayout={this._onLayout}>
                 <Animated.View style={{ height: this._messageContainerHeight }}>
@@ -107,9 +111,11 @@ class ChatPage extends React.PureComponent {
                         onScrollBeginDrag={this._onScrollBeginDrag}
                     />
                 </Animated.View>
-                <Toolbar
+                <ToolContainer
                     ref={this._captureToolbarRef}
-                    barHeight={ToolbarHeight}
+                    barHeight={ToolBarHeight}
+                    contentHeight={ContentHeight}
+                    onPressSend={onPressSend}
                     onToolbarWillShow={this._onToolbarWillShow}
                     onToolbarWillHide={this._onToolbarWillHide}
                 />

@@ -26,7 +26,12 @@ class EmojiContent extends React.PureComponent {
     render() {
         const { contentHeight, barHeight } = this.props
         return (
-            <ToolAnimated ref={this._captureRef} initTranslateY={contentHeight} style={[styles.container, { height: contentHeight, top: barHeight }]}>
+            <ToolAnimated
+                ref={this._captureRef}
+                initTranslateY={contentHeight}
+                barHeight={barHeight}
+                style={[styles.container, { height: contentHeight, top: barHeight }]}
+            >
                 <Text>我是表情组件，谢谢</Text>
             </ToolAnimated>
         );
@@ -35,12 +40,12 @@ class EmojiContent extends React.PureComponent {
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
         backgroundColor: 'blue',
         alignItems: 'center',
         justifyContent: 'center',
         left: 0,
         right: 0,
+        bottom: 0,
     }
 });
 
