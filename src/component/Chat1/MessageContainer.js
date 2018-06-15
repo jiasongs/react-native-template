@@ -58,11 +58,12 @@ class MessageContainer extends React.PureComponent {
         console.log('MessageContainer')
         return (
             <FlatListView
+                onLayout={(event) => { console.log('FlatListView', event.nativeEvent.layout) }}
                 ref={this._captureRef}
                 style={styles.flatListView}
                 contentContainerStyle={styles.contentContainerStyle}
                 keyboardDismissMode={'on-drag'}
-                keyboardShouldPersistTaps={'always'}
+                keyboardShouldPersistTaps={__IOS__ ? 'always' : 'handled'}
                 inverted={true}
                 initialRefresh={false}
                 enableLoadMore={false}
@@ -80,7 +81,7 @@ class MessageContainer extends React.PureComponent {
 
 const styles = StyleSheet.create({
     flatListView: {
-
+        // flex: 1,
     },
     contentContainerStyle: {
         flexGrow: 1,

@@ -100,7 +100,9 @@ class ToolContainer extends React.PureComponent {
 
     _onEmojiSelected = (info) => {
         // alert(info)
-        this.barRef.setInputText(info)
+        if (info != undefined) {
+            this.barRef.setInputText(info)
+        }
     }
 
     _onPressSend = (text) => {
@@ -203,15 +205,21 @@ class ToolContainer extends React.PureComponent {
 
     _onKeyboardShow = (info) => {
         const { contentHeight, onToolbarWillShow } = this.props
-
         if (info.duration != 0) {
             const endCoordinates = info.endCoordinates
-            const toValue = contentHeight - endCoordinates.height
+            let toValue, endCoordinatesHeight
+            if (__IOS__) {
+                toValue = contentHeight - endCoordinates.height
+                endCoordinatesHeight = endCoordinates.height
+            } else {
+                toValue = this.toolBarStatus === Status.ToolBarUp ? 0 : contentHeight - endCoordinates.height
+                endCoordinatesHeight = this.toolBarStatus === Status.ToolBarUp ? endCoordinates.height - 100 : endCoordinates.height
+            }
             this.toolAnimatedRef.startAnimatedTiming(toValue)
             this.barRef.changeSendVisible(true)
             this.toolBarStatus = Status.ToolBarUp
             this.runOtherComponentDown()
-            onToolbarWillShow && onToolbarWillShow({ endCoordinates: { height: endCoordinates.height } })
+            onToolbarWillShow && onToolbarWillShow({ endCoordinates: { height: endCoordinatesHeight } })
         }
         console.log('_onKeyboardShow')
     };
@@ -263,9 +271,19 @@ class ToolContainer extends React.PureComponent {
                     onPressAdd={this._onPressAdd}
                     onPressSend={this._onPressSend}
                 />
-                <CommonLg ref={this._captureCommonLgRef}  {...this.props} />
-                <EmojiContent ref={this._captureEmojiContentRef} onEmojiSelected={this._onEmojiSelected} {...this.props} />
-                <AddContent ref={this._captureAddContentRef}  {...this.props} />
+                <CommonLg
+                    ref={this._captureCommonLgRef}
+                    {...this.props}
+                />
+                <EmojiContent
+                    ref={this._captureEmojiContentRef}
+                    onEmojiSelected={this._onEmojiSelected}
+                    {...this.props}
+                />
+                <AddContent
+                    ref={this._captureAddContentRef}
+                    {...this.props}
+                />
             </ToolAnimated>
         );
     }

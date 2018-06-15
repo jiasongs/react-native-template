@@ -114,7 +114,10 @@ class Chat extends React.PureComponent {
     render() {
         return (
             <Container keyboardShouldPersistTaps={false}>
-                <NavigationBar title={'聊天'} rightView={<TouchableOpacity onPress={this._onPress}><Text>测试发送</Text></TouchableOpacity>} />
+                <NavigationBar
+                    title={'聊天'}
+                    style={{ zIndex: 10 }}
+                />
                 <ChatPage
                     user={this.user}
                     messages={this.state.messages}

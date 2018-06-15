@@ -60,25 +60,20 @@ class ChatPage extends React.PureComponent {
     }
 
     _onToolbarWillShow = (info) => {
-        // if (info.duration != 0) {
-        //     console.log('_onKeyboardWillShow', info)
-        //     const endCoordinates = info.endCoordinates
-        //     if (this._keyboardStatus === Status.KeyboardDown) {
-
-        //         this._keyboardStatus = Status.KeyboardUp
-        //     }
-        // }
         if (this._contaierLayout) {
-            this.startTimingAnimated(this._contaierLayout.height - info.endCoordinates.height - ToolBarHeight)
+            let value
+            if (__IOS__) {
+                value = this._contaierLayout.height - info.endCoordinates.height - ToolBarHeight
+            } else {
+                value = this._contaierLayout.height - info.endCoordinates.height - ToolBarHeight
+            }
+            console.log(this._contaierLayout.height, info.endCoordinates.height, value)
+            this.startTimingAnimated(value)
             this.messageRef.scrollToTop()
         }
     };
 
     _onToolbarWillHide = (info) => {
-        // if (this._keyboardStatus === Status.KeyboardUp) {
-
-        //     this._keyboardStatus = Status.KeyboardDown
-        // }
         if (this._contaierLayout) {
             this.startTimingAnimated(this._contaierLayout.height - ToolBarHeight)
         }
@@ -92,6 +87,7 @@ class ChatPage extends React.PureComponent {
 
     _onLayout = (event) => {
         this._contaierLayout = event.nativeEvent.layout
+        console.log('_contaierLayout', this._contaierLayout)
         this._messageContainerHeight.setValue(this._contaierLayout.height - ToolBarHeight)
     };
 
@@ -102,12 +98,14 @@ class ChatPage extends React.PureComponent {
     _captureRef = (v) => {
         this.messageRef = v
     };
-
+    _ceshi = (event) => {
+        console.log('nihaoma---', event.nativeEvent.layout)
+    }
     render() {
         const { messages, user, onPressSend } = this.props
         return (
             <View style={styles.container} onLayout={this._onLayout}>
-                <Animated.View style={{ height: this._messageContainerHeight }}>
+                <Animated.View style={{ height: this._messageContainerHeight, backgroundColor: 'red', }} onLayout={this._ceshi}>
                     <MessageContainer
                         ref={this._captureRef}
                         messages={messages}
