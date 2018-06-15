@@ -35,7 +35,7 @@ class EmojiContent extends React.PureComponent {
                 barHeight={barHeight}
                 style={[styles.container, { height: contentHeight, top: barHeight }]}
             >
-                {/* <EmotionsView style={styles.emotionsView} onSelected={onEmojiSelected} /> */}
+                <EmotionsView style={styles.emotionsView} onSelected={onEmojiSelected} />
             </ToolAnimated>
         );
     }

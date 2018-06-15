@@ -32,6 +32,7 @@ class ToolAnimated extends React.PureComponent {
             })
             this.currentValue = toValue
         }
+        console.log('startAnimatedSpring')
     };
 
     startAnimatedTiming = (toValue, duration = 195) => {
@@ -45,11 +46,12 @@ class ToolAnimated extends React.PureComponent {
             })
             this.currentValue = toValue
         }
+        console.log('startAnimatedTiming')
     };
 
     render() {
         const { style, children, barHeight, initTranslateY } = this.props
-        console.log('startAnimatedTiming')
+
         return (
             <Animated.View style={[styles.container, { height: barHeight + initTranslateY }, style, {
                 transform: [

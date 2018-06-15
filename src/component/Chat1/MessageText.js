@@ -14,7 +14,6 @@ class MessageText extends React.PureComponent {
 
     }
 
-
     render() {
         const { content } = this.props
         return (
@@ -30,13 +29,13 @@ class MessageText extends React.PureComponent {
 const styles = StyleSheet.create({
     messageText: {
         maxWidth: 230,
-        fontSize: FontSize(13),
+        fontSize: FontSize(14),
         lineHeight: 26,
-        color: "#3d434c"
+        color: "#3d434c",
     },
     emojiStyle: {
-        width: 20,
-        height: 20,
+        width: ScaleSize(40),
+        height: ScaleSize(40),
     }
 });
 

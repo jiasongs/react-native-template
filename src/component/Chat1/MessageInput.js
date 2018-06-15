@@ -36,7 +36,6 @@ class MessageInput extends React.PureComponent {
 
     clear = () => {
         this.textInputRef.clear()
-        this.setText('')
     };
 
     _onChangeText = (text) => {

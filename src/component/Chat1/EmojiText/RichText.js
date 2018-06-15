@@ -8,7 +8,8 @@ import {
 import PropTypes from 'prop-types';
 import { EMOTIONS_DATA, EMOTIONS_ZHCN_INVERT } from './DataSource';
 
-
+import EmojiText from './EmojiText';
+import EmojiImage from './EmojiImage';
 
 class RichText extends React.PureComponent {
 
@@ -83,11 +84,9 @@ class RichText extends React.PureComponent {
         return contentArray;
     }
 
-
-    render() {
+    renderTextContainer = () => {
         const { style, emojiStyle } = this.props
         const { emojiTextArray } = this.state
-        console.log('emojiTextArray', emojiTextArray)
         return (
             <Text style={style}>
                 {emojiTextArray.map((item, index) => {
@@ -95,10 +94,10 @@ class RichText extends React.PureComponent {
                     const content = item['content']
                     if (imageSource) {
                         return (
-                            <Image
+                            <EmojiImage
                                 key={`emoji_${index}`}
                                 style={emojiStyle}
-                                resizeMode={'contain'}
+                                resizeMode={'stretch'}
                                 source={imageSource}
                             />
                         )
@@ -109,6 +108,46 @@ class RichText extends React.PureComponent {
                     }
                 })}
             </Text>
+        )
+    }
+
+    renderViewContainer = () => {
+        const { style, emojiStyle } = this.props
+        const { emojiTextArray } = this.state
+        return (
+            <View style={styles.container}>
+                {emojiTextArray.map((item, index) => {
+                    const imageSource = item['resource']
+                    const content = item['content']
+                    if (imageSource) {
+                        return (
+                            <EmojiImage
+                                key={`emoji_image_${index}`}
+                                style={emojiStyle}
+                                resizeMode={'stretch'}
+                                source={imageSource}
+                            />
+                        )
+                    } else if (content) {
+                        return (
+                            <EmojiText
+                                key={`emoji_text_${index}`}
+                                style={style}
+                                content={content}
+                            />
+                        )
+                    } else {
+                        return null
+                    }
+                })}
+            </View>
+        )
+    }
+
+    render() {
+        return (
+            // this.renderTextContainer()
+            this.renderViewContainer()
         );
     }
 
@@ -116,7 +155,14 @@ class RichText extends React.PureComponent {
 
 
 const styles = StyleSheet.create({
-
+    container: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        maxWidth: 200,
+        // backgroundColor: 'red',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });
 
 export default RichText

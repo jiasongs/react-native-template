@@ -27,10 +27,8 @@ class Message extends React.Component {
         const info = nextProps.info
         const preInfo = this.props.info
         if (info.item.message_id != preInfo.item.message_id) {
-            console.log('preInfo-true')
             return true
         } else {
-            console.log('preInfo-false')
             return false
         }
     }

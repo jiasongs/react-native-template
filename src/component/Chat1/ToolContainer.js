@@ -35,7 +35,7 @@ class ToolContainer extends React.PureComponent {
 
     static defaultProps = {
         barHeight: 53,
-        contentHeight: 250
+        contentHeight: 200
     };
 
     constructor(props) {
@@ -72,6 +72,7 @@ class ToolContainer extends React.PureComponent {
             this.toolBarStatus = Status.ToolBarDown
             onToolbarWillHide && onToolbarWillHide()
         }
+        console.log('runMainComponentDown')
     };
 
     runOtherComponentDown = () => {
@@ -94,6 +95,7 @@ class ToolContainer extends React.PureComponent {
             this.addStatus = Status.AddDown
             onToolbarWillHide && onToolbarWillHide()
         }
+        console.log('runOtherComponentDown')
     };
 
     _onEmojiSelected = (info) => {
@@ -135,6 +137,7 @@ class ToolContainer extends React.PureComponent {
         }
         this.barRef.changeSendVisible(false)
         this.barRef.inputBlur()
+        console.log('_onPressLeft')
     };
 
     _onPressEmoji = () => {
@@ -162,8 +165,10 @@ class ToolContainer extends React.PureComponent {
             this.toolBarStatus = Status.ToolBarDown
             onToolbarWillHide && onToolbarWillHide()
         }
-        this.barRef.changeSendVisible(false)
+        this.barRef.changeSendVisible(true)
         this.barRef.inputBlur()
+        console.log('_onPressEmoji');
+
     };
 
     _onPressAdd = () => {
@@ -193,12 +198,12 @@ class ToolContainer extends React.PureComponent {
         }
         this.barRef.changeSendVisible(false)
         this.barRef.inputBlur()
-        console.log('zzzzzzzzzzz')
+        console.log('_onPressAdd');
     };
 
     _onKeyboardShow = (info) => {
         const { contentHeight, onToolbarWillShow } = this.props
-        console.log('asdsadasd', info.nativeEvent)
+
         if (info.duration != 0) {
             const endCoordinates = info.endCoordinates
             const toValue = contentHeight - endCoordinates.height
@@ -208,6 +213,7 @@ class ToolContainer extends React.PureComponent {
             this.runOtherComponentDown()
             onToolbarWillShow && onToolbarWillShow({ endCoordinates: { height: endCoordinates.height } })
         }
+        console.log('_onKeyboardShow')
     };
 
     _onKeyboardHide = (info) => {
@@ -220,6 +226,7 @@ class ToolContainer extends React.PureComponent {
             this.toolBarStatus = Status.ToolBarDown
             onToolbarWillHide && onToolbarWillHide()
         }
+        console.log('_onKeyboardHide')
     };
 
     _captureRef = (v) => {
@@ -247,7 +254,7 @@ class ToolContainer extends React.PureComponent {
         const { barHeight, contentHeight } = this.props
         console.log('Tolllll')
         return (
-            <ToolAnimated ref={this._captureRef} initTranslateY={contentHeight} barHeight={barHeight} >
+            <ToolAnimated ref={this._captureRef} style={styles.container} initTranslateY={contentHeight} barHeight={barHeight} >
                 <ToolBar
                     ref={this._captureBarRef}
                     barHeight={barHeight}
@@ -257,7 +264,7 @@ class ToolContainer extends React.PureComponent {
                     onPressSend={this._onPressSend}
                 />
                 <CommonLg ref={this._captureCommonLgRef}  {...this.props} />
-                <EmojiContent ref={this._captureEmojiContentRef} {...this.props} />
+                <EmojiContent ref={this._captureEmojiContentRef} onEmojiSelected={this._onEmojiSelected} {...this.props} />
                 <AddContent ref={this._captureAddContentRef}  {...this.props} />
             </ToolAnimated>
         );

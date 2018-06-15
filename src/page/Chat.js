@@ -30,7 +30,7 @@ class Chat extends React.PureComponent {
                     to_user: {
                         id: 3
                     },
-                    content: '123',
+                    content: '[发呆]asdsd[色]你好吗[流泪]',
                     img_width: 200,
                     img_height: 200,
                     img_size: 1431231,
