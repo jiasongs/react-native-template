@@ -1,13 +1,28 @@
 'use strict';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types'
+import RichText from './EmojiText/RichText'
 
 class MessageText extends React.PureComponent {
+
+    static propTypes = {
+        style: Text.propTypes.style
+    }
+
+    static defaultProps = {
+
+    }
+
 
     render() {
         const { content } = this.props
         return (
-            <Text style={styles.messageText}>{content}</Text>
+            <RichText
+                style={styles.messageText}
+                emojiStyle={styles.emojiStyle}
+                textContent={content}
+            />
         );
     }
 }
@@ -18,6 +33,10 @@ const styles = StyleSheet.create({
         fontSize: FontSize(13),
         lineHeight: 26,
         color: "#3d434c"
+    },
+    emojiStyle: {
+        width: 20,
+        height: 20,
     }
 });
 

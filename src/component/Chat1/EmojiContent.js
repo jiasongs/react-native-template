@@ -3,12 +3,15 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import ToolAnimated from './ToolAnimated';
+import EmotionsView from './EmojiText/EmotionsView'
+
 
 class EmojiContent extends React.PureComponent {
 
     static propTypes = {
         barHeight: PropTypes.number,
         contentHeight: PropTypes.number,
+        onEmojiSelected: PropTypes.func
     };
 
     static defaultProps = {
@@ -24,7 +27,7 @@ class EmojiContent extends React.PureComponent {
     };
 
     render() {
-        const { contentHeight, barHeight } = this.props
+        const { contentHeight, barHeight, onEmojiSelected } = this.props
         return (
             <ToolAnimated
                 ref={this._captureRef}
@@ -32,7 +35,7 @@ class EmojiContent extends React.PureComponent {
                 barHeight={barHeight}
                 style={[styles.container, { height: contentHeight, top: barHeight }]}
             >
-                <Text>我是表情组件，谢谢</Text>
+                {/* <EmotionsView style={styles.emotionsView} onSelected={onEmojiSelected} /> */}
             </ToolAnimated>
         );
     }
@@ -40,12 +43,15 @@ class EmojiContent extends React.PureComponent {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'blue',
         alignItems: 'center',
         justifyContent: 'center',
         left: 0,
         right: 0,
         bottom: 0,
+        paddingHorizontal: 10,
+    },
+    emotionsView: {
+        width: SCREEN_WIDTH - 10 * 2
     }
 });
 

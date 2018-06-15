@@ -6,10 +6,9 @@ import MessageAvatar from './MessageAvatar'; // 头像
 import MessageText from './MessageText'; // 
 import MessageBubble from './MessageBubble';
 
-class Message extends React.PureComponent {
+class Message extends React.Component {
 
     static propTypes = {
-        info: PropTypes.object,
         user: PropTypes.shape({ id: PropTypes.number, nick_name: PropTypes.string, avatar: PropTypes.string, }).isRequired,
     };
 
@@ -21,6 +20,19 @@ class Message extends React.PureComponent {
         super(props);
         const from_user_id = props.info.item.from_user.id
         this.position = from_user_id === props.user.id ? 'right' : 'left' // 头像的位置
+        console.log(props.info.item)
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        const info = nextProps.info
+        const preInfo = this.props.info
+        if (info.item.message_id != preInfo.item.message_id) {
+            console.log('preInfo-true')
+            return true
+        } else {
+            console.log('preInfo-false')
+            return false
+        }
     }
 
     renderPositionLeft = () => {
@@ -52,7 +64,7 @@ class Message extends React.PureComponent {
     };
 
     render() {
-
+        console.log('Message')
         return (
             this.position === 'left' ? this.renderPositionLeft() : this.renderPositionRight()
         )

@@ -59,7 +59,7 @@ class Chat extends React.PureComponent {
                     created_at: 12345456,// 
                 }, {
                     type: 1,// 消息类型 1 2 3 4 5 6 ...
-                    message_id: Math.random(),
+                    message_id: 12,
                     from_user: {
                         id: 2,
                         nick_name: '',
@@ -107,7 +107,6 @@ class Chat extends React.PureComponent {
             voice_size: 1312313,
             created_at: 12345456,// 
         }])
-        console.log(messages)
         this.setState({ messages })
         // console.log('messages', messages)
     }

@@ -24,7 +24,7 @@ const ContentType = {
     Emoji: 'Emoji',
     Add: 'Add',
 }
-class Toolbar extends React.PureComponent {
+class ToolContainer extends React.PureComponent {
 
     static propTypes = {
         barHeight: PropTypes.number,
@@ -46,6 +46,7 @@ class Toolbar extends React.PureComponent {
         this.commonLgStatus = Status.CommonLgDown
         this.emojiStatus = Status.EmojiDown
         this.addStatus = Status.AddDown
+        console.log('zzzz')
     };
 
     componentDidMount() {
@@ -95,10 +96,15 @@ class Toolbar extends React.PureComponent {
         }
     };
 
+    _onEmojiSelected = (info) => {
+        // alert(info)
+        this.barRef.setInputText(info)
+    }
+
     _onPressSend = (text) => {
         const { onPressSend } = this.props
         onPressSend && onPressSend(text)
-        console.log(text)
+        // console.log(text)
     };
 
     _onPressLeft = () => {
@@ -187,6 +193,7 @@ class Toolbar extends React.PureComponent {
         }
         this.barRef.changeSendVisible(false)
         this.barRef.inputBlur()
+        console.log('zzzzzzzzzzz')
     };
 
     _onKeyboardShow = (info) => {
@@ -238,6 +245,7 @@ class Toolbar extends React.PureComponent {
     };
     render() {
         const { barHeight, contentHeight } = this.props
+        console.log('Tolllll')
         return (
             <ToolAnimated ref={this._captureRef} initTranslateY={contentHeight} barHeight={barHeight} >
                 <ToolBar
@@ -249,7 +257,7 @@ class Toolbar extends React.PureComponent {
                     onPressSend={this._onPressSend}
                 />
                 <CommonLg ref={this._captureCommonLgRef}  {...this.props} />
-                <EmojiContent ref={this._captureEmojiContentRef}  {...this.props} />
+                <EmojiContent ref={this._captureEmojiContentRef} {...this.props} />
                 <AddContent ref={this._captureAddContentRef}  {...this.props} />
             </ToolAnimated>
         );
@@ -266,4 +274,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Toolbar
+export default ToolContainer

@@ -46,7 +46,7 @@ class MessageContainer extends React.PureComponent {
     };
 
     _keyExtractor = (item, index) => {
-        return `item_${item.message_id}`
+        return `chat_${item.message_id}`
     };
 
     _captureRef = (v) => {

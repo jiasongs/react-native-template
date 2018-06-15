@@ -23,9 +23,7 @@ class ToolBar extends React.PureComponent {
         this.inputText = ''
     }
 
-    _onChangeText = (text) => {
-        this.inputText = text
-    }
+
 
     changeSendVisible = (isVisible) => {
         this.sendRef.changeVisible(isVisible)
@@ -34,18 +32,32 @@ class ToolBar extends React.PureComponent {
     inputBlur = () => {
         this.inputRef.blur()
     }
+
+    setInputText = (text) => {
+        this.inputText = this.inputText + text
+        this.inputRef.setText(this.inputText)
+    }
+
+    _onChangeText = (text) => {
+        this.inputText = text
+    }
+
     _onPressSend = () => {
         const { onPressSend } = this.props
         onPressSend && onPressSend(this.inputText)
         // 清楚输入框
         this.inputRef.clear()
+        this.inputText = ''
     }
+
     _captureSendRef = (v) => {
         this.sendRef = v
     }
+
     _captureInputRef = (v) => {
         this.inputRef = v
     }
+
     render() {
         const { barHeight, onPressLeft, onPressEmoji, onPressAdd } = this.props
         return (

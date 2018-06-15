@@ -8,7 +8,7 @@ import ToolContainer from './ToolContainer';
 
 
 const ToolBarHeight = 53
-const ContentHeight = 250
+const ContentHeight = 200
 const Status = {
     KeyboardUp: 'KeyboardUp',
     KeyboardDown: 'KeyboardDown',
@@ -53,6 +53,10 @@ class ChatPage extends React.PureComponent {
             duration: 210,
 
         }).start()
+    }
+
+    _onEmojiSelected = (info) => {
+        alert(info)
     }
 
     _onToolbarWillShow = (info) => {
