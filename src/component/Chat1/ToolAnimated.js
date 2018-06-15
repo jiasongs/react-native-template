@@ -49,7 +49,7 @@ class ToolAnimated extends React.PureComponent {
 
     render() {
         const { style, children, barHeight, initTranslateY } = this.props
-        console.log('zzz')
+        console.log('startAnimatedTiming')
         return (
             <Animated.View style={[styles.container, { height: barHeight + initTranslateY }, style, {
                 transform: [
