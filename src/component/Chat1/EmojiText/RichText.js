@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         maxWidth: 200,
         // backgroundColor: 'red',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center'
     }
 });
