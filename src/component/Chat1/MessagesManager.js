@@ -4,11 +4,11 @@
 class MessagesManager {
 
 
-    static appendMessages(currentMessages = [], messages, inverted = true) {
+    static appendMessages(historyMessages = [], messages, inverted = true) {
         if (!Array.isArray(messages)) {
             messages = [messages];
         }
-        return inverted ? messages.concat(currentMessages) : currentMessages.concat(messages);
+        return inverted ? messages.concat(historyMessages) : historyMessages.concat(messages);
     }
 
 }

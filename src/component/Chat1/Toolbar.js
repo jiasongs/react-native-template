@@ -42,6 +42,10 @@ class ToolBar extends React.PureComponent {
         this.inputText = text
     }
 
+    _onSubmitEditing = (text) => {
+        this._onPressSend()
+    }
+
     _onPressSend = () => {
         const { onPressSend } = this.props
         onPressSend && onPressSend(this.inputText)
@@ -65,7 +69,11 @@ class ToolBar extends React.PureComponent {
                 <TouchableOpacity style={styles.leftContainer} onPress={onPressLeft}>
                     <Text style={styles.leftText}>常用语</Text>
                 </TouchableOpacity>
-                <MessageInput ref={this._captureInputRef} onChangeText={this._onChangeText} />
+                <MessageInput
+                    ref={this._captureInputRef}
+                    onChangeText={this._onChangeText}
+                    onSubmitEditing={this._onSubmitEditing}
+                />
                 <TouchableOpacity style={styles.leftContainer} onPress={onPressEmoji}>
                     <Text style={styles.leftText}>表情</Text>
                 </TouchableOpacity>

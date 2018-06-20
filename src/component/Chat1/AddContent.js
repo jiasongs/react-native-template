@@ -3,12 +3,16 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import ToolAnimated from './ToolAnimated';
+import Recording from './Recording'
+import SyanImagePicker from 'react-native-syan-image-picker';
+import ImagePicker from 'react-native-image-picker';
 
 class AddContent extends React.PureComponent {
 
     static propTypes = {
         barHeight: PropTypes.number,
         contentHeight: PropTypes.number,
+        onPressAlbum: PropTypes.func,
     };
 
     static defaultProps = {
@@ -24,10 +28,75 @@ class AddContent extends React.PureComponent {
             { type: 4, title: '发送简历', imageSource: '' },
             // { type: 4, title: '发送简历', imageSource: '' },
         ]
+        this.state = { recording: true }
     }
 
     startAnimatedSpring = (toValue) => {
         this.toolAnimatedRef.startAnimatedSpring(toValue)
+    }
+
+    _openSyanImagePicker = async () => {
+        const { onPressAlbum } = this.props
+        let reslut = await SyanImagePicker.asyncShowImagePicker({})
+        let array = []
+        reslut.forEach(item => {
+            array.push({
+                localPath: item.uri,
+                size: item.size,
+                width: item.width,
+                height: item.height
+            })
+        })
+        onPressAlbum && onPressAlbum(array)
+    }
+
+    _openImagePicker = () => {
+        const { onPressAlbum } = this.props
+        const option = { noData: true }
+        ImagePicker.launchCamera(option, (response) => {
+            console.log('ImagePicker', response)
+            let array = []
+            array.push({
+                localPath: response.uri,
+                size: response.fileSize,
+                width: response.width,
+                height: response.height
+            })
+            onPressAlbum && onPressAlbum(array)
+        });
+
+    }
+
+    _openRecording = () => {
+        if (this.state.recording) {
+            this.setState({ recording: false })
+        } else {
+            this.setState({ recording: true })
+        }
+    }
+
+    _onPress = (index) => {
+        const { onPressResume } = this.props
+        switch (index) {
+            case 1:
+                // 拍摄
+                this._openImagePicker()
+                break;
+            case 2:
+                // 相册
+                this._openSyanImagePicker()
+                break;
+            case 3:
+                // 语音
+                this._openRecording()
+                break;
+            case 4:
+                // 发送简历
+                onPressResume && onPressResume()
+                break;
+            default:
+                break;
+        }
     }
 
     renderItems = () => {
@@ -35,7 +104,7 @@ class AddContent extends React.PureComponent {
             this.itemsData.map((item, index) => {
                 return (
                     <View style={styles.itemContainer} key={`${index}`}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => this._onPress(item.type)}>
                             <Image style={styles.itemImage} />
                         </TouchableOpacity>
                         <Text style={styles.itemTitleText}>{item.title}</Text>
@@ -51,6 +120,7 @@ class AddContent extends React.PureComponent {
 
     render() {
         const { contentHeight, barHeight } = this.props
+        const { recording } = this.state
         return (
             <ToolAnimated
                 ref={this._captureRef}
@@ -58,6 +128,7 @@ class AddContent extends React.PureComponent {
                 barHeight={barHeight}
                 style={[styles.container, { height: contentHeight, top: barHeight }]}>
                 <this.renderItems />
+                {recording ? <Recording /> : null}
             </ToolAnimated>
         );
     }
@@ -87,7 +158,8 @@ const styles = StyleSheet.create({
     itemTitleText: {
         fontSize: FontSize(12),
         marginTop: 8,
-    }
+    },
+
 });
 
 export default AddContent

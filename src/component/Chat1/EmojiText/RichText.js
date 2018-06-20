@@ -112,10 +112,10 @@ class RichText extends React.PureComponent {
     }
 
     renderViewContainer = () => {
-        const { style, emojiStyle } = this.props
+        const { style, emojiStyle, textStyle } = this.props
         const { emojiTextArray } = this.state
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, style]}>
                 {emojiTextArray.map((item, index) => {
                     const imageSource = item['resource']
                     const content = item['content']
@@ -132,7 +132,7 @@ class RichText extends React.PureComponent {
                         return (
                             <EmojiText
                                 key={`emoji_text_${index}`}
-                                style={style}
+                                style={textStyle}
                                 content={content}
                             />
                         )
@@ -159,8 +159,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         maxWidth: 200,
-        // backgroundColor: 'red',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center'
     }
 });

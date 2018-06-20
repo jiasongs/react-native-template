@@ -18,7 +18,8 @@ class MessageText extends React.PureComponent {
         const { content } = this.props
         return (
             <RichText
-                style={styles.messageText}
+                style={styles.container}
+                textStyle={styles.messageText}
                 emojiStyle={styles.emojiStyle}
                 textContent={content}
             />
@@ -27,6 +28,9 @@ class MessageText extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        margin: 10,
+    },
     messageText: {
         maxWidth: 230,
         fontSize: FontSize(14),
@@ -36,7 +40,7 @@ const styles = StyleSheet.create({
     emojiStyle: {
         width: ScaleSize(40),
         height: ScaleSize(40),
-    }
+    },
 });
 
 export default MessageText

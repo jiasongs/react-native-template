@@ -30,11 +30,16 @@ class CommonLg extends React.PureComponent {
         this.toolAnimatedRef.startAnimatedSpring(toValue)
     }
 
+    _onPress = (text) => {
+        const { onPressCommon } = this.props
+        onPressCommon && onPressCommon(text)
+    }
+
     _renderItem = (info) => {
         const item = info.item
         const index = info.index
         return (
-            <TouchableOpacity style={styles.itemContainer}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => this._onPress(item.title)}>
                 <Text style={styles.itemTitle} numberOfLines={1}>{item.title}</Text>
             </TouchableOpacity>
         )

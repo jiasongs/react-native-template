@@ -51,7 +51,6 @@ class ToolAnimated extends React.PureComponent {
 
     render() {
         const { style, children, barHeight, initTranslateY } = this.props
-
         return (
             <Animated.View style={[styles.container, { height: barHeight + initTranslateY }, style, {
                 transform: [

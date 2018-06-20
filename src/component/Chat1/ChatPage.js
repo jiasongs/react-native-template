@@ -16,21 +16,20 @@ const Status = {
 class ChatPage extends React.PureComponent {
 
     static propTypes = {
-        messages: PropTypes.array,
+        defaultMessages: PropTypes.array,
         user: PropTypes.shape({ id: PropTypes.number, nick_name: PropTypes.string, avatar: PropTypes.string, }).isRequired,
-        onPressSend: PropTypes.func
+        onPressSend: PropTypes.func,
+        onPressAlbum: PropTypes.func,
     };
 
     static defaultProps = {
-
+        defaultMessages: []
     };
-
-    static appendMessages(currentMessages, messages, inverted) {
-        return MessagesManager.appendMessages(currentMessages, messages, inverted)
-    }
 
     constructor(props) {
         super(props);
+        const { defaultMessages } = props
+        this.state = { messages: defaultMessages }
         this._contaierLayout = null
         this._messageContainerHeight = new Animated.Value(0)
         this._keyboardStatus = Status.KeyboardDown
@@ -47,6 +46,40 @@ class ChatPage extends React.PureComponent {
         // this.keyboardDidHideListener.remove();
     }
 
+    // 发送文本消息
+    sendTextMessage = (currentMsg) => {
+        this.sendMessage(1, currentMsg) // 消息类型 文本消息
+    }
+
+    // 发送图片消息
+    sendImageMessage = (currentMsg) => {
+        this.sendMessage(2, currentMsg) // 消息类型 图片消息
+    }
+
+    sendMessage = (type, currentMsg) => {
+        const { messages } = this.state
+        const msgTemplate = {
+            type: type,
+            message_id: Math.random(),
+            from_user: {
+                id: 1000,
+                nick_name: '',
+                avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528793132482&di=fc622f2c78594ec077a4fcfc023cb542&imgtype=0&src=http%3A%2F%2Fimg1.touxiang.cn%2Fuploads%2F20130330%2F30-074643_295.jpg',
+            },
+            to_user: {
+                id: 5
+            },
+            content: `${''}`,
+            created_at: 12345456,// 
+        }
+        const newMessage = {
+            ...msgTemplate,
+            ...currentMsg,
+        }
+        console.log(newMessage)
+        this.setState({ messages: MessagesManager.appendMessages(messages, newMessage) })
+    }
+
     startTimingAnimated = (toValue) => {
         Animated.timing(this._messageContainerHeight, {
             toValue,
@@ -55,9 +88,6 @@ class ChatPage extends React.PureComponent {
         }).start()
     }
 
-    _onEmojiSelected = (info) => {
-        alert(info)
-    }
 
     _onToolbarWillShow = (info) => {
         if (this._contaierLayout) {
@@ -98,14 +128,13 @@ class ChatPage extends React.PureComponent {
     _captureRef = (v) => {
         this.messageRef = v
     };
-    _ceshi = (event) => {
-        console.log('nihaoma---', event.nativeEvent.layout)
-    }
+
     render() {
-        const { messages, user, onPressSend } = this.props
+        const { user, onPressSend, onPressAlbum, onPressCommon, onPressResume } = this.props
+        const { messages } = this.state
         return (
             <View style={styles.container} onLayout={this._onLayout}>
-                <Animated.View style={{ height: this._messageContainerHeight, backgroundColor: 'red', }} onLayout={this._ceshi}>
+                <Animated.View style={{ height: this._messageContainerHeight }}>
                     <MessageContainer
                         ref={this._captureRef}
                         messages={messages}
@@ -117,7 +146,10 @@ class ChatPage extends React.PureComponent {
                     ref={this._captureToolbarRef}
                     barHeight={ToolBarHeight}
                     contentHeight={ContentHeight}
-                    onPressSend={onPressSend}
+                    onPressSend={onPressSend}  // 发送消息
+                    onPressAlbum={onPressAlbum} // 打开相册后发送消息
+                    onPressCommon={onPressCommon} // 发送常用语 可自定义 不用时去掉即可
+                    onPressResume={onPressResume} // 发送简历 可自定义 不用时去掉即可
                     onToolbarWillShow={this._onToolbarWillShow}
                     onToolbarWillHide={this._onToolbarWillHide}
                 />

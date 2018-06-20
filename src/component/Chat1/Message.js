@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import MessageAvatar from './MessageAvatar'; // 头像
 import MessageText from './MessageText'; // 
 import MessageBubble from './MessageBubble';
+import MessageImage from './MessageImage';
+import MessageTime from './MessageTime';
+import MessageSystem from './MessageSystem';
 
 class Message extends React.Component {
 
@@ -33,15 +36,37 @@ class Message extends React.Component {
         }
     }
 
+    renderTypeMessage = () => {
+        const { info } = this.props
+        const { content, from_user, type, img_width, img_height } = info.item
+        if (type === 1) { // 消息
+            return (
+                <MessageText content={content} />
+            )
+        } else if (type === 2) { // 图片
+            return (
+                <MessageImage uri={content} imageWidth={img_width} imageHeight={img_height} />
+            )
+        } else {
+            return null
+        }
+    }
+
+    renderMessageSystem = () => {
+        return (
+            <MessageSystem />
+        )
+    };
+
     renderPositionLeft = () => {
-        const { info, user } = this.props
-        const { content, from_user } = info.item
+        const { info } = this.props
+        const { from_user } = info.item
         return (
             <View style={styles.containerLeft}>
                 <MessageAvatar source={{ uri: from_user.avatar }} />
                 <View style={styles.messageContentLeft}>
                     <MessageBubble />
-                    <MessageText content={content} />
+                    {this.renderTypeMessage()}
                 </View>
             </View>
         )
@@ -49,51 +74,66 @@ class Message extends React.Component {
 
     renderPositionRight = () => {
         const { info, user } = this.props
-        const { content, from_user } = info.item
+        const { content, from_user, type } = info.item
         return (
             <View style={styles.containerRight}>
                 <View style={styles.messageContentRight}>
                     <MessageBubble />
-                    <MessageText content={content} />
+                    {this.renderTypeMessage()}
                 </View>
                 <MessageAvatar source={{ uri: user.avatar }} />
             </View>
         )
     };
 
+
+
     render() {
-        console.log('Message')
+        const { info, user } = this.props
+        const { content, from_user, type } = info.item
         return (
-            this.position === 'left' ? this.renderPositionLeft() : this.renderPositionRight()
+            type === 5 ? (<this.renderMessageSystem />) : (
+                <View style={styles.container}>
+                    <MessageTime style={styles.messageTime} />
+                    {this.position === 'left' ? <this.renderPositionLeft /> : <this.renderPositionRight />}
+                </View>
+            )
         )
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        // backgroundColor: 'red',
+    },
     containerLeft: {
         marginVertical: 10,
         paddingHorizontal: 16,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'flex-start',
     },
     containerRight: {
         marginVertical: 10,
         paddingHorizontal: 16,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'flex-end',
     },
     messageContentLeft: {
-        padding: 10,
         marginLeft: 10,
         justifyContent: 'center',
     },
     messageContentRight: {
-        padding: 10,
         marginRight: 10,
         justifyContent: 'center',
     },
+    messageTime: {
+        alignSelf: 'center',
+        fontSize: FontSize(13),
+        lineHeight: 26,
+        color: "#a3a4a6"
+    }
 });
 
 export default Message

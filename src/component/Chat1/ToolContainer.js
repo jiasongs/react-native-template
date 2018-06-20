@@ -31,6 +31,8 @@ class ToolContainer extends React.PureComponent {
         contentHeight: PropTypes.number,
         onToolbarWillShow: PropTypes.func,
         onToolbarWillHide: PropTypes.func,
+        onPressAlbum: PropTypes.func,
+        onPressSend: PropTypes.func,
     };
 
     static defaultProps = {
@@ -259,7 +261,7 @@ class ToolContainer extends React.PureComponent {
         this.sendRef = v
     };
     render() {
-        const { barHeight, contentHeight } = this.props
+        const { barHeight, contentHeight, onPressAlbum, onPressCommon, onPressResume } = this.props
         console.log('Tolllll')
         return (
             <ToolAnimated ref={this._captureRef} style={styles.container} initTranslateY={contentHeight} barHeight={barHeight} >
@@ -273,6 +275,7 @@ class ToolContainer extends React.PureComponent {
                 />
                 <CommonLg
                     ref={this._captureCommonLgRef}
+                    onPressCommon={onPressCommon}  // 发送常用语 可自定义 不用时去掉即可
                     {...this.props}
                 />
                 <EmojiContent
@@ -282,6 +285,8 @@ class ToolContainer extends React.PureComponent {
                 />
                 <AddContent
                     ref={this._captureAddContentRef}
+                    onPressAlbum={onPressAlbum}
+                    onPressResume={onPressResume} // 发送简历 可自定义 不用时去掉即可
                     {...this.props}
                 />
             </ToolAnimated>
