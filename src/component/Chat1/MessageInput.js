@@ -22,7 +22,7 @@ class MessageInput extends React.PureComponent {
         console.log('componentDidUpdate')
         const nativeProps = {};
         this._lastNativeSelection = { start: this.state.text.length, end: this.state.text.length }
-        this.textInputRef.setNativeProps({ selection: this._lastNativeSelection })
+        // this.textInputRef.setNativeProps({ selection: this._lastNativeSelection })
 
         // if (
         //     this._lastNativeText !== this.state.text &&

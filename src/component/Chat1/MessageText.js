@@ -16,6 +16,7 @@ class MessageText extends React.PureComponent {
 
     render() {
         const { content } = this.props
+        console.log('MessageTextasdsad')
         return (
             <RichText
                 style={styles.container}

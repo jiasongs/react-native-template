@@ -25,6 +25,7 @@ class RichText extends React.PureComponent {
         super(props);
         const contentArray = this.convertTextContent(props.textContent);
         this.state = { emojiTextArray: contentArray }
+        console.log('constructor---RichText')
     }
 
     componentDidMount() {
@@ -114,6 +115,7 @@ class RichText extends React.PureComponent {
     renderViewContainer = () => {
         const { style, emojiStyle, textStyle } = this.props
         const { emojiTextArray } = this.state
+        console.log('renderViewContainer')
         return (
             <View style={[styles.container, style]}>
                 {emojiTextArray.map((item, index) => {

@@ -31,6 +31,7 @@ class Message extends React.Component {
         const info = nextProps.info
         const preInfo = this.props.info
         if (info.item.message_id != preInfo.item.message_id) {
+            console.log('shouldComponentUpdate')
             return true
         } else {
             return false
@@ -80,6 +81,7 @@ class Message extends React.Component {
     renderPositionRight = () => {
         const { info, user } = this.props
         const { content, from_user, type } = info.item
+        console.log('renderPositionRight-------')
         return (
             <View style={styles.containerRight}>
                 <View style={styles.messageContentRight}>
@@ -100,7 +102,7 @@ class Message extends React.Component {
     render() {
         const { info, user, lastMessageTime } = this.props
         const { content, from_user, type } = info.item
-
+        console.log('Message-------')
         return (
             type === 5 ? <this.renderMessageSystem /> : (
                 <View style={styles.container}>
