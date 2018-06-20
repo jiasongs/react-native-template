@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, PanResponder } from 'react-native';
-
+import RecordManager from '../../config/RecordManager';
 
 class Recording extends React.PureComponent {
 
@@ -13,10 +13,12 @@ class Recording extends React.PureComponent {
             onPanResponderRelease: this._onPanResponderRelease,
             onPanResponderTerminate: this._onPanResponderTerminate,
         });
-        this.state = { isRecording: false, moveToCancel: false }
+        this.state = { isRecording: false, moveToCancel: false, currentTime: 0 }
         this._panLocationMoveXY = { x: 0, y: 0 }
         this._cancelImageLayout = {}
         this._contentLayout = {}
+        // 配置录音
+        RecordManager.prepareRecording(this.recordOnProgress, this.recordOnFinished)
     }
 
     setPanLocationMoveXY = (x, y) => {
@@ -41,12 +43,21 @@ class Recording extends React.PureComponent {
         )
     }
 
-    cancelRecording = () => {
+    recordOnProgress = (data) => {
+        console.log('recordOnProgress', data)
+        this.setState({ currentTime: data.currentTime })
+    }
 
+    recordOnFinished = () => {
+        console.log('recordOnFinished')
+    }
+
+    cancelRecording = () => {
+        RecordManager.stopRecord()
     }
 
     startRecording = () => {
-
+        RecordManager.startRecord()
     }
 
     _onStartShouldSetPanResponder = (event) => {
@@ -83,6 +94,8 @@ class Recording extends React.PureComponent {
     };
 
     _onPanResponderRelease = (event) => {
+        const { onRecording } = this.props
+        const { currentTime } = this.state
         //手松开
         this.setPanLocationMoveXY(event.nativeEvent.locationX, event.nativeEvent.locationY)
         if (this.state.isRecording === true) {
@@ -93,15 +106,15 @@ class Recording extends React.PureComponent {
             } else {
                 // 不在垃圾桶松开手，发送
                 console.log('不在垃圾桶松开手，发送')
-
+                onRecording && onRecording({ uri: RecordManager.ceshiAudioPath, duration: currentTime })
             }
             if (this.state.isRecording) {
                 if (this.state.moveToCancel) {
-                    this.setState({ isRecording: false, moveToCancel: false })
+                    this.setState({ isRecording: false, moveToCancel: false, currentTime: 0 })
                 } else {
-                    this.cancelRecording()
-                    this.setState({ isRecording: false })
+                    this.setState({ isRecording: false, currentTime: 0 })
                 }
+                this.cancelRecording()
             }
         }
     };
@@ -122,22 +135,35 @@ class Recording extends React.PureComponent {
     };
 
     render() {
-        const { moveToCancel } = this.state
+        const { isRecording, moveToCancel, currentTime } = this.state
+        let recordText = ''
+        if (isRecording) {
+            if (moveToCancel) {
+                recordText = '松开取消发送'
+            } else {
+                recordText = '松开发送'
+            }
+        } else {
+            recordText = '长按录音'
+        }
         return (
             <View style={styles.recordContainer} {...this._panResponder.panHandlers}>
                 <View
                     style={styles.contentContainer}
                     pointerEvents={'none'}
                     onLayout={this._onLayout}>
+                    <Text>{isRecording ? parseInt(currentTime) : null}</Text>
                     <Image style={styles.recordImage} />
-                    <Text style={styles.recordText}>长按录音</Text>
+                    <Text style={styles.recordText}>{recordText}</Text>
                 </View>
-                <Image onLayout={this._onLayoutCancel} style={[styles.cancelImage, {
-                    transform: [{
-                        scale: moveToCancel ? 1.5 : 1.0,
-                    }]
-                }]}
-                />
+                {isRecording ? (
+                    <Image onLayout={this._onLayoutCancel} style={[styles.cancelImage, {
+                        transform: [{
+                            scale: moveToCancel ? 1.5 : 1.0,
+                        }]
+                    }]}
+                    />
+                ) : null}
             </View>
 
         );

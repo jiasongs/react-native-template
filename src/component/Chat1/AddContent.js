@@ -119,7 +119,7 @@ class AddContent extends React.PureComponent {
     };
 
     render() {
-        const { contentHeight, barHeight } = this.props
+        const { contentHeight, barHeight, onRecording } = this.props
         const { recording } = this.state
         return (
             <ToolAnimated
@@ -128,7 +128,7 @@ class AddContent extends React.PureComponent {
                 barHeight={barHeight}
                 style={[styles.container, { height: contentHeight, top: barHeight }]}>
                 <this.renderItems />
-                {recording ? <Recording /> : null}
+                {recording ? <Recording onRecording={onRecording} /> : null}
             </ToolAnimated>
         );
     }

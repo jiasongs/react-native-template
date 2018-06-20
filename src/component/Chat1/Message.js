@@ -6,6 +6,7 @@ import MessageAvatar from './MessageAvatar'; // 头像
 import MessageText from './MessageText'; // 
 import MessageBubble from './MessageBubble';
 import MessageImage from './MessageImage';
+import MessageVoice from './MessageVoice';
 import MessageTime from './MessageTime';
 import MessageSystem from './MessageSystem';
 
@@ -38,7 +39,7 @@ class Message extends React.Component {
 
     renderTypeMessage = () => {
         const { info } = this.props
-        const { content, from_user, type, img_width, img_height } = info.item
+        const { content, voice_duration, from_user, type, img_width, img_height } = info.item
         if (type === 1) { // 消息
             return (
                 <MessageText content={content} />
@@ -46,6 +47,10 @@ class Message extends React.Component {
         } else if (type === 2) { // 图片
             return (
                 <MessageImage uri={content} imageWidth={img_width} imageHeight={img_height} />
+            )
+        } else if (type === 3) { // 语音
+            return (
+                <MessageVoice uri={content} duration={voice_duration} />
             )
         } else {
             return null
@@ -92,7 +97,7 @@ class Message extends React.Component {
         const { info, user } = this.props
         const { content, from_user, type } = info.item
         return (
-            type === 5 ? (<this.renderMessageSystem />) : (
+            type === 5 ? <this.renderMessageSystem /> : (
                 <View style={styles.container}>
                     <MessageTime style={styles.messageTime} />
                     {this.position === 'left' ? <this.renderPositionLeft /> : <this.renderPositionRight />}

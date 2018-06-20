@@ -261,7 +261,7 @@ class ToolContainer extends React.PureComponent {
         this.sendRef = v
     };
     render() {
-        const { barHeight, contentHeight, onPressAlbum, onPressCommon, onPressResume } = this.props
+        const { barHeight, contentHeight, onPressAlbum, onPressCommon, onPressResume, onRecording } = this.props
         console.log('Tolllll')
         return (
             <ToolAnimated ref={this._captureRef} style={styles.container} initTranslateY={contentHeight} barHeight={barHeight} >
@@ -287,6 +287,7 @@ class ToolContainer extends React.PureComponent {
                     ref={this._captureAddContentRef}
                     onPressAlbum={onPressAlbum}
                     onPressResume={onPressResume} // 发送简历 可自定义 不用时去掉即可
+                    onRecording={onRecording}
                     {...this.props}
                 />
             </ToolAnimated>

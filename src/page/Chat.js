@@ -111,6 +111,17 @@ class Chat extends React.PureComponent {
         // console.log('messages', messages)
     }
 
+    _onRecording = (params) => {
+        const message = {
+            voice_duration: params.duration, // 语音时间,s
+            voice_ext: 'aar',// 语音后缀
+            voice_size: 1312313,
+            created_at: 12345456,// 
+            content: params.uri
+        }
+        this.chatPageRef.sendVoiceMessage(message)
+    }
+
     _onPressAlbum = (albums) => {
         albums.forEach(item => {
             this.chatPageRef.sendImageMessage({
@@ -149,6 +160,7 @@ class Chat extends React.PureComponent {
                     onPressAlbum={this._onPressAlbum}  // 打开相册后发送图片消息
                     onPressCommon={this._onPressCommon} // 发送常用语 可自定义 不用时去掉即可
                     onPressResume={this._onPressResume} // 发送简历 可自定义 不用时去掉即可
+                    onRecording={this._onRecording}
                 />
             </Container>
         );

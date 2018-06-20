@@ -56,6 +56,11 @@ class ChatPage extends React.PureComponent {
         this.sendMessage(2, currentMsg) // 消息类型 图片消息
     }
 
+    // 发送语音消息
+    sendVoiceMessage = (currentMsg) => {
+        this.sendMessage(3, currentMsg) // 消息类型 语音消息
+    }
+
     sendMessage = (type, currentMsg) => {
         const { messages } = this.state
         const msgTemplate = {
@@ -130,7 +135,7 @@ class ChatPage extends React.PureComponent {
     };
 
     render() {
-        const { user, onPressSend, onPressAlbum, onPressCommon, onPressResume } = this.props
+        const { user, onPressSend, onPressAlbum, onPressCommon, onPressResume, onRecording } = this.props
         const { messages } = this.state
         return (
             <View style={styles.container} onLayout={this._onLayout}>
@@ -150,6 +155,7 @@ class ChatPage extends React.PureComponent {
                     onPressAlbum={onPressAlbum} // 打开相册后发送消息
                     onPressCommon={onPressCommon} // 发送常用语 可自定义 不用时去掉即可
                     onPressResume={onPressResume} // 发送简历 可自定义 不用时去掉即可
+                    onRecording={onRecording}
                     onToolbarWillShow={this._onToolbarWillShow}
                     onToolbarWillHide={this._onToolbarWillHide}
                 />
