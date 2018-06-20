@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import { View, Text, StyleSheet, Keyboard, Animated } from 'react-native';
+import { View, Text, StyleSheet, Keyboard, Animated, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import MessagesManager from './MessagesManager'
 import MessageContainer from './MessageContainer'

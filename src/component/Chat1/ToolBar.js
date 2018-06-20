@@ -37,9 +37,15 @@ class ToolBar extends React.PureComponent {
         this.inputText = this.inputText + text
         this.inputRef.setText(this.inputText)
     }
+    // 后退一个字符
+    backInputText = () => {
+        this.inputText = this.inputText.substr(0, this.inputText.length - 1)
+        this.inputRef.setText(this.inputText)
+    }
 
     _onChangeText = (text) => {
         this.inputText = text
+        console.log('_onChangeText')
     }
 
     _onSubmitEditing = (text) => {

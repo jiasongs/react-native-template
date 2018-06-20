@@ -101,9 +101,10 @@ class ToolContainer extends React.PureComponent {
     };
 
     _onEmojiSelected = (info) => {
-        // alert(info)
         if (info != undefined) {
             this.barRef.setInputText(info)
+        } else {
+            this.barRef.backInputText()
         }
     }
 

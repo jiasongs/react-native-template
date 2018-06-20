@@ -49,7 +49,6 @@ class MessageInput extends React.PureComponent {
     }
 
     setText = (text) => {
-
         this.setState({ text })
     };
 
@@ -130,6 +129,7 @@ class MessageInput extends React.PureComponent {
                 multiline={false}
                 onSelectionChange={this._onSelectionChange}
                 selection={this.state.selection}
+                blurOnSubmit={false}
                 {...others}
             />
         );

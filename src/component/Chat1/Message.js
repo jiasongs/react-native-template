@@ -91,15 +91,20 @@ class Message extends React.Component {
         )
     };
 
+    minuteOffset = () => {
+        const { info, lastMessageTime } = this.props
+        const { created_at } = info.item
 
+    }
 
     render() {
-        const { info, user } = this.props
+        const { info, user, lastMessageTime } = this.props
         const { content, from_user, type } = info.item
+
         return (
             type === 5 ? <this.renderMessageSystem /> : (
                 <View style={styles.container}>
-                    <MessageTime style={styles.messageTime} />
+                    <MessageTime style={styles.messageTime} time={lastMessageTime} />
                     {this.position === 'left' ? <this.renderPositionLeft /> : <this.renderPositionRight />}
                 </View>
             )

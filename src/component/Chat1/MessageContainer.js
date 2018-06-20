@@ -16,6 +16,10 @@ class MessageContainer extends React.PureComponent {
         messages: []
     };
 
+    constructor(props) {
+        super(props);
+        this._lastMessageTime = Moment().format('X')
+    };
 
     setNativeProps(props) {
         console.log(props)
@@ -40,8 +44,13 @@ class MessageContainer extends React.PureComponent {
 
     _renderItem = (info) => {
         const { user } = this.props
+
         return (
-            <Message info={info} user={user} />
+            <Message
+                info={info}
+                user={user}
+                lastMessageTime={this._lastMessageTime}
+            />
         )
     };
 

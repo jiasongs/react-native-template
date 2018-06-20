@@ -86,7 +86,12 @@ class Chat extends React.PureComponent {
     }
 
     _onPressSend = (text) => {
-        this.chatPageRef.sendTextMessage({ content: text })
+        console.log('_onPressSend', text)
+        if (text.length > 0) {
+            this.chatPageRef.sendTextMessage({ content: text })
+        } else {
+            ToastManager.show('请输入信息！')
+        }
         // const messages = ChatPage.appendMessages(this.state.messages, [{
         //     type: 1,// 消息类型 1 2 3 4 5 6 ...
         //     message_id: Math.random(),
@@ -112,6 +117,10 @@ class Chat extends React.PureComponent {
     }
 
     _onRecording = (params) => {
+        if (params.duration < 1) {
+            ToastManager.show('录音时间过短！')
+            return
+        }
         const message = {
             voice_duration: params.duration, // 语音时间,s
             voice_ext: 'aar',// 语音后缀

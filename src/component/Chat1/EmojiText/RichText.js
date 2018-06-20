@@ -14,7 +14,6 @@ import EmojiImage from './EmojiImage';
 class RichText extends React.PureComponent {
 
     static propTypes = {
-        style: Text.propTypes.style,
         textContent: PropTypes.string,
     };
 
@@ -83,12 +82,13 @@ class RichText extends React.PureComponent {
         }
         return contentArray;
     }
-    // 优化版本，但是样式不好调整
+
+    // 优化性能，但是表情样式不好调整
     renderTextContainer = () => {
-        const { style, emojiStyle } = this.props
+        const { textStyle, emojiStyle } = this.props
         const { emojiTextArray } = this.state
         return (
-            <Text style={style}>
+            <Text style={[styles.textContainer, textStyle]}>
                 {emojiTextArray.map((item, index) => {
                     const imageSource = item['resource']
                     const content = item['content']
@@ -158,9 +158,13 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        maxWidth: 200,
+        maxWidth: 230,
         justifyContent: 'flex-start',
         alignItems: 'center'
+    },
+    textContainer: {
+        margin: 10,
+        maxWidth: 230,
     }
 });
 

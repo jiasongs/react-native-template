@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     messageText: {
-        maxWidth: 230,
         fontSize: FontSize(14),
         lineHeight: 26,
         color: "#3d434c",

@@ -43,6 +43,13 @@ class Recording extends React.PureComponent {
         )
     }
 
+    get formatCurrentTime() {
+        const { currentTime } = this.state
+        let m = parseInt(currentTime / 60)
+        let s = parseInt(currentTime % 60)
+        return `${m}:${s}`.replace(/\b(\d)\b/g, "0$1")
+    }
+
     recordOnProgress = (data) => {
         console.log('recordOnProgress', data)
         this.setState({ currentTime: data.currentTime })
@@ -78,14 +85,16 @@ class Recording extends React.PureComponent {
     _onPanResponderMove = (event) => {
         // 手势移动
         this.setPanLocationMoveXY(event.nativeEvent.locationX, event.nativeEvent.locationY)
-        if (this.state.isRecording === true) {
-            if (this.getPanContainCancel === true) {
+        if (this.state.isRecording) {
+            if (this.getPanContainCancel) {
                 // 录音状态下，滑动到垃圾桶
                 console.log('录音状态下，滑动到垃圾桶')
                 if (!this.state.moveToCancel) {
                     this.setState({ moveToCancel: true })
                 }
             } else {
+                // 录音状态下，滑动到垃圾桶
+                console.log('录音状态下，没有滑到垃圾桶')
                 if (this.state.moveToCancel) {
                     this.setState({ moveToCancel: false })
                 }
@@ -98,8 +107,8 @@ class Recording extends React.PureComponent {
         const { currentTime } = this.state
         //手松开
         this.setPanLocationMoveXY(event.nativeEvent.locationX, event.nativeEvent.locationY)
-        if (this.state.isRecording === true) {
-            if (this.getPanContainCancel === true) {
+        if (this.state.isRecording) {
+            if (this.getPanContainCancel) {
                 // 在垃圾桶松开手，取消发送
                 console.log('在垃圾桶松开手，取消发送')
 
@@ -108,14 +117,12 @@ class Recording extends React.PureComponent {
                 console.log('不在垃圾桶松开手，发送')
                 onRecording && onRecording({ uri: RecordManager.ceshiAudioPath, duration: currentTime })
             }
-            if (this.state.isRecording) {
-                if (this.state.moveToCancel) {
-                    this.setState({ isRecording: false, moveToCancel: false, currentTime: 0 })
-                } else {
-                    this.setState({ isRecording: false, currentTime: 0 })
-                }
-                this.cancelRecording()
+            if (this.state.moveToCancel) {
+                this.setState({ isRecording: false, moveToCancel: false, currentTime: 0 })
+            } else {
+                this.setState({ isRecording: false, currentTime: 0 })
             }
+            this.cancelRecording()
         }
     };
 
@@ -137,6 +144,7 @@ class Recording extends React.PureComponent {
     render() {
         const { isRecording, moveToCancel, currentTime } = this.state
         let recordText = ''
+
         if (isRecording) {
             if (moveToCancel) {
                 recordText = '松开取消发送'
@@ -152,7 +160,7 @@ class Recording extends React.PureComponent {
                     style={styles.contentContainer}
                     pointerEvents={'none'}
                     onLayout={this._onLayout}>
-                    <Text>{isRecording ? parseInt(currentTime) : null}</Text>
+                    <Text>{isRecording ? this.formatCurrentTime : null}</Text>
                     <Image style={styles.recordImage} />
                     <Text style={styles.recordText}>{recordText}</Text>
                 </View>
@@ -192,8 +200,10 @@ const styles = StyleSheet.create({
         fontSize: FontSize(12),
     },
     contentContainer: {
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
+        height: 130,
+        width: 100,
         backgroundColor: 'green',
     },
     cancelImage: {
