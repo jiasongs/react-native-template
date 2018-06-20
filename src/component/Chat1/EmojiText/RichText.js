@@ -159,6 +159,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         maxWidth: 200,
+<<<<<<< HEAD
+=======
+        // backgroundColor: 'red',
+>>>>>>> e854c7598266ae9697a9104a04387993cd31056d
         justifyContent: 'flex-start',
         alignItems: 'center'
     }
