@@ -83,7 +83,7 @@ class RichText extends React.PureComponent {
         }
         return contentArray;
     }
-
+    // 优化版本，但是样式不好调整
     renderTextContainer = () => {
         const { style, emojiStyle } = this.props
         const { emojiTextArray } = this.state
