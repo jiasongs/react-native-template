@@ -20,8 +20,8 @@ class RecordManager {
             return Promise.resolve(true);
         }
         const rationale = {
-            'title': 'Microphone Permission',
-            'message': 'AudioExample needs access to your microphone so you can record audio.'
+            'title': '录音权限',
+            'message': '需要您同意录音权限'
         };
         const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO, rationale)
         console.log('Permission result:', result);
@@ -43,11 +43,14 @@ class RecordManager {
 
     // 开始录音
     static startRecord = async () => {
-        if (__ANDROID__) {
-            // 安卓必须再次调用
-            AudioRecorder.prepareRecordingAtPath(defaultAudioPath, option);
+        const result = await RecordManager.checkPermission()
+        if (result) {
+            if (__ANDROID__) {
+                // 安卓必须再次调用
+                AudioRecorder.prepareRecordingAtPath(defaultAudioPath, option);
+            }
+            AudioRecorder.startRecording();
         }
-        AudioRecorder.startRecording();
     }
 
     // 停止录音

@@ -218,7 +218,12 @@ class ToolContainer extends React.PureComponent {
                 toValue = this.toolBarStatus === Status.ToolBarUp ? 0 : contentHeight - endCoordinates.height
                 endCoordinatesHeight = this.toolBarStatus === Status.ToolBarUp ? endCoordinates.height - 100 : endCoordinates.height
             }
-            this.toolAnimatedRef.startAnimatedTiming(toValue)
+            if (__ANDROID__) {
+                this.runMainComponentDown()
+            } else {
+                this.toolAnimatedRef.startAnimatedTiming(toValue)
+            }
+
             this.barRef.changeSendVisible(true)
             this.toolBarStatus = Status.ToolBarUp
             this.runOtherComponentDown()
@@ -232,8 +237,12 @@ class ToolContainer extends React.PureComponent {
         if (this.commonLgStatus === Status.CommonLgDown &&
             this.emojiStatus === Status.EmojiDown &&
             this.addStatus === Status.AddDown) {
+            if (__ANDROID__) {
+
+            } else {
+                this.toolAnimatedRef.startAnimatedTiming(contentHeight)
+            }
             this.barRef.changeSendVisible(false)
-            this.toolAnimatedRef.startAnimatedTiming(contentHeight)
             this.toolBarStatus = Status.ToolBarDown
             onToolbarWillHide && onToolbarWillHide()
         }
