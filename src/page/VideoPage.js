@@ -80,8 +80,10 @@ class VideoPage extends React.PureComponent {
                 /> */}
                 <VideoPlayer
                     style={{ backgroundColor: 'black', }}
-                    source={require('../asset/video/broadchurch.mp4')}
-                    videoStyle={this.state.videoStyle}
+                    source={{ uri: 'rtmp://live.smeoa.com/todo/1' }}
+                    videoStyle={{ width: 375, height: 260 }}
+                    totalDuration={23}
+                    onPressBack={this._onPressBack}
                 />
             </Container>
         );

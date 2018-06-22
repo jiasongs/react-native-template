@@ -31,7 +31,7 @@ class SegmentedControlTab extends React.PureComponent {
     }
 
     static defaultProps = {
-        values: ['One', 'Two', 'Three'],
+        values: ['One', 'Two', 'Three', 'Three', 'Three'],
         badges: ['', '', ''],
         multiple: false,
         selectedIndex: null, // 默认为null
@@ -56,32 +56,29 @@ class SegmentedControlTab extends React.PureComponent {
             }
         }
     };
+
     render() {
         const { multiple, selectedIndex, selectedIndices, values, badges, tabsContainerStyle, onTabPress, tabStyle, ...others } = this.props
-        const firstTabStyle = []
-        const lastTabStyle = []
         const currentIndex = !selectedIndex ? this.state.selectedIndex : selectedIndex
         return (
             <View
                 style={[styles.tabsContainerStyle, tabsContainerStyle]}
                 removeClippedSubviews={false}>
-                {
-                    values.map((item, index) => {
-                        return (
-                            <TabOption
-                                key={index}
-                                index={index}
-                                badge={badges && badges[index] ? badges[index] : false}
-                                isTabActive={multiple ? selectedIndices.includes(index) : currentIndex === index}
-                                text={item}
-                                onTabPress={this._handleTabPress}
-                                firstTabStyle={index === 0 ? [{ borderLeftWidth: 0 }] : {}}
-                                tabStyle={[tabStyle, index !== 0 && index !== values.length - 1 ? {} : {}]}
-                                {...others}
-                            />
-                        );
-                    })
-                }
+                {values.map((item, index) => {
+                    return (
+                        <TabOption
+                            key={index}
+                            index={index}
+                            badge={badges && badges[index] ? badges[index] : false}
+                            isTabActive={multiple ? selectedIndices.includes(index) : currentIndex === index}
+                            text={item}
+                            onTabPress={this._handleTabPress}
+                            firstTabStyle={index === 0 ? { borderLeftWidth: 0 } : null}
+                            tabStyle={tabStyle}
+                            {...others}
+                        />
+                    );
+                })}
             </View>
         );
     }
@@ -90,12 +87,18 @@ class SegmentedControlTab extends React.PureComponent {
 
 // create a component
 class TabOption extends React.PureComponent {
+
     _onPress = () => {
         const { onTabPress, index } = this.props
         onTabPress && onTabPress(index)
     }
+
     render() {
-        const { isTabActive, index, badge, text,
+        const {
+            isTabActive,
+            index,
+            badge,
+            text,
             firstTabStyle,
             tabStyle, activeTabStyle,
             tabTextStyle, activeTabTextStyle,
@@ -106,32 +109,30 @@ class TabOption extends React.PureComponent {
             <TouchableOpacity style={[
                 styles.tabStyle,
                 tabStyle,
-                isTabActive ? [styles.activeTabStyle, activeTabStyle] : {},
+                isTabActive ? [styles.activeTabStyle, activeTabStyle] : null,
                 firstTabStyle]}
                 onPress={this._onPress}
                 activeOpacity={1}>
-                <View style={{ flexDirection: "row" }}>
-                    <Text style={[
-                        styles.tabTextStyle,
-                        tabTextStyle,
-                        isTabActive ? [styles.activeTabTextStyle, activeTabTextStyle] : {}]}
-                        numberOfLines={1}
-                        ellipsizeMode="tail">
-                        {text}
-                    </Text>
-                    {badge ?
-                        <View style={[
-                            styles.tabBadgeContainerStyle,
-                            tabBadgeContainerStyle,
-                            isTabActive ? [styles.activeTabBadgeContainerStyle, activeTabBadgeContainerStyle] : {}]}>
-                            <Text style={[
-                                styles.tabBadgeStyle,
-                                tabBadgeStyle,
-                                isTabActive ? [styles.activeTabBadgeStyle, activeTabBadgeStyle] : {}]}>
-                                {badge}
-                            </Text>
-                        </View> : null}
-                </View>
+                <Text style={[
+                    styles.tabTextStyle,
+                    tabTextStyle,
+                    isTabActive ? [styles.activeTabTextStyle, activeTabTextStyle] : {}]}
+                    numberOfLines={1}
+                    ellipsizeMode="tail" >
+                    {text}
+                </Text>
+                {badge ?
+                    <View style={[
+                        styles.tabBadgeContainerStyle,
+                        tabBadgeContainerStyle,
+                        isTabActive ? [styles.activeTabBadgeContainerStyle, activeTabBadgeContainerStyle] : {}]}>
+                        <Text style={[
+                            styles.tabBadgeStyle,
+                            tabBadgeStyle,
+                            isTabActive ? [styles.activeTabBadgeStyle, activeTabBadgeStyle] : {}]}>
+                            {badge}
+                        </Text>
+                    </View> : null}
             </TouchableOpacity>
         );
     }
@@ -148,6 +149,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     tabStyle: {
+        flexDirection: 'row',
         paddingVertical: 5,
         flex: 1,
         justifyContent: 'center',
@@ -158,7 +160,6 @@ const styles = StyleSheet.create({
     },
     activeTabStyle: {
         backgroundColor: '#0076FF',
-        paddingRight: 0.5,
     },
     tabTextStyle: {
         color: '#0076FF'
