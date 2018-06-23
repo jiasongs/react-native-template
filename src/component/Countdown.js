@@ -18,9 +18,9 @@ class Countdown extends React.PureComponent {
     };
 
     static defaultProps = {
-        deadline: 1527908410,
+        deadline: 1530233496,
         millisec: 1000,
-        backgroundTime: true
+        backgroundTime: false
     };
 
     constructor(props) {
@@ -33,7 +33,7 @@ class Countdown extends React.PureComponent {
         if (this.difference >= 0) {
             timeArr = sec_to_time_day(this.difference)
         }
-        this.state = { time: `${timeArr[0]}天 ${timeArr[1]}小时 ${timeArr[2]}分 ${timeArr[3]}秒` }
+        this.state = { timeArr }
     };
 
     componentDidMount() {
@@ -59,8 +59,8 @@ class Countdown extends React.PureComponent {
             BackgroundTimer.stop()
         }
         BackgroundTimer.clearInterval(this.intervalId)
-        this.intervalId = null
         onIntervalStop && onIntervalStop(this.difference)
+        this.intervalId = null
     };
 
     intervalCallBack = () => {
@@ -69,7 +69,7 @@ class Countdown extends React.PureComponent {
         this.difference = deadline - this.currentTime
         if (this.difference >= 0) {
             let timeArr = sec_to_time_day(this.difference)
-            this.setState({ time: `${timeArr[0]}天 ${timeArr[1]}小时 ${timeArr[2]}分 ${timeArr[3]}秒` })
+            this.setState({ timeArr })
         }
         if (this.difference === 0) {
             this.stopInterval()
@@ -81,7 +81,7 @@ class Countdown extends React.PureComponent {
     render() {
         return (
             <View style={styles.container}>
-                <Text>{this.state.time}</Text>
+                <Text>{this.state.timeArr}</Text>
             </View>
         );
     };
