@@ -7,7 +7,7 @@ class MessageSystem extends React.PureComponent {
     render() {
         return (
             <View>
-
+                <Text>系统消息</Text>
             </View>
         );
     }

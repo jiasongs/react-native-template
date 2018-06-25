@@ -14,6 +14,7 @@ class Message extends React.Component {
 
     static propTypes = {
         user: PropTypes.shape({ id: PropTypes.number, nick_name: PropTypes.string, avatar: PropTypes.string, }).isRequired,
+
     };
 
     static defaultProps = {
@@ -93,20 +94,16 @@ class Message extends React.Component {
         )
     };
 
-    minuteOffset = () => {
-        const { info, lastMessageTime } = this.props
-        const { created_at } = info.item
 
-    }
 
     render() {
-        const { info, user, lastMessageTime } = this.props
-        const { content, from_user, type } = info.item
+        const { info, user, showMessageTime } = this.props
+        const { content, from_user, type, create_at } = info.item
         console.log('Message-------')
         return (
             type === 5 ? <this.renderMessageSystem /> : (
                 <View style={styles.container}>
-                    <MessageTime style={styles.messageTime} time={lastMessageTime} />
+                    {showMessageTime ? <MessageTime style={styles.messageTime} time={create_at} /> : null}
                     {this.position === 'left' ? <this.renderPositionLeft /> : <this.renderPositionRight />}
                 </View>
             )

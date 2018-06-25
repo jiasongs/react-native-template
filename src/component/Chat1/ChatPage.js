@@ -6,9 +6,8 @@ import MessagesManager from './MessagesManager'
 import MessageContainer from './MessageContainer'
 import ToolContainer from './ToolContainer';
 
-
-const ToolBarHeight = 53
-const ContentHeight = 200
+const ToolBarHeight = 53   // bar的高度
+const ContentHeight = 200 // 内容的高度，暂时设置为同样的高度
 const Status = {
     KeyboardUp: 'KeyboardUp',
     KeyboardDown: 'KeyboardDown',
@@ -16,7 +15,8 @@ const Status = {
 class ChatPage extends React.PureComponent {
 
     static propTypes = {
-        defaultMessages: PropTypes.array,
+        messages: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+        defaultMessages: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         user: PropTypes.shape({ id: PropTypes.number, nick_name: PropTypes.string, avatar: PropTypes.string, }).isRequired,
         onPressSend: PropTypes.func,
         onPressAlbum: PropTypes.func,
@@ -34,7 +34,6 @@ class ChatPage extends React.PureComponent {
         this._messageContainerHeight = new Animated.Value(0)
         this._keyboardStatus = Status.KeyboardDown
     }
-
 
     componentDidMount() {
         // this.keyboardDidShowListener = Keyboard.addListener('keyboardWillShow', this._onKeyboardWillShow);
@@ -63,25 +62,21 @@ class ChatPage extends React.PureComponent {
 
     sendMessage = (type, currentMsg) => {
         const { messages } = this.state
+        const { user } = this.props
         const msgTemplate = {
             type: type,
             message_id: Math.random(),
-            from_user: {
-                id: 1000,
-                nick_name: '',
-                avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528793132482&di=fc622f2c78594ec077a4fcfc023cb542&imgtype=0&src=http%3A%2F%2Fimg1.touxiang.cn%2Fuploads%2F20130330%2F30-074643_295.jpg',
-            },
+            from_user: user,
             to_user: {
                 id: 5
             },
             content: `${''}`,
-            created_at: 12345456,// 
+            create_at: 12345456,// 
         }
         const newMessage = {
             ...msgTemplate,
             ...currentMsg,
         }
-        console.log(newMessage)
         this.setState({ messages: MessagesManager.appendMessages(messages, newMessage) })
     }
 
@@ -91,8 +86,7 @@ class ChatPage extends React.PureComponent {
             duration: 210,
 
         }).start()
-    }
-
+    };
 
     _onToolbarWillShow = (info) => {
         if (this._contaierLayout) {
@@ -114,7 +108,6 @@ class ChatPage extends React.PureComponent {
         }
     };
 
-
     _onScrollBeginDrag = () => {
         this.toolbarRef.runMainComponentDown()
         this.toolbarRef.runOtherComponentDown()
@@ -135,14 +128,14 @@ class ChatPage extends React.PureComponent {
     };
 
     render() {
-        const { user, onPressSend, onPressAlbum, onPressCommon, onPressResume, onRecording } = this.props
-        const { messages } = this.state
+        const { messages, user, onPressSend, onPressAlbum, onPressCommon, onPressResume, onRecording } = this.props
+        const data = messages ? messages : this.state.messages
         return (
             <View style={styles.container} onLayout={this._onLayout}>
                 <Animated.View style={{ height: this._messageContainerHeight }}>
                     <MessageContainer
                         ref={this._captureRef}
-                        messages={messages}
+                        messages={data}
                         user={user}
                         onScrollBeginDrag={this._onScrollBeginDrag}
                     />

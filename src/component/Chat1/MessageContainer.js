@@ -8,17 +8,19 @@ import Message from './Message'
 class MessageContainer extends React.PureComponent {
 
     static propTypes = {
-        messages: PropTypes.array,
+        messages: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         user: PropTypes.shape({ id: PropTypes.number, nick_name: PropTypes.string, avatar: PropTypes.string, }).isRequired,
+        millisecTime: PropTypes.number // 间隔多少秒显示时间
     };
 
     static defaultProps = {
-        messages: []
+        messages: [],
+        millisecTime: 10
     };
 
     constructor(props) {
         super(props);
-        this._lastMessageTime = Moment().format('X')
+        this._lastMessageTime = 0
     };
 
     setNativeProps(props) {
@@ -34,6 +36,18 @@ class MessageContainer extends React.PureComponent {
         }
     };
 
+    minuteOffset = (created_at) => {
+        const { millisecTime } = this.props
+        const difference = created_at - this._lastMessageTime
+        // console.log('difference', created_at, this._lastMessageTime, difference)
+        if (difference >= millisecTime) {
+            this._lastMessageTime = created_at
+            return true
+        } else {
+            return false
+        }
+    }
+
     _onRefresh = (stopRefresh) => {
 
     };
@@ -44,12 +58,13 @@ class MessageContainer extends React.PureComponent {
 
     _renderItem = (info) => {
         const { user } = this.props
-
+        const { create_at } = info.item
+        const showMessageTime = this.minuteOffset(create_at)
         return (
             <Message
                 info={info}
                 user={user}
-                lastMessageTime={this._lastMessageTime}
+                showMessageTime={showMessageTime}
             />
         )
     };

@@ -8,6 +8,7 @@ class MessagesManager {
         if (!Array.isArray(messages)) {
             messages = [messages];
         }
+
         return inverted ? messages.concat(historyMessages) : historyMessages.concat(messages);
     }
 

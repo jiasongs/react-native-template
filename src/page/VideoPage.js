@@ -80,7 +80,7 @@ class VideoPage extends React.PureComponent {
                 /> */}
                 <VideoPlayer
                     style={{ backgroundColor: 'black', }}
-                    source={{ uri: 'rtmp://live.smeoa.com/todo/1' }}
+                    // source={{ uri: 'rtmp://live.smeoa.com/todo/1' }}
                     videoStyle={{ width: 375, height: 260 }}
                     totalDuration={23}
                     onPressBack={this._onPressBack}

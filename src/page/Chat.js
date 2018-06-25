@@ -10,8 +10,8 @@ import NavigationBar from '../component/NavigationBar';
 import Container from '../component/Container';
 import SpinnerLoading from '../component/SpinnerLoading';
 import ChatPage from '../component/Chat1/ChatPage'
-
-
+import ChatManager from '../component/Chat1/ChatManager'
+import MessagesManager from '../component/Chat1/MessagesManager';
 
 class Chat extends React.PureComponent {
 
@@ -36,7 +36,7 @@ class Chat extends React.PureComponent {
                 voice_duration: 12, // 语音时间,s
                 voice_ext: 'wav',// 语音后缀
                 voice_size: 1312313,
-                created_at: 12345456,// 
+                create_at: 1529933134,// 
             }, {
                 type: 1,// 消息类型 1 2 3 4 5 6 ...
                 message_id: Math.random(),
@@ -55,7 +55,7 @@ class Chat extends React.PureComponent {
                 voice_duration: 12, // 语音时间,s
                 voice_ext: 'wav',// 语音后缀
                 voice_size: 1312313,
-                created_at: 12345456,// 
+                create_at: 1529933120,// 
             }, {
                 type: 1,// 消息类型 1 2 3 4 5 6 ...
                 message_id: 12,
@@ -74,21 +74,46 @@ class Chat extends React.PureComponent {
                 voice_duration: 12, // 语音时间,s
                 voice_ext: 'wav',// 语音后缀
                 voice_size: 1312313,
-                created_at: 12345456,// 
+                create_at: 1529933100,// 
             }
         ]
 
         this.user = {
-            id: 1000,
+            id: 21,
             nick_name: '',
             avatar: 'https://img4.duitang.com/uploads/item/201607/23/20160723225638_WcYXr.jpeg',
+        }
+        // 最好结合Mobx
+        this.state = { messages: this.defaultMessages }
+
+        // 大部分情况下这三行代码应该写在登陆处，保持全局只有一个ChatManager，目前测试的话可以在这里写
+        // 最好结合Mobx
+        const url = 'ws://wmbchat.nididake.com:9502'
+        this._chatManager = new ChatManager({ webSocketUrl: url, token: 'gejqgqoo42342' })
+        this._chatManager.onChatMessage = this._onChatMessage
+    }
+
+    _onChatMessage = (data) => {
+        // 接收到消息
+        console.log('_onChatMessage', data)
+        const { type } = data
+        if (type === 1) { // 
+            this.setState({ messages: MessagesManager.appendMessages(this.state.messages, data) })
+            // this.chatPageRef.sendTextMessage(data) // 另一种方式
         }
     }
 
     _onPressSend = (text) => {
-        console.log('_onPressSend', text)
         if (text.length > 0) {
-            this.chatPageRef.sendTextMessage({ content: text })
+            const message = {
+                type: 1,
+                content: text,
+                from_user: this.user,
+                to_user: {
+                    id: 23
+                }
+            }
+            this._chatManager.sendMessage(message)
         } else {
             ToastManager.show('请输入信息！')
         }
@@ -128,26 +153,30 @@ class Chat extends React.PureComponent {
             created_at: 12345456,// 
             content: params.uri
         }
-        this.chatPageRef.sendVoiceMessage(message)
+        // this.setState({ messages: MessagesManager.appendMessages(this.state.messages, newData) })
+        // this.chatPageRef.sendVoiceMessage(message)
     }
 
     _onPressAlbum = (albums) => {
-        albums.forEach(item => {
-            this.chatPageRef.sendImageMessage({
-                img_width: item.width,
-                img_height: item.height,
-                img_size: item.size,
-                content: item.localPath
-            })
-        });
+        // this.setState({ messages: MessagesManager.appendMessages(this.state.messages, newData) })
+        // albums.forEach(item => {
+        //     this.chatPageRef.sendImageMessage({
+        //         img_width: item.width,
+        //         img_height: item.height,
+        //         img_size: item.size,
+        //         content: item.localPath
+        //     })
+        // });
     }
 
     _onPressCommon = (text) => {
-        this.chatPageRef.sendTextMessage({ content: text })
+        // this.setState({ messages: MessagesManager.appendMessages(this.state.messages, newData) })
+        // this.chatPageRef.sendTextMessage({ content: text })
     }
 
     _onPressResume = () => {
-        this.chatPageRef.sendTextMessage({ content: '简历已发送到您的邮箱' })
+        // this.setState({ messages: MessagesManager.appendMessages(this.state.messages, newData) })
+        // this.chatPageRef.sendTextMessage({ content: '简历已发送到您的邮箱' })
     }
 
     _captureRef = (v) => {
@@ -164,6 +193,7 @@ class Chat extends React.PureComponent {
                 <ChatPage
                     ref={this._captureRef}
                     user={this.user}
+                    messages={this.state.messages}
                     defaultMessages={this.defaultMessages}
                     onPressSend={this._onPressSend} // 发送消息
                     onPressAlbum={this._onPressAlbum}  // 打开相册后发送图片消息

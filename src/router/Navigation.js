@@ -23,7 +23,7 @@ const Nav = createStackNavigator(configRoute({
     VideoPage: { screen: VideoPage },
     Chat: { screen: Chat },
 }), {
-        initialRouteName: 'VideoPage',
+        initialRouteName: 'Chat',
         cardStyle: {
             shadowOpacity: 0,
             shadowRadius: 0,
