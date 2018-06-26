@@ -44,6 +44,8 @@ const CusTheme = {
     isIPhoneX: Theme.isIPhoneX,
     fitIPhoneXTop: 44,
     fitIPhoneXBottom: 34,
+
+
     screen_width: width,
     screen_height: height,
     pageBackgroundColor: '#e7e7ef',

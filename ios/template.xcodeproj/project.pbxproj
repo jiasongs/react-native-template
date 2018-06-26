@@ -77,6 +77,52 @@
 		7AB008E520BF989C00C04FC2 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB008E420BF989C00C04FC2 /* CoreText.framework */; };
 		7AB008E720BF98C500C04FC2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB008E620BF98C400C04FC2 /* QuartzCore.framework */; };
 		7AB008E920BF98DB00C04FC2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB008E820BF98DB00C04FC2 /* libc++.tbd */; };
+		7AF3A9CB20E1C4B20003EDB0 /* AliThirdparty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C620E1C4B20003EDB0 /* AliThirdparty.framework */; };
+		7AF3A9CC20E1C4B20003EDB0 /* AliThirdparty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C620E1C4B20003EDB0 /* AliThirdparty.framework */; };
+		7AF3A9CD20E1C4B20003EDB0 /* AliyunLanguageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7AF3A9C720E1C4B20003EDB0 /* AliyunLanguageSource.bundle */; };
+		7AF3A9CE20E1C4B20003EDB0 /* AliyunLanguageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7AF3A9C720E1C4B20003EDB0 /* AliyunLanguageSource.bundle */; };
+		7AF3A9CF20E1C4B20003EDB0 /* AliyunLanguageSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7AF3A9C720E1C4B20003EDB0 /* AliyunLanguageSource.bundle */; };
+		7AF3A9D120E1C4B20003EDB0 /* AliyunVodPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C820E1C4B20003EDB0 /* AliyunVodPlayerSDK.framework */; };
+		7AF3A9D220E1C4B20003EDB0 /* AliyunVodPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C820E1C4B20003EDB0 /* AliyunVodPlayerSDK.framework */; };
+		7AF3A9D320E1C4B20003EDB0 /* AliyunPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C920E1C4B20003EDB0 /* AliyunPlayerSDK.framework */; };
+		7AF3A9D420E1C4B20003EDB0 /* AliyunPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C920E1C4B20003EDB0 /* AliyunPlayerSDK.framework */; };
+		7AF3A9D520E1C4B20003EDB0 /* AliyunPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C920E1C4B20003EDB0 /* AliyunPlayerSDK.framework */; };
+		7AF3A9D720E1C4D50003EDB0 /* AliThirdparty.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C620E1C4B20003EDB0 /* AliThirdparty.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AF3A9D820E1C4D50003EDB0 /* AliyunLanguageSource.bundle in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = 7AF3A9C720E1C4B20003EDB0 /* AliyunLanguageSource.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AF3A9DA20E1C4D50003EDB0 /* AliyunVodPlayerSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C820E1C4B20003EDB0 /* AliyunVodPlayerSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AF3A9DC20E1C4D50003EDB0 /* AliyunPlayerSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C920E1C4B20003EDB0 /* AliyunPlayerSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AF3AA3F20E1C61F0003EDB0 /* AliThirdparty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C620E1C4B20003EDB0 /* AliThirdparty.framework */; };
+		7AF3AA4020E1C61F0003EDB0 /* AliyunVodPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3A9C820E1C4B20003EDB0 /* AliyunVodPlayerSDK.framework */; };
+		7AF3AA4520E1C6BC0003EDB0 /* LivePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA4120E1C6BB0003EDB0 /* LivePlayer.m */; };
+		7AF3AA4620E1C6BC0003EDB0 /* LivePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA4120E1C6BB0003EDB0 /* LivePlayer.m */; };
+		7AF3AA4720E1C6BC0003EDB0 /* LivePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA4120E1C6BB0003EDB0 /* LivePlayer.m */; };
+		7AF3AA4820E1C6BC0003EDB0 /* LivePlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA4320E1C6BC0003EDB0 /* LivePlayerManager.m */; };
+		7AF3AA4920E1C6BC0003EDB0 /* LivePlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA4320E1C6BC0003EDB0 /* LivePlayerManager.m */; };
+		7AF3AA4A20E1C6BC0003EDB0 /* LivePlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA4320E1C6BC0003EDB0 /* LivePlayerManager.m */; };
+		7AF3AA7D20E20F890003EDB0 /* OCBarrageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA6F20E20F890003EDB0 /* OCBarrageTextCell.m */; };
+		7AF3AA7E20E20F890003EDB0 /* OCBarrageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA6F20E20F890003EDB0 /* OCBarrageTextCell.m */; };
+		7AF3AA7F20E20F890003EDB0 /* OCBarrageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA6F20E20F890003EDB0 /* OCBarrageTextCell.m */; };
+		7AF3AA8020E20F890003EDB0 /* OCBarrageDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7020E20F890003EDB0 /* OCBarrageDescriptor.m */; };
+		7AF3AA8120E20F890003EDB0 /* OCBarrageDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7020E20F890003EDB0 /* OCBarrageDescriptor.m */; };
+		7AF3AA8220E20F890003EDB0 /* OCBarrageDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7020E20F890003EDB0 /* OCBarrageDescriptor.m */; };
+		7AF3AA8320E20F890003EDB0 /* OCBarrageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7120E20F890003EDB0 /* OCBarrageCell.m */; };
+		7AF3AA8420E20F890003EDB0 /* OCBarrageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7120E20F890003EDB0 /* OCBarrageCell.m */; };
+		7AF3AA8520E20F890003EDB0 /* OCBarrageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7120E20F890003EDB0 /* OCBarrageCell.m */; };
+		7AF3AA8620E20F890003EDB0 /* OCBarrageTextDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7320E20F890003EDB0 /* OCBarrageTextDescriptor.m */; };
+		7AF3AA8720E20F890003EDB0 /* OCBarrageTextDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7320E20F890003EDB0 /* OCBarrageTextDescriptor.m */; };
+		7AF3AA8820E20F890003EDB0 /* OCBarrageTextDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7320E20F890003EDB0 /* OCBarrageTextDescriptor.m */; };
+		7AF3AA8920E20F890003EDB0 /* CALayer+OCBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7420E20F890003EDB0 /* CALayer+OCBarrage.m */; };
+		7AF3AA8A20E20F890003EDB0 /* CALayer+OCBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7420E20F890003EDB0 /* CALayer+OCBarrage.m */; };
+		7AF3AA8B20E20F890003EDB0 /* CALayer+OCBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7420E20F890003EDB0 /* CALayer+OCBarrage.m */; };
+		7AF3AA8C20E20F890003EDB0 /* OCBarrageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7520E20F890003EDB0 /* OCBarrageManager.m */; };
+		7AF3AA8D20E20F890003EDB0 /* OCBarrageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7520E20F890003EDB0 /* OCBarrageManager.m */; };
+		7AF3AA8E20E20F890003EDB0 /* OCBarrageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7520E20F890003EDB0 /* OCBarrageManager.m */; };
+		7AF3AA8F20E20F890003EDB0 /* OCBarrageTrackInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7620E20F890003EDB0 /* OCBarrageTrackInfo.m */; };
+		7AF3AA9020E20F890003EDB0 /* OCBarrageTrackInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7620E20F890003EDB0 /* OCBarrageTrackInfo.m */; };
+		7AF3AA9120E20F890003EDB0 /* OCBarrageTrackInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7620E20F890003EDB0 /* OCBarrageTrackInfo.m */; };
+		7AF3AA9220E20F890003EDB0 /* OCBarrageRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7A20E20F890003EDB0 /* OCBarrageRenderView.m */; };
+		7AF3AA9320E20F890003EDB0 /* OCBarrageRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7A20E20F890003EDB0 /* OCBarrageRenderView.m */; };
+		7AF3AA9420E20F890003EDB0 /* OCBarrageRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7A20E20F890003EDB0 /* OCBarrageRenderView.m */; };
 		7C3DBAD52910447182C0F821 /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2426498E99074D2BAFEC1B37 /* libRCTJPushModule.a */; };
 		7DC7FEF638AD42B298AA7339 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF623458C5740ADBA46D19E /* libRNDeviceInfo.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -548,6 +594,33 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7AF3A9DD20E1C4D50003EDB0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7AF3A9DA20E1C4D50003EDB0 /* AliyunVodPlayerSDK.framework in Embed Frameworks */,
+				7AF3A9D720E1C4D50003EDB0 /* AliThirdparty.framework in Embed Frameworks */,
+				7AF3A9DC20E1C4D50003EDB0 /* AliyunPlayerSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AF3A9DE20E1C4D50003EDB0 /* Embed PlugIns */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7AF3A9D820E1C4D50003EDB0 /* AliyunLanguageSource.bundle in Embed PlugIns */,
+			);
+			name = "Embed PlugIns";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
@@ -619,6 +692,32 @@
 		7AB008E620BF98C400C04FC2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7AB008E820BF98DB00C04FC2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		7ACAAE6C20BD35B000DC4B52 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		7AF3A9C620E1C4B20003EDB0 /* AliThirdparty.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliThirdparty.framework; sourceTree = "<group>"; };
+		7AF3A9C720E1C4B20003EDB0 /* AliyunLanguageSource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AliyunLanguageSource.bundle; sourceTree = "<group>"; };
+		7AF3A9C820E1C4B20003EDB0 /* AliyunVodPlayerSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunVodPlayerSDK.framework; sourceTree = "<group>"; };
+		7AF3A9C920E1C4B20003EDB0 /* AliyunPlayerSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunPlayerSDK.framework; sourceTree = "<group>"; };
+		7AF3AA4120E1C6BB0003EDB0 /* LivePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LivePlayer.m; sourceTree = "<group>"; };
+		7AF3AA4220E1C6BB0003EDB0 /* LivePlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LivePlayerManager.h; sourceTree = "<group>"; };
+		7AF3AA4320E1C6BC0003EDB0 /* LivePlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LivePlayerManager.m; sourceTree = "<group>"; };
+		7AF3AA4420E1C6BC0003EDB0 /* LivePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LivePlayer.h; sourceTree = "<group>"; };
+		7AF3AA6B20E20F890003EDB0 /* CALayer+OCBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+OCBarrage.h"; sourceTree = "<group>"; };
+		7AF3AA6C20E20F890003EDB0 /* OCBarrageTextDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageTextDescriptor.h; sourceTree = "<group>"; };
+		7AF3AA6D20E20F890003EDB0 /* OCBarrageTrackInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageTrackInfo.h; sourceTree = "<group>"; };
+		7AF3AA6E20E20F890003EDB0 /* OCBarrageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageManager.h; sourceTree = "<group>"; };
+		7AF3AA6F20E20F890003EDB0 /* OCBarrageTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTextCell.m; sourceTree = "<group>"; };
+		7AF3AA7020E20F890003EDB0 /* OCBarrageDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageDescriptor.m; sourceTree = "<group>"; };
+		7AF3AA7120E20F890003EDB0 /* OCBarrageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageCell.m; sourceTree = "<group>"; };
+		7AF3AA7220E20F890003EDB0 /* OCBarrageRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageRenderView.h; sourceTree = "<group>"; };
+		7AF3AA7320E20F890003EDB0 /* OCBarrageTextDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTextDescriptor.m; sourceTree = "<group>"; };
+		7AF3AA7420E20F890003EDB0 /* CALayer+OCBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+OCBarrage.m"; sourceTree = "<group>"; };
+		7AF3AA7520E20F890003EDB0 /* OCBarrageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageManager.m; sourceTree = "<group>"; };
+		7AF3AA7620E20F890003EDB0 /* OCBarrageTrackInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageTrackInfo.m; sourceTree = "<group>"; };
+		7AF3AA7720E20F890003EDB0 /* OCBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrage.h; sourceTree = "<group>"; };
+		7AF3AA7820E20F890003EDB0 /* OCBarrageTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageTextCell.h; sourceTree = "<group>"; };
+		7AF3AA7920E20F890003EDB0 /* OCBarrageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageHeader.h; sourceTree = "<group>"; };
+		7AF3AA7A20E20F890003EDB0 /* OCBarrageRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageRenderView.m; sourceTree = "<group>"; };
+		7AF3AA7B20E20F890003EDB0 /* OCBarrageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageCell.h; sourceTree = "<group>"; };
+		7AF3AA7C20E20F890003EDB0 /* OCBarrageDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageDescriptor.h; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		85BE62182C654077A58CEC9B /* CoreTelephony.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		9656ECDB77904B07A646B82E /* RCTJPushModule.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTJPushModule.xcodeproj; path = "../node_modules/jpush-react-native/ios/RCTJPushModule.xcodeproj"; sourceTree = "<group>"; };
@@ -691,6 +790,8 @@
 				B817715188FE42D2B36318F8 /* CoreLocation.framework in Frameworks */,
 				B905DBBFAAE849B080E049BB /* libRNSpinkit.a in Frameworks */,
 				C1C31128DC704BFC9A6AAA9A /* libSplashScreen.a in Frameworks */,
+				7AF3AA3F20E1C61F0003EDB0 /* AliThirdparty.framework in Frameworks */,
+				7AF3AA4020E1C61F0003EDB0 /* AliyunVodPlayerSDK.framework in Frameworks */,
 				C728F6B359C1488995C19D69 /* libRCTVideo.a in Frameworks */,
 				3961AA15009943DA86DC854E /* libRCTOrientation.a in Frameworks */,
 				0F3CEEFA3CBD401D84BFBA25 /* libRNFetchBlob.a in Frameworks */,
@@ -704,6 +805,7 @@
 				58DD373F52014155B93A4365 /* libReactNativePermissions.a in Frameworks */,
 				FAF8C07286D54DB385E785FE /* libRNBackgroundTimer.a in Frameworks */,
 				7A57DD2B20C9056F007865C2 /* libART.a in Frameworks */,
+				7AF3A9D320E1C4B20003EDB0 /* AliyunPlayerSDK.framework in Frameworks */,
 				106C2A0201CA4710A63B7550 /* libRNAudio.a in Frameworks */,
 				BC1C2BA45B5949ECB475D9C3 /* libRNSound.a in Frameworks */,
 			);
@@ -714,12 +816,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */,
+				7AF3A9D120E1C4B20003EDB0 /* AliyunVodPlayerSDK.framework in Frameworks */,
+				7AF3A9D420E1C4B20003EDB0 /* AliyunPlayerSDK.framework in Frameworks */,
 				7AB008DC20BF981B00C04FC2 /* AlipaySDK.framework in Frameworks */,
 				2D02E4C21E0B4AEC006451C7 /* libRCTAnimation.a in Frameworks */,
 				7AB008D820BF981B00C04FC2 /* libWeChatSDK.a in Frameworks */,
 				2D02E4C31E0B4AEC006451C7 /* libRCTImage-tvOS.a in Frameworks */,
 				2D02E4C41E0B4AEC006451C7 /* libRCTLinking-tvOS.a in Frameworks */,
 				2D02E4C51E0B4AEC006451C7 /* libRCTNetwork-tvOS.a in Frameworks */,
+				7AF3A9CB20E1C4B20003EDB0 /* AliThirdparty.framework in Frameworks */,
 				2D02E4C61E0B4AEC006451C7 /* libRCTSettings-tvOS.a in Frameworks */,
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
@@ -731,8 +836,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF3A9CC20E1C4B20003EDB0 /* AliThirdparty.framework in Frameworks */,
 				7AB008D920BF981B00C04FC2 /* libWeChatSDK.a in Frameworks */,
 				7AB008DD20BF981B00C04FC2 /* AlipaySDK.framework in Frameworks */,
+				7AF3A9D520E1C4B20003EDB0 /* AliyunPlayerSDK.framework in Frameworks */,
+				7AF3A9D220E1C4B20003EDB0 /* AliyunVodPlayerSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,6 +937,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				7AF3A97520E1C4740003EDB0 /* Live */,
 				7AB008C020BF981A00C04FC2 /* Pay */,
 				7AB0080120BF912F00C04FC2 /* Resource */,
 			);
@@ -1114,6 +1223,56 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7AF3A97520E1C4740003EDB0 /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				7AF3AA4420E1C6BC0003EDB0 /* LivePlayer.h */,
+				7AF3AA4120E1C6BB0003EDB0 /* LivePlayer.m */,
+				7AF3AA4220E1C6BB0003EDB0 /* LivePlayerManager.h */,
+				7AF3AA4320E1C6BC0003EDB0 /* LivePlayerManager.m */,
+				7AF3AA6A20E20F890003EDB0 /* OCBarrage */,
+				7AF3A9C520E1C4B20003EDB0 /* AliSDK */,
+			);
+			name = Live;
+			path = template/Live;
+			sourceTree = "<group>";
+		};
+		7AF3A9C520E1C4B20003EDB0 /* AliSDK */ = {
+			isa = PBXGroup;
+			children = (
+				7AF3A9C620E1C4B20003EDB0 /* AliThirdparty.framework */,
+				7AF3A9C720E1C4B20003EDB0 /* AliyunLanguageSource.bundle */,
+				7AF3A9C820E1C4B20003EDB0 /* AliyunVodPlayerSDK.framework */,
+				7AF3A9C920E1C4B20003EDB0 /* AliyunPlayerSDK.framework */,
+			);
+			path = AliSDK;
+			sourceTree = "<group>";
+		};
+		7AF3AA6A20E20F890003EDB0 /* OCBarrage */ = {
+			isa = PBXGroup;
+			children = (
+				7AF3AA6B20E20F890003EDB0 /* CALayer+OCBarrage.h */,
+				7AF3AA6C20E20F890003EDB0 /* OCBarrageTextDescriptor.h */,
+				7AF3AA6D20E20F890003EDB0 /* OCBarrageTrackInfo.h */,
+				7AF3AA6E20E20F890003EDB0 /* OCBarrageManager.h */,
+				7AF3AA6F20E20F890003EDB0 /* OCBarrageTextCell.m */,
+				7AF3AA7020E20F890003EDB0 /* OCBarrageDescriptor.m */,
+				7AF3AA7120E20F890003EDB0 /* OCBarrageCell.m */,
+				7AF3AA7220E20F890003EDB0 /* OCBarrageRenderView.h */,
+				7AF3AA7320E20F890003EDB0 /* OCBarrageTextDescriptor.m */,
+				7AF3AA7420E20F890003EDB0 /* CALayer+OCBarrage.m */,
+				7AF3AA7520E20F890003EDB0 /* OCBarrageManager.m */,
+				7AF3AA7620E20F890003EDB0 /* OCBarrageTrackInfo.m */,
+				7AF3AA7720E20F890003EDB0 /* OCBarrage.h */,
+				7AF3AA7820E20F890003EDB0 /* OCBarrageTextCell.h */,
+				7AF3AA7920E20F890003EDB0 /* OCBarrageHeader.h */,
+				7AF3AA7A20E20F890003EDB0 /* OCBarrageRenderView.m */,
+				7AF3AA7B20E20F890003EDB0 /* OCBarrageCell.h */,
+				7AF3AA7C20E20F890003EDB0 /* OCBarrageDescriptor.h */,
+			);
+			path = OCBarrage;
+			sourceTree = "<group>";
+		};
 		7AFAD93820C230A30012C3B8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1216,6 +1375,8 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				7AF3A9DD20E1C4D50003EDB0 /* Embed Frameworks */,
+				7AF3A9DE20E1C4D50003EDB0 /* Embed PlugIns */,
 			);
 			buildRules = (
 			);
@@ -1893,6 +2054,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AB008CA20BF981B00C04FC2 /* AlipaySDK.bundle in Resources */,
+				7AF3A9CD20E1C4B20003EDB0 /* AliyunLanguageSource.bundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				7AB0080320BF915F00C04FC2 /* TZImagePickerController.bundle in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
@@ -1906,6 +2068,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AB0080520BF915F00C04FC2 /* TZImagePickerController.bundle in Resources */,
+				7AF3A9CE20E1C4B20003EDB0 /* AliyunLanguageSource.bundle in Resources */,
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 				7AB008CC20BF981B00C04FC2 /* AlipaySDK.bundle in Resources */,
 				7A13B73F208825CF00AA758D /* RCTJShareConfig.plist in Resources */,
@@ -1918,6 +2081,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AB008CD20BF981B00C04FC2 /* AlipaySDK.bundle in Resources */,
+				7AF3A9CF20E1C4B20003EDB0 /* AliyunLanguageSource.bundle in Resources */,
 				7A13B740208825CF00AA758D /* RCTJShareConfig.plist in Resources */,
 				7AB008D520BF981B00C04FC2 /* README.txt in Resources */,
 				7AB0080620BF915F00C04FC2 /* TZImagePickerController.bundle in Resources */,
@@ -1962,6 +2126,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF3AA8320E20F890003EDB0 /* OCBarrageCell.m in Sources */,
+				7AF3AA4520E1C6BC0003EDB0 /* LivePlayer.m in Sources */,
+				7AF3AA8F20E20F890003EDB0 /* OCBarrageTrackInfo.m in Sources */,
+				7AF3AA7D20E20F890003EDB0 /* OCBarrageTextCell.m in Sources */,
+				7AF3AA4820E1C6BC0003EDB0 /* LivePlayerManager.m in Sources */,
+				7AF3AA9220E20F890003EDB0 /* OCBarrageRenderView.m in Sources */,
+				7AF3AA8920E20F890003EDB0 /* CALayer+OCBarrage.m in Sources */,
+				7AF3AA8C20E20F890003EDB0 /* OCBarrageManager.m in Sources */,
+				7AF3AA8020E20F890003EDB0 /* OCBarrageDescriptor.m in Sources */,
+				7AF3AA8620E20F890003EDB0 /* OCBarrageTextDescriptor.m in Sources */,
 				7AB008CE20BF981B00C04FC2 /* RCTXPay.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
@@ -1972,6 +2146,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF3AA8420E20F890003EDB0 /* OCBarrageCell.m in Sources */,
+				7AF3AA4620E1C6BC0003EDB0 /* LivePlayer.m in Sources */,
+				7AF3AA9020E20F890003EDB0 /* OCBarrageTrackInfo.m in Sources */,
+				7AF3AA7E20E20F890003EDB0 /* OCBarrageTextCell.m in Sources */,
+				7AF3AA4920E1C6BC0003EDB0 /* LivePlayerManager.m in Sources */,
+				7AF3AA9320E20F890003EDB0 /* OCBarrageRenderView.m in Sources */,
+				7AF3AA8A20E20F890003EDB0 /* CALayer+OCBarrage.m in Sources */,
+				7AF3AA8D20E20F890003EDB0 /* OCBarrageManager.m in Sources */,
+				7AF3AA8120E20F890003EDB0 /* OCBarrageDescriptor.m in Sources */,
+				7AF3AA8720E20F890003EDB0 /* OCBarrageTextDescriptor.m in Sources */,
 				7AB008D020BF981B00C04FC2 /* RCTXPay.m in Sources */,
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
 				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
@@ -1983,6 +2167,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DCD954D1E0B4F2C00145EB5 /* templateTests.m in Sources */,
+				7AF3AA4720E1C6BC0003EDB0 /* LivePlayer.m in Sources */,
+				7AF3AA8E20E20F890003EDB0 /* OCBarrageManager.m in Sources */,
+				7AF3AA8B20E20F890003EDB0 /* CALayer+OCBarrage.m in Sources */,
+				7AF3AA7F20E20F890003EDB0 /* OCBarrageTextCell.m in Sources */,
+				7AF3AA8220E20F890003EDB0 /* OCBarrageDescriptor.m in Sources */,
+				7AF3AA8520E20F890003EDB0 /* OCBarrageCell.m in Sources */,
+				7AF3AA4A20E1C6BC0003EDB0 /* LivePlayerManager.m in Sources */,
+				7AF3AA8820E20F890003EDB0 /* OCBarrageTextDescriptor.m in Sources */,
+				7AF3AA9420E20F890003EDB0 /* OCBarrageRenderView.m in Sources */,
+				7AF3AA9120E20F890003EDB0 /* OCBarrageTrackInfo.m in Sources */,
 				7AB008D120BF981B00C04FC2 /* RCTXPay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2025,6 +2219,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/template/Pay",
+					"$(PROJECT_DIR)/template/Live",
+					"$(PROJECT_DIR)/template/Live/AliSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2084,6 +2280,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/template/Pay",
+					"$(PROJECT_DIR)/template/Live",
+					"$(PROJECT_DIR)/template/Live/AliSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2145,6 +2343,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/template/Pay",
+					"$(PROJECT_DIR)/template/Live",
+					"$(PROJECT_DIR)/template/Live/AliSDK",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -2217,6 +2417,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/template/Pay",
+					"$(PROJECT_DIR)/template/Live",
+					"$(PROJECT_DIR)/template/Live/AliSDK",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -2288,6 +2490,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/template/Pay",
+					"$(PROJECT_DIR)/template/Live",
+					"$(PROJECT_DIR)/template/Live/AliSDK",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "template-tvOSTests/Info.plist";
@@ -2332,6 +2536,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/template/Pay",
+					"$(PROJECT_DIR)/template/Live",
+					"$(PROJECT_DIR)/template/Live/AliSDK",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "template-tvOSTests/Info.plist";

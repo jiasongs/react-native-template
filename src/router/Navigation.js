@@ -13,6 +13,7 @@ import LoginAndRegistered from '../page/login/LoginAndRegistered'
 import RecoverPwd from '../page/login/RecoverPwd'
 import VideoPage from '../page/VideoPage';
 import Chat from '../page/Chat';
+import LivePage from '../page/LivePage';
 
 const Nav = createStackNavigator(configRoute({
     Tab: { screen: TabNavigation },
@@ -22,8 +23,9 @@ const Nav = createStackNavigator(configRoute({
     RecoverPwd: { screen: RecoverPwd },
     VideoPage: { screen: VideoPage },
     Chat: { screen: Chat },
+    LivePage: { screen: LivePage },
 }), {
-        initialRouteName: 'Chat',
+        initialRouteName: 'LivePage',
         cardStyle: {
             shadowOpacity: 0,
             shadowRadius: 0,
