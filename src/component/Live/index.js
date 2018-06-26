@@ -7,6 +7,7 @@ import LivePlayer from './LivePlayer'
 import PlayerTools from './PlayerTools'
 import ToolContainer from './ToolContainer';
 import Content from './Content';
+import OCBarrage from './OCBarrage';
 
 class Index extends React.PureComponent {
 
@@ -76,30 +77,31 @@ class Index extends React.PureComponent {
         });
     }
 
-
-
     _captureRef = (v) => {
         this.livePlayer = v
     }
 
     render() {
-        const { style, source, onPressRecharge, onPressGift } = this.props
+        const { style, source, messages, onPressRecharge, onPressGift } = this.props
         const { playerStyle } = this.state
         return (
             <View style={style}>
-                <LivePlayer
-                    ref={this._captureRef}
-                    style={playerStyle}
-                    source={source}
-                />
-                <PlayerTools
-                    style={[styles.playerTools, playerStyle]}
-                    onPressPlay={this._onPressPlay}
-                    onPressVideo={this._onPressVideo}
-                    onPressRefresh={this._onPressRefresh}
-                    onPressScale={this._onPressScale}
-                />
-                <Content />
+                <View style={playerStyle}>
+                    <LivePlayer
+                        ref={this._captureRef}
+                        style={playerStyle}
+                        source={source}
+                    />
+                    <OCBarrage style={styles.ocbarrage} />
+                    <PlayerTools
+                        style={styles.playerTools}
+                        onPressPlay={this._onPressPlay}
+                        onPressVideo={this._onPressVideo}
+                        onPressRefresh={this._onPressRefresh}
+                        onPressScale={this._onPressScale}
+                    />
+                </View>
+                <Content messages={messages} />
                 <ToolContainer
                     onPressRecharge={onPressRecharge}
                     onPressGift={onPressGift}
@@ -113,7 +115,19 @@ const styles = StyleSheet.create({
     playerTools: {
         // backgroundColor: 'red',
         position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
     },
+    ocbarrage: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+        // backgroundColor: 'red',
+    }
 });
 
 export default Index

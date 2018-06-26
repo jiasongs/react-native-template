@@ -18,12 +18,6 @@
 
 @implementation LivePlayerManager
 
-//      NSURL *strUrl = [NSURL URLWithString:@"rtmp://live.hkstv.hk.lxdns.com/live/hks"];//网络视频，填写网络url地址
-//      [_aliPlayer prepareWithURL:strUrl];
-//      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        //开始播放
-//        [_aliPlayer start];
-//      });
 RCT_EXPORT_MODULE();
 
 - (UIView *)view {
@@ -31,8 +25,7 @@ RCT_EXPORT_MODULE();
   return _livePlayer;
 }
 
-- (dispatch_queue_t)methodQueue
-{
+- (dispatch_queue_t)methodQueue {
   return dispatch_get_main_queue();
 }
 

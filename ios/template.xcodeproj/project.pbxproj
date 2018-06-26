@@ -123,6 +123,15 @@
 		7AF3AA9220E20F890003EDB0 /* OCBarrageRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7A20E20F890003EDB0 /* OCBarrageRenderView.m */; };
 		7AF3AA9320E20F890003EDB0 /* OCBarrageRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7A20E20F890003EDB0 /* OCBarrageRenderView.m */; };
 		7AF3AA9420E20F890003EDB0 /* OCBarrageRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA7A20E20F890003EDB0 /* OCBarrageRenderView.m */; };
+		7AF3AA9C20E210600003EDB0 /* OCBarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA9B20E210600003EDB0 /* OCBarrageView.m */; };
+		7AF3AA9D20E210600003EDB0 /* OCBarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA9B20E210600003EDB0 /* OCBarrageView.m */; };
+		7AF3AA9E20E210600003EDB0 /* OCBarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AA9B20E210600003EDB0 /* OCBarrageView.m */; };
+		7AF3AAA120E211C00003EDB0 /* OCBarrageViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AAA020E211C00003EDB0 /* OCBarrageViewManager.m */; };
+		7AF3AAA220E211C00003EDB0 /* OCBarrageViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AAA020E211C00003EDB0 /* OCBarrageViewManager.m */; };
+		7AF3AAA320E211C00003EDB0 /* OCBarrageViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AAA020E211C00003EDB0 /* OCBarrageViewManager.m */; };
+		7AF3AAA720E21BE70003EDB0 /* UIColor+JKHEX.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AAA520E21BE70003EDB0 /* UIColor+JKHEX.m */; };
+		7AF3AAA820E21BE70003EDB0 /* UIColor+JKHEX.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AAA520E21BE70003EDB0 /* UIColor+JKHEX.m */; };
+		7AF3AAA920E21BE70003EDB0 /* UIColor+JKHEX.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3AAA520E21BE70003EDB0 /* UIColor+JKHEX.m */; };
 		7C3DBAD52910447182C0F821 /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2426498E99074D2BAFEC1B37 /* libRCTJPushModule.a */; };
 		7DC7FEF638AD42B298AA7339 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF623458C5740ADBA46D19E /* libRNDeviceInfo.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -718,6 +727,12 @@
 		7AF3AA7A20E20F890003EDB0 /* OCBarrageRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBarrageRenderView.m; sourceTree = "<group>"; };
 		7AF3AA7B20E20F890003EDB0 /* OCBarrageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageCell.h; sourceTree = "<group>"; };
 		7AF3AA7C20E20F890003EDB0 /* OCBarrageDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBarrageDescriptor.h; sourceTree = "<group>"; };
+		7AF3AA9A20E210600003EDB0 /* OCBarrageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCBarrageView.h; sourceTree = "<group>"; };
+		7AF3AA9B20E210600003EDB0 /* OCBarrageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCBarrageView.m; sourceTree = "<group>"; };
+		7AF3AA9F20E211C00003EDB0 /* OCBarrageViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCBarrageViewManager.h; sourceTree = "<group>"; };
+		7AF3AAA020E211C00003EDB0 /* OCBarrageViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCBarrageViewManager.m; sourceTree = "<group>"; };
+		7AF3AAA520E21BE70003EDB0 /* UIColor+JKHEX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JKHEX.m"; sourceTree = "<group>"; };
+		7AF3AAA620E21BE70003EDB0 /* UIColor+JKHEX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+JKHEX.h"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		85BE62182C654077A58CEC9B /* CoreTelephony.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		9656ECDB77904B07A646B82E /* RCTJPushModule.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTJPushModule.xcodeproj; path = "../node_modules/jpush-react-native/ios/RCTJPushModule.xcodeproj"; sourceTree = "<group>"; };
@@ -937,6 +952,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				7AF3AAA420E21BD80003EDB0 /* Categories */,
 				7AF3A97520E1C4740003EDB0 /* Live */,
 				7AB008C020BF981A00C04FC2 /* Pay */,
 				7AB0080120BF912F00C04FC2 /* Resource */,
@@ -1226,6 +1242,10 @@
 		7AF3A97520E1C4740003EDB0 /* Live */ = {
 			isa = PBXGroup;
 			children = (
+				7AF3AA9A20E210600003EDB0 /* OCBarrageView.h */,
+				7AF3AA9B20E210600003EDB0 /* OCBarrageView.m */,
+				7AF3AA9F20E211C00003EDB0 /* OCBarrageViewManager.h */,
+				7AF3AAA020E211C00003EDB0 /* OCBarrageViewManager.m */,
 				7AF3AA4420E1C6BC0003EDB0 /* LivePlayer.h */,
 				7AF3AA4120E1C6BB0003EDB0 /* LivePlayer.m */,
 				7AF3AA4220E1C6BB0003EDB0 /* LivePlayerManager.h */,
@@ -1271,6 +1291,16 @@
 				7AF3AA7C20E20F890003EDB0 /* OCBarrageDescriptor.h */,
 			);
 			path = OCBarrage;
+			sourceTree = "<group>";
+		};
+		7AF3AAA420E21BD80003EDB0 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				7AF3AAA620E21BE70003EDB0 /* UIColor+JKHEX.h */,
+				7AF3AAA520E21BE70003EDB0 /* UIColor+JKHEX.m */,
+			);
+			name = Categories;
+			path = template/Categories;
 			sourceTree = "<group>";
 		};
 		7AFAD93820C230A30012C3B8 /* Products */ = {
@@ -2133,10 +2163,13 @@
 				7AF3AA4820E1C6BC0003EDB0 /* LivePlayerManager.m in Sources */,
 				7AF3AA9220E20F890003EDB0 /* OCBarrageRenderView.m in Sources */,
 				7AF3AA8920E20F890003EDB0 /* CALayer+OCBarrage.m in Sources */,
+				7AF3AAA120E211C00003EDB0 /* OCBarrageViewManager.m in Sources */,
 				7AF3AA8C20E20F890003EDB0 /* OCBarrageManager.m in Sources */,
 				7AF3AA8020E20F890003EDB0 /* OCBarrageDescriptor.m in Sources */,
 				7AF3AA8620E20F890003EDB0 /* OCBarrageTextDescriptor.m in Sources */,
 				7AB008CE20BF981B00C04FC2 /* RCTXPay.m in Sources */,
+				7AF3AAA720E21BE70003EDB0 /* UIColor+JKHEX.m in Sources */,
+				7AF3AA9C20E210600003EDB0 /* OCBarrageView.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -2153,10 +2186,13 @@
 				7AF3AA4920E1C6BC0003EDB0 /* LivePlayerManager.m in Sources */,
 				7AF3AA9320E20F890003EDB0 /* OCBarrageRenderView.m in Sources */,
 				7AF3AA8A20E20F890003EDB0 /* CALayer+OCBarrage.m in Sources */,
+				7AF3AAA220E211C00003EDB0 /* OCBarrageViewManager.m in Sources */,
 				7AF3AA8D20E20F890003EDB0 /* OCBarrageManager.m in Sources */,
 				7AF3AA8120E20F890003EDB0 /* OCBarrageDescriptor.m in Sources */,
 				7AF3AA8720E20F890003EDB0 /* OCBarrageTextDescriptor.m in Sources */,
 				7AB008D020BF981B00C04FC2 /* RCTXPay.m in Sources */,
+				7AF3AAA820E21BE70003EDB0 /* UIColor+JKHEX.m in Sources */,
+				7AF3AA9D20E210600003EDB0 /* OCBarrageView.m in Sources */,
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
 				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
 			);
@@ -2169,15 +2205,18 @@
 				2DCD954D1E0B4F2C00145EB5 /* templateTests.m in Sources */,
 				7AF3AA4720E1C6BC0003EDB0 /* LivePlayer.m in Sources */,
 				7AF3AA8E20E20F890003EDB0 /* OCBarrageManager.m in Sources */,
+				7AF3AA9E20E210600003EDB0 /* OCBarrageView.m in Sources */,
 				7AF3AA8B20E20F890003EDB0 /* CALayer+OCBarrage.m in Sources */,
 				7AF3AA7F20E20F890003EDB0 /* OCBarrageTextCell.m in Sources */,
 				7AF3AA8220E20F890003EDB0 /* OCBarrageDescriptor.m in Sources */,
 				7AF3AA8520E20F890003EDB0 /* OCBarrageCell.m in Sources */,
 				7AF3AA4A20E1C6BC0003EDB0 /* LivePlayerManager.m in Sources */,
 				7AF3AA8820E20F890003EDB0 /* OCBarrageTextDescriptor.m in Sources */,
+				7AF3AAA920E21BE70003EDB0 /* UIColor+JKHEX.m in Sources */,
 				7AF3AA9420E20F890003EDB0 /* OCBarrageRenderView.m in Sources */,
 				7AF3AA9120E20F890003EDB0 /* OCBarrageTrackInfo.m in Sources */,
 				7AB008D120BF981B00C04FC2 /* RCTXPay.m in Sources */,
+				7AF3AAA320E211C00003EDB0 /* OCBarrageViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

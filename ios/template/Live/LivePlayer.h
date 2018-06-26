@@ -17,10 +17,7 @@
 
 @property (nonatomic,strong) NSDictionary *source;
 @property (nonatomic, copy) RCTBubblingEventBlock onLiveLoadStart;
-//@property (nonatomic, copy) RCTBubblingEventBlock onVideoLoad;
-//@property (nonatomic, copy) RCTBubblingEventBlock onVideoBuffer;
-//@property (nonatomic, copy) RCTBubblingEventBlock onVideoError;
-//@property (nonatomic, copy) RCTBubblingEventBlock onVideoProgress;
+
 -(void)releasePlayer;
 
 @end

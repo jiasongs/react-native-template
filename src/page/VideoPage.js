@@ -68,16 +68,6 @@ class VideoPage extends React.PureComponent {
         console.log('render')
         return (
             <Container style={styles.container}>
-                {/* <Button style={{ marginTop: 50, }} title={'测试'} onPress={this.onPress} /> */}
-                {/* <NavigationBar
-                    style={styles.navBar}
-                    hidden={this.state.navHidden}
-                    background={null}
-                    statusBarHidden={this.state.navHidden}
-                    title={'视频播放title'}
-                    rightViewOnPress={this.rightOnPress}
-                    backOnPress={this.backOnPress}
-                /> */}
                 <VideoPlayer
                     style={{ backgroundColor: 'black', }}
                     // source={{ uri: 'rtmp://live.smeoa.com/todo/1' }}

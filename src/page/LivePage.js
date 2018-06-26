@@ -13,6 +13,17 @@ import LivePlayer from '../component/Live/index';
 
 class LivePage extends React.PureComponent {
 
+    constructor(props) {
+        super(props);
+        this.state = { messages: [1, 1, 1, 1, 1, 1, 1] }
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({ messages: [] })
+        }, 5000);
+    }
+
     _onPressRecharge = () => {
         const params = {
             title: '温馨提示',
@@ -36,12 +47,14 @@ class LivePage extends React.PureComponent {
     }
 
     render() {
+        const { messages } = this.state
         return (
             <Container>
                 <LivePlayer
                     style={{ flex: 1 }}
                     playerStyle={{ width: 375, height: 220 }}
                     source={{ uri: 'rtmp://live.hkstv.hk.lxdns.com/live/hks' }}
+                    messages={messages}
                     onPressRecharge={this._onPressRecharge}
                     onPressGift={this._onPressGift}
                 />

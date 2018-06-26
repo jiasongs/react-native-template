@@ -17,8 +17,6 @@ class LivePlayerComponent extends React.PureComponent {
 
     }
 
-
-
     constructor(props) {
         super(props);
         this.isPlaying = true
@@ -55,6 +53,7 @@ class LivePlayerComponent extends React.PureComponent {
 
     render() {
         const { source, style } = this.props
+        console.log('LivePlayer')
         return (
             <LivePlayer
                 style={style}
