@@ -42,13 +42,20 @@ class CusSegmentedView extends PureComponent {
     }
     constructor(props) {
         super(props);
-        this.state = { width: 0, height: 0, activeIndex: 0 }
+        this.state = { width: 0, height: 0, activeIndex: props.initialPage }
         this.isScrollMark = false
     }
+
     componentDidMount() {
         if (__IOS__) {
-            setTimeout(() => this._onChangeBar(this.props.initialPage, false), 50);
+            this.time1 = setTimeout(() => this.changeScrollPage(this.props.initialPage, false), 50);
         }
+    }
+
+    componentWillUnmount() {
+        this.time1 && clearTimeout(this.time1)
+        this.time2 && clearTimeout(this.time2)
+        console.log(this.time1, this.time2)
     }
 
     setNativeProps(props) {
@@ -72,16 +79,17 @@ class CusSegmentedView extends PureComponent {
             this.changeScrollPage(index, false)
         }
     }
+
     _changePage = (cardIndex) => {
         if (this.state.activeIndex != cardIndex && !this.isScrollMark) {
             const { lazy, lazyDelay } = this.props
             console.log(this.state.activeIndex, cardIndex)
             this.isScrollMark = true
-            this.cusSegmentedBar && this.cusSegmentedBar.changeBarIndex && this.cusSegmentedBar.changeBarIndex(cardIndex)
+            this.cusSegmentedBar && this.cusSegmentedBar.changeBarIndex(cardIndex)
             requestAnimationFrame(() => {
                 console.log('requestAnimationFrame')
                 let delay = lazy ? lazyDelay : 0
-                setTimeout(() => {
+                this.time2 = setTimeout(() => {
                     this.setState({ activeIndex: cardIndex }, () => {
                         this.isScrollMark = false
                     })
@@ -144,6 +152,7 @@ class CusSegmentedView extends PureComponent {
             </ScrollView>
         )
     }
+
     _renderViewPagerAndroid = () => {
         const { children, initialPage, scrollEnabled, pageHeight, lazy } = this.props
         const { width, activeIndex } = this.state
@@ -193,6 +202,7 @@ class CusSegmentedView extends PureComponent {
 
         )
     }
+
     render() {
         const { style, onLayout, showSegmentedBar } = this.props
         console.log('rednder')
@@ -214,34 +224,26 @@ class CusSegmentedBar extends PureComponent {
 
     constructor(props) {
         super(props);
-        console.log('props.activeIndex', props.activeIndex)
-        this.state = { activeIndex: props.activeIndex != undefined ? props.activeIndex : 0 }
+        this.state = { activeIndex: props.initialPage }
     }
-    componentWillReceiveProps(nextProps) {
-        if (this.props.activeIndex != undefined && nextProps.activeIndex != this.state.activeIndex) {
-            this.setState({ activeIndex: nextProps.activeIndex });
-        }
-    }
+
     changeBarIndex = (cardIndex) => {
         const { onChange } = this.props
         if (cardIndex != this.state.activeIndex) {
-            if (this.props.activeIndex == undefined) {
-                this.setState({ activeIndex: cardIndex });
-            }
+            this.setState({ activeIndex: cardIndex });
             onChange && onChange(cardIndex)
         }
     }
+
     _onChangeBar = (index) => {
         const { onChangeBar, onChange } = this.props
-        console.log('_onChangeBar')
         if (index != this.state.activeIndex) {
-            if (this.props.activeIndex == undefined) {
-                this.setState({ activeIndex: index });
-            }
+            this.setState({ activeIndex: index });
             onChangeBar && onChangeBar(index)
             onChange && onChange(index)
         }
     }
+
     render() {
         let { onChange, renderCustomBar, children, style, barStyle, backgroundImage, ...others } = this.props
         let customBar;

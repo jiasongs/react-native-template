@@ -29,11 +29,16 @@ class AlertContent extends React.PureComponent {
     constructor(props) {
         super(props)
     };
-    _onPress = (params) => {
+
+    componentWillUnmount() {
+        // 卸载
+        // clearTimeout(this.times)
+    }
+
+    _onPress = (onPressItem) => {
+        // 有待考虑
         setTimeout(() => {
-            if (params != undefined && params) {
-                params()
-            }
+            onPressItem && onPressItem()
         }, 300); // 防止两个alert同时触发
         AlertManager.hide()
     };
