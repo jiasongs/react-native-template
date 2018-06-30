@@ -6,7 +6,7 @@ import Images from '../asset/index'
 import { addCustomProps } from '../util/addCustomProps'
 import JShareModule from 'jshare-react-native';
 import XPay from 'react-native-puti-pay';
-import AsyncStorage from '../util/AsyncStorage'
+import StorageManager from './StorageManager';
 import Services from '../util/Services'
 import MenuManager from './MenuManager'
 import ToastManager from './ToastManager'
@@ -66,7 +66,7 @@ global.ScaleSize = scaleSize;
 global.Images = Images;
 
 // 存储
-global.Storage = AsyncStorage;
+global.StorageManager = StorageManager;
 
 // 存储
 global.Services = Services;

@@ -32,24 +32,14 @@ class ActionsManager {
     }
 
     static showShare(func) {
-        this.pullViewRefs = bouncer(this.pullViewRefs.slice()) // 过滤
-        if (this.pullViewRefs.length === 0) {
-            Overlay.show(
-                <Overlay.PullView
-                    ref={v => this.pullViewRefs.push(v)}
-                    side={'bottom'}
-                    modal={false}
-                    rootTransform={'none'}
-                    containerStyle={Theme.bgTransparentStyle}
-                    onCloseRequest={() => this.hide()}
-                >
-                    <ShareContent onPress={func} />
-                </Overlay.PullView>
-            )
-        }
+        this.showPullView(<ShareContent onPress={func} />, {})
     }
 
     static showArea(func) {
+        this.showPullView(<AreaContent onPress={func} />, {})
+    }
+
+    static showPullView(component, option) {
         this.pullViewRefs = bouncer(this.pullViewRefs.slice()) // 过滤
         if (this.pullViewRefs.length === 0) {
             Overlay.show(
@@ -60,8 +50,9 @@ class ActionsManager {
                     rootTransform={'none'}
                     containerStyle={Theme.bgTransparentStyle}
                     onCloseRequest={() => this.hide()}
+                    {...option}
                 >
-                    <AreaContent onPress={func} />
+                    {component}
                 </Overlay.PullView>
             )
         }

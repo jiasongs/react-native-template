@@ -21,24 +21,10 @@ class AlertManager {
     //     ]
     // }
     static show(params) {
-        this.popViewRefs = bouncer(this.popViewRefs.slice()) // 过滤
-        if (this.popViewRefs.length === 0) {
-            Overlay.show(
-                <Overlay.PopView
-                    ref={v => this.popViewRefs.push(v)}
-                    style={Theme.centerStyle}
-                    type={'zoomOut'}
-                    modal={false}
-                    onCloseRequest={() => this.hide()}
-                >
-                    <AlertContent {...params} />
-                </Overlay.PopView>
-            )
-        }
+        this.showPopView(<AlertContent {...params} />, {})
     }
 
-    // component 为组件
-    static showComponent(component) {
+    static showPopView(component, option) {
         this.popViewRefs = bouncer(this.popViewRefs.slice()) // 过滤
         if (this.popViewRefs.length === 0) {
             Overlay.show(
@@ -48,6 +34,7 @@ class AlertManager {
                     type={'zoomOut'}
                     modal={false}
                     onCloseRequest={() => this.hide()}
+                    {...option}
                 >
                     {component}
                 </Overlay.PopView>

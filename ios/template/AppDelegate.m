@@ -28,6 +28,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   // 极光推送
+  //Required
   NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"RCTJShareConfig" ofType:@"plist"];
   if (plistPath == nil) {
     NSLog(@"error: RCTJShareConfig.plist not found");

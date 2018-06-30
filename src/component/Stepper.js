@@ -24,6 +24,7 @@ class Stepper extends React.PureComponent {
         showSeparator: PropTypes.bool,
         disabled: PropTypes.bool,
         editable: PropTypes.bool,
+        editableInput: PropTypes.bool,
         onChange: PropTypes.func, //(value)
     };
 
@@ -36,6 +37,7 @@ class Stepper extends React.PureComponent {
         showSeparator: true,
         disabled: false,
         editable: true,
+        editableInput: true
     };
 
     constructor(props) {
@@ -63,7 +65,9 @@ class Stepper extends React.PureComponent {
             fontSize: Theme.stepperFontSize,
             textAlign: 'center',
             minWidth: Theme.stepperValueMinWidth,
+            minHeight: 40,
             paddingHorizontal: Theme.stepperValuePaddingHorizontal,
+            // backgroundColor: 'red',
         }].concat(valueStyle);
 
         let btnStyle = {
@@ -150,7 +154,7 @@ class Stepper extends React.PureComponent {
     render() {
         this.buildProps();
 
-        let { style, subButton, addButton, value, valueStyle, valueFormat, max, min, showSeparator, disabled, editable, onLayout, onChange, ...others } = this.props; //disable View.onChange
+        let { style, subButton, addButton, value, valueStyle, valueFormat, max, min, showSeparator, disabled, editable, onLayout, onChange, editableInput, ...others } = this.props; //disable View.onChange
 
         if (value === undefined) value = this.state.value;
 
@@ -180,6 +184,7 @@ class Stepper extends React.PureComponent {
                     value={`${valueFormat ? valueFormat(value) : value}`}
                     onChangeText={this._onChangeText}
                     underlineColorAndroid={'transparent'}
+                    editable={editableInput}
                 />
                 {/* <Text style={valueStyle} numberOfLines={1}>{valueFormat ? valueFormat(value) : value}</Text> */}
                 {separator}
