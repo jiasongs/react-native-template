@@ -35,7 +35,8 @@ module.exports = {
     "semi": [
       "error",
       "always"
-    ]
+    ],
+    "camelcase": 0, //强制驼峰法命名
   },
   "globals": {
     "expect": true,

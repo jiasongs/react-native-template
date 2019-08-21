@@ -1,8 +1,8 @@
 'use strict';
-import React, { useState, useRef, useMemo, useCallback } from 'react';
+import React, { useState, useRef, useMemo, useCallback, useContext } from 'react';
 import { View, Text, StyleSheet, StatusBar, ImageBackground, Image, Platform } from 'react-native';
 import PropTypes from 'prop-types';
-import { Theme } from '../../config/themes';
+import { Theme, ThemeContext } from '../../config/themes';
 import NavigationTitle from './NavigationTitle';
 import NavigationAction from './NavigationAction';
 
@@ -31,6 +31,8 @@ function NavigationBar(props) {
     title,
     extraData
   } = props;
+
+  const themeValue = useContext(ThemeContext);
 
   const defaultLeftActionRef = useRef([{
     icon: backActionSource,
@@ -63,12 +65,20 @@ function NavigationBar(props) {
     return renderLeftAction;
   }, [extraData, renderLeftAction]);
 
+  const buildStyles = useMemo(() => {
+    return {
+      style: [styles.container, { backgroundColor: themeValue.navBarBackgroundColor }, style],
+      statusBarStyle: themeValue.navStatusBarStyle,
+      titleStyle: [{ color: themeValue.navBarTitleColor }, titleStyle]
+    };
+  }, [themeValue, style, titleStyle]);
+
   return (
-    <View style={[styles.container, style]}>
+    <View style={buildStyles.style}>
       <StatusBar
         translucent={true}
         backgroundColor={statusBarColor}
-        barStyle={statusBarStyle}
+        barStyle={statusBarStyle || buildStyles.statusBarStyle}
         animated={animated}
         hidden={statusBarHidden}
       />
@@ -86,7 +96,7 @@ function NavigationBar(props) {
           <NavigationTitle
             style={styles.navTitleContainer}
             title={title}
-            titleStyle={titleStyle}
+            titleStyle={buildStyles.titleStyle}
             leftActionWidth={leftActionWidth}
             rightActionWidth={rightActionWidth}
             extraData={extraData}
@@ -153,7 +163,6 @@ NavigationBar.propTypes = {
 };
 
 NavigationBar.defaultProps = {
-  statusBarStyle: 'light-content',
   statusBarColor: Platform.OS === 'android' && Platform.Version > 22 ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, 0.3)',
   statusBarHidden: false,
 };

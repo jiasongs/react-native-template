@@ -1,7 +1,8 @@
 'use strict';
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback, useContext } from 'react';
 import { ViewPropTypes, StyleSheet, processColor, requireNativeComponent } from 'react-native';
 import PropTypes from 'prop-types';
+import { ThemeContext } from '../../config/themes';
 
 const RCTPicker = requireNativeComponent('RCTPicker');
 
@@ -18,6 +19,7 @@ function PickerIOS(props) {
   const _picherRef = useRef(null);
   const _currentIndex = useRef(0);
   const [items, setItems] = useState([]);
+  const themeValue = useContext(ThemeContext);
 
   const onChange = useCallback((event) => {
     console.log('event', event);
@@ -37,29 +39,38 @@ function PickerIOS(props) {
   }, []);
 
   useEffect(() => {
+    console.log('buildStyles', buildStyles);
     const newData = data.map((item, index) => {
       const label = renderLabelString ? renderLabelString(item, index) : item.label;
       return {
         value: item,
         label: label,
-        textColor: processColor(titleColor),
+        textColor: processColor(buildStyles.titleColor),
       };
     });
     setItems(newData);
-  }, [data, renderLabelString, titleColor]);
+  }, [themeValue, data, renderLabelString, buildStyles]);
 
   useEffect(() => {
     _currentIndex.current = selectedIndex;
   }, [selectedIndex]);
 
+  const buildStyles = useMemo(() => {
+    return {
+      style: [styles.picker, style],
+      titleFontSize: titleFontSize || themeValue.pickerTitleStyle.fontSize,
+      titleColor: titleColor || themeValue.pickerTitleStyle.color,
+    };
+  }, [themeValue, titleFontSize, titleColor, style]);
+
   return (
     <RCTPicker
       ref={_captureRef}
-      style={[styles.picker, style]}
+      style={buildStyles.style}
       items={items}
       selectedIndex={selectedIndex}
       onChange={onChange}
-      fontSize={titleFontSize}
+      fontSize={buildStyles.titleFontSize}
       onStartShouldSetResponder={() => true}
       onResponderTerminationRequest={() => false}
     />
@@ -85,8 +96,6 @@ PickerIOS.propTypes = {
 PickerIOS.defaultProps = {
   selectedIndex: 0,
   data: [],
-  titleColor: '#333',
-  titleFontSize: 14,
 };
 
 export default React.memo(PickerIOS);

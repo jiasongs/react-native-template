@@ -98,8 +98,27 @@ export default {
    * @导航栏的设置
    */
   navBarPadding: 0,
-  navBarBackgroundColor: '#333',
-  navBarTitleColor: '#fff',
+  navBarBackgroundColor: '#fff',
+  navBarTitleColor: '#333',
   navBarTitleFontSize: 16,
   navBarHeight: 44,
+  navStatusBarStyle: 'dark-content',
+  /**
+   * @listRow [详细描述]
+   */
+  listRowBackgroundColor: '#fff',
+  listRowTitleColor: '#333',
+  listRowTitleFontSize: 16,
+  listRowDetailColor: '#666',
+  listRowDetailFontSize: 14,
+  listRowBottomSeparatorStyle: {
+    backgroundColor: '#f3f3f3'
+  },
+  /**
+   * @picker
+   */
+  pickerTitleStyle: {
+    color: '#333',
+    fontSize: 14
+  }
 };

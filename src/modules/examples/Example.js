@@ -1,7 +1,9 @@
 import React, { useRef, useMemo, useEffect, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 import { PageContainer, ListRow, ActionManager, NavigationBar, Checkbox, Picker, ToastManager, AlertManager } from '../../components';
-import { Theme } from '../../config/themes';
+import { Theme, ThemeManager } from '../../config/themes';
+import BlackTheme from '../../config/themes/black';
+import DefaultTheme from '../../config/themes/default';
 import RouterHelper from '../../routers/RouterHelper';
 
 function Father(props) {
@@ -67,22 +69,30 @@ function Example() {
       <Text >{count}</Text>
       <MemoFather render={ButtonTest} />
       <ListRow
-        title={<Text>321</Text>}
+        title={'12'}
+        // title={<Text>321</Text>}
+        detail={'123'}
         onPress={() => {
+          if (!state) {
+            ThemeManager.changeTheme(BlackTheme);
+          } else {
+            ThemeManager.changeTheme(DefaultTheme);
+          }
+          setState((pre) => !pre);
           // RouterHelper.push('Tab');
-          const com = (
-            <View style={{
-              width: 375,
-              height: 200,
-              backgroundColor: '#fff',
-            }}>
+          // const com = (
+          //   <View style={{
+          //     width: 375,
+          //     height: 200,
+          //     backgroundColor: '#fff',
+          //   }}>
 
-            </View>
-          );
-          ActionManager.showView(com, {
-            side: 'bottom',
-            // containerStyle: { flex: 1, justifyContent: 'center', alignItems: 'center', },
-          });
+          //   </View>
+          // );
+          // ActionManager.showView(com, {
+          //   side: 'bottom',
+          //   // containerStyle: { flex: 1, justifyContent: 'center', alignItems: 'center', },
+          // });
           // AlertManager.show({
           //   title: '123',
           //   // detail: <KeyboardAvoidingView ><TextInput placeholder={'123'} /></KeyboardAvoidingView>,

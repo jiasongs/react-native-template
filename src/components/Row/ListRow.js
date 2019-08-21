@@ -1,5 +1,5 @@
 'use strict';
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { View, Text, StyleSheet, Image, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
@@ -30,7 +30,7 @@ function RenderTitle(props) {
   } else if (typeof title === 'function') {
     return title();
   } else if (typeof title === 'string') {
-    return <Text style={[Theme.FC15333, titleStyle]}>{title}</Text>;
+    return <Text style={titleStyle}>{title}</Text>;
   }
   return null;
 }
@@ -42,7 +42,7 @@ function RenderDetail(props) {
   } else if (typeof detail === 'function') {
     return detail();
   } else if (typeof detail === 'string') {
-    return <Text style={[Theme.FC14666, Theme.MR10, detailStyle]}>{detail}</Text>;
+    return <Text style={[Theme.MR10, detailStyle]}>{detail}</Text>;
   }
   return null;
 }
@@ -109,18 +109,33 @@ function ListRow(props) {
     onPress
   } = props;
 
-  const themeContext = useContext(ThemeContext);
-  console.log('themeContext', themeContext)
+  const themeValue = useContext(ThemeContext);
 
+  const buildStyles = useMemo(() => {
+    return {
+      style: [styles.container, { backgroundColor: themeValue.listRowBackgroundColor }, style],
+      titleStyle: [{
+        color: themeValue.listRowTitleColor,
+        fontSize: themeValue.listRowTitleFontSize,
+      }, titleStyle],
+      detailStyle: [{
+        color: themeValue.listRowDetailColor,
+        fontSize: themeValue.listRowDetailFontSize,
+      }, detailStyle],
+      bottomSeparatorStyle: [themeValue.listRowBottomSeparatorStyle, bottomSeparatorStyle]
+    };
+  }, [themeValue, style, titleStyle, detailStyle, bottomSeparatorStyle]);
+
+  console.log('buildStyles.titleStyle', buildStyles.titleStyle);
   return (
-    <Button style={[styles.container, style]} onPress={onPress}>
+    <Button style={buildStyles.style} onPress={onPress}>
       <View style={[styles.contentContainer, contentStyle]}>
         <View style={Theme.RCA}>
           <MemoRenderIcon icon={icon} iconStyle={iconStyle} />
-          <MemoRenderTitle title={title} titleStyle={titleStyle} />
+          <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
         </View>
         <View style={[Theme.RCC, styles.detailContainer]}>
-          <MemoRenderDetail detail={detail} detailStyle={detailStyle} />
+          <MemoRenderDetail detail={detail} detailStyle={buildStyles.detailStyle} />
           <MemoRenderAccessory
             accessoryStyle={accessoryStyle}
             accessory={accessory}
@@ -130,7 +145,7 @@ function ListRow(props) {
       </View>
       <MemoRenderBottomSeparator
         bottomSeparator={bottomSeparator}
-        bottomSeparatorStyle={bottomSeparatorStyle}
+        bottomSeparatorStyle={buildStyles.bottomSeparatorStyle}
       />
     </Button>
   );
@@ -168,13 +183,11 @@ const styles = StyleSheet.create({
   sepFull: {
     alignSelf: 'stretch',
     height: 1,
-    backgroundColor: '#f3f3f3',
   },
   sepIndent: {
     alignSelf: 'stretch',
     marginLeft: 15,
     height: 1,
-    backgroundColor: '#f3f3f3',
   },
   accessory: {
     width: 12,

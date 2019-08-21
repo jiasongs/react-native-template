@@ -13,7 +13,7 @@ import { SafeAreaView } from '@react-navigation/native';
 
 import CrossFadeIcon from 'react-navigation-tabs/src/views/CrossFadeIcon';
 import withDimensions from 'react-navigation-tabs/src/utils/withDimensions';
-
+import { ThemeContext } from '../../config/themes';
 
 const majorVersion = parseInt(Platform.Version, 10);
 const isIos = Platform.OS === 'ios';
@@ -254,82 +254,89 @@ class TabBarBottom extends React.PureComponent {
       style,
     ];
     return (
-      <Animated.View
-        style={[
-          styles.container,
-          keyboardHidesTabBar
-            ? {
-              // When the keyboard is shown, slide down the tab bar
-              transform: [
-                {
-                  translateY: this.state.visible.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [this.state.layout.height, 0],
-                  }),
-                },
-              ],
-              // Absolutely position the tab bar so that the content is below it
-              // This is needed to avoid gap at bottom when the tab bar is hidden
-              position: this.state.keyboard ? 'absolute' : null,
+      <ThemeContext.Consumer>
+        {(themeValue) => (
+          <Animated.View
+            style={[
+              styles.container,
+              keyboardHidesTabBar
+                ? {
+                  // When the keyboard is shown, slide down the tab bar
+                  transform: [
+                    {
+                      translateY: this.state.visible.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [this.state.layout.height, 0],
+                      }),
+                    },
+                  ],
+                  // Absolutely position the tab bar so that the content is below it
+                  // This is needed to avoid gap at bottom when the tab bar is hidden
+                  position: this.state.keyboard ? 'absolute' : null,
+                }
+                : null,
+
+            ]}
+            pointerEvents={
+              keyboardHidesTabBar && this.state.keyboard ? 'none' : 'auto'
             }
-            : null,
-        ]}
-        pointerEvents={
-          keyboardHidesTabBar && this.state.keyboard ? 'none' : 'auto'
-        }
-        onLayout={this._handleLayout}
-      >
-        <SafeAreaView style={tabBarStyle} forceInset={safeAreaInset}>
-          {routes.map((route, index) => {
-            const focused = index === navigation.state.index;
-            const scene = { route, focused };
-            const accessibilityLabel = this.props.getAccessibilityLabel({
-              route,
-            });
+            onLayout={this._handleLayout}
+          >
+            <SafeAreaView
+              style={[tabBarStyle, { backgroundColor: themeValue.navBarBackgroundColor }]}
+              forceInset={safeAreaInset}>
+              {routes.map((route, index) => {
+                const focused = index === navigation.state.index;
+                const scene = { route, focused };
+                const accessibilityLabel = this.props.getAccessibilityLabel({
+                  route,
+                });
 
-            const accessibilityRole = this.props.getAccessibilityRole({
-              route,
-            });
+                const accessibilityRole = this.props.getAccessibilityRole({
+                  route,
+                });
 
-            const accessibilityStates = this.props.getAccessibilityStates(
-              scene
-            );
+                const accessibilityStates = this.props.getAccessibilityStates(
+                  scene
+                );
 
-            const testID = this.props.getTestID({ route });
+                const testID = this.props.getTestID({ route });
 
-            const backgroundColor = focused
-              ? activeBackgroundColor
-              : inactiveBackgroundColor;
+                const backgroundColor = focused
+                  ? activeBackgroundColor
+                  : inactiveBackgroundColor;
 
-            const ButtonComponent =
-              this.props.getButtonComponent({ route }) ||
-              TouchableWithoutFeedbackWrapper;
+                const ButtonComponent =
+                  this.props.getButtonComponent({ route }) ||
+                  TouchableWithoutFeedbackWrapper;
 
-            return (
-              <ButtonComponent
-                key={route.key}
-                onPress={() => onTabPress({ route })}
-                onLongPress={() => onTabLongPress({ route })}
-                testID={testID}
-                accessibilityLabel={accessibilityLabel}
-                accessibilityRole={accessibilityRole}
-                accessibilityStates={accessibilityStates}
-                style={[
-                  styles.tab,
-                  { backgroundColor },
-                  this._shouldUseHorizontalLabels()
-                    ? styles.tabLandscape
-                    : styles.tabPortrait,
-                  tabStyle,
-                ]}
-              >
-                {this._renderIcon(scene)}
-                {this._renderLabel(scene)}
-              </ButtonComponent>
-            );
-          })}
-        </SafeAreaView>
-      </Animated.View>
+                return (
+                  <ButtonComponent
+                    key={route.key}
+                    onPress={() => onTabPress({ route })}
+                    onLongPress={() => onTabLongPress({ route })}
+                    testID={testID}
+                    accessibilityLabel={accessibilityLabel}
+                    accessibilityRole={accessibilityRole}
+                    accessibilityStates={accessibilityStates}
+                    style={[
+                      styles.tab,
+                      { backgroundColor },
+                      this._shouldUseHorizontalLabels()
+                        ? styles.tabLandscape
+                        : styles.tabPortrait,
+                      tabStyle,
+                    ]}
+                  >
+                    {this._renderIcon(scene)}
+                    {this._renderLabel(scene)}
+                  </ButtonComponent>
+                );
+              })}
+            </SafeAreaView>
+          </Animated.View>
+        )}
+      </ThemeContext.Consumer>
     );
   }
 }

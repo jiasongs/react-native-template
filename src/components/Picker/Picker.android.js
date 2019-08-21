@@ -1,7 +1,8 @@
 'use strict';
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback, useContext } from 'react';
 import { ViewPropTypes, StyleSheet, processColor } from 'react-native';
 import PropTypes from 'prop-types';
+import { ThemeContext } from '../../config/themes';
 import { WheelPicker } from 'react-native-wheel-picker-android';
 
 function PickerAndroid(props) {
@@ -17,6 +18,7 @@ function PickerAndroid(props) {
 
   const _currentIndex = useRef(0);
   const [items, setItems] = useState([]);
+  const themeValue = useContext(ThemeContext);
 
   const onChange = useCallback((index) => {
     if (onValueChange) {
@@ -35,14 +37,23 @@ function PickerAndroid(props) {
     _currentIndex.current = selectedIndex;
   }, [selectedIndex]);
 
+  const buildStyles = useMemo(() => {
+    return {
+      style: [styles.picker, style],
+      titleFontSize: titleFontSize || themeValue.pickerTitleStyle.fontSize,
+      titleColor: titleColor || themeValue.pickerTitleStyle.color,
+    };
+  }, [themeValue, titleFontSize, titleColor, style]);
+
+
   return (
     <WheelPicker
-      style={[styles.picker, style]}
+      style={buildStyles.style}
       data={items}
       onItemSelected={onChange}
       indicatorColor={'#dbdbdb'}
-      itemTextColor={processColor(titleColor)}
-      itemTextSize={titleFontSize}
+      itemTextColor={processColor(buildStyles.titleColor)}
+      itemTextSize={buildStyles.titleFontSize}
       selectedItem={selectedIndex}
     />
   );

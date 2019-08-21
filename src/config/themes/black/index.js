@@ -5,7 +5,7 @@ export default {
   /**
    * @通用设置
    */
-  pageBackgroundColor: '#f7f7f7',
+  pageBackgroundColor: '#333',
 
   /**
    * @弹窗提示组件的设置
@@ -102,4 +102,23 @@ export default {
   navBarTitleColor: '#fff',
   navBarTitleFontSize: 16,
   navBarHeight: 44,
+  navStatusBarStyle: 'light-content',
+  /**
+   * @listRow [详细描述]
+   */
+  listRowBackgroundColor: '#333',
+  listRowTitleColor: '#fff',
+  listRowTitleFontSize: 14,
+  listRowDetailColor: '#999',
+  listRowDetailFontSize: 14,
+  listRowBottomSeparatorStyle: {
+    backgroundColor: '#666'
+  },
+  /**
+  * @picker
+  */
+  pickerTitleStyle: {
+    color: '#fff',
+    fontSize: 14
+  }
 };
