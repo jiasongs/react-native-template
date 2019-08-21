@@ -21,21 +21,31 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+Carthage/Build
+Pods/
+Podfile.lock
 
 # Android/IntelliJ
 #
-app/build/
 build/
 .idea
 .gradle
 local.properties
 *.iml
+.settings
 
 # node.js
 #
+modify_modules/
 node_modules/
 npm-debug.log
 yarn-error.log
+/package-lock.json
+ios/bundle/*
+/yarn.lock
+Hyphenate.framework
+
+
 
 # BUCK
 buck-out/
@@ -52,5 +62,12 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
-node_modules/
-Pods/
+
+# Bundle artifact
+*.jsbundle
+package-lock.json
+android/.project
+
+
+# IDE
+.vscode

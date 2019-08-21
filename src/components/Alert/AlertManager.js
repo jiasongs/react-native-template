@@ -1,0 +1,45 @@
+'use strict';
+import React from 'react';
+import AlertView from './AlertView';
+import { OverlayManager, OverlayPopView } from '../Overlay';
+
+const defaultOption = {
+  type: 'zoomOut',
+  modal: false,
+  overlayOpacity: 0.3,
+};
+
+export default class AlertManager {
+
+  static alertKeys = []
+
+  static show(props = {}) {
+    const { option, ...others } = props;
+    const component = (
+      <AlertView {...others} />
+    );
+    this.showView(component, option);
+  }
+
+  static showView(component, option = {}) {
+    const newOption = { ...defaultOption, ...option };
+    OverlayManager.show(
+      <OverlayPopView
+        ref={view => view && this.alertKeys.push(view)}
+        onCloseRequest={() => this.hide()}
+        {...newOption}
+      >
+        {component}
+      </OverlayPopView>
+    );
+  }
+
+  static hide() {
+    if (this.alertKeys.length > 0) {
+      const lastRef = this.alertKeys.pop();
+      lastRef.close();
+    }
+  }
+
+}
+

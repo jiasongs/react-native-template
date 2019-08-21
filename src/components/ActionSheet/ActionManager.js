@@ -1,0 +1,45 @@
+'use strict';
+import React from 'react';
+import ActionSheetView from './ActionSheetView';
+import { OverlayManager, OverlayPullView } from '../Overlay';
+
+const defaultOption = {
+  side: 'bottom',
+  modal: false,
+  overlayOpacity: 0.3,
+};
+
+export default class ActionManager {
+
+  static actionKeys = []
+
+  static show(props = {}) {
+    const { option, ...others } = props;
+    const component = (
+      <ActionSheetView {...others} onCancel={() => this.hide()} />
+    );
+    this.showView(component, option);
+  }
+
+  static showView(component, option = {}) {
+    const newOption = { ...defaultOption, ...option };
+    OverlayManager.show(
+      <OverlayPullView
+        ref={view => view && this.actionKeys.push(view)}
+        onCloseRequest={() => this.hide()}
+        {...newOption}
+      >
+        {component}
+      </OverlayPullView>
+    );
+  }
+
+  static hide() {
+    if (this.actionKeys.length > 0) {
+      const lastRef = this.actionKeys.pop();
+      lastRef.close();
+    }
+  }
+
+}
+
