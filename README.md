@@ -40,7 +40,8 @@
 ```
 $ npm install 
 $ cd ios && pod install
-$ react-native run-ios // react-native run-android
+$ npm run ios // npm run android
+
 ```
 
 ## 更新
