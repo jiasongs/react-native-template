@@ -1,14 +1,12 @@
 'use strict';
-import OverlayView from './OverlayView';
-import OverlayPullView from './OverlayPullView';
-import OverlayPopView from './OverlayPopView';
+import OverlayPull from './OverlayPull';
+import OverlayPop from './OverlayPop';
 import OverlayManager from './OverlayManager';
-import TopView from './TopView';
+import OverlayTopContainer from './OverlayTopContainer';
 
 export {
   OverlayManager,
-  OverlayView,
-  OverlayPullView,
-  OverlayPopView,
-  TopView
+  OverlayTopContainer,
+  OverlayPop,
+  OverlayPull
 };

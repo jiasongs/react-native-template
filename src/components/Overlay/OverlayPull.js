@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import { Animated, ViewPropTypes } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import OverlayManager from './OverlayManager';
-import OverlayView from './OverlayView';
+import OverlayBase from './OverlayBase';
 
-
-export default class OverlayPullView extends OverlayView {
+class OverlayPull extends OverlayBase {
 
   constructor(props) {
     super(props);
@@ -261,11 +260,10 @@ export default class OverlayPullView extends OverlayView {
       </PanGestureHandler>
     );
   }
-
 }
 
-OverlayPullView.propTypes = {
-  ...OverlayView.propTypes,
+OverlayPull.propTypes = {
+  ...OverlayBase.propTypes,
   side: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   containerStyle: ViewPropTypes.style,
   rootTransform: PropTypes.oneOfType([
@@ -280,10 +278,12 @@ OverlayPullView.propTypes = {
   panGestureEnabled: PropTypes.bool
 };
 
-OverlayPullView.defaultProps = {
-  ...OverlayView.defaultProps,
+OverlayPull.defaultProps = {
+  ...OverlayBase.defaultProps,
   side: 'bottom',
   animated: true,
   rootTransform: 'none',
   panGestureEnabled: true
 };
+
+export default OverlayPull;

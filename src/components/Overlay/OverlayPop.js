@@ -2,9 +2,9 @@
 import React from 'react';
 import { Animated, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import OverlayView from './OverlayView';
+import OverlayBase from './OverlayBase';
 
-export default class OverlayPopView extends OverlayView {
+class OverlayPop extends OverlayBase {
 
   constructor(props) {
     super(props);
@@ -167,8 +167,8 @@ export default class OverlayPopView extends OverlayView {
 
 }
 
-OverlayPopView.propTypes = {
-  ...OverlayView.propTypes,
+OverlayPop.propTypes = {
+  ...OverlayBase.propTypes,
   type: PropTypes.oneOf(['none', 'zoomOut', 'zoomIn', 'custom']),
   containerStyle: ViewPropTypes.style,
   customBounds: PropTypes.shape({
@@ -179,8 +179,10 @@ OverlayPopView.propTypes = {
   }),
 };
 
-OverlayPopView.defaultProps = {
-  ...OverlayView.defaultProps,
+OverlayPop.defaultProps = {
+  ...OverlayBase.defaultProps,
   type: 'zoomOut',
   animated: true,
 };
+
+export default OverlayPop;

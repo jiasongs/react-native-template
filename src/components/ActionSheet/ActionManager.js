@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import ActionSheetView from './ActionSheetView';
-import { OverlayManager, OverlayPullView } from '../Overlay';
+import { OverlayManager, OverlayPull } from '../Overlay';
 
 const defaultOption = {
   side: 'bottom',
@@ -24,13 +24,13 @@ export default class ActionManager {
   static showView(component, option = {}) {
     const newOption = { ...defaultOption, ...option };
     OverlayManager.show(
-      <OverlayPullView
+      <OverlayPull
         ref={view => view && this.actionKeys.push(view)}
         onCloseRequest={() => this.hide()}
         {...newOption}
       >
         {component}
-      </OverlayPullView>
+      </OverlayPull>
     );
   }
 

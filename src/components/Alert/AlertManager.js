@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import AlertView from './AlertView';
-import { OverlayManager, OverlayPopView } from '../Overlay';
+import { OverlayManager, OverlayPop } from '../Overlay';
 
 const defaultOption = {
   type: 'zoomOut',
@@ -24,13 +24,13 @@ export default class AlertManager {
   static showView(component, option = {}) {
     const newOption = { ...defaultOption, ...option };
     OverlayManager.show(
-      <OverlayPopView
+      <OverlayPop
         ref={view => view && this.alertKeys.push(view)}
         onCloseRequest={() => this.hide()}
         {...newOption}
       >
         {component}
-      </OverlayPopView>
+      </OverlayPop>
     );
   }
 

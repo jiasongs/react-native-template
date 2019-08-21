@@ -1,5 +1,3 @@
-
-
 import NetworkError from './Error/NetworkError';
 import LoadingHint from './Loading/LoadingHint';
 import ImageView from './Image/ImageView';
@@ -11,7 +9,7 @@ import TabBottomBar from './Navigation/TabBottomBar';
 import { Picker } from './Picker';
 import { Checkbox, Radio } from './Form';
 import { PageContainer, GirdContainer } from './Container';
-import { OverlayManager, OverlayView, OverlayPopView, OverlayPullView } from './Overlay';
+import { OverlayManager, OverlayPop, OverlayPull, OverlayTopContainer } from './Overlay';
 import { ToastManager, ToastView } from './Toast';
 import { AlertManager, AlertView } from './Alert';
 import { ActionManager, ActionSheetView } from './ActionSheet';
@@ -28,9 +26,9 @@ export {
   ListRow,
   TabBottomBar,
   OverlayManager,
-  OverlayView,
-  OverlayPopView,
-  OverlayPullView,
+  OverlayPop,
+  OverlayPull,
+  OverlayTopContainer,
   ToastManager,
   ToastView,
   AlertManager,

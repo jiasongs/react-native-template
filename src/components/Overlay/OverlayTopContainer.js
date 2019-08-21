@@ -2,7 +2,7 @@
 import React from 'react';
 import { StyleSheet, AppRegistry, DeviceEventEmitter, View, Animated } from 'react-native';
 
-export default class TopView extends React.PureComponent {
+class OverlayTopContainer extends React.PureComponent {
 
   constructor(props) {
     super(props);
@@ -142,7 +142,6 @@ export default class TopView extends React.PureComponent {
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -151,19 +150,23 @@ const styles = StyleSheet.create({
   },
 });
 
-if (!AppRegistry.__overlayRegisterComponentOld) {
-  AppRegistry.__overlayRegisterComponentOld = AppRegistry.registerComponent;
-  AppRegistry.registerComponent = function (appKey, componentProvider) {
-    class RootElement extends React.PureComponent {
-      render() {
+OverlayTopContainer.registerProvider = function () {
+  if (!AppRegistry.__overlayRegisterComponentOld) {
+    AppRegistry.__overlayRegisterComponentOld = AppRegistry.registerComponent;
+    AppRegistry.registerComponent = function (appKey, componentProvider) {
+      function RootElement(props) {
         const Component = componentProvider();
         return (
-          <TopView>
-            <Component {...this.props} />
-          </TopView>
+          <OverlayTopContainer>
+            <Component {...props} />
+          </OverlayTopContainer>
         );
       }
-    }
-    return AppRegistry.__overlayRegisterComponentOld(appKey, () => RootElement);
-  };
-}
+      return AppRegistry.__overlayRegisterComponentOld(appKey, () => React.memo(RootElement));
+    };
+  }
+};
+
+export default OverlayTopContainer;
+
+

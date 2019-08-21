@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Animated, View, Platform, TextInput, Keyboard, ViewPropTypes, TouchableWithoutFeedback, BackHandler } from 'react-native';
 
-export default class OverlayView extends React.PureComponent {
+class OverlayBase extends React.PureComponent {
 
   constructor(props) {
     super(props);
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   }
 });
 
-OverlayView.propTypes = {
+OverlayBase.propTypes = {
   style: ViewPropTypes.style,
   modal: PropTypes.bool,
   animated: PropTypes.bool,
@@ -178,10 +178,12 @@ OverlayView.propTypes = {
   onCloseRequest: PropTypes.func,
 };
 
-OverlayView.defaultProps = {
+OverlayBase.defaultProps = {
   modal: false,
   animated: true,
   overlayPointerEvents: 'auto',
   closeOnHardwareBackPress: true,
   overlayOpacity: 0.3
 };
+
+export default OverlayBase;
