@@ -154,13 +154,4 @@ export default {
     fontSize: 10,
     color: '#fff'
   },
-  /**
-   * @button的通用样式一 左边是icon，右边是标题
-   */
-  buttonStyle: {
-    backgroundColor: 'transparent',
-    borderRadius: 0,
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-  },
 };

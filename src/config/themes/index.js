@@ -1,19 +1,21 @@
 'use strict';
+import React from 'react';
 import {
   Dimensions,
   Platform,
-  StatusBar
+  StatusBar,
 } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-import DefaultTheme from './DefaultTheme';
-import DefaultColor from './DefaultColor';
-import DefaultStyles from './DefaultStyles';
+import DefaultTheme from './default';
+import Colors from './common/Colors';
+import Styles from './common/Styles';
+import { ThemeManager, useThemeValue } from './ThemeManager';
 
-export const Theme = {
+const Theme = {
 
   ...DefaultTheme,
-  ...DefaultColor,
-  ...DefaultStyles,
+  ...Colors,
+  ...Styles,
 
   get isIOS() {
     return Platform.OS === 'ios';
@@ -67,4 +69,13 @@ export const Theme = {
   get windowHeight() {
     return Dimensions.get('window').height;
   },
+};
+
+const ThemeContext = React.createContext();
+
+export {
+  Theme,
+  ThemeContext,
+  ThemeManager,
+  useThemeValue
 };

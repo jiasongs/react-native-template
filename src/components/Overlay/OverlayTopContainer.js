@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import { StyleSheet, AppRegistry, DeviceEventEmitter, View, Animated } from 'react-native';
+import { StyleSheet, DeviceEventEmitter, View, Animated } from 'react-native';
 
 class OverlayTopContainer extends React.PureComponent {
 
@@ -150,22 +150,22 @@ const styles = StyleSheet.create({
   },
 });
 
-OverlayTopContainer.registerProvider = function () {
-  if (!AppRegistry.__overlayRegisterComponentOld) {
-    AppRegistry.__overlayRegisterComponentOld = AppRegistry.registerComponent;
-    AppRegistry.registerComponent = function (appKey, componentProvider) {
-      function RootElement(props) {
-        const Component = componentProvider();
-        return (
-          <OverlayTopContainer>
-            <Component {...props} />
-          </OverlayTopContainer>
-        );
-      }
-      return AppRegistry.__overlayRegisterComponentOld(appKey, () => React.memo(RootElement));
-    };
-  }
-};
+// OverlayTopContainer.registerProvider = function () {
+//   if (!AppRegistry.__overlayRegisterComponentOld) {
+//     AppRegistry.__overlayRegisterComponentOld = AppRegistry.registerComponent;
+//     AppRegistry.registerComponent = function (appKey, componentProvider) {
+//       function RootElement(props) {
+//         const Component = componentProvider();
+//         return (
+//           <OverlayTopContainer>
+//             <Component {...props} />
+//           </OverlayTopContainer>
+//         );
+//       }
+//       return AppRegistry.__overlayRegisterComponentOld(appKey, () => React.memo(RootElement));
+//     };
+//   }
+// };
 
 export default OverlayTopContainer;
 

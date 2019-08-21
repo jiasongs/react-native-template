@@ -1,17 +1,26 @@
 'use strict';
+import './config/global';
 import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import NavigationContainer from './routers/NavigationContainer';
-import './config/global';
+import { OverlayTopContainer } from './components';
+import { ThemeContext, useThemeValue } from './config/themes';
+
 
 function App() {
+
+  const value = useThemeValue();
 
   useEffect(() => {
     SplashScreen.hide();
   }, []);
 
   return (
-    <NavigationContainer />
+    <ThemeContext.Provider value={value}>
+      <OverlayTopContainer>
+        <NavigationContainer />
+      </OverlayTopContainer>
+    </ThemeContext.Provider>
   );
 }
 

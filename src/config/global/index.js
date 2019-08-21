@@ -11,7 +11,7 @@ import { Images } from '../../assets';
 import { Theme } from '../themes';
 import Constants from './Constants';
 import { addCustomProps } from '../../utils/Adaptation';
-import { LoadingHint, NavigationBar, ListRow, ToastView, Checkbox, OverlayTopContainer } from '../../components';
+import { LoadingHint, NavigationBar, ListRow, ToastView, Checkbox } from '../../components';
 
 /**
  * @开启安卓的布局动画
@@ -47,7 +47,6 @@ if (!__DEV__) {
 /**
  * @默认UI设置 
  */
-OverlayTopContainer.registerProvider();
 addCustomProps(Text, { allowFontScaling: false });
 addCustomProps(TextInput, { allowFontScaling: false, selectionColor: Theme.overallColor });
 addCustomProps(TouchableOpacity, { activeOpacity: 0.9 });

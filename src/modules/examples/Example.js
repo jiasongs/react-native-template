@@ -2,6 +2,7 @@ import React, { useRef, useMemo, useEffect, useState, useCallback } from 'react'
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 import { PageContainer, ListRow, ActionManager, NavigationBar, Checkbox, Picker, ToastManager, AlertManager } from '../../components';
 import { Theme } from '../../config/themes';
+import RouterHelper from '../../routers/RouterHelper';
 
 function Father(props) {
   console.log('Father');
@@ -68,6 +69,7 @@ function Example() {
       <ListRow
         title={<Text>321</Text>}
         onPress={() => {
+          // RouterHelper.push('Tab');
           const com = (
             <View style={{
               width: 375,

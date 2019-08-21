@@ -1,8 +1,11 @@
 
 'use strict';
 import React, { useRef, useCallback } from 'react';
-import { AppNavigationContainer } from './RouterConfig';
+import { createAppContainer } from 'react-navigation';
+import { StackNavigator } from './RouterConfig';
 import RouterHelper from './RouterHelper';
+
+const AppNavigationContainer = createAppContainer(StackNavigator);
 
 function NavigationContainer() {
 

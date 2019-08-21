@@ -1,10 +1,10 @@
 'use strict';
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
 import Button from '../Touchable/Button';
-import { Theme } from '../../config/themes';
+import { Theme, ThemeContext } from '../../config/themes';
 
 function RenderIcon(props) {
   const { icon, iconStyle } = props;
@@ -108,6 +108,9 @@ function ListRow(props) {
     bottomSeparatorStyle,
     onPress
   } = props;
+
+  const themeContext = useContext(ThemeContext);
+  console.log('themeContext', themeContext)
 
   return (
     <Button style={[styles.container, style]} onPress={onPress}>

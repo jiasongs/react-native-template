@@ -1,12 +1,12 @@
 'use strict';
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { tabOptions, transitionConfig } from './RouterTool';
 import { TabBottomBar } from '../components';
 import {
   Example
 } from '../modules';
 
-const TabNavigator = createBottomTabNavigator({
+const TabNavigatorRouter = {
   Example: {
     screen: Example, navigationOptions: tabOptions({
       title: '示例',
@@ -14,7 +14,9 @@ const TabNavigator = createBottomTabNavigator({
       // selectedIcon: Images.icon_tabbar_home_cur
     })
   },
-}, {
+};
+
+const TabNavigatorConfig = {
   initialRouteName: 'Example',
   initialRouteParams: {},
   tabBarOptions: {
@@ -35,12 +37,15 @@ const TabNavigator = createBottomTabNavigator({
   animationEnabled: false,
   tabBarPosition: 'bottom',
   tabBarComponent: TabBottomBar
-});
+};
 
+const TabNavigator = createBottomTabNavigator(TabNavigatorRouter, TabNavigatorConfig);
 
-const StackNavigator = createStackNavigator({
-  Tab: { screen: TabNavigator },
-}, {
+const StackNavigatorRouter = {
+  Tab: { screen: TabNavigator }
+};
+
+const StackNavigatorConfig = {
   initialRouteName: 'Tab',
   initialRouteParams: {},
   defaultNavigationOptions: {
@@ -50,11 +55,11 @@ const StackNavigator = createStackNavigator({
   cardStyle: {
 
   },
-  cardShadowEnabled: false,
+  cardShadowEnabled: true,
   cardOverlayEnabled: true,
   transitionConfig: transitionConfig
-});
+};
 
-const AppNavigationContainer = createAppContainer(StackNavigator);
+const StackNavigator = createStackNavigator(StackNavigatorRouter, StackNavigatorConfig);
 
-export { AppNavigationContainer };
+export { StackNavigator };
