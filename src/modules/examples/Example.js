@@ -68,23 +68,26 @@ function Example() {
       <ListRow
         title={<Text>321</Text>}
         onPress={() => {
-          // const com = (
-          //   <View style={{
-          //     width: 200,
-          //     height: 200,
-          //     backgroundColor: '#fff',
-          //   }}>
+          const com = (
+            <View style={{
+              width: 375,
+              height: 200,
+              backgroundColor: '#fff',
+            }}>
 
-          //   </View>
-          // );
-          // ActionManager.showView(com, { side: 'top' });
-          AlertManager.show({
-            title: '123',
-            // detail: <KeyboardAvoidingView ><TextInput placeholder={'123'} /></KeyboardAvoidingView>,
-            onPress: () => { AlertManager.hide(); },
-            actions: [{ title: '123' }],
-            option: { type: 'zoomOut', }
+            </View>
+          );
+          ActionManager.showView(com, {
+            side: 'bottom',
+            // containerStyle: { flex: 1, justifyContent: 'center', alignItems: 'center', },
           });
+          // AlertManager.show({
+          //   title: '123',
+          //   // detail: <KeyboardAvoidingView ><TextInput placeholder={'123'} /></KeyboardAvoidingView>,
+          //   onPress: () => { AlertManager.hide(); },
+          //   actions: [{ title: '123' }],
+          //   option: { type: 'zoomOut', }
+          // });
           // ActionManager.show({
           //   title: '123',
           //   onPress: () => { ActionManager.hide(); },

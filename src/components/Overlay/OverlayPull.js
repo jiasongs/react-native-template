@@ -37,9 +37,9 @@ class OverlayPull extends OverlayBase {
   get disappearAnimates() {
     const animates = super.disappearAnimates;
     return animates.concat([
-      Animated.spring(this.pullAnimates.translation, {
+      Animated.timing(this.pullAnimates.translation, {
         toValue: this.offsetSize,
-        friction: 9,
+        duration: 250,
         useNativeDriver: true
       })
     ]);
@@ -254,6 +254,7 @@ class OverlayPull extends OverlayBase {
       >
         <Animated.View
           style={[containerStyle, animatedStyle]}
+          pointerEvents={'box-none'}
           onLayout={this.onLayout}>
           {content || children}
         </Animated.View>
@@ -275,7 +276,7 @@ OverlayPull.propTypes = {
       scaleY: PropTypes.number,
     })),
   ]),
-  panGestureEnabled: PropTypes.bool
+  panGestureEnabled: PropTypes.bool,
 };
 
 OverlayPull.defaultProps = {
@@ -283,7 +284,7 @@ OverlayPull.defaultProps = {
   side: 'bottom',
   animated: true,
   rootTransform: 'none',
-  panGestureEnabled: true
+  panGestureEnabled: true,
 };
 
 export default OverlayPull;

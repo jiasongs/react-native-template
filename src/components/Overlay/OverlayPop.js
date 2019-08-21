@@ -159,7 +159,11 @@ class OverlayPop extends OverlayBase {
       transform: [{ translateX }, { translateY }, { scaleX }, { scaleY }],
     };
     return (
-      <Animated.View style={[containerStyle, animatedStyle]} pointerEvents='box-none' onLayout={this.onLayout}>
+      <Animated.View
+        style={[containerStyle, animatedStyle]}
+        pointerEvents={'box-none'}
+        onLayout={this.onLayout}
+      >
         {content || children}
       </Animated.View>
     );
