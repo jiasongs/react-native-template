@@ -3,15 +3,30 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import { tabOptions, transitionConfig } from './RouterTool';
 import { TabBottomBar } from '../components';
 import {
-  Example
+  About,
+  DemoActionSheet,
+  DemoAlert,
+  DemoButton,
+  DemoContainer,
+  DemoImageView,
+  DemoRow,
+  DemoList,
+  DemoOverlay,
+  DemoPicker,
+  DemoToast,
+  DemoTheme,
+  Example,
 } from '../modules';
 
 const TabNavigatorRouter = {
   Example: {
     screen: Example, navigationOptions: tabOptions({
       title: '示例',
-      // normalIcon: Images.icon_tabbar_home,
-      // selectedIcon: Images.icon_tabbar_home_cur
+    })
+  },
+  About: {
+    screen: About, navigationOptions: tabOptions({
+      title: '关于',
     })
   },
 };
@@ -42,7 +57,18 @@ const TabNavigatorConfig = {
 const TabNavigator = createBottomTabNavigator(TabNavigatorRouter, TabNavigatorConfig);
 
 const StackNavigatorRouter = {
-  Tab: { screen: TabNavigator }
+  Tab: { screen: TabNavigator },
+  DemoActionSheet: { screen: DemoActionSheet },
+  DemoAlert: { screen: DemoAlert },
+  DemoButton: { screen: DemoButton },
+  DemoContainer: { screen: DemoContainer },
+  DemoImageView: { screen: DemoImageView },
+  DemoRow: { screen: DemoRow },
+  DemoList: { screen: DemoList },
+  DemoOverlay: { screen: DemoOverlay },
+  DemoPicker: { screen: DemoPicker },
+  DemoToast: { screen: DemoToast },
+  DemoTheme: { screen: DemoTheme },
 };
 
 const StackNavigatorConfig = {

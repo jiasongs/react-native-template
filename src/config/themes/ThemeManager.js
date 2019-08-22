@@ -5,8 +5,8 @@ import DefaultTheme from './default';
 
 const __ChangeEvent = '__ChangeTheme';
 
-function useThemeValue(initState = DefaultTheme) {
-  const [value, setValue] = useState(initState);
+function useThemeValue(initState = {}) {
+  const [value, setValue] = useState({ ...DefaultTheme, ...initState });
 
   useEffect(() => {
     const listenerName = DeviceEventEmitter.addListener(__ChangeEvent, (data) => {
@@ -22,6 +22,8 @@ function useThemeValue(initState = DefaultTheme) {
 
 class ThemeManager {
 
+  static currentTheme = {}
+
   static addListener(callBack) {
     return DeviceEventEmitter.addListener(__ChangeEvent, callBack);
   }
@@ -31,6 +33,10 @@ class ThemeManager {
   }
 
   static changeTheme(data = {}) {
+    if (!data.type) {
+      console.warn('Theme的type属性必须存在');
+    }
+    this.currentTheme = { ...this.currentTheme, ...data };
     DeviceEventEmitter.emit(__ChangeEvent, data);
   }
 

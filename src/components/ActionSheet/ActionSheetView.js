@@ -1,8 +1,8 @@
 'use strict';
-import React, { useRef, useCallback } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
+import React, { useRef, useCallback, useContext, useMemo } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import { Theme } from '../../config/themes';
+import { Theme, ThemeContext } from '../../config/themes';
 
 function RenderTitle(props) {
   const { title, titleStyle } = props;
@@ -11,7 +11,7 @@ function RenderTitle(props) {
   } else if (title) {
     return (
       <View style={styles.titleContainer}>
-        <Text style={[styles.title, titleStyle]}>{title}</Text>
+        <Text style={titleStyle}>{title}</Text>
       </View>
     );
   }
@@ -19,23 +19,23 @@ function RenderTitle(props) {
 }
 
 function RenderContent(props) {
-  const { actions, onPress } = props;
+  const { actionStyle, actionTitleStyle, actions, onPress } = props;
   return (
     <ScrollView
       style={styles.scrollView}
       bounces={true}
     >
       {actions.map((item, index) => {
-        const { title, titleStyle } = item;
+        const { title, titleStyle: itemStyle } = item;
         const borderTopWidth = index === 0 ? 0 : StyleSheet.hairlineWidth;
         return (
-          <TouchableHighlight
+          <TouchableOpacity
             key={`action_item${index}`}
-            style={[styles.actionContainer, { borderTopWidth }]}
-            underlayColor={'#eeeeee'}
+            style={[actionStyle, { borderTopWidth }]}
+            activeOpacity={0.3}
             onPress={() => onPress(item)}>
-            <Text style={[styles.actionText, titleStyle]}>{title}</Text>
-          </TouchableHighlight>
+            <Text style={[actionTitleStyle, itemStyle]}>{title}</Text>
+          </TouchableOpacity>
         );
       })}
     </ScrollView>
@@ -43,14 +43,14 @@ function RenderContent(props) {
 }
 
 function RenderCancelAction(props) {
-  const { onPress } = props;
+  const { style, titleStyle, onPress } = props;
   return (
-    <TouchableHighlight
-      style={styles.cancelActionContainer}
-      underlayColor={'#eeeeee'}
+    <TouchableOpacity
+      style={style}
+      activeOpacity={0.3}
       onPress={onPress}>
-      <Text style={styles.cancelActionText}>取消</Text>
-    </TouchableHighlight>
+      <Text style={titleStyle}>取消</Text>
+    </TouchableOpacity>
   );
 }
 
@@ -68,6 +68,7 @@ function ActionSheetView(props) {
   } = props;
 
   const lastActionTimeRef = useRef(0);
+  const themeValue = useContext(ThemeContext);
 
   const onPressAction = useCallback((actionItem) => {
     const nowTime = new Date().getTime();
@@ -80,14 +81,35 @@ function ActionSheetView(props) {
     onPress && onPress(actionItem);
   }, [onPress]);
 
+  const buildStyles = useMemo(() => {
+    const sheet = themeValue.sheet;
+    return {
+      contentContainer: [sheet.contentStyle, styles.contentContainer],
+      titleStyle: [sheet.titleStyle, styles.title, titleStyle],
+      actionStyle: [sheet.actionStyle, styles.actionStyle],
+      actionTitleStyle: [sheet.actionTitleStyle, styles.actionText],
+      cancelActionStyle: [sheet.cancelActionStyle, styles.cancelActionContainer],
+      cancelTitleStyle: [sheet.cancelTitleStyle, styles.cancelActionText]
+    };
+  }, [themeValue, titleStyle]);
+
   return (
     <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <MemoRenderTitle title={title} titleStyle={titleStyle} />
-        <MemoRenderContent actions={actions} onPress={onPressAction} />
+      <View style={buildStyles.contentContainer}>
+        <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
+        <MemoRenderContent
+          actionStyle={buildStyles.actionStyle}
+          actionTitleStyle={buildStyles.actionTitleStyle}
+          actions={actions}
+          onPress={onPressAction}
+        />
       </View>
       <View style={styles.sep} />
-      <MemoRenderCancelAction onPress={onCancel} />
+      <MemoRenderCancelAction
+        style={buildStyles.cancelActionStyle}
+        titleStyle={buildStyles.cancelTitleStyle}
+        onPress={onCancel}
+      />
     </View>
   );
 }
@@ -98,8 +120,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   contentContainer: {
-    backgroundColor: '#fff',
-    borderRadius: 6,
     overflow: 'hidden'
   },
   titleContainer: {
@@ -110,38 +130,28 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   title: {
-    fontSize: Theme.titleFontSize,
-    color: Theme.titleColor
+
   },
   scrollView: {
-    maxHeight: Theme.actionMaxHeight,
+
   },
-  actionContainer: {
-    backgroundColor: '#fff',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(127, 127, 127, 0.3)',
+  actionStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 15,
   },
   actionText: {
-    fontSize: Theme.actionTitleFontSize,
-    color: Theme.actionTitleColor
+
   },
   sep: {
     height: 7,
-    // backgroundColor: 'rgba(127, 127, 127, 0.3)',
   },
   cancelActionContainer: {
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 17,
-    borderRadius: 6,
+
   },
   cancelActionText: {
-    fontSize: Theme.cancelTitleFontSize,
-    color: Theme.cancelTitleColor
+
   },
 });
 

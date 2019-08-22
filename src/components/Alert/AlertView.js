@@ -1,8 +1,8 @@
 'use strict';
-import React, { useEffect, useRef, useMemo, useCallback } from 'react';
+import React, { useEffect, useRef, useMemo, useCallback, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, LayoutAnimation } from 'react-native';
 import PropTypes from 'prop-types';
-import { Theme } from '../../config/themes';
+import { Theme, ThemeContext } from '../../config/themes';
 import { useKeyboardSpace } from '../../common/hook';
 
 function RenderTitle(props) {
@@ -26,33 +26,19 @@ function RenderDetail(props) {
 }
 
 function RenderAction(props) {
-  const { actions, onPress } = props;
+  const { style, actionStyle, actionTextStyle, separatorStyle, actions, onPress } = props;
 
-  const buildStyle = useMemo(() => {
-    return (index) => {
-      let separator;
-      if (actions.length === 1) {
-        separator = null;
-      } else {
-        separator = actions.length - 1 === index ? null : styles.separator;
-      }
-      return separator;
-    };
-  }, [actions]);
-
-  if (actions.length === 0) {
-    return null;
-  }
   return (
-    <View style={styles.actionContainer}>
+    <View style={style}>
       {actions.map((item, index) => {
-        const { title, titleStyle, actionStyle } = item;
+        const { title, titleStyle, actionStyle: itemStyle } = item;
+        const separator = actions.length - 1 === index ? null : separatorStyle;
         return (
           <TouchableOpacity
-            style={[styles.actionHighlight, actionStyle, buildStyle(index)]}
+            style={[actionStyle, separator, itemStyle]}
             key={`action_${index}`}
             onPress={() => onPress(item)}>
-            <Text style={[styles.actionText, titleStyle]}>
+            <Text style={[actionTextStyle, titleStyle]}>
               {title}
             </Text>
           </TouchableOpacity>
@@ -79,6 +65,7 @@ function AlertView(props) {
   const lastActionTimeRef = useRef(0);
   const viewLayoutRef = useRef(null);
   const [keyboardSpace, setMaxY] = useKeyboardSpace(-1);
+  const themeValue = useContext(ThemeContext);
 
   const onPressAction = useCallback((actionItem) => {
     const nowTime = new Date().getTime();
@@ -104,12 +91,32 @@ function AlertView(props) {
     }
   }, [keyboardSpace]);
 
+  const buildStyles = useMemo(() => {
+    const alert = themeValue.alert;
+    return {
+      style: [alert.style, styles.container],
+      titleStyle: [alert.titleStyle, titleStyle],
+      detailStyle: [alert.detailStyle, detailStyle],
+      actionContainerStyle: [alert.actionContainerStyle, alert.separatorStyle, styles.actionContainer],
+      actionStyle: [alert.actionStyle, styles.actionHighlight],
+      actionTextStyle: [alert.actionTextStyle, styles.actionText],
+      separatorStyle: [alert.separatorStyle],
+    };
+  }, [themeValue, titleStyle, detailStyle]);
+
   return (
     <View>
-      <View style={styles.container} onLayout={onLayout}>
-        <MemoRenderTitle title={title} titleStyle={titleStyle} />
-        <MemoRenderDetail detail={detail} detailStyle={detailStyle} />
-        <MemoRenderAction actions={actions} onPress={onPressAction} />
+      <View style={buildStyles.style} onLayout={onLayout}>
+        <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
+        <MemoRenderDetail detail={detail} detailStyle={buildStyles.detailStyle} />
+        <MemoRenderAction
+          style={buildStyles.actionContainerStyle}
+          actionStyle={buildStyles.actionStyle}
+          actionTextStyle={buildStyles.actionTextStyle}
+          separatorStyle={buildStyles.separatorStyle}
+          actions={actions}
+          onPress={onPressAction}
+        />
       </View>
       <View style={{ height: keyboardSpace }} />
     </View>
@@ -118,56 +125,33 @@ function AlertView(props) {
 
 const styles = StyleSheet.create({
   container: {
-    width: Theme.alertWidth,
-    minHeight: Theme.alertMinHeight,
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
     borderRadius: 10,
     overflow: 'hidden',
   },
   title: {
     marginTop: 20,
-    maxWidth: Theme.alertTitleMaxWidth,
-    fontSize: Theme.alertTitleFontSize,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: Theme.alertTitleColor,
   },
   detail: {
     marginTop: 12,
-    maxWidth: Theme.alertDetailMaxWidth,
-    textAlign: 'center',
-    fontSize: Theme.alertDetailFontSize,
-    lineHeight: 20,
-    color: Theme.alertDetailColor,
   },
   actionContainer: {
     marginTop: 15,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: Theme.alertWidth,
-    height: Theme.alertActionHeight,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderColor: Theme.alertSeparatorColor,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    backgroundColor: '#dbdbdb',
   },
   actionHighlight: {
     flex: 1,
-    height: Theme.alertActionHeight,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
   },
   actionText: {
-    color: Theme.alertActionColor,
-    fontSize: Theme.alertActionFontSize,
+
   },
   separator: {
-    borderRightWidth: StyleSheet.hairlineWidth,
-    borderRightColor: Theme.alertSeparatorColor,
+    // borderRightWidth: StyleSheet.hairlineWidth,
+    // borderRightColor: Theme.alertSeparatorColor,
   },
 });
 

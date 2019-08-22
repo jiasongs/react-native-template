@@ -112,21 +112,16 @@ function ListRow(props) {
   const themeValue = useContext(ThemeContext);
 
   const buildStyles = useMemo(() => {
+    const listRow = themeValue.listRow;
     return {
-      style: [styles.container, { backgroundColor: themeValue.listRowBackgroundColor }, style],
-      titleStyle: [{
-        color: themeValue.listRowTitleColor,
-        fontSize: themeValue.listRowTitleFontSize,
-      }, titleStyle],
-      detailStyle: [{
-        color: themeValue.listRowDetailColor,
-        fontSize: themeValue.listRowDetailFontSize,
-      }, detailStyle],
-      bottomSeparatorStyle: [themeValue.listRowBottomSeparatorStyle, bottomSeparatorStyle]
+      style: [listRow.style, styles.container, style],
+      titleStyle: [listRow.titleStyle, titleStyle],
+      detailStyle: [listRow.detailStyle, detailStyle],
+      bottomSeparatorStyle: [listRow.bottomSeparatorStyle, bottomSeparatorStyle]
     };
   }, [themeValue, style, titleStyle, detailStyle, bottomSeparatorStyle]);
 
-  console.log('buildStyles.titleStyle', buildStyles.titleStyle);
+
   return (
     <Button style={buildStyles.style} onPress={onPress}>
       <View style={[styles.contentContainer, contentStyle]}>
@@ -156,9 +151,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-    backgroundColor: '#fff',
     alignSelf: 'stretch'
   },
   contentContainer: {
@@ -168,7 +160,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 12,
     justifyContent: 'space-between',
-    backgroundColor: 'transparent',
   },
   detailContainer: {
     flex: 1,

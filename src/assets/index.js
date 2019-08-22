@@ -27,16 +27,11 @@ export const Images = {
   /**
    * @Share [分享]
    */
-  icon_share_timeline: require('./icon/icon_share_timeline.png'), // 朋友圈
-  icon_share_wechat: require('./icon/icon_share_wechat.png'), // 微信
-  icon_share_link: require('./icon/icon_share_link.png'),
 
   /**
    * @CHAT [聊天组件]
    */
-  icon_chat_gift: require('./icon/icon_chat_gift.png'),
-  icon_chat_voice: require('./icon/icon_chat_voice.png'),
-  json_voice: require('./json/chat_voice.json'),
+
 
   /**
   * @TABBAR [Tabbar]
@@ -50,25 +45,12 @@ export const Images = {
   /**
    * @ICONS [项目Icon]
    */
-  icon_center_play: require('./icon/icon_center_paly.png'),
-  icon_center_pause: require('./icon/icon_center_pause.png'),
-  icon_bottom_play: require('./icon/icon_bottom_play.png'),
-  icon_bottom_pause: require('./icon/icon_bottom_pause.png'),
-  icon_enlarge: require('./icon/icon_enlarge.png'),
-  icon_micrify: require('./icon/icon_micrify.png'),
-  icon_live_refresh: require('./icon/icon_live_refresh.png'),
-  icon_live_text: require('./icon/icon_live_text.png'),
-  icon_bar_recharge: require('./icon/icon_bar_recharge.png'),
-  icon_bar_gift: require('./icon/icon_bar_gift.png'),
-  icon_danmu: require('./icon/icon_danmu.png'),
-  icon_danmu_no: require('./icon/icon_danmu_no.png'),
-  icon_live_up: require('./icon/icon_live_up.png'),
+
 
 
   /**
    * @IMAGES [项目Image]
    */
-  img_bg_navbar: require('./img/img_bg_navbar.png'),
-  img_mine_back: require('./img/img_mine_back.png'),
+
 
 };

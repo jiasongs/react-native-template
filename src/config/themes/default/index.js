@@ -3,122 +3,175 @@ import { StyleSheet } from 'react-native';
 
 export default {
   /**
-   * @通用设置
+   * @类型 [此属性为必须]
    */
-  pageBackgroundColor: '#f7f7f7',
-
+  type: 1,
   /**
-   * @弹窗提示组件的设置
+   * @Common
    */
-  alertWidth: 260,
-  alertMinHeight: 52,
-  alertTitleMaxWidth: 200,
-  alertDetailMaxWidth: 230,
-  alertActionHeight: 50,
-  alertActionColor: '#348fe4',
-  alertSeparatorColor: '#eaeaea',
-  alertTitleFontSize: 16,
-  alertTitleColor: '#000',
-  alertDetailFontSize: 13,
-  alertDetailColor: '#000',
-  alertActionFontSize: 14,
-  /**
-   * @action组件的设置
-   */
-  actionMaxHeight: 230,
-  actionTitleFontSize: 14,
-  actionTitleColor: '#000',
-  cancelTitleFontSize: 14,
-  cancelTitleColor: 'red',
-  titleFontSize: 12,
-  titleColor: '#999',
-
-  /**
-   * @分享组件的样式
-   */
-  shareBackColor: '#eeeeee',
-  shareActionWidth: 50,
-  shareActionHeight: 100,
-  shareActionRadius: 7,
-  shareActionTextColor: '#000000',
-  shareCancelActionHeight: 90,
-  shareCancelBackColor: '#fff',
-  shareCancelTextColor: '#000000',
-  /**
-   * @地区选择组件的样式
-   */
-  areaActionTitleColor: '#5d7f3b',
-
-  /**
-   * @设置MenuManager的初始化配置 
-   */
-  menuOptions: {
-    menuAlign: 'end',
-    menuPopoverStyle: { backgroundColor: '#fff', },
-    menuShowArrow: true,
-    menuAnimated: true,
-    menuOverlayOpacity: 0.3,
-    menuShadow: false,
+  page: {
+    style: {
+      backgroundColor: '#f7f7f7',
+    }
   },
   /**
-   * @设置toastManager的初始化配置 
+   * @Button
    */
-  toastOptions: {
-    position: 'center',
-  },
-  toastTextColor: '#fff',
-  toastTextFontSize: 14,
-  /**
-   * @SegmentedView的设置
-   */
-  sbColor: '#fff',
-  sbHeight: 40,
-  sbBtnPaddingTop: 8,
-  sbBtnPaddingBottom: 8,
-  sbBtnPaddingLeft: 8,
-  sbBtnPaddingRight: 8,
-  sbBtnTitleColor: '#989898',
-  sbBtnTextFontSize: 13,
-  sbBtnActiveTitleColor: '#337ab7',
-  sbBtnActiveTextFontSize: 13,
-  sbIndicatorLineColor: '#337ab7',
-  sbIndicatorLineWidth: 2,
-  sbIndicatorPositionPadding: 0,
-  /**
-   * @SegmentedControlTab的设置
-   */
-  scTabColor: '#fff',
-  scActiveTabColor: '#337ab7',
-  scTabTextColor: '#337ab7',
-  scActiveTabTextColor: '#fff',
-  scTabTextFontSize: 14,
-  scActiveTabTextFontSize: 14,
-  scBorderWidth: StyleSheet.hairlineWidth,
-  /**
-   * @导航栏的设置
-   */
-  navBarPadding: 0,
-  navBarBackgroundColor: '#fff',
-  navBarTitleColor: '#333',
-  navBarTitleFontSize: 16,
-  navBarHeight: 44,
-  navStatusBarStyle: 'dark-content',
-  /**
-   * @listRow [详细描述]
-   */
-  listRowBackgroundColor: '#fff',
-  listRowTitleColor: '#333',
-  listRowTitleFontSize: 16,
-  listRowDetailColor: '#666',
-  listRowDetailFontSize: 14,
-  listRowBottomSeparatorStyle: {
-    backgroundColor: '#f3f3f3'
+  button: {
+    solid: {
+      style: {
+
+      }
+    },
+    clear: {
+      style: {
+
+      }
+    },
+    outline: {
+      style: {
+
+      }
+    },
   },
   /**
-   * @picker
+   * @Alert
    */
-  pickerTitleStyle: {
-    color: '#333',
-    fontSize: 14
+  alert: {
+    style: {
+      width: 260,
+      minHeight: 52,
+      backgroundColor: '#fff',
+    },
+    titleStyle: {
+      maxWidth: 200,
+      fontSize: 16,
+      color: '#000',
+      fontWeight: 'bold',
+    },
+    detailStyle: {
+      maxWidth: 230,
+      fontSize: 16,
+      color: '#000',
+      lineHeight: 20,
+    },
+    actionContainerStyle: {
+      width: '100%',
+      backgroundColor: '#dbdbdb',
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderBottomLeftRadius: 10,
+      borderBottomRightRadius: 10,
+    },
+    actionStyle: {
+      backgroundColor: '#fff',
+      paddingVertical: 17,
+    },
+    actionTitleStyle: {
+      fontSize: 14,
+      color: '#333'
+    },
+    separatorStyle: {
+      borderRightWidth: StyleSheet.hairlineWidth,
+      borderColor: '#eee',
+    },
+  },
+
+  /**
+   * @ActionSheet
+   */
+  sheet: {
+    contentStyle: {
+      maxHeight: 230,
+      backgroundColor: '#fff',
+      borderRadius: 6,
+    },
+    titleStyle: {
+      fontSize: 12,
+      color: '#999',
+    },
+    actionStyle: {
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderColor: 'rgba(127, 127, 127, 0.3)',
+      paddingVertical: 15,
+    },
+    actionTitleStyle: {
+      fontSize: 14,
+      color: '#000',
+    },
+    cancelActionStyle: {
+      paddingVertical: 17,
+      borderRadius: 6,
+      backgroundColor: '#fff',
+    },
+    cancelTitleStyle: {
+      fontSize: 14,
+      color: 'red',
+    },
+  },
+  /**
+   * @Toast 
+   */
+  toast: {
+    style: {
+      backgroundColor: 'rgba(35,24,21,0.8)',
+    },
+    textStyle: {
+      color: '#fff',
+      fontSize: 14,
+      lineHeight: 20
+    },
+  },
+
+  /**
+   * @Navigation
+   */
+  navigationBar: {
+    statusBarStyle: 'dark-content',
+    style: {
+      paddingHorizontal: 0,
+      backgroundColor: '#fff',
+      borderBottomColor: '#dbdbdb',
+      borderBottomWidth: StyleSheet.hairlineWidth,
+    },
+    titleStyle: {
+      color: '#333',
+      fontSize: 17,
+      fontWeight: 'bold',
+    },
+  },
+  tabBar: {
+    style: {
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderTopColor: '#eee',
+      backgroundColor: '#fff',
+    },
+  },
+  /**
+   * @ListRow 
+   */
+  listRow: {
+    style: {
+      backgroundColor: '#fff',
+    },
+    titleStyle: {
+      color: '#333',
+      fontSize: 15
+    },
+    detailStyle: {
+      color: '#666',
+      fontSize: 14
+    },
+    bottomSeparatorStyle: {
+      backgroundColor: '#f3f3f3'
+    },
+  },
+  /**
+   * @Picker
+   */
+  picker: {
+    titleStyle: {
+      color: '#333',
+      fontSize: 14
+    }
   }
 };

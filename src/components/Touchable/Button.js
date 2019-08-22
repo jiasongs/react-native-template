@@ -1,8 +1,9 @@
 'use strict';
-import React, { useMemo, useRef, useCallback } from 'react';
+import React, { useMemo, useRef, useCallback, useContext } from 'react';
 import { Text, Image, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
+import { ThemeContext } from '../../config/themes';
 
 const IconPosition = {
   PositionTop: 'top',
@@ -31,6 +32,8 @@ function Button(props) {
 
   const lastActionTimeRef = useRef(0);
 
+  const themeValue = useContext(ThemeContext);
+
   const _onPress = useCallback((event) => {
     const nowTime = new Date().getTime();
     if ((nowTime - lastActionTimeRef.current) <= clickInterval) {
@@ -41,7 +44,7 @@ function Button(props) {
     onPress && onPress(event);
   }, [clickInterval, onPress]);
 
-  function buildStyle() {
+  const { containerStyle, buildIconStyle, buildTitleStyle } = useMemo(() => {
     const containerStyle = [styles.container];
     const buildIconStyle = [styles.iconStyle];
     const buildTitleStyle = [styles.titleStyle];
@@ -75,15 +78,14 @@ function Button(props) {
       }
     }
     return { containerStyle, buildIconStyle, buildTitleStyle };
-  }
-
-  const { containerStyle, buildIconStyle, buildTitleStyle } = useMemo(buildStyle, [iconPosition, spacingIconAndTitle]);
+  }, [icon, iconPosition, spacingIconAndTitle, title]);
 
   const iconTopOrLeft = useMemo(() => {
     return (iconPosition === IconPosition.PositionLeft || iconPosition === IconPosition.PositionTop);
   }, [iconPosition]);
 
   return (
+
     <TouchableOpacity  {...others} ref={forwardedRef} style={[containerStyle, style]} onPress={_onPress} >
       {backgroundImage && (
         <ImageBackground
@@ -131,6 +133,7 @@ const styles = StyleSheet.create({
 });
 
 Button.propTypes = {
+  type: PropTypes.oneOf(['solid', 'clear', 'outline']),
   icon: PropTypes.oneOfType([PropTypes.number, PropTypes.shape({ uri: PropTypes.string })]),
   iconStyle: Image.propTypes.style,
   iconResizeMode: Image.propTypes.resizeMode,

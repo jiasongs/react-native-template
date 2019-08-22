@@ -6,14 +6,12 @@ import {
   StatusBar,
 } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-import DefaultTheme from './default';
 import Colors from './common/Colors';
 import Styles from './common/Styles';
 import { ThemeManager, useThemeValue } from './ThemeManager';
 
 const Theme = {
 
-  ...DefaultTheme,
   ...Colors,
   ...Styles,
 
@@ -46,6 +44,12 @@ const Theme = {
       return 0;
     }
     return 0;
+  },
+  get navBarHeight() {
+    return 44;
+  },
+  get contentTop() {
+    return this.statusBarHeight + this.navBarHeight;
   },
   get screenInset() {
     const isLandscape = this.isLandscape;

@@ -1,8 +1,8 @@
 'use strict';
-import React, { useRef, useEffect, useMemo } from 'react';
+import React, { useRef, useEffect, useMemo, useContext } from 'react';
 import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
 import PropTypes from 'prop-types';
-import { Theme } from '../../config/themes';
+import { ThemeContext } from '../../config/themes';
 
 function RenderIcon(props) {
   const {
@@ -44,10 +44,10 @@ function RenderIcon(props) {
 }
 
 function RenderText(props) {
-  const { text } = props;
+  const { text, titleStyle } = props;
   if (typeof text === 'string') {
     return (
-      <Text style={styles.toastText}>{text}</Text>
+      <Text style={[styles.toastText, titleStyle]}>{text}</Text>
     );
   } else if (React.isValidElement(text)) {
     return text;
@@ -70,6 +70,7 @@ function ToastView(props) {
 
   const rotateAnimatedRef = useRef(new Animated.Value(0));
   const loopAnimatedRef = useRef(null);
+  const themeValue = useContext(ThemeContext);
 
   useEffect(() => {
     type === 'loading' && startRotateAnimated();
@@ -98,16 +99,17 @@ function ToastView(props) {
     rotateAnimatedRef.current = null;
   }
 
-  function buildStyle() {
-    let style = null;
+  const buildStyles = useMemo(() => {
+    const toast = themeValue.toast;
+    let newStyle = null;
     if (type === 'message') {
-      style = {
+      newStyle = {
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
       };
     } else {
-      style = {
+      newStyle = {
         paddingTop: 22,
         paddingBottom: 17,
         paddingHorizontal: 20,
@@ -116,13 +118,14 @@ function ToastView(props) {
         maxWidth: '70%',
       };
     }
-    return style;
-  }
-
-  const style = useMemo(buildStyle, [type]);
+    return {
+      style: [toast.style, styles.container, newStyle],
+      titleStyle: [toast.textStyle]
+    };
+  }, [type, themeValue]);
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={buildStyles.style}>
       <MemoRenderIcon
         type={type}
         rotateAnimated={rotateAnimatedRef.current}
@@ -131,7 +134,7 @@ function ToastView(props) {
         warnIcon={warnIcon}
         loadingIcon={loadingIcon}
       />
-      <MemoRenderText text={text} />
+      <MemoRenderText text={text} titleStyle={buildStyles.titleStyle} />
     </View>
   );
 
@@ -139,7 +142,6 @@ function ToastView(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(35,24,21,0.8)',
     justifyContent: 'center',
     alignItems: 'center',
     maxWidth: '70%',
@@ -150,8 +152,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   toastText: {
-    fontSize: Theme.toastTextFontSize,
-    color: Theme.toastTextColor,
     lineHeight: 20
   }
 });

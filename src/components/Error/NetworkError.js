@@ -21,7 +21,7 @@ function NetworkError(props) {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: Theme.navBarHeight + Theme.statusBarHeight,
+    top: Theme.contentTop,
     bottom: 0,
     left: 0,
     right: 0,

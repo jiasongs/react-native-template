@@ -66,10 +66,11 @@ function NavigationBar(props) {
   }, [extraData, renderLeftAction]);
 
   const buildStyles = useMemo(() => {
+    const navigationBar = themeValue.navigationBar;
     return {
-      style: [styles.container, { backgroundColor: themeValue.navBarBackgroundColor }, style],
-      statusBarStyle: themeValue.navStatusBarStyle,
-      titleStyle: [{ color: themeValue.navBarTitleColor }, titleStyle]
+      style: [navigationBar.style, styles.container, style],
+      statusBarStyle: navigationBar.statusBarStyle,
+      titleStyle: [navigationBar.titleStyle, titleStyle]
     };
   }, [themeValue, style, titleStyle]);
 
@@ -118,8 +119,7 @@ function NavigationBar(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: Theme.navBarHeight + Theme.statusBarHeight,
-    backgroundColor: Theme.navBarBackgroundColor,
+    height: Theme.contentTop,
   },
   navContent: {
     marginTop: Theme.statusBarHeight,
@@ -129,15 +129,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   navTitleContainer: {
+
   },
   navLeftContainer: {
     position: 'absolute',
-    left: Theme.navBarPadding,
+    left: 0,
     justifyContent: 'center',
   },
   navRightContainer: {
     position: 'absolute',
-    right: Theme.navBarPadding,
+    right: 0,
     justifyContent: 'center',
   },
   navImageBack: {

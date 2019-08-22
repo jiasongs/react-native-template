@@ -46,6 +46,7 @@ function PageContainer(props) {
   const themeValue = useContext(ThemeContext);
 
   const buildStyles = useMemo(() => {
+    const page = themeValue.page;
     let notchedScreenStyle;
     if (fitNotchedScreen) {
       if (fitNotchedScreenType === 'padding') {
@@ -61,10 +62,7 @@ function PageContainer(props) {
       notchedScreenStyle = null;
     }
     return {
-      style: [styles.container, notchedScreenStyle, {
-        backgroundColor: themeValue.pageBackgroundColor
-      },
-      style],
+      style: [page.style, styles.container, notchedScreenStyle, style],
     };
   }, [fitNotchedScreen, fitNotchedScreenType, style, themeValue]);
 
@@ -89,7 +87,6 @@ function PageContainer(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Theme.pageBackgroundColor,
   },
 });
 

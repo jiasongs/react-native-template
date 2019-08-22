@@ -38,10 +38,11 @@ function PickerAndroid(props) {
   }, [selectedIndex]);
 
   const buildStyles = useMemo(() => {
+    const picker = themeValue.picker;
     return {
       style: [styles.picker, style],
-      titleFontSize: titleFontSize || themeValue.pickerTitleStyle.fontSize,
-      titleColor: titleColor || themeValue.pickerTitleStyle.color,
+      titleFontSize: titleFontSize || picker.titleStyle.fontSize,
+      titleColor: titleColor || picker.titleStyle.color,
     };
   }, [themeValue, titleFontSize, titleColor, style]);
 

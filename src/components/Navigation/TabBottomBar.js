@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react';
 import {
   Animated,
@@ -283,7 +281,7 @@ class TabBarBottom extends React.PureComponent {
             onLayout={this._handleLayout}
           >
             <SafeAreaView
-              style={[tabBarStyle, { backgroundColor: themeValue.navBarBackgroundColor }]}
+              style={[tabBarStyle, themeValue.tabBar.style]}
               forceInset={safeAreaInset}>
               {routes.map((route, index) => {
                 const focused = index === navigation.state.index;
