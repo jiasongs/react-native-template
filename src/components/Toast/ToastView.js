@@ -46,9 +46,7 @@ function RenderIcon(props) {
 function RenderText(props) {
   const { text, titleStyle } = props;
   if (typeof text === 'string') {
-    return (
-      <Text style={[styles.toastText, titleStyle]}>{text}</Text>
-    );
+    return <Text style={[styles.toastText, titleStyle]}>{text}</Text>;
   } else if (React.isValidElement(text)) {
     return text;
   }
@@ -59,14 +57,7 @@ const MemoRenderIcon = React.memo(RenderIcon);
 const MemoRenderText = React.memo(RenderText);
 
 function ToastView(props) {
-  const {
-    type,
-    text,
-    successIcon,
-    failIcon,
-    warnIcon,
-    loadingIcon,
-  } = props;
+  const { type, text, successIcon, failIcon, warnIcon, loadingIcon } = props;
 
   const rotateAnimatedRef = useRef(new Animated.Value(0));
   const loopAnimatedRef = useRef(null);
@@ -84,12 +75,10 @@ function ToastView(props) {
       toValue: 3600,
       duration: 10000,
       easing: Easing.linear,
-      useNativeDriver: true
+      useNativeDriver: true,
     });
     loopAnimatedRef.current = Animated.loop(timingAnimated, { iterations: -1 });
-    loopAnimatedRef.current.start(() => {
-
-    });
+    loopAnimatedRef.current.start(() => {});
   }
 
   function stopRotateAnimated() {
@@ -120,7 +109,7 @@ function ToastView(props) {
     }
     return {
       style: [toast.style, styles.container, newStyle],
-      titleStyle: [toast.textStyle]
+      titleStyle: [toast.textStyle],
     };
   }, [type, themeValue]);
 
@@ -137,7 +126,6 @@ function ToastView(props) {
       <MemoRenderText text={text} titleStyle={buildStyles.titleStyle} />
     </View>
   );
-
 }
 
 const styles = StyleSheet.create({
@@ -152,8 +140,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   toastText: {
-    lineHeight: 20
-  }
+    lineHeight: 20,
+  },
 });
 
 ToastView.propTypes = {
@@ -166,7 +154,7 @@ ToastView.propTypes = {
 };
 
 ToastView.defaultProps = {
-  type: 'message'
+  type: 'message',
 };
 
 export default React.memo(ToastView);

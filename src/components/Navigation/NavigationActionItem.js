@@ -7,10 +7,14 @@ function NavigationActionItem(props) {
   const { title, titleStyle, icon, iconStyle, onPress } = props;
 
   return (
-    <TouchableOpacity
-      style={styles.actionTouch}
-      onPress={onPress}>
-      {icon && <Image resizeMode={'contain'} style={[styles.actionImage, iconStyle]} source={icon} />}
+    <TouchableOpacity style={styles.actionTouch} onPress={onPress}>
+      {icon && (
+        <Image
+          resizeMode={'contain'}
+          style={[styles.actionImage, iconStyle]}
+          source={icon}
+        />
+      )}
       {title && <Text style={[styles.actionTitle, titleStyle]}>{title}</Text>}
     </TouchableOpacity>
   );
@@ -30,11 +34,15 @@ const styles = StyleSheet.create({
   actionImage: {
     width: 25,
     height: 25,
-  }
+  },
 });
 
 NavigationActionItem.propTypes = {
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.element]),
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    PropTypes.element,
+  ]),
   titleStyle: Text.propTypes.style,
   icon: PropTypes.number,
   iconStyle: Image.propTypes.style,
@@ -42,8 +50,6 @@ NavigationActionItem.propTypes = {
   extraData: PropTypes.any,
 };
 
-NavigationActionItem.defaultProps = {
-
-};
+NavigationActionItem.defaultProps = {};
 
 export default React.memo(NavigationActionItem);

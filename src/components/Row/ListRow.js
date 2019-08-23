@@ -13,12 +13,7 @@ function RenderIcon(props) {
   } else if (typeof icon === 'function') {
     return icon();
   } else if (typeof icon === 'number' || typeof icon === 'object') {
-    return (
-      <ImageView
-        style={[styles.rowImage, iconStyle]}
-        source={icon}
-      />
-    );
+    return <ImageView style={[styles.rowImage, iconStyle]} source={icon} />;
   }
   return null;
 }
@@ -106,7 +101,7 @@ function ListRow(props) {
     accessorySource,
     bottomSeparator,
     bottomSeparatorStyle,
-    onPress
+    onPress,
   } = props;
 
   const themeValue = useContext(ThemeContext);
@@ -117,10 +112,12 @@ function ListRow(props) {
       style: [listRow.style, styles.container, style],
       titleStyle: [listRow.titleStyle, titleStyle],
       detailStyle: [listRow.detailStyle, detailStyle],
-      bottomSeparatorStyle: [listRow.bottomSeparatorStyle, bottomSeparatorStyle]
+      bottomSeparatorStyle: [
+        listRow.bottomSeparatorStyle,
+        bottomSeparatorStyle,
+      ],
     };
   }, [themeValue, style, titleStyle, detailStyle, bottomSeparatorStyle]);
-
 
   return (
     <Button type={'clear'} style={buildStyles.style} onPress={onPress}>
@@ -130,7 +127,10 @@ function ListRow(props) {
           <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
         </View>
         <View style={[Theme.RCC, styles.detailContainer]}>
-          <MemoRenderDetail detail={detail} detailStyle={buildStyles.detailStyle} />
+          <MemoRenderDetail
+            detail={detail}
+            detailStyle={buildStyles.detailStyle}
+          />
           <MemoRenderAccessory
             accessoryStyle={accessoryStyle}
             accessory={accessory}
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
   },
   contentContainer: {
     flexDirection: 'row',
@@ -182,30 +182,46 @@ const styles = StyleSheet.create({
   },
   accessory: {
     width: 12,
-    height: 12
-  }
+    height: 12,
+  },
 });
 
 ListRow.propTypes = {
   style: ViewPropTypes.style,
   contentStyle: ViewPropTypes.style,
-  title: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.func]),
+  title: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.string,
+    PropTypes.func,
+  ]),
   titleStyle: Text.propTypes.style,
   icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   iconStyle: Image.propTypes.style,
-  detail: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.func]),
+  detail: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.string,
+    PropTypes.func,
+  ]),
   detailStyle: Text.propTypes.style,
-  accessory: PropTypes.oneOfType([PropTypes.oneOf(['none', 'indicator']), PropTypes.element, PropTypes.func]),
+  accessory: PropTypes.oneOfType([
+    PropTypes.oneOf(['none', 'indicator']),
+    PropTypes.element,
+    PropTypes.func,
+  ]),
   accessoryStyle: Image.propTypes.style,
   accessorySource: Image.propTypes.source,
-  bottomSeparator: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.oneOf(['none', 'full', 'indent'])]),
+  bottomSeparator: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.oneOf(['none', 'full', 'indent']),
+  ]),
   bottomSeparatorStyle: ViewPropTypes.style,
   onPress: PropTypes.func,
 };
 
 ListRow.defaultProps = {
   bottomSeparator: 'full',
-  accessory: 'indicator'
+  accessory: 'indicator',
 };
 
 export default React.memo(ListRow);

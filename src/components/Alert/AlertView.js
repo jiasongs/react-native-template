@@ -1,6 +1,18 @@
 'use strict';
-import React, { useEffect, useRef, useMemo, useCallback, useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, LayoutAnimation } from 'react-native';
+import React, {
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+  useContext,
+} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  LayoutAnimation,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { Theme, ThemeContext } from '../../config/themes';
 import { useKeyboardSpace } from '../../common/hook';
@@ -9,7 +21,7 @@ function RenderTitle(props) {
   const { title, titleStyle } = props;
   if (React.isValidElement(title)) {
     return title;
-  } else if (typeof title == 'string' || typeof title == 'number') {
+  } else if (typeof title === 'string' || typeof title === 'number') {
     return <Text style={[styles.title, titleStyle]}>{title}</Text>;
   }
   return null;
@@ -19,14 +31,21 @@ function RenderDetail(props) {
   const { detail, detailStyle } = props;
   if (React.isValidElement(detail)) {
     return detail;
-  } else if (typeof detail == 'string' || typeof detail == 'number') {
+  } else if (typeof detail === 'string' || typeof detail === 'number') {
     return <Text style={[styles.detail, detailStyle]}>{detail}</Text>;
   }
   return null;
 }
 
 function RenderAction(props) {
-  const { style, actionStyle, actionTextStyle, separatorStyle, actions, onPress } = props;
+  const {
+    style,
+    actionStyle,
+    actionTextStyle,
+    separatorStyle,
+    actions,
+    onPress,
+  } = props;
 
   return (
     <View style={style}>
@@ -37,10 +56,9 @@ function RenderAction(props) {
           <TouchableOpacity
             style={[actionStyle, separator, itemStyle]}
             key={`action_${index}`}
-            onPress={() => onPress(item)}>
-            <Text style={[actionTextStyle, titleStyle]}>
-              {title}
-            </Text>
+            onPress={() => onPress(item)}
+          >
+            <Text style={[actionTextStyle, titleStyle]}>{title}</Text>
           </TouchableOpacity>
         );
       })}
@@ -53,40 +71,43 @@ const MemoRenderDetail = React.memo(RenderDetail);
 const MemoRenderAction = React.memo(RenderAction);
 
 function AlertView(props) {
-  const {
-    title,
-    titleStyle,
-    detail,
-    detailStyle,
-    actions,
-    onPress
-  } = props;
+  const { title, titleStyle, detail, detailStyle, actions, onPress } = props;
 
   const lastActionTimeRef = useRef(0);
   const viewLayoutRef = useRef(null);
   const [keyboardSpace, setMaxY] = useKeyboardSpace(-1);
   const themeValue = useContext(ThemeContext);
 
-  const onPressAction = useCallback((actionItem) => {
-    const nowTime = new Date().getTime();
-    if ((nowTime - lastActionTimeRef.current) <= 230) {
-      console.warn('间隔时间内重复点击了');
-      return;
-    }
-    lastActionTimeRef.current = nowTime;
-    actionItem.onPress && actionItem.onPress();
-    onPress && onPress(actionItem);
-  }, [onPress]);
+  const onPressAction = useCallback(
+    (actionItem) => {
+      const nowTime = new Date().getTime();
+      if (nowTime - lastActionTimeRef.current <= 230) {
+        console.warn('间隔时间内重复点击了');
+        return;
+      }
+      lastActionTimeRef.current = nowTime;
+      actionItem.onPress && actionItem.onPress();
+      onPress && onPress(actionItem);
+    },
+    [onPress],
+  );
 
-  const onLayout = useCallback((event) => {
-    if (!viewLayoutRef.current) {
-      viewLayoutRef.current = event.nativeEvent.layout;
-      setMaxY((Theme.screenHeight - viewLayoutRef.current.height) / 2 + viewLayoutRef.current.height + 40);
-    }
-  }, [setMaxY]);
+  const onLayout = useCallback(
+    (event) => {
+      if (!viewLayoutRef.current) {
+        viewLayoutRef.current = event.nativeEvent.layout;
+        setMaxY(
+          (Theme.screenHeight - viewLayoutRef.current.height) / 2 +
+            viewLayoutRef.current.height +
+            40,
+        );
+      }
+    },
+    [setMaxY],
+  );
 
   useEffect(() => {
-    if (keyboardSpace != -1) {
+    if (keyboardSpace !== -1) {
       LayoutAnimation.easeInEaseOut();
     }
   }, [keyboardSpace]);
@@ -97,7 +118,11 @@ function AlertView(props) {
       style: [alert.style, styles.container],
       titleStyle: [alert.titleStyle, titleStyle],
       detailStyle: [alert.detailStyle, detailStyle],
-      actionContainerStyle: [alert.actionContainerStyle, alert.separatorStyle, styles.actionContainer],
+      actionContainerStyle: [
+        alert.actionContainerStyle,
+        alert.separatorStyle,
+        styles.actionContainer,
+      ],
       actionStyle: [alert.actionStyle, styles.actionHighlight],
       actionTextStyle: [alert.actionTextStyle, styles.actionText],
       separatorStyle: [alert.separatorStyle],
@@ -108,7 +133,10 @@ function AlertView(props) {
     <View>
       <View style={buildStyles.style} onLayout={onLayout}>
         <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
-        <MemoRenderDetail detail={detail} detailStyle={buildStyles.detailStyle} />
+        <MemoRenderDetail
+          detail={detail}
+          detailStyle={buildStyles.detailStyle}
+        />
         <MemoRenderAction
           style={buildStyles.actionContainerStyle}
           actionStyle={buildStyles.actionStyle}
@@ -146,13 +174,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  actionText: {
-
-  },
-  separator: {
-    // borderRightWidth: StyleSheet.hairlineWidth,
-    // borderRightColor: Theme.alertSeparatorColor,
-  },
+  actionText: {},
+  separator: {},
 });
 
 AlertView.propTypes = {
@@ -160,12 +183,18 @@ AlertView.propTypes = {
   titleStyle: Text.propTypes.style,
   detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   detailStyle: Text.propTypes.style,
-  actions: PropTypes.arrayOf(PropTypes.shape({ title: PropTypes.string, titleStyle: Text.propTypes.style, onPress: PropTypes.func })),
-  onPress: PropTypes.func
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      titleStyle: Text.propTypes.style,
+      onPress: PropTypes.func,
+    }),
+  ),
+  onPress: PropTypes.func,
 };
 
 AlertView.defaultProps = {
-  actions: []
+  actions: [],
 };
 
 export default React.memo(AlertView);

@@ -12,7 +12,7 @@ function Checkbox(props) {
     defaultChecked,
     selectIcon,
     narmalIcon,
-    onPress
+    onPress,
   } = props;
   const [checkState, setCheckState] = useState(defaultChecked);
 
@@ -64,7 +64,7 @@ Checkbox.propTypes = {
   narmalIcon: PropTypes.number,
   selectIcon: PropTypes.number,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
 };
 
 Checkbox.defaultProps = {

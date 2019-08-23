@@ -20,7 +20,6 @@ const isIOS11 = majorVersion >= 11 && isIos;
 const DEFAULT_MAX_TAB_ITEM_WIDTH = 125;
 
 class TouchableWithoutFeedbackWrapper extends React.PureComponent {
-
   render() {
     const {
       onPress,
@@ -94,7 +93,7 @@ class TabBarBottom extends React.PureComponent {
         toValue: 0,
         duration: 150,
         useNativeDriver: true,
-      }).start()
+      }).start(),
     );
 
   _handleKeyboardHide = () =>
@@ -106,7 +105,7 @@ class TabBarBottom extends React.PureComponent {
       this.setState({ keyboard: false });
     });
 
-  _handleLayout = e => {
+  _handleLayout = (e) => {
     const { layout } = this.state;
     const { height, width } = e.nativeEvent.layout;
 
@@ -259,21 +258,17 @@ class TabBarBottom extends React.PureComponent {
               styles.container,
               keyboardHidesTabBar
                 ? {
-                  // When the keyboard is shown, slide down the tab bar
-                  transform: [
-                    {
-                      translateY: this.state.visible.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [this.state.layout.height, 0],
-                      }),
-                    },
-                  ],
-                  // Absolutely position the tab bar so that the content is below it
-                  // This is needed to avoid gap at bottom when the tab bar is hidden
-                  position: this.state.keyboard ? 'absolute' : null,
-                }
+                    transform: [
+                      {
+                        translateY: this.state.visible.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [this.state.layout.height, 0],
+                        }),
+                      },
+                    ],
+                    position: this.state.keyboard ? 'absolute' : null,
+                  }
                 : null,
-
             ]}
             pointerEvents={
               keyboardHidesTabBar && this.state.keyboard ? 'none' : 'auto'
@@ -282,7 +277,8 @@ class TabBarBottom extends React.PureComponent {
           >
             <SafeAreaView
               style={[tabBarStyle, themeValue.tabBar.style]}
-              forceInset={safeAreaInset}>
+              forceInset={safeAreaInset}
+            >
               {routes.map((route, index) => {
                 const focused = index === navigation.state.index;
                 const scene = { route, focused };
@@ -295,7 +291,7 @@ class TabBarBottom extends React.PureComponent {
                 });
 
                 const accessibilityStates = this.props.getAccessibilityStates(
-                  scene
+                  scene,
                 );
 
                 const testID = this.props.getTestID({ route });

@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
 LoadingHint.propTypes = {
   ...LottieView.propTypes,
   style: ViewPropTypes.style,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
 };
 
 LoadingHint.defaultProps = {
   ...LottieView.defaultProps,
-  loading: false
+  loading: false,
 };
 
 export default React.memo(LoadingHint);

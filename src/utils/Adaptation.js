@@ -1,15 +1,14 @@
-
 'use strict';
 import { Dimensions, PixelRatio } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
-const deviceWidth = Math.ceil(Dimensions.get('window').width);      //设备的宽度
-const deviceHeight = Math.ceil(Dimensions.get('window').height);    //设备的高度
-const pixelRatio = Math.ceil(PixelRatio.get());      //当前设备的像素密度
-const defaultPixel = 2;                           //iphone6的像素密度
+const deviceWidth = Math.ceil(Dimensions.get('window').width); //设备的宽度
+const deviceHeight = Math.ceil(Dimensions.get('window').height); //设备的高度
+const pixelRatio = Math.ceil(PixelRatio.get()); //当前设备的像素密度
+const defaultPixel = 2; //iphone6的像素密度
 const w2 = 750 / defaultPixel;
 const h2 = 1334 / defaultPixel;
-const scale = Math.min(deviceHeight / h2, deviceWidth / w2);   //获取缩放比例
+const scale = Math.min(deviceHeight / h2, deviceWidth / w2); //获取缩放比例
 
 console.log(pixelRatio, deviceWidth, deviceHeight);
 
@@ -60,7 +59,7 @@ export function fontSize(size) {
       // Catch other smaller android deviceHeight sizings
     }
     if (deviceHeight < 667) {
-      return size * 1.20;
+      return size * 1.2;
       // catch in-between size Androids and scale font up
       // a tad but not too much
     }
@@ -83,7 +82,7 @@ export function addCustomProps(WrapComponent, customProps) {
   const componentDefaultProps = WrapComponent.defaultProps;
   WrapComponent.defaultProps = {
     ...componentDefaultProps,
-    ...customProps
+    ...customProps,
   };
 }
 

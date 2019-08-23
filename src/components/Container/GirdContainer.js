@@ -4,7 +4,13 @@ import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 
 function GirdContainer(props) {
-  const { style, numColumns, itemColumnMargin, itemRowMargin, children } = props;
+  const {
+    style,
+    numColumns,
+    itemColumnMargin,
+    itemRowMargin,
+    children,
+  } = props;
   const [containerWidth, setContainerWidth] = useState(0);
 
   const onLayout = useCallback((event) => {
@@ -13,7 +19,9 @@ function GirdContainer(props) {
   }, []);
 
   const wrapItemWidth = useMemo(() => {
-    return Math.floor((containerWidth - itemColumnMargin * (numColumns - 1)) / numColumns);
+    return Math.floor(
+      (containerWidth - itemColumnMargin * (numColumns - 1)) / numColumns,
+    );
   }, [containerWidth, itemColumnMargin, numColumns]);
 
   return (
@@ -22,11 +30,14 @@ function GirdContainer(props) {
         const marginLeft = index % numColumns === 0 ? 0 : itemColumnMargin;
         const marginTop = index < numColumns ? 0 : itemRowMargin;
         return React.cloneElement(element, {
-          style: [{
-            width: wrapItemWidth,
-            marginLeft,
-            marginTop
-          }, element.props.style]
+          style: [
+            {
+              width: wrapItemWidth,
+              marginLeft,
+              marginTop,
+            },
+            element.props.style,
+          ],
         });
       })}
     </View>
@@ -38,15 +49,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-
 });
 
 GirdContainer.propTypes = {
-  style: ViewPropTypes.style,  // 最外层的样式
+  style: ViewPropTypes.style, // 最外层的样式
   numColumns: PropTypes.number.isRequired,
   itemColumnMargin: PropTypes.number, // 列间距
   itemRowMargin: PropTypes.number, // 行间距
-  extraData: PropTypes.any
+  extraData: PropTypes.any,
 };
 
 GirdContainer.defaultProps = {

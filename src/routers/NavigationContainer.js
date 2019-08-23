@@ -1,4 +1,3 @@
-
 'use strict';
 import React, { useRef, useCallback } from 'react';
 import { createAppContainer } from 'react-navigation';
@@ -8,7 +7,6 @@ import RouterHelper from './RouterHelper';
 const AppNavigationContainer = createAppContainer(StackNavigator);
 
 function NavigationContainer() {
-
   const navigatorRef = useRef(null);
 
   const _onNavigationStateChange = useCallback(() => {
@@ -33,6 +31,5 @@ function NavigationContainer() {
     />
   );
 }
-
 
 export default React.memo(NavigationContainer);

@@ -1,16 +1,14 @@
 'use strict';
 
 export const Images = {
-
   /**
    * @JSON [动画的JSON文件]
    */
   json_loading: require('./json/loading.json'),
 
-
   /**
-  * @Common [通用]
-  */
+   * @Common [通用]
+   */
   icon_network_err: require('./icon/icon_network_err.png'),
   icon_no_record: require('./icon/icon_no_record.png'),
   icon_nav_left: require('./icon/icon_nav_left.png'),
@@ -32,10 +30,9 @@ export const Images = {
    * @CHAT [聊天组件]
    */
 
-
   /**
-  * @TABBAR [Tabbar]
-  */
+   * @TABBAR [Tabbar]
+   */
   // icon_tabbar_home: require('./tabbar/icon_tabbar_home.png'),
   // icon_tabbar_chat: require('./tabbar/icon_tabbar_chat.png'),
   // icon_tabbar_mine: require('./tabbar/icon_tabbar_mine.png'),
@@ -46,11 +43,7 @@ export const Images = {
    * @ICONS [项目Icon]
    */
 
-
-
   /**
    * @IMAGES [项目Image]
    */
-
-
 };

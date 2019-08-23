@@ -10,14 +10,11 @@ const defaultOption = {
 };
 
 export default class AlertManager {
-
-  static alertKeys = []
+  static alertKeys = [];
 
   static show(props = {}) {
     const { option, ...others } = props;
-    const component = (
-      <AlertView {...others} />
-    );
+    const component = <AlertView {...others} />;
     this.showView(component, option);
   }
 
@@ -25,12 +22,12 @@ export default class AlertManager {
     const newOption = { ...defaultOption, ...option };
     OverlayManager.show(
       <OverlayPop
-        ref={view => view && this.alertKeys.push(view)}
+        ref={(view) => view && this.alertKeys.push(view)}
         onCloseRequest={() => this.hide()}
         {...newOption}
       >
         {component}
-      </OverlayPop>
+      </OverlayPop>,
     );
   }
 
@@ -40,6 +37,4 @@ export default class AlertManager {
       lastRef.close();
     }
   }
-
 }
-

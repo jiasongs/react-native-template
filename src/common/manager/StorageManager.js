@@ -10,35 +10,42 @@ const storageInstance = new Storage({
 });
 
 export default class StorageManager {
-
   static load(key) {
-    return new Promise((resolve, ) => {
-      storageInstance.load({ key }).then((data) => {
-        resolve(data);
-      }).catch(() => {
-        resolve(null);
-      });
+    return new Promise((resolve) => {
+      storageInstance
+        .load({ key })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch(() => {
+          resolve(null);
+        });
     });
   }
 
   static save = async (key, data) => {
-    return new Promise((resolve, ) => {
-      storageInstance.save({ key, data }).then((data) => {
-        resolve(data);
-      }).catch(() => {
-        resolve(null);
-      });
+    return new Promise((resolve) => {
+      storageInstance
+        .save({ key, data })
+        .then(() => {
+          resolve(data);
+        })
+        .catch(() => {
+          resolve(null);
+        });
     });
-  }
+  };
 
   static remove = async (key) => {
-    return new Promise((resolve, ) => {
-      storageInstance.remove({ key }).then((data) => {
-        resolve(data);
-      }).catch(() => {
-        resolve(null);
-      });
+    return new Promise((resolve) => {
+      storageInstance
+        .remove({ key })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch(() => {
+          resolve(null);
+        });
     });
-  }
+  };
 }
-

@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 import { NavigationBar, PageContainer } from '../../components';
 
 function DemoOverlay() {
-
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'DemoOverlay'} />
@@ -13,9 +12,7 @@ function DemoOverlay() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-
-  }
+  container: {},
 });
 
 export default React.memo(DemoOverlay);

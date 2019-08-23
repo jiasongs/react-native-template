@@ -1,15 +1,15 @@
-
 'use strict';
 import { useEffect, useCallback, useState } from 'react';
 import { Keyboard, Platform } from 'react-native';
 
 export function useKeyboard() {
-
   const [keyboardState, setKeyboardState] = useState(null);
 
   useEffect(() => {
-    const showName = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
-    const hidename = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
+    const showName =
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
+    const hidename =
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
     const showListener = Keyboard.addListener(showName, onKeyboardShow);
     const hideListener = Keyboard.addListener(hidename, onKeyboardHide);
     return () => {
@@ -30,10 +30,9 @@ export function useKeyboard() {
       endScreenX: event.endCoordinates.screenX,
       endScreenY: event.endCoordinates.screenY,
       width: event.endCoordinates.width,
-      height: event.endCoordinates.height
+      height: event.endCoordinates.height,
     });
   }, []);
-
 
   const onKeyboardHide = useCallback((event) => {
     if (!event.isEventFromThisApp) {
@@ -46,7 +45,7 @@ export function useKeyboard() {
       endScreenX: event.endCoordinates.screenX,
       endScreenY: event.endCoordinates.screenY,
       width: event.endCoordinates.width,
-      height: event.endCoordinates.height
+      height: event.endCoordinates.height,
     });
   }, []);
 

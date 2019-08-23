@@ -9,11 +9,14 @@ function useThemeValue(initState = {}) {
   const [value, setValue] = useState({ ...DefaultTheme, ...initState });
 
   useEffect(() => {
-    const listenerName = DeviceEventEmitter.addListener(__ChangeEvent, (data) => {
-      setValue((preValue) => {
-        return { ...preValue, ...data };
-      });
-    });
+    const listenerName = DeviceEventEmitter.addListener(
+      __ChangeEvent,
+      (data) => {
+        setValue((preValue) => {
+          return { ...preValue, ...data };
+        });
+      },
+    );
     return () => listenerName.remove();
   }, []);
 
@@ -21,8 +24,7 @@ function useThemeValue(initState = {}) {
 }
 
 class ThemeManager {
-
-  static currentTheme = {}
+  static currentTheme = {};
 
   static addListener(callBack) {
     return DeviceEventEmitter.addListener(__ChangeEvent, callBack);
@@ -43,11 +45,6 @@ class ThemeManager {
   static restoreTheme() {
     DeviceEventEmitter.emit(__ChangeEvent, DefaultTheme);
   }
-
 }
 
-export {
-  ThemeManager,
-  useThemeValue
-};
-
+export { ThemeManager, useThemeValue };

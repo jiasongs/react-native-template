@@ -1,6 +1,18 @@
 'use strict';
-import React, { useState, useRef, useEffect, useMemo, useCallback, useContext } from 'react';
-import { ViewPropTypes, Text, StyleSheet, requireNativeComponent } from 'react-native';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
+  useContext,
+} from 'react';
+import {
+  ViewPropTypes,
+  Text,
+  StyleSheet,
+  requireNativeComponent,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../config/themes';
 
@@ -13,25 +25,28 @@ function PickerIOS(props) {
     selectedIndex,
     data,
     onValueChange,
-    renderLabelString
+    renderLabelString,
   } = props;
   const _picherRef = useRef(null);
   const _currentIndex = useRef(0);
   const [items, setItems] = useState([]);
   const themeValue = useContext(ThemeContext);
 
-  const onChange = useCallback((event) => {
-    console.log('event', event);
-    const { newValue, newIndex } = event.nativeEvent;
-    if (onValueChange) {
-      onValueChange(newValue, newIndex);
-    }
-    if (_picherRef.current && _currentIndex.current !== newIndex) {
-      _picherRef.current.setNativeProps({
-        selectedIndex: _currentIndex.current,
-      });
-    }
-  }, [onValueChange]);
+  const onChange = useCallback(
+    (event) => {
+      console.log('event', event);
+      const { newValue, newIndex } = event.nativeEvent;
+      if (onValueChange) {
+        onValueChange(newValue, newIndex);
+      }
+      if (_picherRef.current && _currentIndex.current !== newIndex) {
+        _picherRef.current.setNativeProps({
+          selectedIndex: _currentIndex.current,
+        });
+      }
+    },
+    [onValueChange],
+  );
 
   const _captureRef = useCallback((picker) => {
     _picherRef.current = picker;
@@ -39,7 +54,9 @@ function PickerIOS(props) {
 
   useEffect(() => {
     const newData = data.map((item, index) => {
-      const label = renderLabelString ? renderLabelString(item, index) : item.label;
+      const label = renderLabelString
+        ? renderLabelString(item, index)
+        : item.label;
       return {
         value: item,
         label: label,

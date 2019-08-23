@@ -5,13 +5,7 @@ import PropTypes from 'prop-types';
 import Button from '../Touchable/Button';
 
 function Radio(props) {
-  const {
-    style,
-    title,
-    checked,
-    selectIcon,
-    narmalIcon
-  } = props;
+  const { style, title, checked, selectIcon, narmalIcon } = props;
 
   return (
     <Button
@@ -49,11 +43,9 @@ Radio.propTypes = {
   narmalIcon: PropTypes.number,
   selectIcon: PropTypes.number,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
 };
 
-Radio.defaultProps = {
-
-};
+Radio.defaultProps = {};
 
 export default React.memo(Radio);

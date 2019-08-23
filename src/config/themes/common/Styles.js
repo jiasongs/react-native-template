@@ -89,69 +89,69 @@ export default {
   },
   SEP: {
     height: StyleSheet.hairlineWidth,
-    backgroundColor: '#f3f3f3'
+    backgroundColor: '#f3f3f3',
   },
   SEP10: {
     height: 10,
-    backgroundColor: '#f3f3f3'
+    backgroundColor: '#f3f3f3',
   },
   /**
    * @字体大小和颜色
    */
   FC16333: {
     fontSize: 16,
-    color: '#333'
+    color: '#333',
   },
   FC16666: {
     fontSize: 16,
-    color: '#666'
+    color: '#666',
   },
   FC16fff: {
     fontSize: 16,
-    color: '#fff'
+    color: '#fff',
   },
   FC15333: {
     fontSize: 15,
-    color: '#333'
+    color: '#333',
   },
   FC15fff: {
     fontSize: 15,
-    color: '#fff'
+    color: '#fff',
   },
   FC15666: {
     fontSize: 15,
-    color: '#666'
+    color: '#666',
   },
   FC14333: {
     fontSize: 14,
-    color: '#333'
+    color: '#333',
   },
   FC13333: {
     fontSize: 13,
-    color: '#333'
+    color: '#333',
   },
   FC14666: {
     fontSize: 14,
-    color: '#666'
+    color: '#666',
   },
   FC13666: {
     fontSize: 13,
-    color: '#666'
+    color: '#666',
   },
   FC13fff: {
     fontSize: 13,
-    color: '#fff'
+    color: '#fff',
   },
   FC12333: {
     fontSize: 12,
-    color: '#666'
+    color: '#666',
   },
   FC12fff: {
     fontSize: 12,
-    color: '#fff'
+    color: '#fff',
   },
   FC10fff: {
     fontSize: 10,
-    color: '#fff'
+    color: '#fff',
   },
 };

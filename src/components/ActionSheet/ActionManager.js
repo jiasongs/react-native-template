@@ -10,8 +10,7 @@ const defaultOption = {
 };
 
 export default class ActionManager {
-
-  static actionKeys = []
+  static actionKeys = [];
 
   static show(props = {}) {
     const { option, ...others } = props;
@@ -25,12 +24,12 @@ export default class ActionManager {
     const newOption = { ...defaultOption, ...option };
     OverlayManager.show(
       <OverlayPull
-        ref={view => view && this.actionKeys.push(view)}
+        ref={(view) => view && this.actionKeys.push(view)}
         onCloseRequest={() => this.hide()}
         {...newOption}
       >
         {component}
-      </OverlayPull>
+      </OverlayPull>,
     );
   }
 
@@ -40,6 +39,4 @@ export default class ActionManager {
       lastRef.close();
     }
   }
-
 }
-

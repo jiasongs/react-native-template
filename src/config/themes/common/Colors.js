@@ -6,5 +6,4 @@ export default {
    */
   overallColor: '#333',
   red1: 'red',
-
 };

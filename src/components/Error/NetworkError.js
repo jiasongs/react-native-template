@@ -1,6 +1,13 @@
 'use strict';
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ViewPropTypes } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ViewPropTypes,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { Theme } from '../../config/themes';
 
@@ -31,7 +38,7 @@ const styles = StyleSheet.create({
   },
   errImage: {
     width: 50,
-    height: 50
+    height: 50,
   },
   description: {
     marginTop: 20,
@@ -54,11 +61,9 @@ const styles = StyleSheet.create({
 NetworkError.propTypes = {
   style: ViewPropTypes.style,
   onNetworkReload: PropTypes.func,
-  source: Image.propTypes.source
+  source: Image.propTypes.source,
 };
 
-NetworkError.defaultProps = {
-
-};
+NetworkError.defaultProps = {};
 
 export default React.memo(NetworkError);

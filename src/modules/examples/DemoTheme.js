@@ -5,9 +5,8 @@ import { NavigationBar, PageContainer, Button } from '../../components';
 import { ThemeManager, ThemeWhite, ThemeBlack } from '../../config/themes';
 
 function DemoTheme() {
-
   return (
-    <PageContainer >
+    <PageContainer>
       <NavigationBar title={'DemoTheme'} />
       <Button
         style={styles.whiteButton}
@@ -24,12 +23,8 @@ function DemoTheme() {
 }
 
 const styles = StyleSheet.create({
-  whiteButton: {
-
-  },
-  blackButton: {
-
-  },
+  whiteButton: {},
+  blackButton: {},
 });
 
 export default React.memo(DemoTheme);

@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 import { NavigationBar, PageContainer } from '../../components';
 
 function DemoActionSheet() {
-
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'DemoActionSheet'} />
@@ -13,9 +12,7 @@ function DemoActionSheet() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-
-  }
+  container: {},
 });
 
 export default React.memo(DemoActionSheet);

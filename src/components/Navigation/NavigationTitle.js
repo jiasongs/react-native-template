@@ -11,7 +11,7 @@ function NavigationTitle(props) {
     titleStyle,
     extraData,
     leftActionWidth,
-    rightActionWidth
+    rightActionWidth,
   } = props;
 
   function buildRenderContent() {
@@ -39,14 +39,14 @@ function NavigationTitle(props) {
     return { width: Theme.screenWidth - maxWidth * 2 };
   }
 
-  const RenderContent = useMemo(buildRenderContent, [title, titleStyle, extraData]);
+  const RenderContent = useMemo(buildRenderContent, [
+    title,
+    titleStyle,
+    extraData,
+  ]);
   const defaultStyle = useMemo(buildStyle, [leftActionWidth, rightActionWidth]);
 
-  return (
-    <View style={[defaultStyle, style]}>
-      {RenderContent}
-    </View>
-  );
+  return <View style={[defaultStyle, style]}>{RenderContent}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -54,16 +54,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: Theme.navBarTitleColor,
     fontSize: Theme.navBarTitleFontSize,
-  }
+  },
 });
 
 NavigationTitle.propTypes = {
   style: ViewPropTypes.style,
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.element]),
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    PropTypes.element,
+  ]),
   titleStyle: Text.propTypes.style,
   leftActionWidth: PropTypes.number,
   rightActionWidth: PropTypes.number,
-  extraData: PropTypes.any
+  extraData: PropTypes.any,
 };
 
 NavigationTitle.defaultProps = {

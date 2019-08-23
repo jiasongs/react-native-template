@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 import { NavigationBar, PageContainer } from '../../components';
 
 function DemoList() {
-
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'DemoList'} />
@@ -13,9 +12,7 @@ function DemoList() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-
-  }
+  container: {},
 });
 
 export default React.memo(DemoList);

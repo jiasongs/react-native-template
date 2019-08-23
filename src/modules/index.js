@@ -26,5 +26,4 @@ export {
   DemoPicker,
   DemoToast,
   Example,
-
 };

@@ -5,30 +5,24 @@ import { NavigationBar, PageContainer, Button } from '../../components';
 import { Images } from '../../assets';
 
 function DemoButton() {
-
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'DemoButton'} />
-      <ScrollView style={styles.content} contentContainerStyle={{ justifyContent: 'center', alignItems: 'center', }}>
-        <Button
-          style={styles.button}
-          title={'solid-title'}
-        />
-        <Button
-          style={styles.button}
-          title={'solid-loading'}
-          loading={true}
-        />
+      <ScrollView
+        style={styles.content}
+        contentContainerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Button style={styles.button} title={'solid-title'} />
+        <Button style={styles.button} title={'solid-loading'} loading={true} />
         <Button
           style={styles.button}
           title={'solid-disabled'}
           disabled={true}
         />
-        <Button
-          raised={true}
-          style={styles.button}
-          title={'solid-raised'}
-        />
+        <Button raised={true} style={styles.button} title={'solid-raised'} />
         <Button
           style={styles.button}
           title={'solid-左icon右title'}
@@ -108,11 +102,7 @@ function DemoButton() {
         <Button type={'outline'} style={styles.button}>
           <Text style={{ color: '#333' }}>{'outline-被button包裹'}</Text>
         </Button>
-        <Button
-          type={'clear'}
-          style={styles.button}
-          title={'clear-title'}
-        />
+        <Button type={'clear'} style={styles.button} title={'clear-title'} />
         <Button
           type={'clear'}
           style={styles.button}
@@ -161,15 +151,11 @@ function DemoButton() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-
-  },
-  content: {
-
-  },
+  container: {},
+  content: {},
   button: {
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 });
 
 export default React.memo(DemoButton);

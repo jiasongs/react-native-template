@@ -4,17 +4,17 @@
  */
 export default {
   /**
-   * @成功 
+   * @成功
    */
   SUCCESS_CODE: 0,
   SUCEESS_MSG: '请求成功',
   /**
-   * @失败 
+   * @失败
    */
   FAIL_CODE: 1,
   FAIL_MSG: '请求失败',
   /**
-   * @超时 
+   * @超时
    */
   OVERTIME_CODE: 50100,
   OVERTIME_MSG: '请求超时',
@@ -32,10 +32,5 @@ export default {
    * @服务器不通 [详细描述]
    */
   SERVER_ERROR_CODE: 50000,
-  SERVER_ERROR_MSG: '服务器请求失败，请稍后重试'
+  SERVER_ERROR_MSG: '服务器请求失败，请稍后重试',
 };
-
-
-
-
-

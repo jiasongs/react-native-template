@@ -6,9 +6,7 @@ import NavigationContainer from './routers/NavigationContainer';
 import { OverlayTopContainer } from './components';
 import { ThemeContext, useThemeValue } from './config/themes';
 
-
 function App() {
-
   const value = useThemeValue();
 
   useEffect(() => {

@@ -2,11 +2,10 @@
 import { StackActions, NavigationActions } from 'react-navigation';
 
 export default class RouterHelper {
-
   /**
    * @导航实例
    */
-  static navigation = null
+  static navigation = null;
   /**
    * @上次执行to方法的时间
    */
@@ -22,7 +21,7 @@ export default class RouterHelper {
   /**
    * @未登录忽略名单 跳转时跳到登录界面
    */
-  static loginIgnoreRoute = []
+  static loginIgnoreRoute = [];
 
   static checkActionState() {
     if (!this.navigation) {
@@ -30,7 +29,7 @@ export default class RouterHelper {
       return false;
     }
     const nowTime = new Date().getTime();
-    if ((nowTime - this.lastActionTime) <= this.interval) {
+    if (nowTime - this.lastActionTime <= this.interval) {
       return false;
     }
     this.lastActionTime = nowTime;
@@ -74,7 +73,9 @@ export default class RouterHelper {
       return;
     }
     if (routeName) {
-      const index = this.routerStacks.findIndex((item) => routeName === item.routeName);
+      const index = this.routerStacks.findIndex(
+        (item) => routeName === item.routeName,
+      );
       if (index >= 0) {
         const navTarget = this.routerStacks[index + 1];
         this.navigation.goBack(navTarget.key);
@@ -120,8 +121,9 @@ export default class RouterHelper {
     if (!this.checkActionState()) {
       return;
     }
-    this.navigation.reset([NavigationActions.navigate({ routeName, params })], 0);
+    this.navigation.reset(
+      [NavigationActions.navigate({ routeName, params })],
+      0,
+    );
   }
 }
-
-

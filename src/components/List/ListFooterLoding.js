@@ -37,7 +37,6 @@ function ListFooterLoding(props) {
   return null;
 }
 
-
 const styles = StyleSheet.create({
   footerContainer: {
     flexDirection: 'row',
@@ -62,12 +61,12 @@ const styles = StyleSheet.create({
 
 ListFooterLoding.propTypes = {
   loading: PropTypes.bool,
-  allLoad: PropTypes.bool,// 是否加载完毕
+  allLoad: PropTypes.bool, // 是否加载完毕
 };
 
 ListFooterLoding.defaultProps = {
   loading: false,
-  allLoad: false
+  allLoad: false,
 };
 
 export default React.memo(ListFooterLoding);

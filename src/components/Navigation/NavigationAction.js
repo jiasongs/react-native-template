@@ -13,10 +13,16 @@ function RenderContent(props) {
       }
       if (React.isValidElement(item)) {
         return React.cloneElement(item, {
-          key: `nav_action${index}`
+          key: `nav_action${index}`,
         });
       }
-      return <NavigationActionItem key={`nav_action${index}`} extraData={extraData} {...item} />;
+      return (
+        <NavigationActionItem
+          key={`nav_action${index}`}
+          extraData={extraData}
+          {...item}
+        />
+      );
     });
   } else if (typeof renderAction === 'function') {
     return renderAction();
@@ -31,10 +37,7 @@ function NavigationAction(props) {
 
   return (
     <View style={[styles.actionContainer, style]} onLayout={onLayout}>
-      <RenderContent
-        renderAction={renderAction}
-        extraData={extraData}
-      />
+      <RenderContent renderAction={renderAction} extraData={extraData} />
     </View>
   );
 }
@@ -49,12 +52,14 @@ const styles = StyleSheet.create({
 NavigationAction.propTypes = {
   style: ViewPropTypes.style,
   onLayout: PropTypes.func,
-  renderAction: PropTypes.oneOfType([PropTypes.array, PropTypes.func, PropTypes.element]),
-  extraData: PropTypes.any
+  renderAction: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.func,
+    PropTypes.element,
+  ]),
+  extraData: PropTypes.any,
 };
 
-NavigationAction.defaultProps = {
-
-};
+NavigationAction.defaultProps = {};
 
 export default React.memo(NavigationAction);

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import OverlayBase from './OverlayBase';
 
 class OverlayPop extends OverlayBase {
-
   constructor(props) {
     super(props);
     this.viewLayout = { x: 0, y: 0, width: 0, height: 0 };
@@ -29,27 +28,27 @@ class OverlayPop extends OverlayBase {
       Animated.timing(this.popAnimates.opacity, {
         toValue: 1,
         duration,
-        useNativeDriver: true
+        useNativeDriver: true,
       }),
       Animated.timing(this.popAnimates.translateX, {
         toValue: 0,
         duration,
-        useNativeDriver: true
+        useNativeDriver: true,
       }),
       Animated.timing(this.popAnimates.translateY, {
         toValue: 0,
         duration,
-        useNativeDriver: true
+        useNativeDriver: true,
       }),
       Animated.timing(this.popAnimates.scaleX, {
         toValue: 1,
         duration,
-        useNativeDriver: true
+        useNativeDriver: true,
       }),
       Animated.timing(this.popAnimates.scaleY, {
         toValue: 1,
         duration,
-        useNativeDriver: true
+        useNativeDriver: true,
       }),
     ]);
   }
@@ -62,27 +61,27 @@ class OverlayPop extends OverlayBase {
       Animated.timing(this.popAnimates.opacity, {
         toValue: 0,
         duration,
-        useNativeDriver: true
+        useNativeDriver: true,
       }),
       Animated.timing(this.popAnimates.translateX, {
         toValue: ft.translateX,
         duration,
-        useNativeDriver: true
+        useNativeDriver: true,
       }),
       Animated.timing(this.popAnimates.translateY, {
         toValue: ft.translateY,
         duration,
-        useNativeDriver: true
+        useNativeDriver: true,
       }),
       Animated.timing(this.popAnimates.scaleX, {
         toValue: ft.scaleX,
         duration,
-        useNativeDriver: true
+        useNativeDriver: true,
       }),
       Animated.timing(this.popAnimates.scaleY, {
         toValue: ft.scaleY,
         duration,
-        useNativeDriver: true
+        useNativeDriver: true,
       }),
     ]);
   }
@@ -91,7 +90,9 @@ class OverlayPop extends OverlayBase {
     const { type, customBounds } = this.props;
     let bounds;
     if (type === 'custom' && !customBounds) {
-      console.error('OverlayPopView: customBounds can not be null when type is "custom"');
+      console.error(
+        'OverlayPopView: customBounds can not be null when type is "custom"',
+      );
     }
     if (type === 'custom' && customBounds) {
       bounds = customBounds;
@@ -114,8 +115,8 @@ class OverlayPop extends OverlayBase {
     const fb = this.fromBounds;
     const tb = this.viewLayout;
     const transform = {
-      translateX: (fb.x + fb.width / 2) - (tb.x + tb.width / 2),
-      translateY: (fb.y + fb.height / 2) - (tb.y + tb.height / 2),
+      translateX: fb.x + fb.width / 2 - (tb.x + tb.width / 2),
+      translateY: fb.y + fb.height / 2 - (tb.y + tb.height / 2),
       scaleX: fb.width / tb.width,
       scaleY: fb.height / tb.height,
     };
@@ -124,7 +125,13 @@ class OverlayPop extends OverlayBase {
 
   appear(animated = this.props.animated) {
     if (animated) {
-      const { opacity, translateX, translateY, scaleX, scaleY } = this.popAnimates;
+      const {
+        opacity,
+        translateX,
+        translateY,
+        scaleX,
+        scaleY,
+      } = this.popAnimates;
       const ft = this.fromTransform;
       opacity.setValue(0);
       translateX.setValue(ft.translateX);
@@ -149,11 +156,17 @@ class OverlayPop extends OverlayBase {
     this.viewLayout = event.nativeEvent.layout;
     onLayout && onLayout(event);
     this.show();
-  }
+  };
 
   renderContent(content = null) {
     const { containerStyle, children } = this.props;
-    const { opacity, translateX, translateY, scaleX, scaleY } = this.popAnimates;
+    const {
+      opacity,
+      translateX,
+      translateY,
+      scaleX,
+      scaleY,
+    } = this.popAnimates;
     const animatedStyle = {
       opacity: opacity,
       transform: [{ translateX }, { translateY }, { scaleX }, { scaleY }],
@@ -168,7 +181,6 @@ class OverlayPop extends OverlayBase {
       </Animated.View>
     );
   }
-
 }
 
 OverlayPop.propTypes = {

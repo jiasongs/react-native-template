@@ -1,14 +1,22 @@
 'use strict';
 import React, { useMemo, useRef, useCallback, useContext } from 'react';
-import { Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator, ImageBackground, ViewPropTypes } from 'react-native';
+import {
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+  ImageBackground,
+  ViewPropTypes,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
 import { ThemeContext } from '../../config/themes';
 
 const IconPosition = {
   PositionTop: 'top',
-  PositionLeft: 'left',            // imageView在titleLabel左边
-  PositionBottom: 'bottom',          // imageView在titleLabel下面
+  PositionLeft: 'left', // imageView在titleLabel左边
+  PositionBottom: 'bottom', // imageView在titleLabel下面
   PositionRight: 'right',
 };
 
@@ -40,19 +48,24 @@ function Button(props) {
   const lastActionTimeRef = useRef(0);
   const themeValue = useContext(ThemeContext);
 
-  const _onPress = useCallback((event) => {
-    const nowTime = new Date().getTime();
-    if ((nowTime - lastActionTimeRef.current) <= clickInterval) {
-      console.warn('间隔时间内重复点击了');
-      return;
-    }
-    lastActionTimeRef.current = nowTime;
-    onPress && onPress(event);
-  }, [clickInterval, onPress]);
+  const _onPress = useCallback(
+    (event) => {
+      const nowTime = new Date().getTime();
+      if (nowTime - lastActionTimeRef.current <= clickInterval) {
+        console.warn('间隔时间内重复点击了');
+        return;
+      }
+      lastActionTimeRef.current = nowTime;
+      onPress && onPress(event);
+    },
+    [clickInterval, onPress],
+  );
 
   const buildStyles = useMemo(() => {
     const button = themeValue.button;
-    const newStyle = [], newTitleStyle = [], newLoadingStyle = [];
+    const newStyle = [],
+      newTitleStyle = [],
+      newLoadingStyle = [];
     if (type === 'solid') {
       newStyle.push(button.solid.style);
       newTitleStyle.push(button.solid.titleStyle);
@@ -89,17 +102,17 @@ function Button(props) {
       buildStyle.push({ alignItems: 'center' });
       switch (iconPosition) {
         case IconPosition.PositionTop:
-          type != 'clear' && buildStyle.push({ paddingVertical: 15 });
+          type !== 'clear' && buildStyle.push({ paddingVertical: 15 });
           buildIconStyle.push({
             marginBottom: spacingIconAndTitle,
-            ...button.iconVerticalStyle
+            ...button.iconVerticalStyle,
           });
           break;
         case IconPosition.PositionBottom:
-          type != 'clear' && buildStyle.push({ paddingVertical: 15 });
+          type !== 'clear' && buildStyle.push({ paddingVertical: 15 });
           buildIconStyle.push({
             marginTop: spacingIconAndTitle,
-            ...button.iconVerticalStyle
+            ...button.iconVerticalStyle,
           });
           break;
         case IconPosition.PositionLeft:
@@ -123,13 +136,36 @@ function Button(props) {
     return {
       style: [...buildStyle, style, disabled ? disabledStyle : null],
       iconStyle: [...buildIconStyle, iconStyle],
-      titleStyle: [...buildTitleStyle, titleStyle, disabled ? disabledTitleStyle : null],
+      titleStyle: [
+        ...buildTitleStyle,
+        titleStyle,
+        disabled ? disabledTitleStyle : null,
+      ],
       loadingStyle: [...newLoadingStyle, loadingStyle],
     };
-  }, [disabled, disabledStyle, disabledTitleStyle, icon, iconPosition, iconStyle, loading, loadingStyle, raised, spacingIconAndTitle, style, themeValue.button, title, titleStyle, type]);
+  }, [
+    disabled,
+    disabledStyle,
+    disabledTitleStyle,
+    icon,
+    iconPosition,
+    iconStyle,
+    loading,
+    loadingStyle,
+    raised,
+    spacingIconAndTitle,
+    style,
+    themeValue.button,
+    title,
+    titleStyle,
+    type,
+  ]);
 
   const iconTopOrLeft = useMemo(() => {
-    return (iconPosition === IconPosition.PositionLeft || iconPosition === IconPosition.PositionTop);
+    return (
+      iconPosition === IconPosition.PositionLeft ||
+      iconPosition === IconPosition.PositionTop
+    );
   }, [iconPosition]);
 
   return (
@@ -153,9 +189,7 @@ function Button(props) {
           source={icon}
         />
       )}
-      {title && (
-        <Text style={buildStyles.titleStyle}>{title}</Text>
-      )}
+      {title && <Text style={buildStyles.titleStyle}>{title}</Text>}
       {icon && !iconTopOrLeft && (
         <ImageView
           style={buildStyles.iconStyle}
@@ -183,27 +217,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  iconStyle: {
-
-  },
-  titleStyle: {
-
-  },
+  iconStyle: {},
+  titleStyle: {},
   imageBackground: {
-    ...StyleSheet.absoluteFillObject
-  }
+    ...StyleSheet.absoluteFillObject,
+  },
 });
 
 Button.propTypes = {
   type: PropTypes.oneOf(['solid', 'clear', 'outline']),
-  icon: PropTypes.oneOfType([PropTypes.number, PropTypes.shape({ uri: PropTypes.string })]),
+  icon: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.shape({ uri: PropTypes.string }),
+  ]),
   iconStyle: Image.propTypes.style,
   iconResizeMode: Image.propTypes.resizeMode,
   iconPosition: PropTypes.oneOf([
     IconPosition.PositionTop,
     IconPosition.PositionLeft,
     IconPosition.PositionBottom,
-    IconPosition.PositionRight
+    IconPosition.PositionRight,
   ]),
   title: PropTypes.string,
   titleStyle: Text.propTypes.style,
@@ -238,7 +271,7 @@ Button.defaultProps = {
   activeOpacity: 0.8,
   clickInterval: 300,
   hitSlop: { top: 10, left: 10, bottom: 10, right: 10 },
-  raised: false
+  raised: false,
 };
 
 export default React.memo(Button);

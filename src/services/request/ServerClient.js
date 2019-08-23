@@ -24,9 +24,11 @@ const _settings = {
     text: 'text/plain',
     html: 'text/html',
     xml: 'application/xml, text/xml',
-    json: 'application/json, text/javascript'
+    json: 'application/json, text/javascript',
   },
-  contentType: useFormData ? 'multipart/form-data; charset=UTF-8' : 'application/x-www-form-urlencoded; charset=UTF-8',
+  contentType: useFormData
+    ? 'multipart/form-data; charset=UTF-8'
+    : 'application/x-www-form-urlencoded; charset=UTF-8',
 };
 
 /**
@@ -34,10 +36,10 @@ const _settings = {
  */
 const _allType = '*/' + '*';
 
-
 function configSettings(settings) {
   // fetch 选项 // 组合默认设置与用户设置
-  let options = {}, newSettings = { ..._settings, ...settings };
+  let options = {},
+    newSettings = { ..._settings, ...settings };
   newSettings.method = newSettings.method.toUpperCase();
   newSettings.dataType = newSettings.dataType.toLowerCase();
   // GET/HEAD请求不能设置body
@@ -46,7 +48,7 @@ function configSettings(settings) {
   newSettings.query = QueryString.stringify(newSettings.query || null);
   if (newSettings.uploadFormData && Array.isArray(newSettings.uploadFormData)) {
     let newFormData = [];
-    newSettings.uploadFormData.forEach(item => {
+    newSettings.uploadFormData.forEach((item) => {
       if (item.filename) {
         let path = item.data;
         path = path.startsWith('file://') ? path.slice(7) : path;
@@ -61,14 +63,18 @@ function configSettings(settings) {
   if (newSettings.data) {
     if (newSettings.useFormData) {
       let formData = new FormData();
-      for (const key in newSettings.data) {
+      let key;
+      for (key in newSettings.data) {
         if (Object.prototype.hasOwnProperty.call(newSettings.data, key)) {
           let value = newSettings.data[key];
           if (value === undefined || value === null) {
             value = '';
           } else if (value.slice) {
             let newValue = value.slice();
-            if (newValue && (Array.isArray(newValue) || typeof newValue === 'object')) {
+            if (
+              newValue &&
+              (Array.isArray(newValue) || typeof newValue === 'object')
+            ) {
               value = JSON.stringify(newValue);
             }
           }
@@ -96,13 +102,18 @@ function configSettings(settings) {
       options.body = newSettings.data;
       newSettings.headers['Content-Type'] = newSettings.contentType;
     } else if (newSettings.uploadFormData) {
-      newSettings.headers['Content-Type'] = 'multipart/form-data; charset=UTF-8';
+      newSettings.headers['Content-Type'] =
+        'multipart/form-data; charset=UTF-8';
     }
   }
-  newSettings.url += (newSettings.query ? (/\?/.test(newSettings.url) ? '&' : '?') + newSettings.query : '');
+  newSettings.url += newSettings.query
+    ? (/\?/.test(newSettings.url) ? '&' : '?') + newSettings.query
+    : '';
   // q=0.01 表示权重，数字越小权重越小
   let accept = newSettings.accepts[newSettings.dataType];
-  newSettings.headers.Accept = accept ? (accept + ', ' + _allType + '; q=0.01') : _allType;
+  newSettings.headers.Accept = accept
+    ? accept + ', ' + _allType + '; q=0.01'
+    : _allType;
   options.method = newSettings.method;
   options.headers = newSettings.headers;
   return { newSettings, options };
@@ -112,7 +123,11 @@ function timeoutPromise(settings) {
   const { newSettings } = settings;
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve({ code: ServerCode.OVERTIME_CODE, data: null, msg: ServerCode.OVERTIME_MSG });
+      resolve({
+        code: ServerCode.OVERTIME_CODE,
+        data: null,
+        msg: ServerCode.OVERTIME_MSG,
+      });
     }, newSettings.timeout);
   });
 }
@@ -122,8 +137,9 @@ function fetchPromise(settings) {
   return fetch(newSettings.url, options)
     .then((response) => {
       const status = response.status;
-      if (response.ok && status >= 200 && status < 300 || status === 304) {
-        const dataType = newSettings.dataType || response.headers.get('Content-Type');
+      if ((response.ok && status >= 200 && status < 300) || status === 304) {
+        const dataType =
+          newSettings.dataType || response.headers.get('Content-Type');
         if (dataType.match(/json/)) {
           return response.json();
         } else {
@@ -141,14 +157,30 @@ function fetchPromise(settings) {
       if (__DEV__) {
         try {
           console.group('%c请求数据', loggerTrueColor);
-          console.log(`%c请求接口(${options.method})——>>`, loggerTrueColor, newSettings.url);
+          console.log(
+            `%c请求接口(${options.method})——>>`,
+            loggerTrueColor,
+            newSettings.url,
+          );
           if (options.method === 'GET') {
-            console.log('%c请求参数(QUERY)——>>', loggerTrueColor, QueryString.parse(newSettings.query));
+            console.log(
+              '%c请求参数(QUERY)——>>',
+              loggerTrueColor,
+              QueryString.parse(newSettings.query),
+            );
           } else {
             if (newSettings.useFormData) {
-              console.log('%c请求内容(FORMDATA)——>>', loggerTrueColor, newSettings.data._parts);
+              console.log(
+                '%c请求内容(FORMDATA)——>>',
+                loggerTrueColor,
+                newSettings.data._parts,
+              );
             } else {
-              console.log('%c请求内容(JSON)——>>', loggerTrueColor, JSON.parse(newSettings.data));
+              console.log(
+                '%c请求内容(JSON)——>>',
+                loggerTrueColor,
+                JSON.parse(newSettings.data),
+              );
             }
           }
           console.log('%c请求结果——>>', loggerTrueColor, result);
@@ -165,30 +197,60 @@ function fetchPromise(settings) {
         try {
           let errorDetail = await error.errorDetail;
           console.group('%c请求数据', loggerFalseColor);
-          console.log(`%c请求接口(${options.method})——>>`, loggerFalseColor, newSettings.url);
+          console.log(
+            `%c请求接口(${options.method})——>>`,
+            loggerFalseColor,
+            newSettings.url,
+          );
           if (options.method === 'GET') {
-            console.log('%c请求参数(QUERY)——>>', loggerFalseColor, QueryString.parse(newSettings.query));
+            console.log(
+              '%c请求参数(QUERY)——>>',
+              loggerFalseColor,
+              QueryString.parse(newSettings.query),
+            );
           } else {
             if (newSettings.useFormData) {
-              console.log('%c请求内容(FORMDATA)——>>', loggerFalseColor, newSettings.data._parts);
+              console.log(
+                '%c请求内容(FORMDATA)——>>',
+                loggerFalseColor,
+                newSettings.data._parts,
+              );
             } else {
-              console.log('%c请求内容(JSON)——>>', loggerFalseColor, JSON.parse(newSettings.data));
+              console.log(
+                '%c请求内容(JSON)——>>',
+                loggerFalseColor,
+                JSON.parse(newSettings.data),
+              );
             }
           }
-          console.log('%c请求失败——>>', loggerFalseColor, error.status, errorDetail);
+          console.log(
+            '%c请求失败——>>',
+            loggerFalseColor,
+            error.status,
+            errorDetail,
+          );
           console.groupEnd();
-        } catch (error) {
-          console.log('%c打印出错——>>', loggerFalseColor, error);
+        } catch (e) {
+          console.log('%c打印出错——>>', loggerFalseColor, e);
         }
       }
-      return Promise.resolve({ code: ServerCode.FAIL_CODE, data: '', msg: error });
+      return Promise.resolve({
+        code: ServerCode.FAIL_CODE,
+        data: '',
+        msg: error,
+      });
     });
 }
 
 function fetchBlobPromise(settings) {
   const { newSettings, options } = settings;
   return FetchBlob.config(newSettings.config)
-    .fetch(options.method, newSettings.url, options.headers, newSettings.uploadFormData)
+    .fetch(
+      options.method,
+      newSettings.url,
+      options.headers,
+      newSettings.uploadFormData,
+    )
     .uploadProgress((written, total) => {
       console.log('uploaded', written / total);
     })
@@ -215,12 +277,24 @@ function fetchBlobPromise(settings) {
       if (__DEV__) {
         try {
           console.group('%c请求数据', loggerTrueColor);
-          console.log(`%c请求接口(${options.method})——>>`, loggerTrueColor, newSettings.url);
+          console.log(
+            `%c请求接口(${options.method})——>>`,
+            loggerTrueColor,
+            newSettings.url,
+          );
           if (options.method === 'GET') {
-            console.log('%c下载参数(QUERY)——>>', loggerTrueColor, QueryString.parse(newSettings.query));
+            console.log(
+              '%c下载参数(QUERY)——>>',
+              loggerTrueColor,
+              QueryString.parse(newSettings.query),
+            );
           } else {
             if (newSettings.uploadFormData) {
-              console.log('%c上传内容(FORMDATA)——>>', loggerTrueColor, newSettings.uploadFormData);
+              console.log(
+                '%c上传内容(FORMDATA)——>>',
+                loggerTrueColor,
+                newSettings.uploadFormData,
+              );
             }
           }
           console.log('%c请求结果——>>', loggerTrueColor, result);
@@ -236,21 +310,42 @@ function fetchBlobPromise(settings) {
         try {
           let errorDetail = await error.errorDetail;
           console.group('%c请求数据', loggerFalseColor);
-          console.log(`%c请求接口(${options.method})——>>`, loggerFalseColor, newSettings.url);
+          console.log(
+            `%c请求接口(${options.method})——>>`,
+            loggerFalseColor,
+            newSettings.url,
+          );
           if (options.method === 'GET') {
-            console.log('%c下载参数(QUERY)——>>', loggerFalseColor, QueryString.parse(newSettings.query));
+            console.log(
+              '%c下载参数(QUERY)——>>',
+              loggerFalseColor,
+              QueryString.parse(newSettings.query),
+            );
           } else {
             if (newSettings.uploadFormData) {
-              console.log('%c上传内容(FORMDATA)——>>', loggerFalseColor, newSettings.uploadFormData);
+              console.log(
+                '%c上传内容(FORMDATA)——>>',
+                loggerFalseColor,
+                newSettings.uploadFormData,
+              );
             }
           }
-          console.log('%c请求失败——>>', loggerFalseColor, error.status, errorDetail);
+          console.log(
+            '%c请求失败——>>',
+            loggerFalseColor,
+            error.status,
+            errorDetail,
+          );
           console.groupEnd();
-        } catch (error) {
-          console.log('%c打印出错——>>', loggerFalseColor, error);
+        } catch (e) {
+          console.log('%c打印出错——>>', loggerFalseColor, e);
         }
       }
-      return Promise.resolve({ code: ServerCode.FAIL_CODE, data: '', msg: error });
+      return Promise.resolve({
+        code: ServerCode.FAIL_CODE,
+        data: '',
+        msg: error,
+      });
     });
 }
 
@@ -263,12 +358,6 @@ function request(settings) {
   const newSettings = configSettings(settings);
   const timeout = timeoutPromise(newSettings);
   const fetch = fetchPromise(newSettings);
-  /**
-  * @debug环境下安卓race方法有bug 
-  */
-  if (__ANDROID__ && __DEV__) {
-    return fetch;
-  }
   return Promise.race([timeout, fetch]);
 }
 
@@ -276,12 +365,6 @@ function requestBlob(settings) {
   const newSettings = configSettings(settings);
   // const timeout = timeoutPromise(newSettings);
   const fetchBlob = fetchBlobPromise(newSettings);
-  /**
-   * @debug环境下安卓race方法有bug 
-   */
-  if (__ANDROID__ && __DEV__) {
-    return fetchBlob;
-  }
   return Promise.race([fetchBlob]);
 }
 
@@ -296,7 +379,7 @@ function get(url, query, option) {
     url: url,
     method: 'GET',
     query: { ...query },
-    ...option
+    ...option,
   };
   return request(setting);
 }
@@ -312,7 +395,7 @@ function post(url, data, option) {
     url: url,
     method: 'POST',
     data: { ...data },
-    ...option
+    ...option,
   };
   return request(setting);
 }
@@ -331,7 +414,7 @@ function upload(url, formData, option) {
     method: 'POST',
     uploadFormData: formData,
     config: {},
-    ...option
+    ...option,
     // uploadProgress: null,
   };
   return requestBlob(setting);
@@ -352,15 +435,14 @@ function download(url, query, option) {
     method: 'GET',
     query: { ...query },
     config: { fileCache: true, appendExt: urlArray[urlArray.length - 1] },
-    ...option
+    ...option,
   };
   return requestBlob(setting);
 }
-
 
 export default {
   get,
   post,
   upload,
-  download
+  download,
 };

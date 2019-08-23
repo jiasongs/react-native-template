@@ -1,19 +1,33 @@
 'use strict';
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from 'react';
 import { View, StyleSheet, Animated, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
 
 const ImageStatus = {
-  START: 'START',  // 开始加载
+  START: 'START', // 开始加载
   LOADING: 'LOADING', // 加载中
-  END: 'END',  // 结束加载
-  ERROR: 'ERROR' // 加载错误
+  END: 'END', // 结束加载
+  ERROR: 'ERROR', // 加载错误
 };
 
 function RenderPlaceholder(props) {
-  const { maxImageWidth, imageStatus, placeholderImage, placeholderStyle } = props;
-  if (!maxImageWidth && (imageStatus === ImageStatus.START || imageStatus === ImageStatus.LOADING)) {
+  const {
+    maxImageWidth,
+    imageStatus,
+    placeholderImage,
+    placeholderStyle,
+  } = props;
+  if (
+    !maxImageWidth &&
+    (imageStatus === ImageStatus.START || imageStatus === ImageStatus.LOADING)
+  ) {
     return (
       <View style={styles.placeholderContainer}>
         <Image
@@ -30,11 +44,7 @@ function RenderPlaceholder(props) {
 function RenderOpacityMask(props) {
   const { maxImageWidth, useOpacity, opacity } = props;
   if (maxImageWidth && useOpacity) {
-    return (
-      <Animated.View
-        style={[styles.opacityMask, { opacity: opacity }]}
-      />
-    );
+    return <Animated.View style={[styles.opacityMask, { opacity: opacity }]} />;
   }
   return null;
 }
@@ -71,49 +81,66 @@ function ImageView(props) {
     Animated.timing(opacityRef.current, {
       toValue: 0,
       duration: 300,
-      useNativeDriver: true
-    }).start(() => {
-
-    });
+      useNativeDriver: true,
+    }).start(() => {});
   }
 
-  const onImageProgress = useCallback((event) => {
-    onProgress && onProgress(event);
-  }, [onProgress]);
+  const onImageProgress = useCallback(
+    (event) => {
+      onProgress && onProgress(event);
+    },
+    [onProgress],
+  );
 
-  const onImageLoadStart = useCallback((event) => {
-    _imageStatusRef.current = ImageStatus.LOADING;
-    setImageStatus(ImageStatus.LOADING);
-    onLoadStart && onLoadStart(event);
-  }, [onLoadStart]);
+  const onImageLoadStart = useCallback(
+    (event) => {
+      _imageStatusRef.current = ImageStatus.LOADING;
+      setImageStatus(ImageStatus.LOADING);
+      onLoadStart && onLoadStart(event);
+    },
+    [onLoadStart],
+  );
 
-  const onImageLoadEnd = useCallback((event) => {
-    _imageStatusRef.current = ImageStatus.END;
-    setImageStatus(ImageStatus.END);
-    onLoadEnd && onLoadEnd(event);
-  }, [onLoadEnd]);
+  const onImageLoadEnd = useCallback(
+    (event) => {
+      _imageStatusRef.current = ImageStatus.END;
+      setImageStatus(ImageStatus.END);
+      onLoadEnd && onLoadEnd(event);
+    },
+    [onLoadEnd],
+  );
 
-  const onImageLoad = useCallback((event) => {
-    let { width, height } = event.nativeEvent;
-    if (maxImageWidth) {
-      if (width >= maxImageWidth) {
-        height = (maxImageWidth / width) * height;
-        width = maxImageWidth;
+  const onImageLoad = useCallback(
+    (event) => {
+      let { width, height } = event.nativeEvent;
+      if (maxImageWidth) {
+        if (width >= maxImageWidth) {
+          height = (maxImageWidth / width) * height;
+          width = maxImageWidth;
+        }
+        setImageSize({ width, height });
       }
-      setImageSize({ width, height });
-    }
-    onLoad && onLoad(event);
-  }, [maxImageWidth, onLoad]);
+      onLoad && onLoad(event);
+    },
+    [maxImageWidth, onLoad],
+  );
 
-  const onImageError = useCallback((event) => {
-    _imageStatusRef.current = ImageStatus.ERROR;
-    setImageStatus(ImageStatus.ERROR);
-    onError && onError(event);
-  }, [onError]);
+  const onImageError = useCallback(
+    (event) => {
+      _imageStatusRef.current = ImageStatus.ERROR;
+      setImageStatus(ImageStatus.ERROR);
+      onError && onError(event);
+    },
+    [onError],
+  );
 
   useEffect(() => {
     const opacityAnimation = opacityRef.current;
-    if (maxImageWidth && useOpacity && _imageStatusRef.current === ImageStatus.END) {
+    if (
+      maxImageWidth &&
+      useOpacity &&
+      _imageStatusRef.current === ImageStatus.END
+    ) {
       startOpacityAnimated();
     }
     return () => {
@@ -122,7 +149,11 @@ function ImageView(props) {
   }, [imageStatus, maxImageWidth, useOpacity]);
 
   const newSource = useMemo(() => {
-    if (source && typeof source !== 'number' && (source.uri === undefined || source.uri === null)) {
+    if (
+      source &&
+      typeof source !== 'number' &&
+      (source.uri === undefined || source.uri === null)
+    ) {
       source.uri = '';
     }
     return { ...source };
@@ -180,7 +211,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#fff',
-  }
+  },
 });
 
 ImageView.propTypes = {
@@ -188,7 +219,7 @@ ImageView.propTypes = {
   maxImageWidth: PropTypes.number,
   useOpacity: PropTypes.bool,
   placeholderImage: Image.propTypes.source,
-  placeholderStyle: Image.propTypes.style
+  placeholderStyle: Image.propTypes.style,
 };
 
 ImageView.defaultProps = {

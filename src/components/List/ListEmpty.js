@@ -28,12 +28,15 @@ const styles = StyleSheet.create({
   },
   emptyImage: {
     width: scaleSize(180),
-    height: scaleSize(180)
-  }
+    height: scaleSize(180),
+  },
 });
 
 ListEmpty.propTypes = {
-  source: PropTypes.oneOfType([PropTypes.number, PropTypes.shape({ uri: PropTypes.string })]),
+  source: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.shape({ uri: PropTypes.string }),
+  ]),
   title: PropTypes.string,
 };
 

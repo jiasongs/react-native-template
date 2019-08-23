@@ -7,7 +7,6 @@ import OverlayManager from './OverlayManager';
 import OverlayBase from './OverlayBase';
 
 class OverlayPull extends OverlayBase {
-
   constructor(props) {
     super(props);
     this.viewLayout = { x: 0, y: 0, width: 0, height: 0 };
@@ -29,8 +28,8 @@ class OverlayPull extends OverlayBase {
       Animated.spring(this.pullAnimates.translation, {
         toValue: 0,
         friction: 9,
-        useNativeDriver: true
-      })
+        useNativeDriver: true,
+      }),
     ]);
   }
 
@@ -40,8 +39,8 @@ class OverlayPull extends OverlayBase {
       Animated.timing(this.pullAnimates.translation, {
         toValue: this.offsetSize,
         duration: 250,
-        useNativeDriver: true
-      })
+        useNativeDriver: true,
+      }),
     ]);
   }
 
@@ -118,23 +117,26 @@ class OverlayPull extends OverlayBase {
         break;
     }
     const size = Math.abs(this.offsetSize);
-    const translation = (side === 'left' || side === 'right') ? Math.abs(translationX) : Math.abs(translationY);
+    const translation =
+      side === 'left' || side === 'right'
+        ? Math.abs(translationX)
+        : Math.abs(translationY);
     if (translation <= size / 3) {
       Animated.spring(this.pullAnimates.translation, {
         toValue: 0,
         friction: 9,
-        useNativeDriver: true
+        useNativeDriver: true,
       }).start();
     } else {
       Animated.timing(this.pullAnimates.translation, {
         toValue: this.offsetSize,
         duration: 200,
-        useNativeDriver: true
+        useNativeDriver: true,
       }).start(() => {
         this.close();
       });
     }
-  }
+  };
 
   _onGestureEvent = (event) => {
     const { side } = this.props;
@@ -166,7 +168,7 @@ class OverlayPull extends OverlayBase {
       default:
         break;
     }
-  }
+  };
 
   appear(animated = this.props.animated) {
     const { rootTransform } = this.props;
@@ -189,16 +191,32 @@ class OverlayPull extends OverlayBase {
     let sideStyle = {};
     switch (side) {
       case 'top':
-        sideStyle = { flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'stretch' };
+        sideStyle = {
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'stretch',
+        };
         break;
       case 'left':
-        sideStyle = { flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'stretch' };
+        sideStyle = {
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          alignItems: 'stretch',
+        };
         break;
       case 'right':
-        sideStyle = { flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'stretch' };
+        sideStyle = {
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          alignItems: 'stretch',
+        };
         break;
       default:
-        sideStyle = { flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'stretch' };
+        sideStyle = {
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          alignItems: 'stretch',
+        };
     }
     return super.buildStyle().concat(sideStyle);
   }
@@ -208,7 +226,7 @@ class OverlayPull extends OverlayBase {
     this.viewLayout = event.nativeEvent.layout;
     onLayout && onLayout(event);
     this.show();
-  }
+  };
 
   renderContent(content = null) {
     const { side, containerStyle, children } = this.props;
@@ -216,35 +234,43 @@ class OverlayPull extends OverlayBase {
     switch (side) {
       case 'top':
         transformStyle = {
-          transform: [{
-            translateY: this.pullAnimates.translation
-          }]
+          transform: [
+            {
+              translateY: this.pullAnimates.translation,
+            },
+          ],
         };
         break;
       case 'left':
         transformStyle = {
-          transform: [{
-            translateX: this.pullAnimates.translation
-          }]
+          transform: [
+            {
+              translateX: this.pullAnimates.translation,
+            },
+          ],
         };
         break;
       case 'right':
         transformStyle = {
-          transform: [{
-            translateX: this.pullAnimates.translation
-          }]
+          transform: [
+            {
+              translateX: this.pullAnimates.translation,
+            },
+          ],
         };
         break;
       default:
         transformStyle = {
-          transform: [{
-            translateY: this.pullAnimates.translation
-          }]
+          transform: [
+            {
+              translateY: this.pullAnimates.translation,
+            },
+          ],
         };
     }
     const animatedStyle = {
       opacity: this.pullAnimates.opacity,
-      ...transformStyle
+      ...transformStyle,
     };
     return (
       <PanGestureHandler
@@ -255,7 +281,8 @@ class OverlayPull extends OverlayBase {
         <Animated.View
           style={[containerStyle, animatedStyle]}
           pointerEvents={'box-none'}
-          onLayout={this.onLayout}>
+          onLayout={this.onLayout}
+        >
           {content || children}
         </Animated.View>
       </PanGestureHandler>
@@ -269,12 +296,14 @@ OverlayPull.propTypes = {
   containerStyle: ViewPropTypes.style,
   rootTransform: PropTypes.oneOfType([
     PropTypes.oneOf(['none', 'translate', 'scale']),
-    PropTypes.arrayOf(PropTypes.shape({
-      translateX: PropTypes.number,
-      translateY: PropTypes.number,
-      scaleX: PropTypes.number,
-      scaleY: PropTypes.number,
-    })),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        translateX: PropTypes.number,
+        translateY: PropTypes.number,
+        scaleX: PropTypes.number,
+        scaleY: PropTypes.number,
+      }),
+    ),
   ]),
   panGestureEnabled: PropTypes.bool,
 };

@@ -3,26 +3,15 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 function Card() {
-
-  return (
-    <View style={styles.container}>
-
-    </View>
-  );
+  return <View style={styles.container} />;
 }
 
 const styles = StyleSheet.create({
-  container: {
-
-  }
+  container: {},
 });
 
-Card.propTypes = {
+Card.propTypes = {};
 
-};
-
-Card.defaultProps = {
-
-};
+Card.defaultProps = {};
 
 export default React.memo(Card);

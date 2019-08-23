@@ -1,5 +1,12 @@
 'use strict';
-import React, { useState, useRef, useEffect, useMemo, useCallback, useContext } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
+  useContext,
+} from 'react';
 import { ViewPropTypes, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../config/themes';
@@ -12,18 +19,21 @@ function PickerAndroid(props) {
     selectedIndex,
     data,
     onValueChange,
-    renderLabelString
+    renderLabelString,
   } = props;
 
   const _currentIndex = useRef(0);
   const [items, setItems] = useState([]);
   const themeValue = useContext(ThemeContext);
 
-  const onChange = useCallback((index) => {
-    if (onValueChange) {
-      onValueChange(items[index], index);
-    }
-  }, [items, onValueChange]);
+  const onChange = useCallback(
+    (index) => {
+      if (onValueChange) {
+        onValueChange(items[index], index);
+      }
+    },
+    [items, onValueChange],
+  );
 
   useEffect(() => {
     const newData = data.map((item, index) => {
@@ -43,7 +53,6 @@ function PickerAndroid(props) {
       titleStyle: [picker.titleStyle, titleStyle],
     };
   }, [themeValue, style, titleStyle]);
-
 
   return (
     <WheelPicker

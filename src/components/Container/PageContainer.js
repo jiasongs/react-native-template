@@ -40,7 +40,7 @@ function PageContainer(props) {
     onNetworkReload,
     loading,
     fitNotchedScreen,
-    fitNotchedScreenType
+    fitNotchedScreenType,
   } = props;
 
   const themeValue = useContext(ThemeContext);
@@ -51,11 +51,11 @@ function PageContainer(props) {
     if (fitNotchedScreen) {
       if (fitNotchedScreenType === 'padding') {
         notchedScreenStyle = {
-          paddingBottom: Theme.isNotchedScreen ? Theme.screenInset.bottom : 0
+          paddingBottom: Theme.isNotchedScreen ? Theme.screenInset.bottom : 0,
         };
       } else {
         notchedScreenStyle = {
-          marginBottom: Theme.isNotchedScreen ? Theme.screenInset.bottom : 0
+          marginBottom: Theme.isNotchedScreen ? Theme.screenInset.bottom : 0,
         };
       }
     } else {
@@ -69,10 +69,7 @@ function PageContainer(props) {
   return (
     <View style={buildStyles.style}>
       {children}
-      <MemoRenderLoadingHint
-        style={emptyStyle}
-        loading={loading}
-      />
+      <MemoRenderLoadingHint style={emptyStyle} loading={loading} />
       {showNetworkError && (
         <MemoRenderNetworkError
           style={emptyStyle}
@@ -98,7 +95,7 @@ PageContainer.propTypes = {
   loading: PropTypes.bool,
   showNetworkError: PropTypes.bool,
   onNetworkReload: PropTypes.func,
-  networkErrorSource: NetworkError.type.propTypes.source
+  networkErrorSource: NetworkError.type.propTypes.source,
 };
 
 PageContainer.defaultProps = {
@@ -109,7 +106,3 @@ PageContainer.defaultProps = {
 };
 
 export default React.memo(PageContainer);
-
-
-
-

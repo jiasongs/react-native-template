@@ -1,5 +1,8 @@
 'use strict';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+} from 'react-navigation';
 import { tabOptions, transitionConfig } from './RouterTool';
 import { TabBottomBar } from '../components';
 import {
@@ -20,14 +23,16 @@ import {
 
 const TabNavigatorRouter = {
   Example: {
-    screen: Example, navigationOptions: tabOptions({
+    screen: Example,
+    navigationOptions: tabOptions({
       title: '示例',
-    })
+    }),
   },
   About: {
-    screen: About, navigationOptions: tabOptions({
+    screen: About,
+    navigationOptions: tabOptions({
       title: '关于',
-    })
+    }),
   },
 };
 
@@ -40,7 +45,7 @@ const TabNavigatorConfig = {
     inactiveTintColor: '#999',
     activeTintColor: '#0085da',
     style: {
-      backgroundColor: '#fff'
+      backgroundColor: '#fff',
     },
     tabStyle: {
       margin: 2,
@@ -51,10 +56,13 @@ const TabNavigatorConfig = {
   swipeEnabled: false,
   animationEnabled: false,
   tabBarPosition: 'bottom',
-  tabBarComponent: TabBottomBar
+  tabBarComponent: TabBottomBar,
 };
 
-const TabNavigator = createBottomTabNavigator(TabNavigatorRouter, TabNavigatorConfig);
+const TabNavigator = createBottomTabNavigator(
+  TabNavigatorRouter,
+  TabNavigatorConfig,
+);
 
 const StackNavigatorRouter = {
   Tab: { screen: TabNavigator },
@@ -76,16 +84,17 @@ const StackNavigatorConfig = {
   initialRouteParams: {},
   defaultNavigationOptions: {
     header: null,
-    gesturesEnabled: true
+    gesturesEnabled: true,
   },
-  cardStyle: {
-
-  },
+  cardStyle: {},
   cardShadowEnabled: true,
   cardOverlayEnabled: true,
-  transitionConfig: transitionConfig
+  transitionConfig: transitionConfig,
 };
 
-const StackNavigator = createStackNavigator(StackNavigatorRouter, StackNavigatorConfig);
+const StackNavigator = createStackNavigator(
+  StackNavigatorRouter,
+  StackNavigatorConfig,
+);
 
 export { StackNavigator };

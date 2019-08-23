@@ -1,6 +1,20 @@
 'use strict';
-import React, { useState, useRef, useMemo, useCallback, useContext } from 'react';
-import { View, Text, StyleSheet, StatusBar, ImageBackground, Image, Platform } from 'react-native';
+import React, {
+  useState,
+  useRef,
+  useMemo,
+  useCallback,
+  useContext,
+} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  StatusBar,
+  ImageBackground,
+  Image,
+  Platform,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { Theme, ThemeContext } from '../../config/themes';
 import NavigationTitle from './NavigationTitle';
@@ -10,8 +24,10 @@ const MemoRenderBackground = React.memo(RenderImageBackground);
 
 function RenderImageBackground(props) {
   const { backgroundImage } = props;
-  return backgroundImage && (
-    <ImageBackground style={styles.navImageBack} source={backgroundImage} />
+  return (
+    backgroundImage && (
+      <ImageBackground style={styles.navImageBack} source={backgroundImage} />
+    )
   );
 }
 
@@ -29,23 +45,28 @@ function NavigationBar(props) {
     backgroundImage,
     backActionSource,
     title,
-    extraData
+    extraData,
   } = props;
 
   const themeValue = useContext(ThemeContext);
 
-  const defaultLeftActionRef = useRef([{
-    icon: backActionSource,
-    iconStyle: { width: 20, height: 20 },
-    onPress: _onPressBackFunc
-  }]);
+  const defaultLeftActionRef = useRef([
+    {
+      icon: backActionSource,
+      iconStyle: { width: 20, height: 20 },
+      onPress: _onPressBackFunc,
+    },
+  ]);
 
   const [leftActionWidth, setLeftActionWidth] = useState(10);
   const [rightActionWidth, setRightActionWidth] = useState(10);
 
-  const _onPressBackFunc = useCallback((event) => {
-    onPressBack && onPressBack(event);
-  }, [onPressBack]);
+  const _onPressBackFunc = useCallback(
+    (event) => {
+      onPressBack && onPressBack(event);
+    },
+    [onPressBack],
+  );
 
   const onLayoutLeft = useCallback((event) => {
     const width = event.nativeEvent.layout.width;
@@ -58,7 +79,8 @@ function NavigationBar(props) {
   }, []);
 
   const newRenderLeftAction = useMemo(() => {
-    if (extraData);
+    if (extraData) {
+    }
     if (renderLeftAction === undefined) {
       return defaultLeftActionRef.current;
     }
@@ -70,7 +92,7 @@ function NavigationBar(props) {
     return {
       style: [navigationBar.style, styles.container, style],
       statusBarStyle: navigationBar.statusBarStyle,
-      titleStyle: [navigationBar.titleStyle, titleStyle]
+      titleStyle: [navigationBar.titleStyle, titleStyle],
     };
   }, [themeValue, style, titleStyle]);
 
@@ -128,9 +150,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  navTitleContainer: {
-
-  },
+  navTitleContainer: {},
   navLeftContainer: {
     position: 'absolute',
     left: 0,
@@ -151,20 +171,35 @@ const styles = StyleSheet.create({
 });
 
 NavigationBar.propTypes = {
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.element]),
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    PropTypes.element,
+  ]),
   titleStyle: Text.propTypes.style,
   backActionSource: Image.propTypes.source,
-  renderLeftAction: PropTypes.oneOfType([PropTypes.array, PropTypes.func, PropTypes.element]),
-  renderRightAction: PropTypes.oneOfType([PropTypes.array, PropTypes.func, PropTypes.element]),
+  renderLeftAction: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.func,
+    PropTypes.element,
+  ]),
+  renderRightAction: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.func,
+    PropTypes.element,
+  ]),
   backgroundImage: PropTypes.number,
-  statusBarStyle: PropTypes.oneOf(['default', 'light-content', 'dark-content',]),
+  statusBarStyle: PropTypes.oneOf(['default', 'light-content', 'dark-content']),
   statusBarColor: PropTypes.string,
   statusBarHidden: PropTypes.bool,
-  extraData: PropTypes.any
+  extraData: PropTypes.any,
 };
 
 NavigationBar.defaultProps = {
-  statusBarColor: Platform.OS === 'android' && Platform.Version > 22 ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, 0.3)',
+  statusBarColor:
+    Platform.OS === 'android' && Platform.Version > 22
+      ? 'rgba(0, 0, 0, 0)'
+      : 'rgba(0, 0, 0, 0.3)',
   statusBarHidden: false,
 };
 

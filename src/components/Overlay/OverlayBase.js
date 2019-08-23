@@ -1,10 +1,19 @@
 'use strict';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Animated, View, Platform, TextInput, Keyboard, ViewPropTypes, TouchableWithoutFeedback, BackHandler } from 'react-native';
+import {
+  StyleSheet,
+  Animated,
+  View,
+  Platform,
+  TextInput,
+  Keyboard,
+  ViewPropTypes,
+  TouchableWithoutFeedback,
+  BackHandler,
+} from 'react-native';
 
 class OverlayBase extends React.PureComponent {
-
   constructor(props) {
     super(props);
     this.animates = {
@@ -17,14 +26,17 @@ class OverlayBase extends React.PureComponent {
   componentDidMount() {
     const { closeOnHardwareBackPress } = this.props;
     if (Platform.OS === 'android') {
-      this.backListener = BackHandler.addEventListener('hardwareBackPress', () => {
-        if (closeOnHardwareBackPress) {
-          this.closePanRelease();
-          return true;
-        } else {
-          return false;
-        }
-      });
+      this.backListener = BackHandler.addEventListener(
+        'hardwareBackPress',
+        () => {
+          if (closeOnHardwareBackPress) {
+            this.closePanRelease();
+            return true;
+          } else {
+            return false;
+          }
+        },
+      );
     }
     this.appearAfterMount && this.show();
   }
@@ -42,8 +54,8 @@ class OverlayBase extends React.PureComponent {
       Animated.timing(this.animates.opacity, {
         toValue: this.props.overlayOpacity,
         duration,
-        useNativeDriver: true
-      })
+        useNativeDriver: true,
+      }),
     ];
     return animates;
   }
@@ -54,8 +66,8 @@ class OverlayBase extends React.PureComponent {
       Animated.timing(this.animates.opacity, {
         toValue: 0,
         duration,
-        useNativeDriver: true
-      })
+        useNativeDriver: true,
+      }),
     ];
     return animates;
   }
@@ -68,9 +80,11 @@ class OverlayBase extends React.PureComponent {
     const { overlayOpacity, onAppearCompleted } = this.props;
     if (animated) {
       this.animates.opacity.setValue(0);
-      Animated.parallel(this.appearAnimates.concat(additionAnimates)).start(() => {
-        onAppearCompleted && onAppearCompleted();
-      });
+      Animated.parallel(this.appearAnimates.concat(additionAnimates)).start(
+        () => {
+          onAppearCompleted && onAppearCompleted();
+        },
+      );
     } else {
       this.animates.opacity.setValue(overlayOpacity);
       onAppearCompleted && onAppearCompleted();
@@ -80,14 +94,16 @@ class OverlayBase extends React.PureComponent {
   disappear(animated = this.props.animated, additionAnimates = null) {
     const { overlayOpacity, onDisappearCompleted } = this.props;
     if (animated) {
-      Animated.parallel(this.disappearAnimates.concat(additionAnimates)).start(() => {
-        if (overlayOpacity < 0.3) {
-          this.animates.opacity.removeAllListeners();
-          onDisappearCompleted && onDisappearCompleted();
-        }
-      });
+      Animated.parallel(this.disappearAnimates.concat(additionAnimates)).start(
+        () => {
+          if (overlayOpacity < 0.3) {
+            this.animates.opacity.removeAllListeners();
+            onDisappearCompleted && onDisappearCompleted();
+          }
+        },
+      );
       if (overlayOpacity >= 0.3) {
-        this.animates.opacity.addListener(event => {
+        this.animates.opacity.addListener((event) => {
           if (event.value < 0.01) {
             this.animates.opacity.stopAnimation();
             this.animates.opacity.removeAllListeners();
@@ -128,7 +144,7 @@ class OverlayBase extends React.PureComponent {
     } else {
       this.close();
     }
-  }
+  };
 
   buildStyle() {
     const { style } = this.props;
@@ -142,7 +158,10 @@ class OverlayBase extends React.PureComponent {
   render() {
     const { overlayPointerEvents } = this.props;
     return (
-      <View style={[StyleSheet.absoluteFill, this.buildStyle()]} pointerEvents={overlayPointerEvents}>
+      <View
+        style={[StyleSheet.absoluteFill, this.buildStyle()]}
+        pointerEvents={overlayPointerEvents}
+      >
         <TouchableWithoutFeedback onPress={this.closePanRelease}>
           <Animated.View
             style={[styles.maskStyle, { opacity: this.animates.opacity }]}
@@ -152,7 +171,6 @@ class OverlayBase extends React.PureComponent {
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -163,7 +181,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     backgroundColor: 'transparent',
-  }
+  },
 });
 
 OverlayBase.propTypes = {
@@ -183,7 +201,7 @@ OverlayBase.defaultProps = {
   animated: true,
   overlayPointerEvents: 'auto',
   closeOnHardwareBackPress: true,
-  overlayOpacity: 0.3
+  overlayOpacity: 0.3,
 };
 
 export default OverlayBase;

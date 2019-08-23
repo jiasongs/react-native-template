@@ -9,11 +9,10 @@ const defaultOption = {
   modal: true,
   overlayOpacity: 0.0,
   duration: 2000,
-  overlayPointerEvents: 'box-only'
+  overlayPointerEvents: 'box-only',
 };
 
 export default class ToastManager {
-
   static toastKeys = [];
 
   static message(text, options) {
@@ -40,7 +39,7 @@ export default class ToastManager {
     this.showView(<ToastView type={'loading'} text={text} />, {
       duration: 60000,
       modal: true,
-      ...options
+      ...options,
     });
   }
 
@@ -48,11 +47,11 @@ export default class ToastManager {
     const newOption = { ...defaultOption, ...option };
     OverlayManager.show(
       <OverlayPopView
-        ref={view => view && this.toastKeys.push(view)}
+        ref={(view) => view && this.toastKeys.push(view)}
         {...newOption}
       >
         {component}
-      </OverlayPopView>
+      </OverlayPopView>,
     );
     setTimeout(() => this.hide(), newOption.duration);
   }

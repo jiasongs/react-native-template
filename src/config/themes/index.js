@@ -1,10 +1,6 @@
 'use strict';
 import React from 'react';
-import {
-  Dimensions,
-  Platform,
-  StatusBar,
-} from 'react-native';
+import { Dimensions, Platform, StatusBar } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import Colors from './common/Colors';
 import Styles from './common/Styles';
@@ -13,7 +9,6 @@ import ThemeBlack from './black';
 import { ThemeManager, useThemeValue } from './ThemeManager';
 
 const Theme = {
-
   ...Colors,
   ...Styles,
 

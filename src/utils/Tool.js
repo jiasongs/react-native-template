@@ -1,7 +1,7 @@
 'use strict';
 /**
  * 检查手机号是否正确
- * @param 
+ * @param
  * @returns {Boolean}
  */
 export function checkMobile(mobile) {
@@ -10,12 +10,14 @@ export function checkMobile(mobile) {
 }
 /**
  * 检查是否为number类型
- * @param 
+ * @param
  * @returns {Boolean}
  */
 export function checkNumber(number) {
   const regPos = new RegExp(/^\d+(\.\d+)?$/); //非负浮点数
-  const regNeg = new RegExp(/^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$/); //负浮点数
+  const regNeg = new RegExp(
+    /^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$/,
+  ); //负浮点数
   if (regPos.test(number) || regNeg.test(number)) {
     return true;
   } else {
@@ -24,19 +26,25 @@ export function checkNumber(number) {
 }
 /**
  * 检查是否为空
- * @param 
+ * @param
  * @returns {Boolean}
  */
 export function checkEmpty(string) {
-  if (typeof (string) === 'undefined') return true;
-  if (string === null) return true;
-  if (string === '') return true;
+  if (typeof string === 'undefined') {
+    return true;
+  }
+  if (string === null) {
+    return true;
+  }
+  if (string === '') {
+    return true;
+  }
   return false;
 }
 
 /**
  * 检测字符串是否有中文
- * @param 
+ * @param
  * @returns {Boolean}
  */
 export function containsChinese(value) {
@@ -45,17 +53,21 @@ export function containsChinese(value) {
 }
 /**
  * 检查是否为空
- * @param 
+ * @param
  * @returns {String}
  */
 export function conversionBytes(bytes) {
-  if (bytes === 0) return '0 B';
-  const k = 1000, sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], i = Math.floor(Math.log(bytes) / Math.log(k));
+  if (bytes === 0) {
+    return '0 B';
+  }
+  const k = 1000,
+    sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+    i = Math.floor(Math.log(bytes) / Math.log(k));
   return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
 }
 /**
  * 以Base64位字符串数据的形式返回一个图片的source
- * @param 
+ * @param
  * @returns {String}
  */
 export function base64Prefix(data) {
@@ -63,7 +75,7 @@ export function base64Prefix(data) {
 }
 /**
  * 阶乘算法
- * @param 
+ * @param
  * @returns {Int}
  */
 export function factorial(num) {
@@ -72,19 +84,19 @@ export function factorial(num) {
   } else if (num === 0 || num === 1) {
     return 1;
   } else {
-    return (num * factorial(num - 1));
+    return num * factorial(num - 1);
   }
 }
 /**
  * 转换时分秒
- * @param 
- * @returns 
+ * @param
+ * @returns
  */
 export function conversionSeconds(seconds) {
   let arr = [
     parseInt(seconds / 60 / 60),
-    parseInt(seconds / 60 % 60),
-    parseInt(seconds % 60)
+    parseInt((seconds / 60) % 60),
+    parseInt(seconds % 60),
   ];
   return arr.join(':').replace(/\b(\d)\b/g, '0$1');
 }
@@ -103,7 +115,7 @@ export function bouncerEmpty(arr) {
 /**
  *
  * 冒泡排序
- * @param array 
+ * @param array
  * @param sortType ascending descending
  * @returns array
  */
@@ -128,7 +140,7 @@ export function bubbleSort(array, sortType = 'ascending') {
 // /**
 //  * 转换时间戳
 //  * @param 时间戳
-//  * @returns 
+//  * @returns
 //  */
 // export function formatTimeStamp(dateTimeStamp) {
 //   const minute = 1000 * 60, hour = minute * 60, day = hour * 24, week = day * 7, month = day * 30;

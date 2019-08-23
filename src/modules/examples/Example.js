@@ -4,7 +4,6 @@ import { PageContainer, ListRow, NavigationBar } from '../../components';
 import RouterHelper from '../../routers/RouterHelper';
 
 function Example() {
-
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'Example'} renderLeftAction={null} />
@@ -26,11 +25,10 @@ function Example() {
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }
+  },
 });
 
 export default React.memo(Example);

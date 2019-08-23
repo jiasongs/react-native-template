@@ -7,7 +7,7 @@ const primary = {
     second: '#999',
     reverse: '#333',
     disabled: '#e5e6e8',
-    separator: '#999'
+    separator: '#999',
   },
 };
 
@@ -23,17 +23,19 @@ export default {
   page: {
     style: {
       backgroundColor: primary.color.reverse,
-    }
+    },
   },
   /**
    * @Button
    */
   button: {
-    iconVerticalStyle: { // 垂直
+    iconVerticalStyle: {
+      // 垂直
       width: 40,
       height: 40,
     },
-    iconHorizontalStyle: { // 水平
+    iconHorizontalStyle: {
+      // 水平
       width: 20,
       height: 20,
     },
@@ -48,7 +50,7 @@ export default {
           shadowOpacity: 1,
           shadowRadius: 1,
         },
-      })
+      }),
     },
     solid: {
       style: {
@@ -71,8 +73,8 @@ export default {
       loadingStyle: {
         ...StyleSheet.absoluteFillObject,
         color: primary.color.reverse,
-        size: 'small'
-      }
+        size: 'small',
+      },
     },
     outline: {
       style: {
@@ -101,16 +103,14 @@ export default {
       loadingStyle: {
         ...StyleSheet.absoluteFillObject,
         color: primary.color.main,
-        size: 'small'
-      }
+        size: 'small',
+      },
     },
     clear: {
-      style: {
-
-      },
+      style: {},
       titleStyle: {
         color: primary.color.main,
-        fontSize: 14
+        fontSize: 14,
       },
       disabledStyle: {
         opacity: 1,
@@ -121,8 +121,8 @@ export default {
       loadingStyle: {
         ...StyleSheet.absoluteFillObject,
         color: primary.color.main,
-        size: 'small'
-      }
+        size: 'small',
+      },
     },
   },
   /**
@@ -132,7 +132,7 @@ export default {
     style: {
       width: 260,
       minHeight: 52,
-      backgroundColor: primary.color.reverse
+      backgroundColor: primary.color.reverse,
     },
     titleStyle: {
       maxWidth: 200,
@@ -159,7 +159,7 @@ export default {
     },
     actionTitleStyle: {
       fontSize: 14,
-      color: primary.color.main
+      color: primary.color.main,
     },
     separatorStyle: {
       borderRightWidth: StyleSheet.hairlineWidth,
@@ -200,7 +200,7 @@ export default {
     },
   },
   /**
-   * @Toast 
+   * @Toast
    */
   toast: {
     style: {
@@ -209,7 +209,7 @@ export default {
     textStyle: {
       color: primary.color.reverse,
       fontSize: 14,
-      lineHeight: 20
+      lineHeight: 20,
     },
   },
 
@@ -238,7 +238,7 @@ export default {
     },
   },
   /**
-   * @ListRow 
+   * @ListRow
    */
   listRow: {
     style: {
@@ -246,14 +246,14 @@ export default {
     },
     titleStyle: {
       color: primary.color.main,
-      fontSize: 15
+      fontSize: 15,
     },
     detailStyle: {
       color: primary.color.second,
-      fontSize: 14
+      fontSize: 14,
     },
     bottomSeparatorStyle: {
-      backgroundColor: primary.color.separator
+      backgroundColor: primary.color.separator,
     },
   },
   /**
@@ -262,7 +262,7 @@ export default {
   picker: {
     titleStyle: {
       color: primary.color.main,
-      fontSize: 14
-    }
-  }
+      fontSize: 14,
+    },
+  },
 };

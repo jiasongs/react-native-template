@@ -11,13 +11,12 @@ export default {
   API_HOST: API_HOST,
 
   /**
-  * @资源 [APP图标]
-  */
+   * @资源 [APP图标]
+   */
   ICON_APP: API_HOST + '/icon_app.png',
 
   /**
-   * @业务接口 
+   * @业务接口
    */
   GET_TOPICS: API_HOST + 'v1/topics',
-
 };
