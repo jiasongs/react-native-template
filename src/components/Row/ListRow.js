@@ -123,7 +123,7 @@ function ListRow(props) {
 
 
   return (
-    <Button style={buildStyles.style} onPress={onPress}>
+    <Button type={'clear'} style={buildStyles.style} onPress={onPress}>
       <View style={[styles.contentContainer, contentStyle]}>
         <View style={Theme.RCA}>
           <MemoRenderIcon icon={icon} iconStyle={iconStyle} />

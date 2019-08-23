@@ -1,6 +1,6 @@
 'use strict';
 import React, { useState, useRef, useEffect, useMemo, useCallback, useContext } from 'react';
-import { ViewPropTypes, StyleSheet, processColor, requireNativeComponent } from 'react-native';
+import { ViewPropTypes, Text, StyleSheet, requireNativeComponent } from 'react-native';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../config/themes';
 
@@ -9,10 +9,9 @@ const RCTPicker = requireNativeComponent('RCTPicker');
 function PickerIOS(props) {
   const {
     style,
+    titleStyle,
     selectedIndex,
     data,
-    titleFontSize,
-    titleColor,
     onValueChange,
     renderLabelString
   } = props;
@@ -44,7 +43,7 @@ function PickerIOS(props) {
       return {
         value: item,
         label: label,
-        textColor: processColor(buildStyles.titleColor),
+        textColor: StyleSheet.flatten(buildStyles.titleStyle).color,
       };
     });
     setItems(newData);
@@ -58,10 +57,9 @@ function PickerIOS(props) {
     const picker = themeValue.picker;
     return {
       style: [styles.picker, style],
-      titleFontSize: titleFontSize || picker.titleStyle.fontSize,
-      titleColor: titleColor || picker.titleStyle.color,
+      titleStyle: [picker.titleStyle, titleStyle],
     };
-  }, [themeValue, titleFontSize, titleColor, style]);
+  }, [themeValue, style, titleStyle]);
 
   return (
     <RCTPicker
@@ -70,7 +68,7 @@ function PickerIOS(props) {
       items={items}
       selectedIndex={selectedIndex}
       onChange={onChange}
-      fontSize={buildStyles.titleFontSize}
+      fontSize={StyleSheet.flatten(buildStyles.titleStyle).fontSize}
       onStartShouldSetResponder={() => true}
       onResponderTerminationRequest={() => false}
     />
@@ -85,10 +83,9 @@ const styles = StyleSheet.create({
 
 PickerIOS.propTypes = {
   style: ViewPropTypes.style,
+  titleStyle: Text.propTypes.style,
   selectedIndex: PropTypes.number.isRequired,
   data: PropTypes.array,
-  titleColor: PropTypes.string,
-  titleFontSize: PropTypes.number,
   onValueChange: PropTypes.func,
   renderLabelString: PropTypes.func,
 };

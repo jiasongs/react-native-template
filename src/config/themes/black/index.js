@@ -1,5 +1,15 @@
 'use strict';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+
+const primary = {
+  color: {
+    main: '#fff',
+    second: '#999',
+    reverse: '#333',
+    disabled: '#e5e6e8',
+    separator: '#999'
+  },
+};
 
 export default {
   /**
@@ -9,28 +19,109 @@ export default {
   /**
    * @Common
    */
+  primary: primary,
   page: {
     style: {
-      backgroundColor: '#333',
+      backgroundColor: primary.color.reverse,
     }
   },
   /**
    * @Button
    */
   button: {
+    iconVerticalStyle: { // 垂直
+      width: 40,
+      height: 40,
+    },
+    iconHorizontalStyle: { // 水平
+      width: 20,
+      height: 20,
+    },
+    raisedStyle: {
+      ...Platform.select({
+        android: {
+          elevation: 4,
+        },
+        ios: {
+          shadowColor: 'rgba(0,0,0, .4)',
+          shadowOffset: { height: 1, width: 1 },
+          shadowOpacity: 1,
+          shadowRadius: 1,
+        },
+      })
+    },
     solid: {
       style: {
-
+        backgroundColor: primary.color.main,
+        paddingVertical: 12,
+        paddingHorizontal: 25,
+        borderRadius: 3,
+      },
+      titleStyle: {
+        color: primary.color.reverse,
+        fontSize: 14,
+      },
+      disabledStyle: {
+        opacity: 1,
+        backgroundColor: primary.color.disabled,
+      },
+      disabledTitleStyle: {
+        color: primary.color.second,
+      },
+      loadingStyle: {
+        ...StyleSheet.absoluteFillObject,
+        color: primary.color.reverse,
+        size: 'small'
+      }
+    },
+    outline: {
+      style: {
+        backgroundColor: primary.color.reverse,
+        paddingVertical: 12,
+        paddingHorizontal: 25,
+        borderRadius: 3,
+        borderWidth: StyleSheet.hairlineWidth,
+        borderColor: primary.color.main,
+      },
+      titleStyle: {
+        color: primary.color.main,
+        fontSize: 14,
+        shadowColor: 'rgba(0,0,0, 0)',
+        shadowOffset: { height: 0, width: 0 },
+        shadowOpacity: 0,
+        shadowRadius: 0,
+      },
+      disabledStyle: {
+        opacity: 1,
+        borderColor: primary.color.second,
+      },
+      disabledTitleStyle: {
+        color: primary.color.second,
+      },
+      loadingStyle: {
+        ...StyleSheet.absoluteFillObject,
+        color: primary.color.main,
+        size: 'small'
       }
     },
     clear: {
       style: {
 
-      }
-    },
-    outline: {
-      style: {
-
+      },
+      titleStyle: {
+        color: primary.color.main,
+        fontSize: 14
+      },
+      disabledStyle: {
+        opacity: 1,
+      },
+      disabledTitleStyle: {
+        color: primary.color.second,
+      },
+      loadingStyle: {
+        ...StyleSheet.absoluteFillObject,
+        color: primary.color.main,
+        size: 'small'
       }
     },
   },
@@ -41,18 +132,18 @@ export default {
     style: {
       width: 260,
       minHeight: 52,
-      backgroundColor: '#333',
+      backgroundColor: primary.color.reverse
     },
     titleStyle: {
       maxWidth: 200,
       fontSize: 16,
-      color: '#fff',
+      color: primary.color.main,
       fontWeight: 'bold',
     },
     detailStyle: {
       maxWidth: 230,
       fontSize: 16,
-      color: '#fff',
+      color: primary.color.main,
       lineHeight: 20,
     },
     actionContainerStyle: {
@@ -63,30 +154,31 @@ export default {
       borderBottomRightRadius: 10,
     },
     actionStyle: {
-      backgroundColor: '#333',
+      backgroundColor: primary.color.reverse,
       paddingVertical: 17,
     },
     actionTitleStyle: {
       fontSize: 14,
-      color: '#fff'
+      color: primary.color.main
     },
     separatorStyle: {
       borderRightWidth: StyleSheet.hairlineWidth,
-      borderColor: '#eee',
+      borderColor: primary.color.separator,
     },
   },
+
   /**
    * @ActionSheet
    */
   sheet: {
     contentStyle: {
       maxHeight: 230,
-      backgroundColor: '#333',
+      backgroundColor: primary.color.reverse,
       borderRadius: 6,
     },
     titleStyle: {
       fontSize: 12,
-      color: '#fff',
+      color: primary.color.second,
     },
     actionStyle: {
       borderTopWidth: StyleSheet.hairlineWidth,
@@ -95,16 +187,16 @@ export default {
     },
     actionTitleStyle: {
       fontSize: 14,
-      color: '#fff',
+      color: primary.color.main,
     },
     cancelActionStyle: {
       paddingVertical: 17,
       borderRadius: 6,
-      backgroundColor: '#333',
+      backgroundColor: primary.color.reverse,
     },
     cancelTitleStyle: {
       fontSize: 14,
-      color: 'fff',
+      color: 'red',
     },
   },
   /**
@@ -115,7 +207,7 @@ export default {
       backgroundColor: 'rgba(35,24,21,0.8)',
     },
     textStyle: {
-      color: '#fff',
+      color: primary.color.reverse,
       fontSize: 14,
       lineHeight: 20
     },
@@ -125,15 +217,15 @@ export default {
    * @Navigation
    */
   navigationBar: {
-    statusBarStyle: 'light-content',
+    statusBarStyle: 'dark-content',
     style: {
       paddingHorizontal: 0,
-      backgroundColor: '#333',
-      borderBottomColor: '#666',
+      backgroundColor: primary.color.reverse,
+      borderBottomColor: primary.color.separator,
       borderBottomWidth: StyleSheet.hairlineWidth,
     },
     titleStyle: {
-      color: '#fff',
+      color: primary.color.main,
       fontSize: 17,
       fontWeight: 'bold',
     },
@@ -141,8 +233,8 @@ export default {
   tabBar: {
     style: {
       borderTopWidth: StyleSheet.hairlineWidth,
-      borderTopColor: '#666',
-      backgroundColor: '#333',
+      borderTopColor: primary.color.separator,
+      backgroundColor: primary.color.reverse,
     },
   },
   /**
@@ -150,18 +242,18 @@ export default {
    */
   listRow: {
     style: {
-      backgroundColor: '#333',
+      backgroundColor: primary.color.reverse,
     },
     titleStyle: {
-      color: '#fff',
+      color: primary.color.main,
       fontSize: 15
     },
     detailStyle: {
-      color: '#999',
+      color: primary.color.second,
       fontSize: 14
     },
     bottomSeparatorStyle: {
-      backgroundColor: '#666'
+      backgroundColor: primary.color.separator
     },
   },
   /**
@@ -169,7 +261,7 @@ export default {
    */
   picker: {
     titleStyle: {
-      color: '#fff',
+      color: primary.color.main,
       fontSize: 14
     }
   }

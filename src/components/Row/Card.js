@@ -1,9 +1,8 @@
 'use strict';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 
-function Card(props) {
+function Card() {
 
   return (
     <View style={styles.container}>

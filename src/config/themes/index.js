@@ -8,6 +8,8 @@ import {
 import DeviceInfo from 'react-native-device-info';
 import Colors from './common/Colors';
 import Styles from './common/Styles';
+import ThemeWhite from './default';
+import ThemeBlack from './black';
 import { ThemeManager, useThemeValue } from './ThemeManager';
 
 const Theme = {
@@ -81,5 +83,7 @@ export {
   Theme,
   ThemeContext,
   ThemeManager,
-  useThemeValue
+  useThemeValue,
+  ThemeWhite,
+  ThemeBlack,
 };

@@ -2,9 +2,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationBar, PageContainer, Button } from '../../components';
-import { ThemeManager } from '../../config/themes';
-import ThemeBlack from '../../config/themes/black';
-import ThemeWhite from '../../config/themes/default';
+import { ThemeManager, ThemeWhite, ThemeBlack } from '../../config/themes';
 
 function DemoTheme() {
 
