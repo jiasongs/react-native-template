@@ -24,7 +24,7 @@ function useThemeValue(initState = {}) {
 }
 
 class ThemeManager {
-  static currentTheme = {};
+  static currentTheme = DefaultTheme;
 
   static addListener(callBack) {
     return DeviceEventEmitter.addListener(__ChangeEvent, callBack);

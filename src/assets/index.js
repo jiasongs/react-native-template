@@ -1,4 +1,5 @@
 'use strict';
+import { ThemeManager } from '../config/themes/index';
 
 export const Images = {
   /**
@@ -17,7 +18,17 @@ export const Images = {
   /**
    * @Toast [轻提示]
    */
-  icon_toast_fail: require('./icon/icon_toast_fail.png'),
+  get icon_toast_fail() {
+    const type = ThemeManager.currentTheme.type;
+    switch (type) {
+      case 1:
+        return require('./icon/icon_toast_fail.png');
+      case 2:
+        return require('./icon/icon_toast_fail.png');
+      default:
+        return null;
+    }
+  },
   icon_toast_loading: require('./icon/icon_toast_loading.png'),
   icon_toast_success: require('./icon/icon_toast_success.png'),
   icon_toast_warn: require('./icon/icon_toast_warn.png'),

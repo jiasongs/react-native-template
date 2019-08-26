@@ -1,14 +1,14 @@
 module.exports = {
   env: {
-    'es6': true,
-    'node': true
+    es6: true,
+    node: true,
   },
-  parser: "babel-eslint",
+  parser: 'babel-eslint',
   parserOptions: {
-    "ecmaFeatures": {
-      "legacyDecorators": true,
-      "experimentalObjectRestSpread": true,
-      "jsx": true
+    ecmaFeatures: {
+      legacyDecorators: true,
+      experimentalObjectRestSpread: true,
+      jsx: true,
     },
     sourceType: 'module',
   },
@@ -91,12 +91,12 @@ module.exports = {
     // Best Practices
     // These are rules designed to prevent you from making mistakes. They either prescribe a better way of doing something or help you avoid footguns.
     'block-scoped-var': 0, // treat var statements as if they were block scoped (off by default)
-    'complexity': 0, // specify the maximum cyclomatic complexity allowed in a program (off by default)
+    complexity: 0, // specify the maximum cyclomatic complexity allowed in a program (off by default)
     'consistent-return': 0, // require return statements to either always or never specify values
-    'curly': 1, // specify curly brace conventions for all control statements
+    curly: 1, // specify curly brace conventions for all control statements
     'default-case': 0, // require default case in switch statements (off by default)
     'dot-notation': 1, // encourages use of dot notation whenever possible
-    'eqeqeq': [1, 'allow-null'], // require the use of === and !==
+    eqeqeq: [1, 'allow-null'], // require the use of === and !==
     'guard-for-in': 0, // make sure for-in loops have an if statement (off by default)
     'no-alert': 1, // disallow the use of alert, confirm, and prompt
     'no-caller': 1, // disallow use of arguments.caller or arguments.callee
@@ -130,11 +130,11 @@ module.exports = {
     'no-void': 1, // disallow use of void operator (off by default)
     'no-warning-comments': 0, // disallow usage of configurable warning terms in comments": 1,                        // e.g. TODO or FIXME (off by default)
     'no-with': 1, // disallow use of the with statement
-    'radix': 0, // require use of the second argument for parseInt() (off by default)
+    radix: 0, // require use of the second argument for parseInt() (off by default)
     'semi-spacing': 1, // require a space after a semi-colon
     'vars-on-top': 0, // requires to declare all vars on top of their containing scope (off by default)
     'wrap-iife': 0, // require immediate function invocation to be wrapped in parentheses (off by default)
-    'yoda': 1, // require or disallow Yoda conditions
+    yoda: 1, // require or disallow Yoda conditions
 
     // Variables
     // These rules have to do with variable declarations.
@@ -181,7 +181,7 @@ module.exports = {
     'comma-spacing': 0,
     'no-multi-spaces': 0,
     'brace-style': 0, // enforce one true brace style (off by default)
-    'camelcase': 0, // require camel case names
+    camelcase: 0, // require camel case names
     'consistent-this': 1, // enforces consistent naming when capturing the current execution context (off by default)
     'eol-last': 1, // enforce newline at the end of file, with no multiple empty lines
     'func-names': 0, // require function expressions to have a name (off by default)
@@ -197,9 +197,9 @@ module.exports = {
     'no-ternary': 0, // disallow the use of ternary operators (off by default)
     'no-trailing-spaces': 1, // disallow trailing whitespace at the end of lines
     'no-underscore-dangle': 0, // disallow dangling underscores in identifiers
-    'quotes': [1, 'single', 'avoid-escape'], // specify whether double or single quotes should be used
+    quotes: [1, 'single', 'avoid-escape'], // specify whether double or single quotes should be used
     'quote-props': 0, // require quotes around object literal property names (off by default)
-    'semi': 0, // require or disallow use of semicolons instead of ASI
+    semi: 0, // require or disallow use of semicolons instead of ASI
     'sort-vars': 0, // sort variables within the same declaration block (off by default)
     'space-in-brackets': 0, // require or disallow spaces inside brackets (off by default)
     'space-in-parens': 0, // require or disallow spaces inside parentheses (off by default)
@@ -248,10 +248,10 @@ module.exports = {
     // React-Native Plugin
     // The following rules are made available via `eslint-plugin-react-native`
 
-    "react-native/no-unused-styles": 0,
-    "react-native/split-platform-components": 2,
-    "react-native/no-inline-styles": 0,
-    "react-native/no-color-literals": 0,
-    "react-native/no-raw-text": 2,
+    'react-native/no-unused-styles': 0,
+    'react-native/split-platform-components': 2,
+    'react-native/no-inline-styles': 0,
+    'react-native/no-color-literals': 0,
+    'react-native/no-raw-text': 2,
   },
 };

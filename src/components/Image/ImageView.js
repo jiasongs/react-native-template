@@ -159,6 +159,13 @@ function ImageView(props) {
     return { ...source };
   }, [source]);
 
+  const buildStyles = useMemo(() => {
+    return {
+      style: [style, imageSize],
+      resizeMode: StyleSheet.flatten(style).resizeMode,
+    };
+  }, [imageSize, style]);
+
   if (typeof source === 'number') {
     return <Image {...props} />;
   }
@@ -167,7 +174,7 @@ function ImageView(props) {
     <FastImage
       {...others}
       ref={forwardedRef}
-      style={[style, imageSize]}
+      style={buildStyles.style}
       source={{ priority: FastImage.priority.low, ...newSource }}
       onLoadStart={onImageLoadStart}
       onProgress={onImageProgress}
@@ -175,6 +182,7 @@ function ImageView(props) {
       onLoadEnd={onImageLoadEnd}
       onError={onImageError}
       fallback={false}
+      resizeMode={buildStyles.resizeMode}
     >
       <MemoRenderPlaceholder
         maxImageWidth={maxImageWidth}
