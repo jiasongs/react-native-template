@@ -110,7 +110,7 @@ function ListRow(props) {
     const listRow = themeValue.listRow;
     return {
       style: [listRow.style, styles.container, style],
-      titleStyle: [listRow.titleStyle, titleStyle],
+      titleStyle: [listRow.titleStyle, styles.titleStyle, titleStyle],
       detailStyle: [listRow.detailStyle, detailStyle],
       bottomSeparatorStyle: [
         listRow.bottomSeparatorStyle,
@@ -120,9 +120,14 @@ function ListRow(props) {
   }, [themeValue, style, titleStyle, detailStyle, bottomSeparatorStyle]);
 
   return (
-    <Button type={'clear'} style={buildStyles.style} onPress={onPress}>
+    <Button
+      hitSlop={null}
+      type={'clear'}
+      style={buildStyles.style}
+      onPress={onPress}
+    >
       <View style={[styles.contentContainer, contentStyle]}>
-        <View style={Theme.RCA}>
+        <View style={[Theme.RCA, { paddingRight: 20 }]}>
           <MemoRenderIcon icon={icon} iconStyle={iconStyle} />
           <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
         </View>
@@ -160,6 +165,9 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 12,
     justifyContent: 'space-between',
+  },
+  titleStyle: {
+    flex: 1,
   },
   detailContainer: {
     flex: 1,

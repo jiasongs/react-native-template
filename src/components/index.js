@@ -7,7 +7,7 @@ import Button from './Touchable/Button';
 import ListRow from './Row/ListRow';
 import TabBottomBar from './Navigation/TabBottomBar';
 import { Picker } from './Picker';
-import { Checkbox, Radio } from './Form';
+import { Checkbox, Radio, Badge } from './Form';
 import { PageContainer, GirdContainer } from './Container';
 import {
   OverlayManager,
@@ -43,4 +43,5 @@ export {
   Checkbox,
   Radio,
   Picker,
+  Badge,
 };

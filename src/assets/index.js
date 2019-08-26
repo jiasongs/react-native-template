@@ -1,38 +1,42 @@
 'use strict';
-import { ThemeManager } from '../config/themes/index';
 
 export const Images = {
   /**
    * @JSON [动画的JSON文件]
    */
-  json_loading: require('./json/loading.json'),
-
+  get json_loading() {
+    return require('./json/loading.json');
+  },
   /**
    * @Common [通用]
    */
-  icon_network_err: require('./icon/icon_network_err.png'),
-  icon_no_record: require('./icon/icon_no_record.png'),
-  icon_nav_left: require('./icon/icon_nav_left.png'),
-  icon_arrow_right: require('./icon/icon_arrow_right.png'),
-
+  get icon_network_err() {
+    return require('./icon/icon_network_err.png');
+  },
+  get icon_no_record() {
+    return require('./icon/icon_no_record.png');
+  },
+  get icon_nav_left() {
+    return require('./icon/icon_nav_left.png');
+  },
+  get icon_arrow_right() {
+    return require('./icon/icon_arrow_right.png');
+  },
   /**
    * @Toast [轻提示]
    */
   get icon_toast_fail() {
-    const type = ThemeManager.currentTheme.type;
-    switch (type) {
-      case 1:
-        return require('./icon/icon_toast_fail.png');
-      case 2:
-        return require('./icon/icon_toast_fail.png');
-      default:
-        return null;
-    }
+    return require('./icon/icon_toast_fail.png');
   },
-  icon_toast_loading: require('./icon/icon_toast_loading.png'),
-  icon_toast_success: require('./icon/icon_toast_success.png'),
-  icon_toast_warn: require('./icon/icon_toast_warn.png'),
-
+  get icon_toast_loading() {
+    return require('./icon/icon_toast_loading.png');
+  },
+  get icon_toast_success() {
+    return require('./icon/icon_toast_success.png');
+  },
+  get icon_toast_warn() {
+    return require('./icon/icon_toast_warn.png');
+  },
   /**
    * @Share [分享]
    */

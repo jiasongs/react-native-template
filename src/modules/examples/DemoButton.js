@@ -16,6 +16,7 @@ function DemoButton() {
         }}
       >
         <Button style={styles.button} title={'solid-title'} />
+        <Button style={styles.button} icon={Images.icon_toast_success} />
         <Button style={styles.button} title={'solid-loading'} loading={true} />
         <Button
           style={styles.button}
@@ -57,6 +58,11 @@ function DemoButton() {
         <Button
           type={'outline'}
           style={styles.button}
+          icon={Images.icon_toast_success}
+        />
+        <Button
+          type={'outline'}
+          style={styles.button}
           title={'outline-loading'}
           loading={true}
         />
@@ -76,33 +82,38 @@ function DemoButton() {
           type={'outline'}
           style={styles.button}
           title={'outline-左icon右title'}
-          icon={Images.icon_network_err}
+          icon={Images.icon_toast_success}
         />
         <Button
           type={'outline'}
           style={styles.button}
           title={'outline-右icon左title'}
-          icon={Images.icon_network_err}
+          icon={Images.icon_toast_success}
           iconPosition={'right'}
         />
         <Button
           type={'outline'}
           style={styles.button}
           title={'outline'}
-          icon={Images.icon_network_err}
+          icon={Images.icon_toast_success}
           iconPosition={'top'}
         />
         <Button
           type={'outline'}
           style={styles.button}
           title={'outline'}
-          icon={Images.icon_network_err}
+          icon={Images.icon_toast_success}
           iconPosition={'bottom'}
         />
         <Button type={'outline'} style={styles.button}>
           <Text style={{ color: '#333' }}>{'outline-被button包裹'}</Text>
         </Button>
         <Button type={'clear'} style={styles.button} title={'clear-title'} />
+        <Button
+          type={'clear'}
+          style={styles.button}
+          icon={Images.icon_toast_success}
+        />
         <Button
           type={'clear'}
           style={styles.button}
@@ -119,27 +130,27 @@ function DemoButton() {
           type={'clear'}
           style={styles.button}
           title={'clear-左icon右title'}
-          icon={Images.icon_network_err}
+          icon={Images.icon_toast_success}
         />
         <Button
           type={'clear'}
           style={styles.button}
           title={'clear-右icon左title'}
-          icon={Images.icon_network_err}
+          icon={Images.icon_toast_success}
           iconPosition={'right'}
         />
         <Button
           type={'clear'}
           style={styles.button}
           title={'clear'}
-          icon={Images.icon_network_err}
+          icon={Images.icon_toast_success}
           iconPosition={'top'}
         />
         <Button
           type={'clear'}
           style={styles.button}
           title={'clear'}
-          icon={Images.icon_network_err}
+          icon={Images.icon_toast_success}
           iconPosition={'bottom'}
         />
         <Button type={'clear'} style={styles.button}>

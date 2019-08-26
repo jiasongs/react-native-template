@@ -61,7 +61,7 @@ addCustomProps(TextInput, {
 });
 addCustomProps(TouchableOpacity, { activeOpacity: 0.9 });
 addCustomProps(LoadingHint.type, { source: Images.json_loading });
-addCustomProps(NavigationBar.type, { backActionSource: Images.icon_nav_left });
+addCustomProps(NavigationBar.type, { defaultLeftSource: Images.icon_nav_left });
 addCustomProps(ListRow.type, { accessorySource: Images.icon_arrow_right });
 addCustomProps(ToastView.type, {
   successIcon: Images.icon_toast_success,

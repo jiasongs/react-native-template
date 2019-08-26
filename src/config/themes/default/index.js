@@ -8,6 +8,7 @@ const primary = {
     reverse: '#fff',
     disabled: '#e5e6e8',
     separator: '#eee',
+    badge: 'red',
   },
 };
 
@@ -63,6 +64,11 @@ export default {
         color: primary.color.reverse,
         fontSize: 14,
       },
+      iconStyle: {
+        width: 20,
+        height: 20,
+        tintColor: primary.color.reverse,
+      },
       disabledStyle: {
         opacity: 1,
         backgroundColor: primary.color.disabled,
@@ -93,6 +99,11 @@ export default {
         shadowOpacity: 0,
         shadowRadius: 0,
       },
+      iconStyle: {
+        width: 20,
+        height: 20,
+        tintColor: primary.color.main,
+      },
       disabledStyle: {
         opacity: 1,
         borderColor: primary.color.second,
@@ -111,6 +122,11 @@ export default {
       titleStyle: {
         color: primary.color.main,
         fontSize: 14,
+      },
+      iconStyle: {
+        width: 20,
+        height: 20,
+        tintColor: primary.color.main,
       },
       disabledStyle: {
         opacity: 1,
@@ -148,8 +164,8 @@ export default {
     },
     actionContainerStyle: {
       width: '100%',
-      backgroundColor: '#dbdbdb',
       borderTopWidth: StyleSheet.hairlineWidth,
+      borderTopColor: primary.color.separator,
       borderBottomLeftRadius: 10,
       borderBottomRightRadius: 10,
     },
@@ -229,6 +245,11 @@ export default {
       fontSize: 17,
       fontWeight: 'bold',
     },
+    defaultLeftAction: {
+      iconStyle: {
+        tintColor: 'black',
+      },
+    },
   },
   tabBar: {
     style: {
@@ -247,6 +268,7 @@ export default {
     titleStyle: {
       color: primary.color.main,
       fontSize: 15,
+      lineHeight: 18,
     },
     detailStyle: {
       color: primary.color.second,
@@ -263,6 +285,46 @@ export default {
     titleStyle: {
       color: primary.color.main,
       fontSize: 14,
+    },
+  },
+  /**
+   * @Badge
+   */
+  badge: {
+    capsule: {
+      style: {
+        backgroundColor: primary.color.badge,
+        padding: 5,
+        minWidth: 23,
+        height: 23,
+        borderRadius: 23 / 2,
+      },
+      countStyle: {
+        color: primary.color.reverse,
+        fontSize: 10,
+      },
+    },
+    square: {
+      style: {
+        backgroundColor: primary.color.badge,
+        padding: 5,
+        minWidth: 23,
+        height: 23,
+        borderRadius: 3,
+      },
+      countStyle: {
+        color: primary.color.reverse,
+        fontSize: 10,
+      },
+    },
+    dot: {
+      style: {
+        backgroundColor: primary.color.badge,
+        width: 8,
+        height: 8,
+        borderRadius: 8 / 2,
+      },
+      countStyle: {},
     },
   },
 };

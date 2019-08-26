@@ -7,7 +7,6 @@ import { tabOptions, transitionConfig } from './RouterTool';
 import { TabBottomBar } from '../components';
 import {
   About,
-  DemoActionSheet,
   DemoAlert,
   DemoButton,
   DemoContainer,
@@ -19,6 +18,7 @@ import {
   DemoToast,
   DemoTheme,
   Example,
+  DemoBadge,
 } from '../modules';
 
 const TabNavigatorRouter = {
@@ -66,7 +66,6 @@ const TabNavigator = createBottomTabNavigator(
 
 const StackNavigatorRouter = {
   Tab: { screen: TabNavigator },
-  DemoActionSheet: { screen: DemoActionSheet },
   DemoAlert: { screen: DemoAlert },
   DemoButton: { screen: DemoButton },
   DemoContainer: { screen: DemoContainer },
@@ -77,6 +76,7 @@ const StackNavigatorRouter = {
   DemoPicker: { screen: DemoPicker },
   DemoToast: { screen: DemoToast },
   DemoTheme: { screen: DemoTheme },
+  DemoBadge: { screen: DemoBadge },
 };
 
 const StackNavigatorConfig = {

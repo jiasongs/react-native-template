@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import ToastView from './ToastView';
-import { OverlayManager, OverlayPopView } from '../Overlay';
+import { OverlayManager, OverlayPop } from '../Overlay';
 
 const defaultOption = {
   style: { justifyContent: 'center', alignItems: 'center' },
@@ -46,12 +46,12 @@ export default class ToastManager {
   static showView(component, option = {}) {
     const newOption = { ...defaultOption, ...option };
     OverlayManager.show(
-      <OverlayPopView
+      <OverlayPop
         ref={(view) => view && this.toastKeys.push(view)}
         {...newOption}
       >
         {component}
-      </OverlayPopView>,
+      </OverlayPop>,
     );
     setTimeout(() => this.hide(), newOption.duration);
   }

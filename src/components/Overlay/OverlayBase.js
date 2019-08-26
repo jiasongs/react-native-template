@@ -164,6 +164,7 @@ class OverlayBase extends React.PureComponent {
       >
         <TouchableWithoutFeedback onPress={this.closePanRelease}>
           <Animated.View
+            pointerEvents={overlayPointerEvents}
             style={[styles.maskStyle, { opacity: this.animates.opacity }]}
           />
         </TouchableWithoutFeedback>

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { PageContainer, ListRow, NavigationBar } from '../../components';
 import RouterHelper from '../../routers/RouterHelper';
+import { ServiceHome } from '../../services/index';
 
 function Example() {
+  useEffect(() => {
+    ServiceHome.getHomeList();
+  }, []);
+
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'Example'} renderLeftAction={null} />
@@ -19,6 +24,14 @@ function Example() {
         <ListRow
           title={'Button'}
           onPress={() => RouterHelper.navigate('DemoButton')}
+        />
+        <ListRow
+          title={'Badge'}
+          onPress={() => RouterHelper.navigate('DemoBadge')}
+        />
+        <ListRow
+          title={'Toast'}
+          onPress={() => RouterHelper.navigate('DemoToast')}
         />
       </ScrollView>
     </PageContainer>

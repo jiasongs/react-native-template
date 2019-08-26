@@ -41,7 +41,7 @@ function RenderAction(props) {
   const {
     style,
     actionStyle,
-    actionTextStyle,
+    actionTitleStyle,
     separatorStyle,
     actions,
     onPress,
@@ -52,13 +52,18 @@ function RenderAction(props) {
       {actions.map((item, index) => {
         const { title, titleStyle, actionStyle: itemStyle } = item;
         const separator = actions.length - 1 === index ? null : separatorStyle;
+        console.log(
+          'separator',
+          [actionStyle, separator, itemStyle],
+          separator,
+        );
         return (
           <TouchableOpacity
             style={[actionStyle, separator, itemStyle]}
             key={`action_${index}`}
             onPress={() => onPress(item)}
           >
-            <Text style={[actionTextStyle, titleStyle]}>{title}</Text>
+            <Text style={[actionTitleStyle, titleStyle]}>{title}</Text>
           </TouchableOpacity>
         );
       })}
@@ -120,11 +125,10 @@ function AlertView(props) {
       detailStyle: [alert.detailStyle, detailStyle],
       actionContainerStyle: [
         alert.actionContainerStyle,
-        alert.separatorStyle,
         styles.actionContainer,
       ],
       actionStyle: [alert.actionStyle, styles.actionHighlight],
-      actionTextStyle: [alert.actionTextStyle, styles.actionText],
+      actionTitleStyle: [alert.actionTitleStyle, styles.actionText],
       separatorStyle: [alert.separatorStyle],
     };
   }, [themeValue, titleStyle, detailStyle]);
@@ -140,7 +144,7 @@ function AlertView(props) {
         <MemoRenderAction
           style={buildStyles.actionContainerStyle}
           actionStyle={buildStyles.actionStyle}
-          actionTextStyle={buildStyles.actionTextStyle}
+          actionTitleStyle={buildStyles.actionTitleStyle}
           separatorStyle={buildStyles.separatorStyle}
           actions={actions}
           onPress={onPressAction}
@@ -156,15 +160,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     overflow: 'hidden',
+    paddingTop: 10,
   },
   title: {
-    marginTop: 20,
+    marginVertical: 10,
+    // marginTop: 20,
   },
   detail: {
-    marginTop: 12,
+    marginVertical: 10,
+    // marginTop: 12,
   },
   actionContainer: {
-    marginTop: 15,
+    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,5 +1,4 @@
 import About from './examples/About';
-import DemoActionSheet from './examples/DemoActionSheet';
 import DemoAlert from './examples/DemoAlert';
 import DemoButton from './examples/DemoButton';
 import DemoContainer from './examples/DemoContainer';
@@ -11,11 +10,11 @@ import DemoPicker from './examples/DemoPicker';
 import DemoToast from './examples/DemoToast';
 import Example from './examples/Example';
 import DemoTheme from './examples/DemoTheme';
+import DemoBadge from './examples/DemoBadge';
 
 export {
   DemoTheme,
   About,
-  DemoActionSheet,
   DemoAlert,
   DemoButton,
   DemoContainer,
@@ -25,5 +24,6 @@ export {
   DemoOverlay,
   DemoPicker,
   DemoToast,
+  DemoBadge,
   Example,
 };

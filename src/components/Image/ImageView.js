@@ -67,6 +67,8 @@ function ImageView(props) {
     placeholderStyle,
     children,
     forwardedRef,
+    resizeMode,
+    tintColor,
     ...others
   } = props;
 
@@ -160,14 +162,16 @@ function ImageView(props) {
   }, [source]);
 
   const buildStyles = useMemo(() => {
+    const newStyles = StyleSheet.flatten(style);
     return {
-      style: [style, imageSize],
-      resizeMode: StyleSheet.flatten(style).resizeMode,
+      style: [newStyles, imageSize],
+      resizeMode: newStyles.resizeMode || resizeMode,
+      tintColor: newStyles.tintColor || tintColor,
     };
-  }, [imageSize, style]);
+  }, [imageSize, resizeMode, style, tintColor]);
 
   if (typeof source === 'number') {
-    return <Image {...props} />;
+    return <Image {...props} resizeMode={buildStyles.resizeMode} />;
   }
 
   return (
@@ -183,6 +187,7 @@ function ImageView(props) {
       onError={onImageError}
       fallback={false}
       resizeMode={buildStyles.resizeMode}
+      tintColor={buildStyles.tintColor}
     >
       <MemoRenderPlaceholder
         maxImageWidth={maxImageWidth}

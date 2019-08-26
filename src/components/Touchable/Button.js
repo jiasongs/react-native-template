@@ -27,7 +27,6 @@ function Button(props) {
     raised,
     icon,
     iconStyle,
-    iconResizeMode,
     iconPosition,
     title,
     titleStyle,
@@ -65,10 +64,12 @@ function Button(props) {
     const button = themeValue.button;
     const newStyle = [],
       newTitleStyle = [],
+      newIconStyle = [],
       newLoadingStyle = [];
     if (type === 'solid') {
       newStyle.push(button.solid.style);
       newTitleStyle.push(button.solid.titleStyle);
+      newIconStyle.push(button.solid.iconStyle);
       loading && newLoadingStyle.push(button.solid.loadingStyle);
       if (disabled) {
         newStyle.push(button.solid.disabledStyle);
@@ -77,6 +78,7 @@ function Button(props) {
     } else if (type === 'outline') {
       newStyle.push(button.outline.style);
       newTitleStyle.push(button.outline.titleStyle);
+      newIconStyle.push(button.outline.iconStyle);
       loading && newLoadingStyle.push(button.outline.loadingStyle);
       if (disabled) {
         newStyle.push(button.outline.disabledStyle);
@@ -85,6 +87,7 @@ function Button(props) {
     } else if (type === 'clear') {
       newStyle.push(button.clear.style);
       newTitleStyle.push(button.clear.titleStyle);
+      newIconStyle.push(button.clear.iconStyle);
       loading && newLoadingStyle.push(button.clear.loadingStyle);
       if (disabled) {
         newStyle.push(button.clear.disabledStyle);
@@ -95,9 +98,9 @@ function Button(props) {
       newStyle.push(button.raisedStyle);
       console.log('newStyle', newStyle);
     }
-    const buildStyle = [newStyle, styles.container];
-    const buildTitleStyle = [newTitleStyle, styles.titleStyle];
-    const buildIconStyle = [styles.iconStyle, button.iconHorizontalStyle];
+    const buildStyle = [...newStyle, styles.container];
+    const buildTitleStyle = [...newTitleStyle, styles.titleStyle];
+    const buildIconStyle = [...newIconStyle, styles.iconStyle];
     if (icon && title) {
       buildStyle.push({ alignItems: 'center' });
       switch (iconPosition) {
@@ -183,19 +186,11 @@ function Button(props) {
         />
       )}
       {icon && iconTopOrLeft && (
-        <ImageView
-          style={buildStyles.iconStyle}
-          resizeMode={iconResizeMode}
-          source={icon}
-        />
+        <ImageView style={buildStyles.iconStyle} source={icon} />
       )}
       {title && <Text style={buildStyles.titleStyle}>{title}</Text>}
       {icon && !iconTopOrLeft && (
-        <ImageView
-          style={buildStyles.iconStyle}
-          resizeMode={iconResizeMode}
-          source={icon}
-        />
+        <ImageView style={buildStyles.iconStyle} source={icon} />
       )}
       {children}
       {loading && (
@@ -217,7 +212,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  iconStyle: {},
+  iconStyle: {
+    resizeMode: 'contain',
+  },
   titleStyle: {},
   imageBackground: {
     ...StyleSheet.absoluteFillObject,
@@ -231,7 +228,6 @@ Button.propTypes = {
     PropTypes.shape({ uri: PropTypes.string }),
   ]),
   iconStyle: Image.propTypes.style,
-  iconResizeMode: Image.propTypes.resizeMode,
   iconPosition: PropTypes.oneOf([
     IconPosition.PositionTop,
     IconPosition.PositionLeft,
@@ -253,19 +249,13 @@ Button.propTypes = {
   loading: PropTypes.bool,
   loadingStyle: ViewPropTypes.style,
   raised: PropTypes.bool,
-  hitSlop: PropTypes.shape({
-    top: PropTypes.number,
-    left: PropTypes.number,
-    bottom: PropTypes.number,
-    right: PropTypes.number,
-  }),
+  hitSlop: ViewPropTypes.hitSlop,
   clickInterval: PropTypes.number, // 多次点击之间的延迟
 };
 
 Button.defaultProps = {
   ...TouchableOpacity.defaultProps,
   type: 'solid',
-  iconResizeMode: 'contain',
   iconPosition: IconPosition.PositionLeft,
   spacingIconAndTitle: 8,
   activeOpacity: 0.8,

@@ -1,11 +1,5 @@
 'use strict';
-import React, {
-  useState,
-  useRef,
-  useMemo,
-  useCallback,
-  useContext,
-} from 'react';
+import React, { useState, useMemo, useCallback, useContext } from 'react';
 import {
   View,
   Text,
@@ -16,9 +10,11 @@ import {
   Platform,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { Theme, ThemeContext } from '../../config/themes';
 import NavigationTitle from './NavigationTitle';
 import NavigationAction from './NavigationAction';
+import { Theme, ThemeContext } from '../../config/themes';
+// 考虑引入是否合理
+import RouterHelper from '../../routers/RouterHelper';
 
 const MemoRenderBackground = React.memo(RenderImageBackground);
 
@@ -43,27 +39,23 @@ function NavigationBar(props) {
     renderLeftAction,
     renderRightAction,
     backgroundImage,
-    backActionSource,
+    defaultLeftSource,
     title,
     extraData,
   } = props;
 
   const themeValue = useContext(ThemeContext);
 
-  const defaultLeftActionRef = useRef([
-    {
-      icon: backActionSource,
-      iconStyle: { width: 20, height: 20 },
-      onPress: _onPressBackFunc,
-    },
-  ]);
-
   const [leftActionWidth, setLeftActionWidth] = useState(10);
   const [rightActionWidth, setRightActionWidth] = useState(10);
 
   const _onPressBackFunc = useCallback(
     (event) => {
-      onPressBack && onPressBack(event);
+      if (onPressBack) {
+        onPressBack(event);
+      } else {
+        RouterHelper.goBack();
+      }
     },
     [onPressBack],
   );
@@ -78,14 +70,25 @@ function NavigationBar(props) {
     setRightActionWidth(width);
   }, []);
 
+  const defaultLeftAction = useMemo(() => {
+    const action = themeValue.navigationBar.defaultLeftAction;
+    return [
+      {
+        icon: defaultLeftSource,
+        iconStyle: [{ width: 20, height: 20 }, action.iconStyle],
+        onPress: _onPressBackFunc,
+      },
+    ];
+  }, [_onPressBackFunc, defaultLeftSource, themeValue]);
+
   const newRenderLeftAction = useMemo(() => {
     if (extraData) {
     }
     if (renderLeftAction === undefined) {
-      return defaultLeftActionRef.current;
+      return defaultLeftAction;
     }
     return renderLeftAction;
-  }, [extraData, renderLeftAction]);
+  }, [defaultLeftAction, extraData, renderLeftAction]);
 
   const buildStyles = useMemo(() => {
     const navigationBar = themeValue.navigationBar;
@@ -153,12 +156,12 @@ const styles = StyleSheet.create({
   navTitleContainer: {},
   navLeftContainer: {
     position: 'absolute',
-    left: 0,
+    left: 5,
     justifyContent: 'center',
   },
   navRightContainer: {
     position: 'absolute',
-    right: 0,
+    right: 5,
     justifyContent: 'center',
   },
   navImageBack: {
@@ -177,7 +180,7 @@ NavigationBar.propTypes = {
     PropTypes.element,
   ]),
   titleStyle: Text.propTypes.style,
-  backActionSource: Image.propTypes.source,
+  defaultLeftSource: Image.propTypes.source,
   renderLeftAction: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.func,

@@ -91,7 +91,7 @@ class OverlayPop extends OverlayBase {
     let bounds;
     if (type === 'custom' && !customBounds) {
       console.error(
-        'OverlayPopView: customBounds can not be null when type is "custom"',
+        'OverlayPop: customBounds can not be null when type is "custom"',
       );
     }
     if (type === 'custom' && customBounds) {
