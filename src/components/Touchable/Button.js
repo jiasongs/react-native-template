@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
-import { ThemeContext } from '../../config/themes';
+import { ThemeContext } from '../../config/theme';
 
 const IconPosition = {
   PositionTop: 'top',

@@ -2,14 +2,14 @@
 import { useState, useEffect } from 'react';
 import { DeviceEventEmitter } from 'react-native';
 // eslint-disable-next-line no-unused-vars
-import DefaultTheme from './default';
-import BlackTheme from './black';
+import ThemeLight from './ThemeLight';
+import ThemeDark from './ThemeDark';
 
-const InitTheme = BlackTheme;
+const initialTheme = ThemeDark;
 const __ChangeEvent = '__ChangeTheme';
 
 function useThemeValue(initState = {}) {
-  const [value, setValue] = useState({ ...InitTheme, ...initState });
+  const [value, setValue] = useState({ ...initialTheme, ...initState });
 
   useEffect(() => {
     const listenerName = DeviceEventEmitter.addListener(
@@ -27,7 +27,7 @@ function useThemeValue(initState = {}) {
 }
 
 class ThemeManager {
-  static currentTheme = InitTheme;
+  static currentTheme = initialTheme;
 
   static addListener(callBack) {
     return DeviceEventEmitter.addListener(__ChangeEvent, callBack);
@@ -51,7 +51,7 @@ class ThemeManager {
   }
 
   static restoreTheme() {
-    DeviceEventEmitter.emit(__ChangeEvent, InitTheme);
+    DeviceEventEmitter.emit(__ChangeEvent, initialTheme);
   }
 }
 

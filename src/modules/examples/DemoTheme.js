@@ -4,10 +4,10 @@ import { StyleSheet } from 'react-native';
 import { NavigationBar, PageContainer, Button } from '../../components';
 import {
   ThemeManager,
-  ThemeWhite,
-  ThemeBlack,
+  ThemeDark,
+  ThemeLight,
   ThemeContext,
-} from '../../config/themes';
+} from '../../config/theme';
 
 function DemoTheme() {
   const themeValue = useContext(ThemeContext);
@@ -25,12 +25,12 @@ function DemoTheme() {
         ]}
         title={'点击切换白色主题'}
         titleStyle={{ color: themeValue.primary.color.main }}
-        onPress={() => ThemeManager.changeTheme(ThemeWhite)}
+        onPress={() => ThemeManager.changeTheme(ThemeLight)}
       />
       <Button
         style={styles.blackButton}
         title={'点击切换黑暗主题'}
-        onPress={() => ThemeManager.changeTheme(ThemeBlack)}
+        onPress={() => ThemeManager.changeTheme(ThemeDark)}
       />
     </PageContainer>
   );

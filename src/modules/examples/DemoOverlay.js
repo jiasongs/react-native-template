@@ -7,10 +7,10 @@ import {
   ListRow,
   ActionManager,
 } from '../../components';
-import { Theme } from '../../config/themes';
+import { Predefine } from '../../config/predefine';
 
 function DemoOverlay() {
-  const w = 331.20000000000005 || Theme.screenWidth * 0.8;
+  const w = Math.round(Predefine.screenWidth * 0.8);
   console.log('w', w);
   useEffect(() => {
     const com = (

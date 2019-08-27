@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Images } from '../../assets';
-import { Theme } from '../themes';
+import { Predefine } from '../predefine';
 import Constants from './Constants';
-import { addCustomProps } from '../../utils/Adaptation';
+import { addDefaultProps } from '../../utils/Adaptation';
 import {
   LoadingHint,
   NavigationBar,
@@ -54,22 +54,22 @@ if (!__DEV__) {
 /**
  * @默认UI设置
  */
-addCustomProps(Text, { allowFontScaling: false });
-addCustomProps(TextInput, {
+addDefaultProps(Text, { allowFontScaling: false });
+addDefaultProps(TextInput, {
   allowFontScaling: false,
-  selectionColor: Theme.overallColor,
+  selectionColor: Predefine.overallColor,
 });
-addCustomProps(TouchableOpacity, { activeOpacity: 0.9 });
-addCustomProps(LoadingHint.type, { source: Images.json_loading });
-addCustomProps(NavigationBar.type, { defaultLeftSource: Images.icon_nav_left });
-addCustomProps(ListRow.type, { accessorySource: Images.icon_arrow_right });
-addCustomProps(ToastView.type, {
+addDefaultProps(TouchableOpacity, { activeOpacity: 0.9 });
+addDefaultProps(LoadingHint, { source: Images.json_loading });
+addDefaultProps(NavigationBar, { defaultLeftSource: Images.icon_nav_left });
+addDefaultProps(ListRow, { accessorySource: Images.icon_arrow_right });
+addDefaultProps(ToastView, {
   successIcon: Images.icon_toast_success,
   failIcon: Images.icon_toast_fail,
   warnIcon: Images.icon_toast_warn,
   loadingIcon: Images.icon_toast_loading,
 });
-addCustomProps(Checkbox.type, {
+addDefaultProps(Checkbox, {
   narmalIcon: Images.icon_nav_left,
   selectIcon: Images.icon_center_play,
 });
@@ -85,11 +85,11 @@ global.__ANDROID__ = Platform.OS === 'android';
 /**
  * @获取屏幕宽度
  */
-global.SCREEN_WIDTH = Theme.screenWidth;
+global.SCREEN_WIDTH = Predefine.screenWidth;
 /**
  * @获取屏幕高度
  */
-global.SCREEN_HEIGHT = Theme.screenHeight;
+global.SCREEN_HEIGHT = Predefine.screenHeight;
 /**
  * @常量
  */

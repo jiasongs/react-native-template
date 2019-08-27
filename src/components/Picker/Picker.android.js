@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import { ViewPropTypes, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../config/themes';
+import { ThemeContext } from '../../config/theme';
 import { WheelPicker } from 'react-native-wheel-picker-android';
 
 function PickerAndroid(props) {

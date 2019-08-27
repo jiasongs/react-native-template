@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useMemo, useContext } from 'react';
 import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../config/themes';
+import { ThemeContext } from '../../config/theme';
 
 function RenderIcon(props) {
   const {
@@ -46,7 +46,7 @@ function RenderIcon(props) {
 function RenderText(props) {
   const { text, titleStyle } = props;
   if (typeof text === 'string') {
-    return <Text style={[styles.toastText, titleStyle]}>{text}</Text>;
+    return <Text style={titleStyle}>{text}</Text>;
   } else if (React.isValidElement(text)) {
     return text;
   }
@@ -109,7 +109,7 @@ function ToastView(props) {
     }
     return {
       style: [toast.style, styles.container, newStyle],
-      titleStyle: [toast.textStyle],
+      titleStyle: [toast.titleStyle, styles.toastText],
     };
   }, [type, themeValue]);
 
@@ -132,16 +132,13 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    maxWidth: '70%',
   },
   loadingImage: {
     width: 48,
     height: 48,
     marginBottom: 10,
   },
-  toastText: {
-    lineHeight: 20,
-  },
+  toastText: {},
 });
 
 ToastView.propTypes = {

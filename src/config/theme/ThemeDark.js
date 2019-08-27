@@ -3,12 +3,12 @@ import { StyleSheet, Platform } from 'react-native';
 
 const primary = {
   color: {
-    main: '#333',
+    main: '#fff',
     second: '#999',
-    reverse: '#fff',
+    reverse: '#333',
     disabled: '#e5e6e8',
-    separator: '#eee',
-    badge: 'red',
+    separator: '#999',
+    badge: '#8b0000',
   },
 };
 
@@ -16,7 +16,7 @@ export default {
   /**
    * @类型 [此属性为必须]
    */
-  type: 1,
+  type: 2,
   /**
    * @Common
    */
@@ -212,7 +212,7 @@ export default {
     },
     cancelTitleStyle: {
       fontSize: 14,
-      color: 'red',
+      color: primary.color.badge,
     },
   },
   /**
@@ -220,10 +220,11 @@ export default {
    */
   toast: {
     style: {
-      backgroundColor: 'rgba(35,24,21,0.8)',
+      maxWidth: '70%',
+      backgroundColor: 'rgba(30,30,30,0.8)',
     },
-    textStyle: {
-      color: primary.color.reverse,
+    titleStyle: {
+      color: primary.color.main,
       fontSize: 14,
       lineHeight: 20,
     },
@@ -233,7 +234,7 @@ export default {
    * @Navigation
    */
   navigationBar: {
-    statusBarStyle: 'dark-content',
+    statusBarStyle: 'light-content',
     style: {
       paddingHorizontal: 0,
       backgroundColor: primary.color.reverse,
@@ -247,7 +248,7 @@ export default {
     },
     defaultLeftAction: {
       iconStyle: {
-        tintColor: 'black',
+        tintColor: 'white',
       },
     },
   },
@@ -268,7 +269,6 @@ export default {
     titleStyle: {
       color: primary.color.main,
       fontSize: 15,
-      lineHeight: 18,
     },
     detailStyle: {
       color: primary.color.second,
@@ -300,7 +300,7 @@ export default {
         borderRadius: 23 / 2,
       },
       countStyle: {
-        color: primary.color.reverse,
+        color: primary.color.main,
         fontSize: 10,
       },
     },
@@ -313,7 +313,7 @@ export default {
         borderRadius: 3,
       },
       countStyle: {
-        color: primary.color.reverse,
+        color: primary.color.main,
         fontSize: 10,
       },
     },

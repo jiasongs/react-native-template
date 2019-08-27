@@ -2,7 +2,7 @@
 import React, { useMemo, useContext } from 'react';
 import { View, Text, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../config/themes';
+import { ThemeContext } from '../../config/theme';
 
 function Badge(props) {
   const { style, type, count, countStyle, maxCount } = props;

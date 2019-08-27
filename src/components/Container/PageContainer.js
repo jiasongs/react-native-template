@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import { useNetInfo } from '@react-native-community/netinfo';
 import LoadingHint from '../Loading/LoadingHint';
 import NetworkError from '../Error/NetworkError';
-import { Theme, ThemeContext } from '../../config/themes';
+import { ThemeContext } from '../../config/theme';
+import { Predefine } from '../../config/predefine';
 
 const MemoRenderNetworkError = React.memo(RenderNetworkError);
 const MemoRenderLoadingHint = React.memo(RenderLoadingHint);
@@ -51,11 +52,15 @@ function PageContainer(props) {
     if (fitNotchedScreen) {
       if (fitNotchedScreenType === 'padding') {
         notchedScreenStyle = {
-          paddingBottom: Theme.isNotchedScreen ? Theme.screenInset.bottom : 0,
+          paddingBottom: Predefine.isNotchedScreen
+            ? Predefine.screenInset.bottom
+            : 0,
         };
       } else {
         notchedScreenStyle = {
-          marginBottom: Theme.isNotchedScreen ? Theme.screenInset.bottom : 0,
+          marginBottom: Predefine.isNotchedScreen
+            ? Predefine.screenInset.bottom
+            : 0,
         };
       }
     } else {

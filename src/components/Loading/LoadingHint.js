@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import LottieView from 'lottie-react-native';
 import PropTypes from 'prop-types';
-import { Theme } from '../../config/themes';
+import { Predefine } from '../../config/predefine';
 
 function LoadingHint(props) {
   const { style, loading, source } = props;
@@ -29,7 +29,7 @@ function LoadingHint(props) {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: Theme.contentTop,
+    top: Predefine.contentTop,
     bottom: 0,
     left: 0,
     right: 0,

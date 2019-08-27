@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import NavigationContainer from './routers/NavigationContainer';
 import { OverlayTopContainer } from './components';
-import { ThemeContext, useThemeValue } from './config/themes';
+import { ThemeContext, useThemeValue } from './config/theme';
 
 function App() {
   const value = useThemeValue();

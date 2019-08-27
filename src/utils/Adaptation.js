@@ -40,7 +40,8 @@ export function fontSize(size) {
       // catch in-between size Androids and scale font up
       // a tad but not too much
     }
-    if (deviceHeight >= 667 && deviceHeight <= 735) {
+    if (deviceHeight >= 667 && deviceHeight <= 737) {
+      console.log('size');
       return size * 1.2;
     }
     // iphoneX的字体需要特殊适配
@@ -78,9 +79,10 @@ export function scaleSize(size) {
   return size / defaultPixel;
 }
 
-export function addCustomProps(WrapComponent, customProps) {
-  const componentDefaultProps = WrapComponent.defaultProps;
-  WrapComponent.defaultProps = {
+export function addDefaultProps(WrapComponent, customProps) {
+  const NewWrapComponent = WrapComponent.type || WrapComponent;
+  const componentDefaultProps = NewWrapComponent.defaultProps;
+  NewWrapComponent.defaultProps = {
     ...componentDefaultProps,
     ...customProps,
   };

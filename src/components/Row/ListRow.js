@@ -4,7 +4,8 @@ import { View, Text, StyleSheet, Image, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
 import Button from '../Touchable/Button';
-import { Theme, ThemeContext } from '../../config/themes';
+import { ThemeContext } from '../../config/theme';
+import { Predefine } from '../../config/predefine';
 
 function RenderIcon(props) {
   const { icon, iconStyle } = props;
@@ -37,7 +38,7 @@ function RenderDetail(props) {
   } else if (typeof detail === 'function') {
     return detail();
   } else if (typeof detail === 'string') {
-    return <Text style={[Theme.MR10, detailStyle]}>{detail}</Text>;
+    return <Text style={[Predefine.MR10, detailStyle]}>{detail}</Text>;
   }
   return null;
 }
@@ -127,11 +128,11 @@ function ListRow(props) {
       onPress={onPress}
     >
       <View style={[styles.contentContainer, contentStyle]}>
-        <View style={[Theme.RCA, { paddingRight: 20 }]}>
+        <View style={[Predefine.RCA, { paddingRight: 20 }]}>
           <MemoRenderIcon icon={icon} iconStyle={iconStyle} />
           <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
         </View>
-        <View style={[Theme.RCC, styles.detailContainer]}>
+        <View style={[Predefine.RCC, styles.detailContainer]}>
           <MemoRenderDetail
             detail={detail}
             detailStyle={buildStyles.detailStyle}

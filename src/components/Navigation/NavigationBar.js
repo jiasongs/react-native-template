@@ -12,7 +12,8 @@ import {
 import PropTypes from 'prop-types';
 import NavigationTitle from './NavigationTitle';
 import NavigationAction from './NavigationAction';
-import { Theme, ThemeContext } from '../../config/themes';
+import { ThemeContext } from '../../config/theme';
+import { Predefine } from '../../config/predefine';
 // 考虑引入是否合理
 import RouterHelper from '../../routers/RouterHelper';
 
@@ -144,11 +145,11 @@ function NavigationBar(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: Theme.contentTop,
+    height: Predefine.contentTop,
   },
   navContent: {
-    marginTop: Theme.statusBarHeight,
-    height: Theme.navBarHeight,
+    marginTop: Predefine.statusBarHeight,
+    height: Predefine.navBarHeight,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

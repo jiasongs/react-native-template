@@ -14,7 +14,7 @@ import {
   requireNativeComponent,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../config/themes';
+import { ThemeContext } from '../../config/theme';
 
 const RCTPicker = requireNativeComponent('RCTPicker');
 

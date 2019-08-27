@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { Theme, ThemeContext } from '../../config/themes';
+import { ThemeContext } from '../../config/theme';
+import { Predefine } from '../../config/predefine';
 
 function RenderTitle(props) {
   const { title, titleStyle } = props;
@@ -122,7 +123,7 @@ function ActionSheetView(props) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: Theme.isNotchedScreen ? Theme.screenInset.bottom : 0,
+    paddingBottom: Predefine.isNotchedScreen ? Predefine.screenInset.bottom : 0,
     margin: 10,
   },
   contentContainer: {

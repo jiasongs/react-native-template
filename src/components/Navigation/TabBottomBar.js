@@ -11,7 +11,7 @@ import { SafeAreaView } from '@react-navigation/native';
 
 import CrossFadeIcon from 'react-navigation-tabs/src/views/CrossFadeIcon';
 import withDimensions from 'react-navigation-tabs/src/utils/withDimensions';
-import { ThemeContext } from '../../config/themes';
+import { ThemeContext } from '../../config/theme';
 
 const majorVersion = parseInt(Platform.Version, 10);
 const isIos = Platform.OS === 'ios';

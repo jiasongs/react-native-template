@@ -14,7 +14,8 @@ import {
   LayoutAnimation,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { Theme, ThemeContext } from '../../config/themes';
+import { ThemeContext } from '../../config/theme';
+import { Predefine } from '../../config/predefine';
 import { useKeyboardSpace } from '../../common/hook';
 
 function RenderTitle(props) {
@@ -102,7 +103,7 @@ function AlertView(props) {
       if (!viewLayoutRef.current) {
         viewLayoutRef.current = event.nativeEvent.layout;
         setMaxY(
-          (Theme.screenHeight - viewLayoutRef.current.height) / 2 +
+          (Predefine.screenHeight - viewLayoutRef.current.height) / 2 +
             viewLayoutRef.current.height +
             40,
         );

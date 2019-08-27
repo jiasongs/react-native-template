@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import { Theme } from '../../config/themes';
+import { Predefine } from '../../config/predefine';
 
 function NavigationTitle(props) {
   const {
@@ -36,7 +36,7 @@ function NavigationTitle(props) {
 
   function buildStyle() {
     const maxWidth = Math.max(leftActionWidth, rightActionWidth) + 3 * 2;
-    return { width: Theme.screenWidth - maxWidth * 2 };
+    return { width: Predefine.screenWidth - maxWidth * 2 };
   }
 
   const RenderContent = useMemo(buildRenderContent, [
@@ -52,8 +52,6 @@ function NavigationTitle(props) {
 const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
-    color: Theme.navBarTitleColor,
-    fontSize: Theme.navBarTitleFontSize,
   },
 });
 

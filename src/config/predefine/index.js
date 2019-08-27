@@ -1,16 +1,12 @@
 'use strict';
-import React from 'react';
 import { Dimensions, Platform, StatusBar } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-import Colors from './common/Colors';
-import Styles from './common/Styles';
-import ThemeWhite from './default';
-import ThemeBlack from './black';
-import { ThemeManager, useThemeValue } from './ThemeManager';
+import DefineColors from './DefineColors';
+import DefineStyles from './DefineStyles';
 
-const Theme = {
-  ...Colors,
-  ...Styles,
+const Predefine = {
+  ...DefineColors,
+  ...DefineStyles,
 
   get isIOS() {
     return Platform.OS === 'ios';
@@ -72,13 +68,4 @@ const Theme = {
   },
 };
 
-const ThemeContext = React.createContext();
-
-export {
-  Theme,
-  ThemeContext,
-  ThemeManager,
-  useThemeValue,
-  ThemeWhite,
-  ThemeBlack,
-};
+export { Predefine };

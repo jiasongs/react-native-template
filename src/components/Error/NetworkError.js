@@ -9,7 +9,7 @@ import {
   ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { Theme } from '../../config/themes';
+import { Predefine } from '../../config/predefine';
 
 function NetworkError(props) {
   const { style, onNetworkReload, source } = props;
@@ -28,13 +28,12 @@ function NetworkError(props) {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: Theme.contentTop,
+    top: Predefine.contentTop,
     bottom: 0,
     left: 0,
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Theme.pageBackgroundColor,
   },
   errImage: {
     width: 50,
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   reloadTouch: {
-    backgroundColor: Theme.overallColor,
+    backgroundColor: Predefine.overallColor,
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 17,
