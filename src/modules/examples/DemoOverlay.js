@@ -1,6 +1,6 @@
 'use strict';
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, ScrollView } from 'react-native';
 import {
   NavigationBar,
   PageContainer,
