@@ -12,7 +12,6 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.1",
     "@react-native-community/netinfo": "^4.1.5",
-    "@react-native-community/viewpager": "^1.1.7",
     "crypto-js": "^3.1.9-1",
     "lottie-ios": "^3.0.3",
     "lottie-react-native": "^3.1.0",

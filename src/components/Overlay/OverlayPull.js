@@ -217,7 +217,13 @@ class OverlayPull extends OverlayBase {
   }
 
   renderContent() {
-    const { type, containerStyle, children, panGestureEnabled } = this.props;
+    const {
+      type,
+      containerStyle,
+      children,
+      panGestureEnabled,
+      containerPointerEvents,
+    } = this.props;
     let translate = {};
     switch (type) {
       case 'top':
@@ -273,6 +279,7 @@ class OverlayPull extends OverlayBase {
         <Animated.View
           style={[containerStyle, animatedStyle]}
           onLayout={this.onLayout}
+          pointerEvents={containerPointerEvents}
         >
           {children}
         </Animated.View>
@@ -285,6 +292,7 @@ OverlayPull.propTypes = {
   ...OverlayBase.propTypes,
   type: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   containerStyle: ViewPropTypes.style,
+  containerPointerEvents: ViewPropTypes.pointerEvents,
   rootTransform: PropTypes.oneOfType([
     PropTypes.oneOf(['none', 'translate', 'scale']),
     PropTypes.arrayOf(
@@ -305,6 +313,7 @@ OverlayPull.defaultProps = {
   animated: true,
   rootTransform: 'none',
   panGestureEnabled: true,
+  containerPointerEvents: 'auto',
 };
 
 export default OverlayPull;

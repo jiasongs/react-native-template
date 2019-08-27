@@ -156,8 +156,8 @@ class OverlayPop extends OverlayBase {
     this.show();
   };
 
-  renderContent(content = null) {
-    const { containerStyle, children } = this.props;
+  renderContent() {
+    const { containerStyle, children, containerPointerEvents } = this.props;
     const {
       opacity,
       translateX,
@@ -172,10 +172,10 @@ class OverlayPop extends OverlayBase {
     return (
       <Animated.View
         style={[containerStyle, animatedStyle]}
-        pointerEvents={'box-none'}
+        pointerEvents={containerPointerEvents}
         onLayout={this.onLayout}
       >
-        {content || children}
+        {children}
       </Animated.View>
     );
   }
@@ -185,6 +185,7 @@ OverlayPop.propTypes = {
   ...OverlayBase.propTypes,
   type: PropTypes.oneOf(['none', 'zoomOut', 'zoomIn', 'custom']),
   containerStyle: ViewPropTypes.style,
+  containerPointerEvents: ViewPropTypes.pointerEvents,
   customBounds: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
@@ -197,6 +198,7 @@ OverlayPop.defaultProps = {
   ...OverlayBase.defaultProps,
   type: 'zoomOut',
   animated: true,
+  containerPointerEvents: 'box-none',
 };
 
 export default OverlayPop;
