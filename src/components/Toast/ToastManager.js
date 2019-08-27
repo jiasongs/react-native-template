@@ -58,7 +58,7 @@ export default class ToastManager {
 
   static hide() {
     if (this.toastKeys.length > 0) {
-      const lastRef = this.toastKeys.pop();
+      const lastRef = this.toastKeys.shift();
       lastRef.close();
     }
   }

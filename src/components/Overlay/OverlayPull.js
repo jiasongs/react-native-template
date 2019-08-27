@@ -40,8 +40,6 @@ class OverlayPull extends OverlayBase {
   }
 
   get appearAnimates() {
-    this.pullAnimates.translation.setValue(this.offsetSize);
-    this.pullAnimates.opacity.setValue(1);
     return super.appearAnimates.concat([
       Animated.spring(this.pullAnimates.translation, {
         toValue: 0,
@@ -105,53 +103,53 @@ class OverlayPull extends OverlayBase {
 
   _onHandlerStateChange = (event) => {
     const { type } = this.props;
-    const { translationX, translationY, state } = event.nativeEvent;
-    if (state !== 5) {
-      return;
-    }
-    switch (type) {
-      case 'left':
-        if (translationX > 0) {
-          return;
-        }
-        break;
-      case 'right':
-        if (translationX < 0) {
-          return;
-        }
-        break;
-      case 'top':
-        if (translationY > 0) {
-          return;
-        }
-        break;
-      case 'bottom':
-        if (translationY < 0) {
-          return;
-        }
-        break;
-      default:
-        break;
-    }
-    const size = Math.abs(this.offsetSize);
-    const translation =
-      type === 'left' || type === 'right'
-        ? Math.abs(translationX)
-        : Math.abs(translationY);
-    if (translation <= size / 3) {
-      Animated.spring(this.pullAnimates.translation, {
-        toValue: 0,
-        friction: 9,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.timing(this.pullAnimates.translation, {
-        toValue: this.offsetSize,
-        duration: 200,
-        useNativeDriver: true,
-      }).start(() => {
-        this.close();
-      });
+    const { translationX, translationY, oldState } = event.nativeEvent;
+    if (oldState === 4) {
+      switch (type) {
+        case 'left':
+          if (translationX > 0) {
+            return;
+          }
+          break;
+        case 'right':
+          if (translationX < 0) {
+            return;
+          }
+          break;
+        case 'top':
+          if (translationY > 0) {
+            return;
+          }
+          break;
+        case 'bottom':
+          if (translationY < 0) {
+            return;
+          }
+          break;
+        default:
+          break;
+      }
+      console.log('_onHandlerStateChange', event.nativeEvent);
+      const size = Math.abs(this.offsetSize);
+      const translation =
+        type === 'left' || type === 'right'
+          ? Math.abs(translationX)
+          : Math.abs(translationY);
+      if (translation <= size / 3) {
+        Animated.spring(this.pullAnimates.translation, {
+          toValue: 0,
+          friction: 9,
+          useNativeDriver: true,
+        }).start();
+      } else {
+        Animated.timing(this.pullAnimates.translation, {
+          toValue: this.offsetSize,
+          duration: 200,
+          useNativeDriver: true,
+        }).start(() => {
+          this.close();
+        });
+      }
     }
   };
 
@@ -160,6 +158,8 @@ class OverlayPull extends OverlayBase {
     if (rootTransform && rootTransform !== 'none') {
       OverlayManager.transformRoot(this.rootTransformValue, animated);
     }
+    this.pullAnimates.translation.setValue(this.offsetSize);
+    this.pullAnimates.opacity.setValue(1);
     super.appear(animated);
   }
 
@@ -170,6 +170,13 @@ class OverlayPull extends OverlayBase {
     }
     super.disappear(animated);
   }
+
+  onLayout = (event) => {
+    const { onLayout } = this.props;
+    this.viewLayout = event.nativeEvent.layout;
+    onLayout && onLayout(event);
+    this.show();
+  };
 
   buildStyle() {
     const { type } = this.props;
@@ -208,13 +215,6 @@ class OverlayPull extends OverlayBase {
     }
     return super.buildStyle().concat(sideStyle);
   }
-
-  onLayout = (event) => {
-    const { onLayout } = this.props;
-    this.viewLayout = event.nativeEvent.layout;
-    onLayout && onLayout(event);
-    this.show();
-  };
 
   renderContent() {
     const { type, containerStyle, children, panGestureEnabled } = this.props;
@@ -272,7 +272,6 @@ class OverlayPull extends OverlayBase {
       >
         <Animated.View
           style={[containerStyle, animatedStyle]}
-          pointerEvents={'box-none'}
           onLayout={this.onLayout}
         >
           {children}

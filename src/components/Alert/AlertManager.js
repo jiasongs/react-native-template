@@ -33,7 +33,7 @@ export default class AlertManager {
 
   static hide() {
     if (this.alertKeys.length > 0) {
-      const lastRef = this.alertKeys.pop();
+      const lastRef = this.alertKeys.shift();
       lastRef.close();
     }
   }

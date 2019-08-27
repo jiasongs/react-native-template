@@ -35,7 +35,7 @@ export default class ActionManager {
 
   static hide() {
     if (this.actionKeys.length > 0) {
-      const lastRef = this.actionKeys.pop();
+      const lastRef = this.actionKeys.shift();
       lastRef.close();
     }
   }
