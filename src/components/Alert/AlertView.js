@@ -16,7 +16,7 @@ import {
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../config/theme';
 import { Predefine } from '../../config/predefine';
-import { useKeyboardSpace } from '../../common/hook';
+import { useKeyboardSpace } from '../../common/hooks';
 
 function RenderTitle(props) {
   const { title, titleStyle } = props;

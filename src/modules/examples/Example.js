@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { PageContainer, ListRow, NavigationBar } from '../../components';
 import RouterHelper from '../../routers/RouterHelper';
-import { ServiceHome } from '../../services/index';
+import { ServiceHome } from '../../services';
 
 function Example() {
   useEffect(() => {
