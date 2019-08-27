@@ -9,11 +9,30 @@ import OverlayBase from './OverlayBase';
 class OverlayPull extends OverlayBase {
   constructor(props) {
     super(props);
+    const { type } = this.props;
     this.viewLayout = { x: 0, y: 0, width: 0, height: 0 };
     this.pullAnimates = {
       opacity: new Animated.Value(0),
-      translation: new Animated.Value(0),
+      translation: new Animated.Value(0), // 最终反馈的位置
     };
+    switch (type) {
+      case 'left':
+      case 'right':
+        this.onGestureEvent = Animated.event(
+          [{ nativeEvent: { translationX: this.pullAnimates.translation } }],
+          { useNativeDriver: true },
+        );
+        break;
+      case 'top':
+      case 'bottom':
+        this.onGestureEvent = Animated.event(
+          [{ nativeEvent: { translationY: this.pullAnimates.translation } }],
+          { useNativeDriver: true },
+        );
+        break;
+      default:
+        break;
+    }
   }
 
   get appearAfterMount() {
@@ -21,10 +40,9 @@ class OverlayPull extends OverlayBase {
   }
 
   get appearAnimates() {
-    const animates = super.appearAnimates;
     this.pullAnimates.translation.setValue(this.offsetSize);
     this.pullAnimates.opacity.setValue(1);
-    return animates.concat([
+    return super.appearAnimates.concat([
       Animated.spring(this.pullAnimates.translation, {
         toValue: 0,
         friction: 9,
@@ -34,8 +52,7 @@ class OverlayPull extends OverlayBase {
   }
 
   get disappearAnimates() {
-    const animates = super.disappearAnimates;
-    return animates.concat([
+    return super.disappearAnimates.concat([
       Animated.timing(this.pullAnimates.translation, {
         toValue: this.offsetSize,
         duration: 250,
@@ -45,8 +62,8 @@ class OverlayPull extends OverlayBase {
   }
 
   get offsetSize() {
-    const { side } = this.props;
-    switch (side) {
+    const { type } = this.props;
+    switch (type) {
       case 'top':
         return -this.viewLayout.height;
       case 'bottom':
@@ -61,13 +78,13 @@ class OverlayPull extends OverlayBase {
   }
 
   get rootTransformValue() {
-    const { side, rootTransform } = this.props;
+    const { type, rootTransform } = this.props;
     if (!rootTransform || rootTransform === 'none') {
       return [];
     }
     switch (rootTransform) {
       case 'translate':
-        switch (side) {
+        switch (type) {
           case 'top':
             return [{ translateY: this.offsetSize }];
           case 'bottom':
@@ -87,12 +104,12 @@ class OverlayPull extends OverlayBase {
   }
 
   _onHandlerStateChange = (event) => {
-    const { side } = this.props;
+    const { type } = this.props;
     const { translationX, translationY, state } = event.nativeEvent;
     if (state !== 5) {
       return;
     }
-    switch (side) {
+    switch (type) {
       case 'left':
         if (translationX > 0) {
           return;
@@ -118,7 +135,7 @@ class OverlayPull extends OverlayBase {
     }
     const size = Math.abs(this.offsetSize);
     const translation =
-      side === 'left' || side === 'right'
+      type === 'left' || type === 'right'
         ? Math.abs(translationX)
         : Math.abs(translationY);
     if (translation <= size / 3) {
@@ -135,38 +152,6 @@ class OverlayPull extends OverlayBase {
       }).start(() => {
         this.close();
       });
-    }
-  };
-
-  _onGestureEvent = (event) => {
-    const { side } = this.props;
-    const { translationX, translationY, state } = event.nativeEvent;
-    if (state !== 4) {
-      return;
-    }
-    switch (side) {
-      case 'left':
-        if (translationX < 0) {
-          this.pullAnimates.translation.setValue(translationX);
-        }
-        break;
-      case 'right':
-        if (translationX > 0) {
-          this.pullAnimates.translation.setValue(translationX);
-        }
-        break;
-      case 'top':
-        if (translationY < 0) {
-          this.pullAnimates.translation.setValue(translationY);
-        }
-        break;
-      case 'bottom':
-        if (translationY > 0) {
-          this.pullAnimates.translation.setValue(translationY);
-        }
-        break;
-      default:
-        break;
     }
   };
 
@@ -187,13 +172,20 @@ class OverlayPull extends OverlayBase {
   }
 
   buildStyle() {
-    const { side } = this.props;
+    const { type } = this.props;
     let sideStyle = {};
-    switch (side) {
+    switch (type) {
       case 'top':
         sideStyle = {
           flexDirection: 'column',
           justifyContent: 'flex-start',
+          alignItems: 'stretch',
+        };
+        break;
+      case 'bottom':
+        sideStyle = {
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
           alignItems: 'stretch',
         };
         break;
@@ -212,11 +204,7 @@ class OverlayPull extends OverlayBase {
         };
         break;
       default:
-        sideStyle = {
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-          alignItems: 'stretch',
-        };
+        break;
     }
     return super.buildStyle().concat(sideStyle);
   }
@@ -228,62 +216,66 @@ class OverlayPull extends OverlayBase {
     this.show();
   };
 
-  renderContent(content = null) {
-    const { side, containerStyle, children } = this.props;
-    let transformStyle = {};
-    switch (side) {
+  renderContent() {
+    const { type, containerStyle, children, panGestureEnabled } = this.props;
+    let translate = {};
+    switch (type) {
       case 'top':
-        transformStyle = {
-          transform: [
-            {
-              translateY: this.pullAnimates.translation,
-            },
-          ],
+        translate = {
+          translateY: this.pullAnimates.translation.interpolate({
+            inputRange: [-1, 0],
+            outputRange: [-1, 0],
+            extrapolateRight: 'clamp',
+          }),
+        };
+        break;
+      case 'bottom':
+        translate = {
+          translateY: this.pullAnimates.translation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1],
+            extrapolateLeft: 'clamp',
+          }),
         };
         break;
       case 'left':
-        transformStyle = {
-          transform: [
-            {
-              translateX: this.pullAnimates.translation,
-            },
-          ],
+        translate = {
+          translateX: this.pullAnimates.translation.interpolate({
+            inputRange: [-1, 0],
+            outputRange: [-1, 0],
+            extrapolateRight: 'clamp',
+          }),
         };
         break;
       case 'right':
-        transformStyle = {
-          transform: [
-            {
-              translateX: this.pullAnimates.translation,
-            },
-          ],
+        translate = {
+          translateX: this.pullAnimates.translation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1],
+            extrapolateLeft: 'clamp',
+          }),
         };
         break;
       default:
-        transformStyle = {
-          transform: [
-            {
-              translateY: this.pullAnimates.translation,
-            },
-          ],
-        };
+        break;
     }
     const animatedStyle = {
       opacity: this.pullAnimates.opacity,
-      ...transformStyle,
+      transform: [translate],
     };
+
     return (
       <PanGestureHandler
         onHandlerStateChange={this._onHandlerStateChange}
-        onGestureEvent={this._onGestureEvent}
-        enabled={this.props.panGestureEnabled}
+        onGestureEvent={this.onGestureEvent}
+        enabled={panGestureEnabled}
       >
         <Animated.View
           style={[containerStyle, animatedStyle]}
           pointerEvents={'box-none'}
           onLayout={this.onLayout}
         >
-          {content || children}
+          {children}
         </Animated.View>
       </PanGestureHandler>
     );
@@ -292,7 +284,7 @@ class OverlayPull extends OverlayBase {
 
 OverlayPull.propTypes = {
   ...OverlayBase.propTypes,
-  side: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  type: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   containerStyle: ViewPropTypes.style,
   rootTransform: PropTypes.oneOfType([
     PropTypes.oneOf(['none', 'translate', 'scale']),
@@ -310,7 +302,7 @@ OverlayPull.propTypes = {
 
 OverlayPull.defaultProps = {
   ...OverlayBase.defaultProps,
-  side: 'bottom',
+  type: 'bottom',
   animated: true,
   rootTransform: 'none',
   panGestureEnabled: true,

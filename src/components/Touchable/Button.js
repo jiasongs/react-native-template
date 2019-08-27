@@ -222,6 +222,7 @@ const styles = StyleSheet.create({
 });
 
 Button.propTypes = {
+  forwardedRef: PropTypes.any,
   type: PropTypes.oneOf(['solid', 'clear', 'outline']),
   icon: PropTypes.oneOfType([
     PropTypes.number,

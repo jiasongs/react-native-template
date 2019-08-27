@@ -4,7 +4,7 @@ import ActionSheetView from './ActionSheetView';
 import { OverlayManager, OverlayPull } from '../Overlay';
 
 const defaultOption = {
-  side: 'bottom',
+  type: 'bottom',
   modal: false,
   overlayOpacity: 0.3,
 };

@@ -22,9 +22,8 @@ class OverlayPop extends OverlayBase {
   }
 
   get appearAnimates() {
-    const animates = super.appearAnimates;
     const duration = 249;
-    return animates.concat([
+    return super.appearAnimates.concat([
       Animated.timing(this.popAnimates.opacity, {
         toValue: 1,
         duration,
@@ -54,10 +53,9 @@ class OverlayPop extends OverlayBase {
   }
 
   get disappearAnimates() {
-    const animates = super.disappearAnimates;
     const duration = 200;
     const ft = this.fromTransform;
-    return animates.concat([
+    return super.disappearAnimates.concat([
       Animated.timing(this.popAnimates.opacity, {
         toValue: 0,
         duration,
