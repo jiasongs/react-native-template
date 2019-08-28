@@ -61,7 +61,6 @@ class OverlayTopContainer extends React.PureComponent {
       sy = 1;
     transform.map((item) => {
       if (item && typeof item === 'object') {
-        // eslint-disable-next-line no-unused-vars
         for (const itemKey in item) {
           const value = item[itemKey];
           switch (itemKey) {

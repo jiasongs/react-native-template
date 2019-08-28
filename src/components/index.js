@@ -18,6 +18,7 @@ import {
 import { ToastManager, ToastView } from './Toast';
 import { AlertManager, AlertView } from './Alert';
 import { ActionManager, ActionSheetView } from './ActionSheet';
+import { DevRefresh } from './Development';
 
 export {
   PageContainer,
@@ -44,4 +45,5 @@ export {
   Radio,
   Picker,
   Badge,
+  DevRefresh,
 };

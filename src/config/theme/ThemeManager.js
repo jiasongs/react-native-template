@@ -1,11 +1,11 @@
 'use strict';
 import { useState, useEffect } from 'react';
 import { DeviceEventEmitter } from 'react-native';
-// eslint-disable-next-line no-unused-vars
 import ThemeLight from './ThemeLight';
+// eslint-disable-next-line no-unused-vars
 import ThemeDark from './ThemeDark';
 
-const initialTheme = ThemeDark;
+const initialTheme = ThemeLight;
 const __ChangeEvent = '__ChangeTheme';
 
 function useThemeValue(initState = {}) {

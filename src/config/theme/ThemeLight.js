@@ -65,8 +65,6 @@ export default {
         fontSize: 14,
       },
       iconStyle: {
-        width: 20,
-        height: 20,
         tintColor: primary.color.reverse,
       },
       disabledStyle: {
@@ -100,8 +98,6 @@ export default {
         shadowRadius: 0,
       },
       iconStyle: {
-        width: 20,
-        height: 20,
         tintColor: primary.color.main,
       },
       disabledStyle: {
@@ -124,8 +120,6 @@ export default {
         fontSize: 14,
       },
       iconStyle: {
-        width: 20,
-        height: 20,
         tintColor: primary.color.main,
       },
       disabledStyle: {

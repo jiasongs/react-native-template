@@ -34,7 +34,6 @@ function PickerIOS(props) {
 
   const onChange = useCallback(
     (event) => {
-      console.log('event', event);
       const { newValue, newIndex } = event.nativeEvent;
       if (onValueChange) {
         onValueChange(newValue, newIndex);
@@ -60,7 +59,7 @@ function PickerIOS(props) {
       return {
         value: item,
         label: label,
-        textColor: StyleSheet.flatten(buildStyles.titleStyle).color,
+        textColor: buildStyles.textColor,
       };
     });
     setItems(newData);
@@ -72,9 +71,12 @@ function PickerIOS(props) {
 
   const buildStyles = useMemo(() => {
     const picker = themeValue.picker;
+    const newTitleStyle = [picker.titleStyle, titleStyle];
     return {
       style: [styles.picker, style],
-      titleStyle: [picker.titleStyle, titleStyle],
+      titleStyle: newTitleStyle,
+      fontSize: StyleSheet.flatten(newTitleStyle).fontSize,
+      textColor: StyleSheet.flatten(newTitleStyle).color,
     };
   }, [themeValue, style, titleStyle]);
 
@@ -85,7 +87,7 @@ function PickerIOS(props) {
       items={items}
       selectedIndex={selectedIndex}
       onChange={onChange}
-      fontSize={StyleSheet.flatten(buildStyles.titleStyle).fontSize}
+      fontSize={buildStyles.fontSize}
       onStartShouldSetResponder={() => true}
       onResponderTerminationRequest={() => false}
     />
