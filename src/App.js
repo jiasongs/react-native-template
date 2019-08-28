@@ -5,6 +5,8 @@ import SplashScreen from 'react-native-splash-screen';
 import NavigationContainer from './routers/NavigationContainer';
 import { OverlayTopContainer } from './components';
 import { ThemeContext, useThemeValue } from './config/theme';
+import RouterHelper from './routers/RouterHelper';
+import { useBackExitApp } from './common/hooks';
 
 function App() {
   const value = useThemeValue();
@@ -12,6 +14,15 @@ function App() {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
+
+  useBackExitApp(() => {
+    const routerStacks = RouterHelper.routerStacks;
+    if (routerStacks.length === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 
   return (
     <ThemeContext.Provider value={value}>

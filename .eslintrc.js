@@ -249,7 +249,7 @@ module.exports = {
     // The following rules are made available via `eslint-plugin-react-native`
 
     'react-native/no-unused-styles': 0,
-    'react-native/split-platform-components': 2,
+    'react-native/split-platform-components': 0,
     'react-native/no-inline-styles': 0,
     'react-native/no-color-literals': 0,
     'react-native/no-raw-text': 2,
