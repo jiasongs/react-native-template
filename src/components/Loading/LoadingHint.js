@@ -3,10 +3,9 @@ import React from 'react';
 import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import LottieView from 'lottie-react-native';
 import PropTypes from 'prop-types';
-import { Predefine } from '../../config/predefine';
 
 function LoadingHint(props) {
-  const { style, loading, source } = props;
+  const { style, lotteryStyle, loading, source } = props;
 
   if (!loading) {
     return null;
@@ -14,8 +13,7 @@ function LoadingHint(props) {
   return (
     <View style={[styles.container, style]}>
       <LottieView
-        ref={this._captureRef}
-        style={styles.lottery}
+        style={[styles.lottery, lotteryStyle]}
         resizeMode={'cover'}
         loop={true}
         autoSize={false}
@@ -29,7 +27,7 @@ function LoadingHint(props) {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: Predefine.contentTop,
+    top: 0,
     bottom: 0,
     left: 0,
     right: 0,
@@ -38,15 +36,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   lottery: {
-    marginTop: -20,
-    width: 210,
-    height: 210,
+    width: 170,
+    height: 170,
   },
 });
 
 LoadingHint.propTypes = {
   ...LottieView.propTypes,
   style: ViewPropTypes.style,
+  lotteryStyle: ViewPropTypes.style,
   loading: PropTypes.bool,
 };
 
