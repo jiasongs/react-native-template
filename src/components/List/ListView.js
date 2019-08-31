@@ -57,7 +57,7 @@ export default class ListView extends React.PureComponent {
       PropTypes.number,
       PropTypes.shape({ uri: PropTypes.string }),
     ]),
-    emptyTitle: PropTypes.title,
+    emptyTitle: PropTypes.string,
 
     extraData: PropTypes.any,
   };
