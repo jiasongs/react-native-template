@@ -3,10 +3,19 @@ import React from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
-function RenderIndicator(props) {
-  const { loading } = props;
+function RenderAllLoad(props) {
+  const { onLayout } = props;
   return (
-    <View style={styles.indicatorContainer}>
+    <View onLayout={onLayout} style={styles.indicatorContainer}>
+      <Text style={styles.footerText}>数据已全部加载完毕</Text>
+    </View>
+  );
+}
+
+function RenderIndicator(props) {
+  const { onLayout, loading } = props;
+  return (
+    <View onLayout={onLayout} style={styles.indicatorContainer}>
       <ActivityIndicator
         animating={loading}
         size="small"
@@ -18,21 +27,13 @@ function RenderIndicator(props) {
   );
 }
 
-function RenderAllLoad() {
-  return (
-    <View style={styles.indicatorContainer}>
-      <Text style={styles.footerText}>数据已全部加载完毕</Text>
-    </View>
-  );
-}
-
 function ListFooterLoding(props) {
-  const { loading, allLoad } = props;
+  const { loading, allLoad, onLayout } = props;
 
   if (!loading && allLoad) {
     return <RenderAllLoad />;
   } else if (loading) {
-    return <RenderIndicator loading={loading} />;
+    return <RenderIndicator onLayout={onLayout} loading={loading} />;
   }
   return null;
 }
@@ -42,18 +43,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 30,
+    height: 50,
   },
   indicatorContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 30,
+    height: 50,
   },
   footerText: {
     marginLeft: 10,
-    height: 30,
-    lineHeight: 30,
     fontSize: 13,
     color: '#999999',
   },

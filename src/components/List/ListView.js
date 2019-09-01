@@ -254,15 +254,8 @@ export default class ListView extends React.PureComponent {
 
   startEndReached = () => {
     if (!this.state.isEndReached) {
-      // console.log('startEndReached');
       this._currentEndReachedStatus = EndReachedStatus.START_LOADED;
-      this.setState({ isEndReached: true }, () => {
-        // 问题所在，不能显示到视图最底层
-        // console.log('this._currentContentSize', this._currentContentSize.contentHeight)
-        // let offset = this._currentContentSize.contentHeight - this._currentListSize.height + 30
-        // console.log('this.offset', offset)
-        // this.scrollToOffset({ offset: offset, animated: true })
-      });
+      this.setState({ isEndReached: true });
     }
   };
 
@@ -305,6 +298,16 @@ export default class ListView extends React.PureComponent {
     onLayout && onLayout(event);
   };
 
+  _onFooterLayout = () => {
+    const isStartLoading =
+      this._currentEndReachedStatus === EndReachedStatus.START_LOADED;
+    if (Platform.OS === 'android' && isStartLoading) {
+      setTimeout(() => {
+        this.scrollToEnd({ animated: false });
+      }, 0);
+    }
+  };
+
   renderRefreshLoading = () => {
     const {
       refreshableColors,
@@ -334,7 +337,13 @@ export default class ListView extends React.PureComponent {
     const { isEndReached } = this.state;
     const status =
       this._currentEndReachedStatus === EndReachedStatus.ALL_LOADED;
-    return <FooterLoding loading={isEndReached} allLoad={status} />;
+    return (
+      <FooterLoding
+        onLayout={this._onFooterLayout}
+        loading={isEndReached}
+        allLoad={status}
+      />
+    );
   };
 
   renderEmptyView = () => {
@@ -370,7 +379,7 @@ export default class ListView extends React.PureComponent {
           onLayout={this._onLayout}
           onContentSizeChange={this._onContentSizeChange}
           onScroll={this._onScroll}
-          onEndReachedThreshold={0.1} // 必须在{...}后面，否则就会出问题。也不知道是为什么，
+          onEndReachedThreshold={0.2} // 必须在{...}后面，否则就会出问题。也不知道是为什么，
           onEndReached={this._onEndReached}
         />
       );
@@ -385,10 +394,10 @@ export default class ListView extends React.PureComponent {
           ListEmptyComponent={this.renderEmptyView}
           extraData={!enableRefresh ? this.state.isEndReached : null}
           {...others}
+          onLayout={this._onLayout}
           onContentSizeChange={this._onContentSizeChange}
           onScroll={this._onScroll}
-          onLayout={this._onLayout}
-          onEndReachedThreshold={0.1} // 必须在{...}后面，否则就会出问题。也不知道是为什么，
+          onEndReachedThreshold={0.2} // 必须在{...}后面，否则就会出问题。也不知道是为什么，
           onEndReached={this._onEndReached}
         />
       );

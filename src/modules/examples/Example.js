@@ -37,6 +37,10 @@ function Example() {
           title={'Overlay'}
           onPress={() => RouterHelper.navigate('DemoOverlay')}
         />
+        <ListRow
+          title={'List'}
+          onPress={() => RouterHelper.navigate('DemoList')}
+        />
       </ScrollView>
     </PageContainer>
   );

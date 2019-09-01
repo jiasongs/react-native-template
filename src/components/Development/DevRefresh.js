@@ -126,9 +126,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 50,
   },
-  button: {
-    backgroundColor: 'red',
-  },
+  button: {},
 });
 
 DevRefresh.propTypes = {};

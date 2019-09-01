@@ -30,7 +30,7 @@ module.exports = {
     __dirname: false,
     __fbBatchedBridgeConfig: false,
     it: true,
-    alert: false,
+    alert: true,
     cancelAnimationFrame: false,
     cancelIdleCallback: false,
     clearImmediate: true,
@@ -98,7 +98,7 @@ module.exports = {
     'dot-notation': 1, // encourages use of dot notation whenever possible
     eqeqeq: [1, 'allow-null'], // require the use of === and !==
     'guard-for-in': 0, // make sure for-in loops have an if statement (off by default)
-    'no-alert': 1, // disallow the use of alert, confirm, and prompt
+    'no-alert': 0, // disallow the use of alert, confirm, and prompt
     'no-caller': 1, // disallow use of arguments.caller or arguments.callee
     'no-div-regex': 1, // disallow division operators explicitly at beginning of regular expression (off by default)
     'no-else-return': 0, // disallow else after a return in an if (off by default)
