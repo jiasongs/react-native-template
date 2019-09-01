@@ -2,12 +2,13 @@ import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { PageContainer, ListRow, NavigationBar } from '../../components';
 import RouterHelper from '../../routers/RouterHelper';
+import { RefreshHeader } from 'react-native-refresh';
 
 function Example() {
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'Example'} renderLeftAction={null} />
-      <ScrollView>
+      <ScrollView refreshControl={<RefreshHeader enableRefresh={false} />}>
         <ListRow
           title={'Theme'}
           onPress={() => RouterHelper.navigate('DemoTheme')}

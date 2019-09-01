@@ -309,10 +309,12 @@ export default class ListView extends React.PureComponent {
   };
 
   renderRefreshLoading = () => {
+    const { enableRefresh } = this.props;
     return (
       <HeaderLoading
         refreshing={this.state.isRefreshing}
         onRefresh={this._onRefresh}
+        enableRefresh={enableRefresh}
       />
     );
   };
@@ -355,7 +357,7 @@ export default class ListView extends React.PureComponent {
         <FlatList
           ref={this._captureRef}
           data={data}
-          refreshControl={enableRefresh ? this.renderRefreshLoading() : null}
+          refreshControl={this.renderRefreshLoading()}
           ListFooterComponent={enableLoadMore ? this.renderFooterLoading : null}
           ListEmptyComponent={this.renderEmptyView}
           extraData={!enableRefresh ? this.state.isEndReached : null}
@@ -373,7 +375,7 @@ export default class ListView extends React.PureComponent {
           ref={this._captureRef}
           sections={data}
           stickySectionHeadersEnabled={true} // 安卓sction黏着
-          refreshControl={enableRefresh ? this.renderRefreshLoading() : null}
+          refreshControl={this.renderRefreshLoading()}
           ListFooterComponent={enableLoadMore ? this.renderFooterLoading : null}
           ListEmptyComponent={this.renderEmptyView}
           extraData={!enableRefresh ? this.state.isEndReached : null}

@@ -12,13 +12,16 @@ import { ServiceHome } from '../../services';
 function DemoList() {
   const listRef = useRef(React.createRef());
   const [data, setData] = useState([]);
-
+  console.log('data', data);
   useEffect(() => {
-    ServiceHome.getHomeList({ limit: 20 }).then((result) => {
-      if (result.success) {
-        setData(result.data);
-      }
-    });
+    // ServiceHome.getHomeList({ limit: 20 }).then((result) => {
+    //   if (result.success) {
+    //     setData(result.data);
+    //   }
+    // });
+    return () => {
+      console.log('销毁');
+    };
   }, []);
 
   const onRefresh = useCallback((stopRefresh) => {
@@ -61,6 +64,7 @@ function DemoList() {
         ref={listRef}
         style={styles.container}
         initialRefresh={true}
+        enableRefresh={true}
         onRefresh={onRefresh}
         keyExtractor={(item, index) => index + ''}
         data={data}

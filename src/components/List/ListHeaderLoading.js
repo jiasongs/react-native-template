@@ -7,7 +7,7 @@ import { RefreshHeader, RefreshState } from 'react-native-refresh';
 import { Predefine } from '../../config/predefine';
 
 function ListHeaderLoading(props) {
-  const { refreshing, onRefresh, source } = props;
+  const { refreshing, onRefresh, source, enableRefresh } = props;
 
   const lottieRef = useRef(React.createRef());
   const progressRef = useRef(new Animated.Value(1));
@@ -72,6 +72,7 @@ function ListHeaderLoading(props) {
       onRefresh={onRefreshCallBack}
       onEndRefresh={onEndRefreshCallBack}
       onIdleRefresh={onIdleRefreshCallBack}
+      enableRefresh={enableRefresh}
     >
       <LottieView
         ref={lottieRef}
@@ -114,10 +115,12 @@ ListHeaderLoading.propTypes = {
   ]),
   refreshing: PropTypes.bool,
   onRefresh: PropTypes.func,
+  enableRefresh: PropTypes.bool,
 };
 
 ListHeaderLoading.defaultProps = {
   refreshing: false,
+  enableRefresh: true,
 };
 
 export default React.memo(ListHeaderLoading);

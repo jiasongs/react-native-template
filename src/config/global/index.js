@@ -48,9 +48,12 @@ if (!__DEV__) {
   global.console = {
     info: () => {},
     log: () => {},
+    assert: () => {},
     warn: () => {},
     debug: () => {},
     error: () => {},
+    time: () => {},
+    timeEnd: () => {},
   };
 }
 /**
