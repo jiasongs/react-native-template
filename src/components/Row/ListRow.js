@@ -122,7 +122,7 @@ function ListRow(props) {
 
   return (
     <Button
-      hitSlop={null}
+      hitSlop={Predefine.InsetZero}
       type={'clear'}
       style={buildStyles.style}
       onPress={onPress}

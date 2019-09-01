@@ -18,6 +18,7 @@ import {
   ToastView,
   Checkbox,
 } from '../../components';
+import ListHeaderLoading from '../../components/List/ListHeaderLoading';
 
 /**
  * @开启安卓的布局动画
@@ -38,6 +39,7 @@ YellowBox.ignoreWarnings([
   'Warning: ViewPagerAndroid',
   'Accessing view manager configs directly off UIManager',
   'Module AudioRecorderManager requires main queue setup since it overrides',
+  'Warning: componentWillMount is',
 ]);
 /**
  * @屏蔽输出
@@ -72,6 +74,9 @@ addDefaultProps(ToastView, {
 addDefaultProps(Checkbox, {
   narmalIcon: Images.icon_nav_left,
   selectIcon: Images.icon_center_play,
+});
+addDefaultProps(ListHeaderLoading, {
+  source: Images.json_list_header_loading,
 });
 
 /**

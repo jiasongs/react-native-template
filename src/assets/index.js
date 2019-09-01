@@ -7,6 +7,9 @@ export const Images = {
   get json_loading() {
     return require('./json/loading.json');
   },
+  get json_list_header_loading() {
+    return require('./json/list_header_loading.json');
+  },
   /**
    * @Common [通用]
    */

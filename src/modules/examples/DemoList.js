@@ -7,6 +7,7 @@ import {
   ListView,
   ListRow,
 } from '../../components';
+import { Predefine } from '../../config/predefine';
 
 const dataTemp = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
@@ -14,19 +15,28 @@ function DemoList() {
   const [data, setData] = useState(dataTemp);
 
   const onRefresh = useCallback((stopRefresh) => {
-    setTimeout(() => {
-      stopRefresh();
-    }, 3000);
+    console.log('onRefresh');
+    let a = new Date().getTime();
+    setTimeout(
+      () => {
+        console.log('setTimeout', new Date().getTime() - a);
+        stopRefresh();
+      },
+      Predefine.isAndroid ? 5000 : 2000,
+    );
   }, []);
 
   const onEndReached = useCallback(
     (stopEndReached) => {
-      setTimeout(() => {
-        setData((preData) => {
-          return preData.concat([1, 1, 1, 1]);
-        });
-        stopEndReached({ allLoad: data.length > 100 });
-      }, 3000);
+      setTimeout(
+        () => {
+          setData((preData) => {
+            return preData.concat([1, 1, 1, 1]);
+          });
+          stopEndReached({ allLoad: data.length > 100 });
+        },
+        Predefine.isAndroid ? 5000 : 2000,
+      );
     },
     [data],
   );

@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import { Image } from 'react-native';
-import { StackViewTransitionConfigs } from 'react-navigation';
+import { StackViewTransitionConfigs } from 'react-navigation-stack';
 
 export function transitionConfig(transitionProps, prevTransitionProps) {
   const params = transitionProps && transitionProps.scene.route.params;

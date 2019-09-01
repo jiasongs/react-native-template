@@ -70,7 +70,7 @@ export default class ListView extends React.PureComponent {
     enableRefresh: true,
     enableLoadMore: true,
 
-    refreshableColors: [],
+    refreshableColors: ['#333'],
     // refreshableTintColor: '#333',
     // refreshableTitleColor: '#333',
     refreshableTitle: '  正在加载...',
@@ -194,13 +194,13 @@ export default class ListView extends React.PureComponent {
   }
 
   _onRefresh = () => {
+    const { onRefresh } = this.props;
     this.startRefresh();
-    this.props.onRefresh && this.props.onRefresh(this.stopRefresh);
+    onRefresh && onRefresh(this.stopRefresh);
   };
 
   startRefresh = () => {
     if (!this.state.isRefreshing) {
-      // console.log('startRefresh')
       if (this._currentEndReachedStatus === EndReachedStatus.ALL_LOADED) {
         this._currentEndReachedStatus = EndReachedStatus.WAITING_LOADING;
       }
@@ -212,7 +212,7 @@ export default class ListView extends React.PureComponent {
     if (this.state.isRefreshing) {
       this.refreshTime = setTimeout(() => {
         this.setState({ isRefreshing: false });
-      }, 200); // 解决下拉刷新请求过快，导致的bug
+      }, 500); // 解决下拉刷新请求过快，导致的bug
     }
   };
 
@@ -268,7 +268,7 @@ export default class ListView extends React.PureComponent {
           this._currentEndReachedStatus = EndReachedStatus.WAITING_LOADING;
         }
         this.setState({ isEndReached: false });
-      }, 200); // 解决上拉加载请求过快，导致的bug
+      }, 500); // 解决上拉加载请求过快，导致的bug
     }
   };
 
@@ -303,32 +303,16 @@ export default class ListView extends React.PureComponent {
       this._currentEndReachedStatus === EndReachedStatus.START_LOADED;
     if (Platform.OS === 'android' && isStartLoading) {
       setTimeout(() => {
-        this.scrollToEnd({ animated: false });
+        this.scrollToEnd({ animated: true });
       }, 0);
     }
   };
 
   renderRefreshLoading = () => {
-    const {
-      refreshableColors,
-      refreshableProgressViewOffset,
-      refreshableProgressBackgroundColor,
-      refreshableSize,
-      refreshableTintColor,
-      refreshableTitle,
-      refreshableTitleColor,
-    } = this.props;
     return (
       <HeaderLoading
         refreshing={this.state.isRefreshing}
         onRefresh={this._onRefresh}
-        colors={refreshableColors}
-        progressBackgroundColor={refreshableProgressBackgroundColor}
-        size={refreshableSize}
-        tintColor={refreshableTintColor}
-        title={refreshableTitle}
-        titleColor={refreshableTitleColor}
-        progressViewOffset={refreshableProgressViewOffset}
       />
     );
   };
@@ -379,7 +363,7 @@ export default class ListView extends React.PureComponent {
           onLayout={this._onLayout}
           onContentSizeChange={this._onContentSizeChange}
           onScroll={this._onScroll}
-          onEndReachedThreshold={0.2} // 必须在{...}后面，否则就会出问题。也不知道是为什么，
+          onEndReachedThreshold={0.1} // 必须在{...}后面，否则就会出问题。也不知道是为什么，
           onEndReached={this._onEndReached}
         />
       );
@@ -397,7 +381,7 @@ export default class ListView extends React.PureComponent {
           onLayout={this._onLayout}
           onContentSizeChange={this._onContentSizeChange}
           onScroll={this._onScroll}
-          onEndReachedThreshold={0.2} // 必须在{...}后面，否则就会出问题。也不知道是为什么，
+          onEndReachedThreshold={0.1} // 必须在{...}后面，否则就会出问题。也不知道是为什么，
           onEndReached={this._onEndReached}
         />
       );
