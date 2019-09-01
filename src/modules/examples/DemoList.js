@@ -1,5 +1,5 @@
 'use strict';
-import React, { useCallback, useState } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   NavigationBar,
@@ -7,36 +7,37 @@ import {
   ListView,
   ListRow,
 } from '../../components';
-import { Predefine } from '../../config/predefine';
-
-const dataTemp = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+import { ServiceHome } from '../../services';
 
 function DemoList() {
-  const [data, setData] = useState(dataTemp);
+  const listRef = useRef(React.createRef());
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    ServiceHome.getHomeList({ limit: 20 }).then((result) => {
+      if (result.success) {
+        setData(result.data);
+      }
+    });
+  }, []);
 
   const onRefresh = useCallback((stopRefresh) => {
-    console.log('onRefresh');
-    let a = new Date().getTime();
-    setTimeout(
-      () => {
-        console.log('setTimeout', new Date().getTime() - a);
+    ServiceHome.getHomeList({ limit: 20 }).then((result) => {
+      if (result.success) {
         stopRefresh();
-      },
-      Predefine.isAndroid ? 5000 : 2000,
-    );
+        setData(result.data);
+      }
+    });
   }, []);
 
   const onEndReached = useCallback(
     (stopEndReached) => {
-      setTimeout(
-        () => {
-          setData((preData) => {
-            return preData.concat([1, 1, 1, 1]);
-          });
-          stopEndReached({ allLoad: data.length > 100 });
-        },
-        Predefine.isAndroid ? 5000 : 2000,
-      );
+      setTimeout(() => {
+        setData((preData) => {
+          return preData.concat([1, 1, 1, 1]);
+        });
+        stopEndReached({ allLoad: data.length > 100 });
+      }, 2000);
     },
     [data],
   );
@@ -44,6 +45,7 @@ function DemoList() {
   const renderItem = useCallback(({ index }) => {
     return (
       <ListRow
+        contentStyle={{ height: 100 }}
         onPress={() => {
           alert('Z');
         }}
@@ -56,7 +58,9 @@ function DemoList() {
     <PageContainer style={styles.container}>
       <NavigationBar title={'DemoList'} />
       <ListView
+        ref={listRef}
         style={styles.container}
+        initialRefresh={true}
         onRefresh={onRefresh}
         keyExtractor={(item, index) => index + ''}
         data={data}

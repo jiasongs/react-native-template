@@ -76,7 +76,10 @@ addDefaultProps(Checkbox, {
   selectIcon: Images.icon_center_play,
 });
 addDefaultProps(ListHeaderLoading, {
-  source: Images.json_list_header_loading,
+  source:
+    Platform.OS === 'android'
+      ? Images.json_list_header_loading
+      : Images.json_list_header_loading,
 });
 
 /**

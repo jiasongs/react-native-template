@@ -194,25 +194,24 @@ export default class ListView extends React.PureComponent {
   }
 
   _onRefresh = () => {
-    const { onRefresh } = this.props;
     this.startRefresh();
-    onRefresh && onRefresh(this.stopRefresh);
   };
 
   startRefresh = () => {
-    if (!this.state.isRefreshing) {
-      if (this._currentEndReachedStatus === EndReachedStatus.ALL_LOADED) {
-        this._currentEndReachedStatus = EndReachedStatus.WAITING_LOADING;
-      }
-      this.setState({ isRefreshing: true });
+    const { onRefresh } = this.props;
+    if (this._currentEndReachedStatus === EndReachedStatus.ALL_LOADED) {
+      this._currentEndReachedStatus = EndReachedStatus.WAITING_LOADING;
     }
+    this.setState({ isRefreshing: true }, () => {
+      onRefresh && onRefresh(this.stopRefresh);
+    });
   };
 
   stopRefresh = () => {
     if (this.state.isRefreshing) {
       this.refreshTime = setTimeout(() => {
         this.setState({ isRefreshing: false });
-      }, 500); // 解决下拉刷新请求过快，导致的bug
+      }, 249); // 解决下拉刷新请求过快，导致的bug
     }
   };
 
@@ -247,15 +246,16 @@ export default class ListView extends React.PureComponent {
     ) {
       return;
     }
-
     this.startEndReached();
-    this.props.onEndReached && this.props.onEndReached(this.stopEndReached);
   };
 
   startEndReached = () => {
+    const { onEndReached } = this.props;
     if (!this.state.isEndReached) {
       this._currentEndReachedStatus = EndReachedStatus.START_LOADED;
-      this.setState({ isEndReached: true });
+      this.setState({ isEndReached: true }, () => {
+        onEndReached && onEndReached(this.stopEndReached);
+      });
     }
   };
 
@@ -268,7 +268,7 @@ export default class ListView extends React.PureComponent {
           this._currentEndReachedStatus = EndReachedStatus.WAITING_LOADING;
         }
         this.setState({ isEndReached: false });
-      }, 500); // 解决上拉加载请求过快，导致的bug
+      }, 249); // 解决上拉加载请求过快，导致的bug
     }
   };
 

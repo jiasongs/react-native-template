@@ -7,6 +7,9 @@ export const Images = {
   get json_loading() {
     return require('./json/loading.json');
   },
+  get json_cycle_animation() {
+    return require('./json/cycle_animation.json');
+  },
   get json_list_header_loading() {
     return require('./json/list_header_loading.json');
   },

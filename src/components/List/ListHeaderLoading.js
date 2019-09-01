@@ -4,6 +4,7 @@ import { StyleSheet, Animated } from 'react-native';
 import PropTypes from 'prop-types';
 import LottieView from 'lottie-react-native';
 import { RefreshHeader, RefreshState } from 'react-native-refresh';
+import { Predefine } from '../../config/predefine';
 
 function ListHeaderLoading(props) {
   const { refreshing, onRefresh, source } = props;
@@ -20,9 +21,13 @@ function ListHeaderLoading(props) {
     (state) => {
       currentState.current = state;
       onRefresh && onRefresh(state);
-      setTimeout(() => {
+      if (Predefine.isIOS) {
+        setTimeout(() => {
+          lottieRef.current.play();
+        }, 0);
+      } else {
         lottieRef.current.play();
-      }, 0);
+      }
     },
     [onRefresh],
   );
@@ -33,20 +38,28 @@ function ListHeaderLoading(props) {
 
   const onIdleRefreshCallBack = useCallback((state) => {
     if (currentState.current === RefreshState.End) {
-      setTimeout(() => {
+      if (Predefine.isIOS) {
+        setTimeout(() => {
+          lottieRef.current.reset();
+        }, 0);
+      } else {
         lottieRef.current.reset();
-      }, 0);
+      }
     }
     currentState.current = state;
   }, []);
 
   const onChangeOffsetCallBack = useCallback((event) => {
     const { offset } = event.nativeEvent;
+
     if (
       currentState.current !== RefreshState.Refreshing &&
       currentState.current !== RefreshState.End
     ) {
-      progressRef.current.setValue(offset);
+      if (Predefine.isAndroid) {
+      } else {
+        progressRef.current.setValue(offset);
+      }
     }
   }, []);
 
@@ -72,7 +85,7 @@ function ListHeaderLoading(props) {
         hardwareAccelerationAndroid={true}
         cacheStrategy={'weak'}
         progress={progressRef.current.interpolate({
-          inputRange: [0, 200],
+          inputRange: [0, 286],
           outputRange: [0, 1],
           extrapolate: 'clamp',
         })}
