@@ -12,13 +12,15 @@ import { ServiceHome } from '../../services';
 function DemoList() {
   const listRef = useRef(React.createRef());
   const [data, setData] = useState([]);
-  console.log('data', data);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    // ServiceHome.getHomeList({ limit: 20 }).then((result) => {
-    //   if (result.success) {
-    //     setData(result.data);
-    //   }
-    // });
+    ServiceHome.getHomeList({ limit: 20 }).then((result) => {
+      if (result.success) {
+        setData(result.data);
+        setLoading(false);
+      }
+    });
     return () => {
       console.log('销毁');
     };
@@ -58,13 +60,16 @@ function DemoList() {
   }, []);
 
   return (
-    <PageContainer style={styles.container}>
+    <PageContainer
+      style={styles.container}
+      loading={loading}
+      loadingStyle={{}}
+      emptyStyle={{}}
+    >
       <NavigationBar title={'DemoList'} />
       <ListView
         ref={listRef}
         style={styles.container}
-        initialRefresh={true}
-        enableRefresh={true}
         onRefresh={onRefresh}
         keyExtractor={(item, index) => index + ''}
         data={data}

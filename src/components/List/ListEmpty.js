@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   emptyText: {
-    marginTop: scaleSize(20),
+    marginTop: scaleSize(22),
     color: '#cdcdcd',
-    fontSize: 13,
+    fontSize: 14,
   },
   emptyImage: {
-    width: scaleSize(180),
-    height: scaleSize(180),
+    width: scaleSize(249),
+    height: scaleSize(249),
   },
 });
 

@@ -70,7 +70,9 @@ function Button(props) {
       newStyle.push(button.solid.style);
       newTitleStyle.push(button.solid.titleStyle);
       newIconStyle.push(button.solid.iconStyle);
-      loading && newLoadingStyle.push(button.solid.loadingStyle);
+      if (loading) {
+        newLoadingStyle.push(button.solid.loadingStyle);
+      }
       if (disabled) {
         newStyle.push(button.solid.disabledStyle);
         newTitleStyle.push(button.solid.disabledTitleStyle);
@@ -79,7 +81,9 @@ function Button(props) {
       newStyle.push(button.outline.style);
       newTitleStyle.push(button.outline.titleStyle);
       newIconStyle.push(button.outline.iconStyle);
-      loading && newLoadingStyle.push(button.outline.loadingStyle);
+      if (loading) {
+        newLoadingStyle.push(button.outline.loadingStyle);
+      }
       if (disabled) {
         newStyle.push(button.outline.disabledStyle);
         newTitleStyle.push(button.outline.disabledTitleStyle);
@@ -88,7 +92,9 @@ function Button(props) {
       newStyle.push(button.clear.style);
       newTitleStyle.push(button.clear.titleStyle);
       newIconStyle.push(button.clear.iconStyle);
-      loading && newLoadingStyle.push(button.clear.loadingStyle);
+      if (loading) {
+        newLoadingStyle.push(button.clear.loadingStyle);
+      }
       if (disabled) {
         newStyle.push(button.clear.disabledStyle);
         newTitleStyle.push(button.clear.disabledTitleStyle);
@@ -96,7 +102,10 @@ function Button(props) {
     }
     if (type !== 'clear' && raised) {
       newStyle.push(button.raisedStyle);
-      console.log('newStyle', newStyle);
+    }
+    if (loading) {
+      newTitleStyle.push({ opacity: 0 });
+      newIconStyle.push({ opacity: 0 });
     }
     const buildStyle = [...newStyle, styles.container];
     const buildTitleStyle = [...newTitleStyle, styles.titleStyle];
@@ -208,7 +217,6 @@ function Button(props) {
 
 const styles = StyleSheet.create({
   container: {
-    // alignSelf: 'flex-start',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -222,12 +230,9 @@ const styles = StyleSheet.create({
 });
 
 Button.propTypes = {
-  forwardedRef: PropTypes.any,
+  ...TouchableOpacity.propTypes,
   type: PropTypes.oneOf(['solid', 'clear', 'outline']),
-  icon: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.shape({ uri: PropTypes.string }),
-  ]),
+  icon: Image.propTypes.source,
   iconStyle: Image.propTypes.style,
   iconPosition: PropTypes.oneOf([
     IconPosition.PositionTop,
@@ -235,22 +240,16 @@ Button.propTypes = {
     IconPosition.PositionBottom,
     IconPosition.PositionRight,
   ]),
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   titleStyle: Text.propTypes.style,
   spacingIconAndTitle: PropTypes.number,
   backgroundImage: PropTypes.number,
-  activeOpacity: PropTypes.number,
-  onPress: PropTypes.func,
-  onPressOut: PropTypes.func,
-  onLongPress: PropTypes.func,
-  delayLongPress: PropTypes.number,
   disabled: PropTypes.bool,
   disabledStyle: ViewPropTypes.style,
   disabledTitleStyle: Text.propTypes.style,
   loading: PropTypes.bool,
   loadingStyle: ViewPropTypes.style,
   raised: PropTypes.bool,
-  hitSlop: ViewPropTypes.hitSlop,
   clickInterval: PropTypes.number, // 多次点击之间的延迟
 };
 

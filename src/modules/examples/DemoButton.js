@@ -1,10 +1,12 @@
 'use strict';
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, StyleSheet, ScrollView } from 'react-native';
 import { NavigationBar, PageContainer, Button } from '../../components';
 import { Images } from '../../assets';
 
 function DemoButton() {
+  const [loading, setLoading] = useState(false);
+
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'DemoButton'} />
@@ -16,8 +18,24 @@ function DemoButton() {
         }}
       >
         <Button style={styles.button} title={'solid-title'} />
-        <Button style={styles.button} icon={Images.icon_toast_success} />
-        <Button style={styles.button} title={'solid-loading'} loading={true} />
+        <Button
+          loading={loading}
+          style={styles.button}
+          icon={Images.icon_toast_success}
+        />
+        <Button
+          style={styles.button}
+          title={'solid-loading'}
+          loading={loading}
+          onPress={() => {
+            if (!loading) {
+              setLoading(true);
+              setTimeout(() => {
+                setLoading(false);
+              }, 2000);
+            }
+          }}
+        />
         <Button
           style={styles.button}
           title={'solid-disabled'}
@@ -64,7 +82,7 @@ function DemoButton() {
           type={'outline'}
           style={styles.button}
           title={'outline-loading'}
-          loading={true}
+          loading={loading}
         />
         <Button
           type={'outline'}
@@ -118,7 +136,7 @@ function DemoButton() {
           type={'clear'}
           style={styles.button}
           title={'clear-loading'}
-          loading={true}
+          loading={loading}
         />
         <Button
           type={'clear'}

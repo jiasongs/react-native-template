@@ -16,11 +16,11 @@ export const Images = {
   /**
    * @Common [通用]
    */
-  get icon_network_err() {
-    return require('./icon/icon_network_err.png');
+  get img_no_nerwork() {
+    return require('./img/img_no_nerwork.png');
   },
-  get icon_no_record() {
-    return require('./icon/icon_no_record.png');
+  get img_no_record() {
+    return require('./img/img_no_record.png');
   },
   get icon_nav_left() {
     return require('./icon/icon_nav_left.png');

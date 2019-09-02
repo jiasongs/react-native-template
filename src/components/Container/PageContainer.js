@@ -36,6 +36,7 @@ function PageContainer(props) {
     children,
     style,
     emptyStyle,
+    loadingStyle,
     showNetworkError,
     networkErrorSource,
     onNetworkReload,
@@ -74,7 +75,7 @@ function PageContainer(props) {
   return (
     <View style={buildStyles.style}>
       {children}
-      <MemoRenderLoadingHint style={emptyStyle} loading={loading} />
+      <MemoRenderLoadingHint style={loadingStyle} loading={loading} />
       {showNetworkError && (
         <MemoRenderNetworkError
           style={emptyStyle}
@@ -95,6 +96,7 @@ const styles = StyleSheet.create({
 PageContainer.propTypes = {
   style: ViewPropTypes.style,
   emptyStyle: ViewPropTypes.style,
+  loadingStyle: ViewPropTypes.style,
   fitNotchedScreen: PropTypes.bool,
   fitNotchedScreenType: PropTypes.oneOf(['padding', 'margin']),
   loading: PropTypes.bool,

@@ -17,6 +17,8 @@ import {
   ListRow,
   ToastView,
   Checkbox,
+  ListView,
+  NetworkError,
 } from '../../components';
 import ListHeaderLoading from '../../components/List/ListHeaderLoading';
 
@@ -68,6 +70,8 @@ addDefaultProps(TouchableOpacity, { activeOpacity: 0.9 });
 addDefaultProps(LoadingHint, { source: Images.json_loading });
 addDefaultProps(NavigationBar, { defaultLeftSource: Images.icon_nav_left });
 addDefaultProps(ListRow, { accessorySource: Images.icon_arrow_right });
+addDefaultProps(ListView, { emptySource: Images.img_no_record });
+addDefaultProps(NetworkError, { source: Images.img_no_nerwork });
 addDefaultProps(ToastView, {
   successIcon: Images.icon_toast_success,
   failIcon: Images.icon_toast_fail,
