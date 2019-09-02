@@ -3,7 +3,11 @@ import React, { useRef, useCallback } from 'react';
 import { StyleSheet, Animated } from 'react-native';
 import PropTypes from 'prop-types';
 import LottieView from 'lottie-react-native';
-import { RefreshHeader, RefreshState } from 'react-native-refresh';
+import {
+  RefreshLayout,
+  RefreshHeader,
+  RefreshState,
+} from 'react-native-refresh';
 import { Predefine } from '../../config/predefine';
 
 function ListHeaderLoading(props) {
@@ -64,8 +68,7 @@ function ListHeaderLoading(props) {
   }, []);
 
   return (
-    <RefreshHeader
-      style={styles.container}
+    <RefreshLayout
       refreshing={refreshing}
       onChangeOffset={onChangeOffsetCallBack}
       onPullingRefresh={onPullingRefreshCallBack}
@@ -74,25 +77,27 @@ function ListHeaderLoading(props) {
       onIdleRefresh={onIdleRefreshCallBack}
       enableRefresh={enableRefresh}
     >
-      <LottieView
-        ref={lottieRef}
-        style={styles.lottery}
-        resizeMode={'cover'}
-        loop={true}
-        autoSize={false}
-        autoPlay={false}
-        speed={2}
-        source={source}
-        hardwareAccelerationAndroid={true}
-        cacheStrategy={'weak'}
-        progress={progressRef.current.interpolate({
-          inputRange: [0, 286],
-          outputRange: [0, 1],
-          extrapolate: 'clamp',
-        })}
-      />
+      <RefreshHeader style={styles.container}>
+        <LottieView
+          ref={lottieRef}
+          style={styles.lottery}
+          resizeMode={'cover'}
+          loop={true}
+          autoSize={false}
+          autoPlay={false}
+          speed={2}
+          source={source}
+          hardwareAccelerationAndroid={true}
+          cacheStrategy={'weak'}
+          progress={progressRef.current.interpolate({
+            inputRange: [0, 286],
+            outputRange: [0, 1],
+            extrapolate: 'clamp',
+          })}
+        />
+      </RefreshHeader>
       {props.children}
-    </RefreshHeader>
+    </RefreshLayout>
   );
 }
 
