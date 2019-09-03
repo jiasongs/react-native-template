@@ -76,13 +76,13 @@ function PageContainer(props) {
     <View style={buildStyles.style}>
       {children}
       <MemoRenderLoadingHint style={loadingStyle} loading={loading} />
-      {showNetworkError && (
+      {showNetworkError ? (
         <MemoRenderNetworkError
           style={emptyStyle}
           source={networkErrorSource}
           onNetworkReload={onNetworkReload}
         />
-      )}
+      ) : null}
     </View>
   );
 }

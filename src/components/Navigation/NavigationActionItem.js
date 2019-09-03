@@ -8,14 +8,16 @@ function NavigationActionItem(props) {
 
   return (
     <TouchableOpacity style={styles.actionTouch} onPress={onPress}>
-      {icon && (
+      {icon ? (
         <Image
           resizeMode={'contain'}
           style={[styles.actionImage, iconStyle]}
           source={icon}
         />
-      )}
-      {title && <Text style={[styles.actionTitle, titleStyle]}>{title}</Text>}
+      ) : null}
+      {title ? (
+        <Text style={[styles.actionTitle, titleStyle]}>{title}</Text>
+      ) : null}
     </TouchableOpacity>
   );
 }

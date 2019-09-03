@@ -195,21 +195,21 @@ function Button(props) {
       onPress={_onPress}
       disabled={loading || disabled}
     >
-      {backgroundImage && (
+      {backgroundImage ? (
         <ImageBackground
           style={styles.imageBackground}
           source={backgroundImage}
         />
-      )}
-      {icon && iconTopOrLeft && (
+      ) : null}
+      {icon && iconTopOrLeft ? (
         <ImageView style={buildStyles.iconStyle} source={icon} />
-      )}
-      {title && <Text style={buildStyles.titleStyle}>{title}</Text>}
-      {icon && !iconTopOrLeft && (
+      ) : null}
+      {title ? <Text style={buildStyles.titleStyle}>{title}</Text> : null}
+      {icon && !iconTopOrLeft ? (
         <ImageView style={buildStyles.iconStyle} source={icon} />
-      )}
+      ) : null}
       {children}
-      {loading && (
+      {loading ? (
         <ActivityIndicator
           style={buildStyles.loadingStyle}
           color={buildStyles.loadingColor}
@@ -217,7 +217,7 @@ function Button(props) {
           animating={loading}
           hidesWhenStopped={true}
         />
-      )}
+      ) : null}
     </TouchableOpacity>
   );
 }

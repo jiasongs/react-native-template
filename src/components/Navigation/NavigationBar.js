@@ -21,11 +21,9 @@ const MemoRenderBackground = React.memo(RenderImageBackground);
 
 function RenderImageBackground(props) {
   const { backgroundImage } = props;
-  return (
-    backgroundImage && (
-      <ImageBackground style={styles.navImageBack} source={backgroundImage} />
-    )
-  );
+  return backgroundImage ? (
+    <ImageBackground style={styles.navImageBack} source={backgroundImage} />
+  ) : null;
 }
 
 function NavigationBar(props) {
@@ -111,15 +109,15 @@ function NavigationBar(props) {
       />
       <MemoRenderBackground backgroundImage={backgroundImage} />
       <View style={styles.navContent}>
-        {newRenderLeftAction && (
+        {newRenderLeftAction ? (
           <NavigationAction
             style={styles.navLeftContainer}
             onLayout={onLayoutLeft}
             renderAction={newRenderLeftAction}
             extraData={extraData}
           />
-        )}
-        {title && (
+        ) : null}
+        {title ? (
           <NavigationTitle
             style={styles.navTitleContainer}
             title={title}
@@ -128,15 +126,15 @@ function NavigationBar(props) {
             rightActionWidth={rightActionWidth}
             extraData={extraData}
           />
-        )}
-        {renderRightAction && (
+        ) : null}
+        {renderRightAction ? (
           <NavigationAction
             style={styles.navRightContainer}
             onLayout={onLayoutRight}
             renderAction={renderRightAction}
             extraData={extraData}
           />
-        )}
+        ) : null}
       </View>
     </View>
   );

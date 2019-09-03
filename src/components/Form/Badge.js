@@ -36,11 +36,11 @@ function Badge(props) {
 
   return (
     <View style={buildStyles.style}>
-      {type !== 'dot' && (
+      {type !== 'dot' ? (
         <Text style={buildStyles.countStyle}>
           {parseInt(count) > maxCount ? `${maxCount}+` : count}
         </Text>
-      )}
+      ) : null}
     </View>
   );
 }
