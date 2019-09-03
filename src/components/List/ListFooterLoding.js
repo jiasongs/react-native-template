@@ -1,58 +1,70 @@
 'use strict';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
-function RenderAllLoad(props) {
-  const { onLayout } = props;
-  return (
-    <View onLayout={onLayout} style={styles.indicatorContainer}>
-      <Text style={styles.footerText}>数据已全部加载完毕</Text>
-    </View>
-  );
+function RenderFooter(props) {
+  const { footer } = props;
+  if (React.isValidElement(footer)) {
+    return footer;
+  } else if (typeof footer === 'function') {
+    return footer();
+  }
+  return null;
 }
 
-function RenderIndicator(props) {
-  const { onLayout, loading } = props;
+function RenderLoading(props) {
+  const { loading, enable, allLoad } = props;
+
+  const title = useMemo(() => {
+    if (loading) {
+      return '正在加载...';
+    } else if (allLoad) {
+      return '数据已全部加载完毕';
+    } else {
+      return ' ';
+    }
+  }, [allLoad, loading]);
+
+  if (!enable) {
+    return null;
+  }
+
   return (
-    <View onLayout={onLayout} style={styles.indicatorContainer}>
+    <View style={styles.indicatorContainer}>
       <ActivityIndicator
+        style={[styles.indicator, { marginRight: loading ? 10 : 0 }]}
         animating={loading}
-        size="small"
+        size={'small'}
         hidesWhenStopped={true}
         color={'#666'}
       />
-      <Text style={styles.footerText}>正在加载...</Text>
+      <Text style={styles.footerText}>{title}</Text>
     </View>
   );
 }
 
 function ListFooterLoding(props) {
-  const { loading, allLoad, onLayout } = props;
+  const { loading, isShowEmpty, allLoad, renderFooter, enable } = props;
 
-  if (!loading && allLoad) {
-    return <RenderAllLoad />;
-  } else if (loading) {
-    return <RenderIndicator onLayout={onLayout} loading={loading} />;
-  }
-  return null;
+  return (
+    <View style={[styles.container, { opacity: isShowEmpty ? 0 : 1 }]}>
+      <RenderFooter footer={renderFooter} />
+      <RenderLoading loading={loading} enable={enable} allLoad={allLoad} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  footerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 50,
-  },
+  container: {},
   indicatorContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     height: 50,
   },
+  indicator: {},
   footerText: {
-    marginLeft: 10,
     fontSize: 13,
     color: '#999999',
   },

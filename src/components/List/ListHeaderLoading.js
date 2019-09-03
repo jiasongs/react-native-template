@@ -11,7 +11,7 @@ import {
 import { Predefine } from '../../config/predefine';
 
 function ListHeaderLoading(props) {
-  const { refreshing, onRefresh, source, enableRefresh } = props;
+  const { refreshing, onRefresh, source, enable } = props;
 
   const lottieRef = useRef(React.createRef());
   const progressRef = useRef(new Animated.Value(1));
@@ -38,9 +38,11 @@ function ListHeaderLoading(props) {
 
   const onEndRefreshCallBack = useCallback((state) => {
     currentState.current = state;
+    console.log('----', 4);
   }, []);
 
   const onIdleRefreshCallBack = useCallback((state) => {
+    console.log('----', 1);
     if (currentState.current === RefreshState.End) {
       if (Predefine.isIOS) {
         setTimeout(() => {
@@ -75,7 +77,7 @@ function ListHeaderLoading(props) {
       onRefresh={onRefreshCallBack}
       onEndRefresh={onEndRefreshCallBack}
       onIdleRefresh={onIdleRefreshCallBack}
-      enableRefresh={enableRefresh}
+      enable={enable}
     >
       <RefreshHeader style={styles.container}>
         <LottieView
@@ -120,12 +122,12 @@ ListHeaderLoading.propTypes = {
   ]),
   refreshing: PropTypes.bool,
   onRefresh: PropTypes.func,
-  enableRefresh: PropTypes.bool,
+  enable: PropTypes.bool,
 };
 
 ListHeaderLoading.defaultProps = {
   refreshing: false,
-  enableRefresh: true,
+  enable: true,
 };
 
 export default React.memo(ListHeaderLoading);

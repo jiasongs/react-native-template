@@ -209,6 +209,7 @@ export default class ListView extends React.PureComponent {
 
   stopRefresh = () => {
     if (this.state.isRefreshing) {
+      clearTimeout(this.refreshTime);
       this.refreshTime = setTimeout(() => {
         this.setState({ isRefreshing: false });
       }, 249); // 解决下拉刷新请求过快，导致的bug
@@ -261,6 +262,7 @@ export default class ListView extends React.PureComponent {
 
   stopEndReached = (option = { allLoad: false }) => {
     if (this.state.isEndReached) {
+      clearTimeout(this.endReachedTime);
       this.endReachedTime = setTimeout(() => {
         if (option.allLoad === true) {
           this._currentEndReachedStatus = EndReachedStatus.ALL_LOADED;
@@ -298,36 +300,30 @@ export default class ListView extends React.PureComponent {
     onLayout && onLayout(event);
   };
 
-  _onFooterLayout = () => {
-    const isStartLoading =
-      this._currentEndReachedStatus === EndReachedStatus.START_LOADED;
-    if (Platform.OS === 'android' && isStartLoading) {
-      setTimeout(() => {
-        this.scrollToEnd({ animated: true });
-      }, 0);
-    }
-  };
-
   renderRefreshLoading = () => {
     const { enableRefresh } = this.props;
     return (
       <HeaderLoading
+        enable={enableRefresh}
         refreshing={this.state.isRefreshing}
         onRefresh={this._onRefresh}
-        enableRefresh={enableRefresh}
       />
     );
   };
 
   renderFooterLoading = () => {
+    const { data, ListFooterComponent, enableLoadMore, extraData } = this.props;
     const { isEndReached } = this.state;
     const status =
       this._currentEndReachedStatus === EndReachedStatus.ALL_LOADED;
     return (
       <FooterLoding
-        onLayout={this._onFooterLayout}
+        enable={enableLoadMore}
         loading={isEndReached}
         allLoad={status}
+        isShowEmpty={data.length === 0}
+        renderFooter={ListFooterComponent}
+        extraData={extraData}
       />
     );
   };
@@ -343,25 +339,19 @@ export default class ListView extends React.PureComponent {
     this._listRef = v;
   };
 
-  renderListView = () => {
-    const {
-      listType,
-      data,
-      onRefresh,
-      enableRefresh,
-      enableLoadMore,
-      ...others
-    } = this.props;
+  render() {
+    const { listType, data, onRefresh, extraData, ...others } = this.props;
+    const { isEndReached } = this.state;
     if (listType === 'FlatList') {
       return (
         <FlatList
           ref={this._captureRef}
-          data={data}
           refreshControl={this.renderRefreshLoading()}
-          ListFooterComponent={enableLoadMore ? this.renderFooterLoading : null}
           ListEmptyComponent={this.renderEmptyView}
-          extraData={!enableRefresh ? this.state.isEndReached : null}
           {...others}
+          data={data}
+          ListFooterComponent={this.renderFooterLoading}
+          extraData={[isEndReached, extraData]}
           onLayout={this._onLayout}
           onContentSizeChange={this._onContentSizeChange}
           onScroll={this._onScroll}
@@ -373,13 +363,13 @@ export default class ListView extends React.PureComponent {
       return (
         <SectionList
           ref={this._captureRef}
-          sections={data}
-          stickySectionHeadersEnabled={true} // 安卓sction黏着
+          tickySectionHeadersEnabled={true} // 安卓sction黏着
           refreshControl={this.renderRefreshLoading()}
-          ListFooterComponent={enableLoadMore ? this.renderFooterLoading : null}
           ListEmptyComponent={this.renderEmptyView}
-          extraData={!enableRefresh ? this.state.isEndReached : null}
           {...others}
+          sections={data}
+          ListFooterComponent={this.renderFooterLoading}
+          extraData={[isEndReached, extraData]}
           onLayout={this._onLayout}
           onContentSizeChange={this._onContentSizeChange}
           onScroll={this._onScroll}
@@ -388,9 +378,6 @@ export default class ListView extends React.PureComponent {
         />
       );
     }
-  };
-
-  render() {
-    return this.renderListView();
+    return null;
   }
 }

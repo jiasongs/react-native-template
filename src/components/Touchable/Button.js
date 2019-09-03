@@ -77,6 +77,9 @@ function Button(props) {
         newStyle.push(button.solid.disabledStyle);
         newTitleStyle.push(button.solid.disabledTitleStyle);
       }
+      if (raised) {
+        newStyle.push(button.raisedStyle);
+      }
     } else if (type === 'outline') {
       newStyle.push(button.outline.style);
       newTitleStyle.push(button.outline.titleStyle);
@@ -87,6 +90,9 @@ function Button(props) {
       if (disabled) {
         newStyle.push(button.outline.disabledStyle);
         newTitleStyle.push(button.outline.disabledTitleStyle);
+      }
+      if (raised) {
+        newStyle.push(button.raisedStyle);
       }
     } else if (type === 'clear') {
       newStyle.push(button.clear.style);
@@ -99,13 +105,6 @@ function Button(props) {
         newStyle.push(button.clear.disabledStyle);
         newTitleStyle.push(button.clear.disabledTitleStyle);
       }
-    }
-    if (type !== 'clear' && raised) {
-      newStyle.push(button.raisedStyle);
-    }
-    if (loading) {
-      newTitleStyle.push({ opacity: 0 });
-      newIconStyle.push({ opacity: 0 });
     }
     const buildStyle = [...newStyle, styles.container];
     const buildTitleStyle = [...newTitleStyle, styles.titleStyle];
@@ -145,6 +144,12 @@ function Button(props) {
           break;
       }
     }
+    let loadingFlatten = {};
+    if (loading) {
+      buildTitleStyle.push({ opacity: 0 });
+      buildIconStyle.push({ opacity: 0 });
+      loadingFlatten = StyleSheet.flatten([...newLoadingStyle, loadingStyle]);
+    }
     return {
       style: [...buildStyle, style, disabled ? disabledStyle : null],
       iconStyle: [...buildIconStyle, iconStyle],
@@ -153,7 +158,9 @@ function Button(props) {
         titleStyle,
         disabled ? disabledTitleStyle : null,
       ],
-      loadingStyle: [...newLoadingStyle, loadingStyle],
+      loadingStyle: loadingFlatten,
+      loadingColor: loadingFlatten.color,
+      loadingSize: loadingFlatten.size,
     };
   }, [
     disabled,
@@ -205,8 +212,8 @@ function Button(props) {
       {loading && (
         <ActivityIndicator
           style={buildStyles.loadingStyle}
-          color={StyleSheet.flatten(buildStyles.loadingStyle).color}
-          size={StyleSheet.flatten(buildStyles.loadingStyle).size}
+          color={buildStyles.loadingColor}
+          size={buildStyles.loadingSize}
           animating={loading}
           hidesWhenStopped={true}
         />

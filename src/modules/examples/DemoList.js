@@ -1,6 +1,6 @@
 'use strict';
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import {
   NavigationBar,
   PageContainer,
@@ -41,7 +41,7 @@ function DemoList() {
         setData((preData) => {
           return preData.concat([1, 1, 1, 1]);
         });
-        stopEndReached({ allLoad: data.length > 100 });
+        stopEndReached({ allLoad: data.length > 10 });
       }, 2000);
     },
     [data],
@@ -70,11 +70,16 @@ function DemoList() {
       <ListView
         ref={listRef}
         style={styles.container}
+        enableRefresh={true}
+        enableLoadMore={true}
         onRefresh={onRefresh}
         keyExtractor={(item, index) => index + ''}
         data={data}
         renderItem={renderItem}
         onEndReached={onEndReached}
+        ListFooterComponent={() => {
+          return <Text>123</Text>;
+        }}
       />
     </PageContainer>
   );
