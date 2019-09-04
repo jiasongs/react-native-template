@@ -43,6 +43,10 @@ function Example() {
             title={'List'}
             onPress={() => RouterHelper.navigate('DemoList')}
           />
+          <ListRow
+            title={'ImageView'}
+            onPress={() => RouterHelper.navigate('DemoImageView')}
+          />
         </ScrollView>
       </RefreshLayout>
     </PageContainer>

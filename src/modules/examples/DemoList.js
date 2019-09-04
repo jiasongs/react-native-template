@@ -77,9 +77,7 @@ function DemoList() {
         data={data}
         renderItem={renderItem}
         onEndReached={onEndReached}
-        ListFooterComponent={() => {
-          return <Text>123</Text>;
-        }}
+        // ListFooterComponent={Footer()}
       />
     </PageContainer>
   );

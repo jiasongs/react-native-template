@@ -311,6 +311,16 @@ export default class ListView extends React.PureComponent {
     );
   };
 
+  renderListHeader = () => {
+    const { ListHeaderComponent } = this.props;
+    if (React.isValidElement(ListHeaderComponent)) {
+      return ListHeaderComponent;
+    } else if (typeof ListHeaderComponent === 'function') {
+      return ListHeaderComponent();
+    }
+    return null;
+  };
+
   renderFooterLoading = () => {
     const { data, ListFooterComponent, enableLoadMore, extraData } = this.props;
     const { isEndReached } = this.state;
@@ -350,6 +360,7 @@ export default class ListView extends React.PureComponent {
           ListEmptyComponent={this.renderEmptyView}
           {...others}
           data={data}
+          ListHeaderComponent={this.renderListHeader}
           ListFooterComponent={this.renderFooterLoading}
           extraData={[isEndReached, extraData]}
           onLayout={this._onLayout}
@@ -368,6 +379,7 @@ export default class ListView extends React.PureComponent {
           ListEmptyComponent={this.renderEmptyView}
           {...others}
           sections={data}
+          ListHeaderComponent={this.renderListHeader}
           ListFooterComponent={this.renderFooterLoading}
           extraData={[isEndReached, extraData]}
           onLayout={this._onLayout}
