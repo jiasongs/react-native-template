@@ -28,6 +28,7 @@
 - Theme 支持切换主题
 
 # 待完成
+- WebBrowser
 - Card
 - PermissionsManager
 - Popover
