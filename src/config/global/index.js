@@ -10,7 +10,6 @@ import {
 import { Images } from '../../assets';
 import { Predefine } from '../predefine';
 import Constants from './Constants';
-import { addDefaultProps } from '../../utils/Adaptation';
 import {
   LoadingHint,
   NavigationBar,
@@ -61,28 +60,32 @@ if (!__DEV__) {
 /**
  * @默认UI设置
  */
-addDefaultProps(Text, { allowFontScaling: false });
-addDefaultProps(TextInput, {
+Predefine.addDefaultProps(Text, { allowFontScaling: false });
+Predefine.addDefaultProps(TextInput, {
   allowFontScaling: false,
   selectionColor: Predefine.overallColor,
 });
-addDefaultProps(TouchableOpacity, { activeOpacity: 0.9 });
-addDefaultProps(LoadingHint, { source: Images.json_loading });
-addDefaultProps(NavigationBar, { defaultLeftSource: Images.icon_nav_left });
-addDefaultProps(ListRow, { accessorySource: Images.icon_arrow_right });
-addDefaultProps(ListView, { emptySource: Images.img_no_record });
-addDefaultProps(NetworkError, { source: Images.img_no_nerwork });
-addDefaultProps(ToastView, {
+Predefine.addDefaultProps(TouchableOpacity, { activeOpacity: 0.9 });
+Predefine.addDefaultProps(LoadingHint, { source: Images.json_loading });
+Predefine.addDefaultProps(NavigationBar, {
+  defaultLeftSource: Images.icon_nav_left,
+});
+Predefine.addDefaultProps(ListRow, {
+  accessorySource: Images.icon_arrow_right,
+});
+Predefine.addDefaultProps(ListView, { emptySource: Images.img_no_record });
+Predefine.addDefaultProps(NetworkError, { source: Images.img_no_nerwork });
+Predefine.addDefaultProps(ToastView, {
   successIcon: Images.icon_toast_success,
   failIcon: Images.icon_toast_fail,
   warnIcon: Images.icon_toast_warn,
   loadingIcon: Images.icon_toast_loading,
 });
-addDefaultProps(Checkbox, {
+Predefine.addDefaultProps(Checkbox, {
   narmalIcon: Images.icon_nav_left,
   selectIcon: Images.icon_center_play,
 });
-addDefaultProps(ListHeaderLoading, {
+Predefine.addDefaultProps(ListHeaderLoading, {
   source:
     Platform.OS === 'android'
       ? Images.json_list_header_loading

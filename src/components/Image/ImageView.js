@@ -26,6 +26,7 @@ function RenderPlaceholder(props) {
   } = props;
   if (
     !maxImageWidth &&
+    placeholderImage &&
     (imageStatus === ImageStatus.START || imageStatus === ImageStatus.LOADING)
   ) {
     return (

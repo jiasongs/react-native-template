@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { scaleSize } from '../../utils/Adaptation';
+import { Predefine } from '../../config/predefine';
 
 function ListEmpty(props) {
   const { style, source, title } = props;
@@ -17,18 +17,18 @@ function ListEmpty(props) {
 
 const styles = StyleSheet.create({
   emptyContainer: {
-    height: scaleSize(800),
+    height: Predefine.scaleSize(800),
     justifyContent: 'center',
     alignItems: 'center',
   },
   emptyText: {
-    marginTop: scaleSize(22),
+    marginTop: Predefine.scaleSize(22),
     color: '#cdcdcd',
     fontSize: 14,
   },
   emptyImage: {
-    width: scaleSize(249),
-    height: scaleSize(249),
+    width: Predefine.scaleSize(249),
+    height: Predefine.scaleSize(249),
   },
 });
 

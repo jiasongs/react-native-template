@@ -3,11 +3,24 @@ import { Dimensions, Platform, StatusBar } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import DefineColors from './DefineColors';
 import DefineStyles from './DefineStyles';
+import {
+  fontSize,
+  scaleSize,
+  addDefaultProps,
+  getDeviceInfo,
+} from './Adaptation';
 
 const Predefine = {
   ...DefineColors,
   ...DefineStyles,
 
+  fontSize,
+  scaleSize,
+  addDefaultProps,
+
+  get deviceInfo() {
+    return getDeviceInfo();
+  },
   get isIOS() {
     return Platform.OS === 'ios';
   },
