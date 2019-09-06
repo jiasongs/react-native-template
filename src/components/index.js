@@ -19,8 +19,10 @@ import { ToastManager, ToastView } from './Toast';
 import { AlertManager, AlertView } from './Alert';
 import { ActionManager, ActionSheetView } from './ActionSheet';
 import { DevRefresh } from './Development';
+import SegmentedView from './Segmented/SegmentedView';
 
 export {
+  SegmentedView,
   PageContainer,
   NetworkError,
   LoadingHint,

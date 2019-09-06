@@ -11,6 +11,7 @@ import DemoToast from './examples/DemoToast';
 import Example from './examples/Example';
 import DemoTheme from './examples/DemoTheme';
 import DemoBadge from './examples/DemoBadge';
+import DemoSegmented from './examples/DemoSegmented';
 
 export {
   DemoTheme,
@@ -25,5 +26,6 @@ export {
   DemoPicker,
   DemoToast,
   DemoBadge,
+  DemoSegmented,
   Example,
 };

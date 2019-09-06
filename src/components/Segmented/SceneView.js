@@ -1,13 +1,24 @@
 'use strict';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 
-function SceneView() {
-  return <View style={styles.container} />;
+function SceneView(props) {
+  const { children, layout } = props;
+
+  const buildStyles = useMemo(() => {
+    const propsStyle = children.props.style;
+    return {
+      style: [styles.container, propsStyle, { width: layout.width }],
+    };
+  }, [children, layout]);
+
+  return <View style={buildStyles.style}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+  },
 });
 
 SceneView.propTypes = {};
