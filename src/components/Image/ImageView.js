@@ -163,7 +163,7 @@ function ImageView(props) {
   }, [source]);
 
   const buildStyles = useMemo(() => {
-    const newStyles = StyleSheet.flatten(style);
+    const newStyles = StyleSheet.flatten(style ? style : {});
     return {
       style: [newStyles, imageSize],
       resizeMode: newStyles.resizeMode || resizeMode,
@@ -230,6 +230,7 @@ const styles = StyleSheet.create({
 
 ImageView.propTypes = {
   ...FastImage.propTypes,
+  style: Image.propTypes.style,
   maxImageWidth: PropTypes.number,
   useOpacity: PropTypes.bool,
   placeholderImage: Image.propTypes.source,
