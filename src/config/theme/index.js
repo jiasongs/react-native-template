@@ -1,8 +1,9 @@
-import React from 'react';
 import ThemeLight from './ThemeLight';
 import ThemeDark from './ThemeDark';
-import { ThemeManager, useThemeValue } from '../theme/ThemeManager';
-
-const ThemeContext = React.createContext(ThemeLight);
+import {
+  ThemeContext,
+  ThemeManager,
+  useThemeValue,
+} from '../theme/ThemeManager';
 
 export { ThemeLight, ThemeDark, ThemeManager, ThemeContext, useThemeValue };

@@ -1,40 +1,41 @@
 'use strict';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DeviceEventEmitter } from 'react-native';
 import ThemeLight from './ThemeLight';
 // eslint-disable-next-line no-unused-vars
 import ThemeDark from './ThemeDark';
 
+const CHANGEEVENT = '__ChangeTheme';
 const initialTheme = ThemeLight;
-const __ChangeEvent = '__ChangeTheme';
 
 function useThemeValue(initState = {}) {
   const [value, setValue] = useState({ ...initialTheme, ...initState });
 
   useEffect(() => {
-    const listenerName = DeviceEventEmitter.addListener(
-      __ChangeEvent,
-      (data) => {
-        setValue((preValue) => {
-          return { ...preValue, ...data };
-        });
-      },
-    );
+    const listenerName = DeviceEventEmitter.addListener(CHANGEEVENT, (data) => {
+      setValue((preValue) => {
+        return { ...preValue, ...data };
+      });
+    });
     return () => listenerName.remove();
-  }, []);
+  }, [initState]);
+
+  useEffect(() => {
+    ThemeManager.currentTheme = value;
+  }, [value]);
 
   return value;
 }
 
 class ThemeManager {
-  static currentTheme = initialTheme;
+  static currentTheme = {};
 
   static addListener(callBack) {
-    return DeviceEventEmitter.addListener(__ChangeEvent, callBack);
+    return DeviceEventEmitter.addListener(CHANGEEVENT, callBack);
   }
 
   static removeListener(callBack) {
-    DeviceEventEmitter.removeListener(__ChangeEvent, callBack);
+    DeviceEventEmitter.removeListener(CHANGEEVENT, callBack);
   }
 
   static changeTheme(data = {}) {
@@ -46,13 +47,14 @@ class ThemeManager {
       console.warn('与当前主题相同');
       return;
     }
-    this.currentTheme = { ...this.currentTheme, ...data };
-    DeviceEventEmitter.emit(__ChangeEvent, data);
+    DeviceEventEmitter.emit(CHANGEEVENT, data);
   }
 
   static restoreTheme() {
-    DeviceEventEmitter.emit(__ChangeEvent, initialTheme);
+    DeviceEventEmitter.emit(CHANGEEVENT, initialTheme);
   }
 }
 
-export { ThemeManager, useThemeValue };
+const ThemeContext = React.createContext(initialTheme);
+
+export { ThemeManager, ThemeContext, useThemeValue };
