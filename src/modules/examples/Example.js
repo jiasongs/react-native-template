@@ -8,12 +8,7 @@ function Example() {
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'Example'} renderLeftAction={null} />
-      <RefreshLayout
-        enable={false}
-        onChangeOffset={(event) => {
-          console.log('event', event.nativeEvent);
-        }}
-      >
+      <RefreshLayout enable={false}>
         <ScrollView>
           <ListRow
             title={'Theme'}

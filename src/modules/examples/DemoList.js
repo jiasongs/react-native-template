@@ -27,12 +27,16 @@ function DemoList() {
   }, []);
 
   const onRefresh = useCallback((stopRefresh) => {
-    ServiceHome.getHomeList({ limit: 20 }).then((result) => {
-      if (result.success) {
-        stopRefresh();
-        setData(result.data);
-      }
-    });
+    // ServiceHome.getHomeList({ limit: 20 }).then((result) => {
+    //   if (result.success) {
+    //     stopRefresh();
+    //     setData(result.data);
+    //   }
+    // });
+    setTimeout(() => {
+      stopRefresh();
+      setData((pre) => pre.slice());
+    }, 1000);
   }, []);
 
   const onEndReached = useCallback(
@@ -77,7 +81,6 @@ function DemoList() {
         data={data}
         renderItem={renderItem}
         onEndReached={onEndReached}
-        // ListFooterComponent={Footer()}
       />
     </PageContainer>
   );
