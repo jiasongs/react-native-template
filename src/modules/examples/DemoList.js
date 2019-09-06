@@ -41,7 +41,7 @@ function DemoList() {
         setData((preData) => {
           return preData.concat([1, 1, 1, 1]);
         });
-        stopEndReached({ allLoad: data.length > 10 });
+        stopEndReached({ allLoad: data.length > 1000 });
       }, 2000);
     },
     [data],
