@@ -23,7 +23,7 @@ function ContentView(props) {
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
       bounces={true}
-      scrollEventThrottle={16}
+      scrollEventThrottle={1}
       onScroll={onScroll}
     >
       {React.Children.map(children, (item, index) => {

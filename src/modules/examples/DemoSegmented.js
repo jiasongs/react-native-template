@@ -10,15 +10,15 @@ const pageData = [
   { title: '' },
   { title: '' },
   { title: '' },
-  // { title: '' },
-  // { title: '' },
-  // { title: '' },
-  // { title: '' },
-  // { title: '' },
-  // { title: '' },
-  // { title: '' },
-  // { title: '' },
-  // { title: '' },
+  { title: '' },
+  { title: '' },
+  { title: '' },
+  { title: '' },
+  { title: '' },
+  { title: '' },
+  { title: '' },
+  { title: '' },
+  { title: '' },
 ];
 
 function DemoSegmented() {
@@ -40,7 +40,7 @@ function DemoSegmented() {
               key={index}
               itemKey={index}
               title={title}
-              style={{ backgroundColor: 'gray' }}
+              style={{}}
             >
               <FlatList
                 keyExtractor={(item, index) => index + ''}

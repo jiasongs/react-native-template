@@ -17,6 +17,7 @@ import {
   DemoTheme,
   Example,
   DemoBadge,
+  DemoSegmented,
 } from '../modules';
 
 const TabNavigatorRouter = {
@@ -75,6 +76,7 @@ const StackNavigatorRouter = {
   DemoToast: { screen: DemoToast },
   DemoTheme: { screen: DemoTheme },
   DemoBadge: { screen: DemoBadge },
+  DemoSegmented: { screen: DemoSegmented },
 };
 
 const StackNavigatorConfig = {

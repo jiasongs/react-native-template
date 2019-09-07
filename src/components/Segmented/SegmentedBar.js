@@ -24,18 +24,95 @@ function Indicator(props) {
 function SegmentedBar(props) {
   const { animatedX, sceneChildren, contentLayout, currentIndex } = props;
 
+  const itemSumWidthRef = useRef(0);
   const itemLayoutsRef = useRef([]);
+  const scrollViewRef = useRef(React.createRef());
 
-  const [contentSize, setContentSize] = useState({ width: 1, height: 1 });
+  const [interpolateX, setInterpolateX] = useState({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+  const [interpolateScaleX, setInterpolateScaleX] = useState({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+  const [itemLayouts, setItemLayouts] = useState([]);
+  const [contentSize, setContentSize] = useState({ width: 0, height: 0 });
   const [layout, setLayout] = useState({ width: 0, height: 0 });
 
   const onLayout = useCallback((event) => {
     setLayout(event.nativeEvent.layout);
   }, []);
 
-  const onItemLayout = useCallback((event, index) => {
-    itemLayoutsRef.current[index] = event.nativeEvent.layout;
+  console.log('contentSize', contentSize);
+  useEffect(() => {
+    const temp = 685;
+    const listener = animatedX.addListener(({ value }) => {
+      const z = value * (temp / (375 * sceneChildren.length));
+      console.log('value', value);
+      if (z < 375 / 2) {
+        return;
+      }
+      const xxxx = z - 375 / 2;
+      scrollViewRef.current.scrollTo({
+        x: xxxx,
+        y: 0,
+        animated: false,
+      });
+    });
+    return () => listener.remove();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const onItemLayout = useCallback(
+    (event, index) => {
+      const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;
+      if (event.nativeEvent.layout) {
+        itemLayoutsRef.current[index] = event.nativeEvent.layout;
+        const temp = itemLayoutsRef.current.filter((item) => item);
+        if (temp.length === length) {
+          setItemLayouts(itemLayoutsRef.current);
+        }
+      }
+    },
+    [sceneChildren],
+  );
+
+  useEffect(() => {
+    const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;
+    const temp = itemLayouts.filter((item) => item);
+    console.log('itemLayoutsRef.current', itemLayoutsRef.current);
+    if (
+      temp.length === length &&
+      contentLayout.width !== 0 &&
+      contentSize.width !== 0
+    ) {
+      let inputRange = [],
+        outputRange = [],
+        outputRange2 = [],
+        preWidth = 0;
+      const itemw = contentSize.width / length;
+      itemLayoutsRef.current.forEach((item, ii) => {
+        const currentLayout = itemLayoutsRef.current[ii];
+        inputRange.push(contentLayout.width * ii);
+        const sc = currentLayout.width / itemw; // 缩放倍数
+        const transformx = (itemw * (1 - sc)) / 2;
+        console.log('sc', sc);
+        console.log('width', currentLayout.width);
+        console.log('itemw', contentLayout.width, length);
+        console.log('transformx', transformx);
+        outputRange.push(currentLayout.x - transformx);
+        outputRange2.push(currentLayout.width / itemw);
+        preWidth = currentLayout.width;
+      }, []);
+      console.log(inputRange);
+      console.log(outputRange);
+      console.log(itemw, outputRange2);
+      setInterpolateX({ inputRange, outputRange });
+      setInterpolateScaleX({ inputRange, outputRange: outputRange2 });
+    }
+    console.log('ContentSize', contentLayout.width);
+  }, [contentLayout, contentSize, itemLayouts, sceneChildren]);
 
   const onContentSizeChange = useCallback((width, height) => {
     setContentSize({ width, height });
@@ -44,69 +121,35 @@ function SegmentedBar(props) {
 
   const buildStyles = useMemo(() => {
     const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;
-    let inputRange = [0],
-      outputRange = [0],
-      outputRange2 = [1],
-      preWidth = 0;
-    itemLayoutsRef.current.forEach((item, index) => {
-      const itemw = contentSize.width / length;
-      const currentLayout = itemLayoutsRef.current[index + 1];
-      console.log('currentLayout', currentLayout);
-      inputRange.push(contentLayout.width * (index + 1));
-      outputRange.push(currentLayout ? currentLayout.x : 0);
-      console.log('z', currentLayout ? currentLayout.width : 0);
-      outputRange2.push((currentLayout ? currentLayout.width : 0) / itemw);
-    }, []);
-    if (inputRange.length === 1) {
-      inputRange = [0, 1];
-      outputRange = [0, 1];
-      outputRange2 = [0, 1];
-    }
-    console.log('inputRange', inputRange);
-    console.log('outputRange', outputRange);
-    console.log('outputRange2', outputRange2);
+    const itemw = contentSize.width / length;
+    const currentLayout = itemLayoutsRef.current[currentIndex];
+    console.log('currentLayout', currentLayout);
     const transform = {
       transform: [
         {
-          translateX: animatedX.interpolate({
-            inputRange: inputRange,
-            outputRange: outputRange,
-          }),
+          translateX: animatedX.interpolate(interpolateX),
         },
         {
-          scaleX: animatedX.interpolate({
-            inputRange: inputRange,
-            outputRange: outputRange2,
-          }),
+          scaleX: animatedX.interpolate(interpolateScaleX),
         },
       ],
     };
-    console.log('currentIndex', currentIndex);
-    const currentLayout = itemLayoutsRef.current[currentIndex];
-    console.log('currentLayout', currentLayout);
     return {
-      indicatorStyle: [
-        styles.indicatorStyle,
-        transform,
-        { width: contentSize ? contentSize.width / length : 0 },
-      ],
+      indicatorStyle: [styles.indicatorStyle, transform, { width: itemw }],
     };
-  }, [animatedX, contentLayout, contentSize, currentIndex, sceneChildren]);
-
-  // useEffect(() => {
-  //   LayoutAnimation.configureNext({
-  //     duration: 500,
-  //     update: {
-  //       duration: 500,
-  //       property: LayoutAnimation.Properties.scaleXY,
-  //       type: LayoutAnimation.Types.linear,
-  //     },
-  //   });
-  // }, [currentIndex]);
+  }, [
+    animatedX,
+    contentSize.width,
+    currentIndex,
+    interpolateScaleX,
+    interpolateX,
+    sceneChildren,
+  ]);
 
   return (
     <View style={styles.container} onLayout={onLayout}>
       <ScrollView
+        ref={scrollViewRef}
         horizontal={true}
         contentContainerStyle={styles.contentContainerStyle}
         onContentSizeChange={onContentSizeChange}
