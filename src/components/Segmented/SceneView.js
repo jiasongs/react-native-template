@@ -3,14 +3,14 @@ import React, { useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 function SceneView(props) {
-  const { children, layout } = props;
+  const { children, contentLayout } = props;
 
   const buildStyles = useMemo(() => {
     const propsStyle = children.props.style;
     return {
-      style: [styles.container, propsStyle, { width: layout.width }],
+      style: [styles.container, propsStyle, { width: contentLayout.width }],
     };
-  }, [children, layout]);
+  }, [children, contentLayout]);
 
   return <View style={buildStyles.style}>{children}</View>;
 }

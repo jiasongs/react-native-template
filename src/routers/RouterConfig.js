@@ -80,7 +80,7 @@ const StackNavigatorRouter = {
 };
 
 const StackNavigatorConfig = {
-  initialRouteName: 'Tab',
+  initialRouteName: 'DemoSegmented',
   initialRouteParams: {},
   defaultNavigationOptions: {
     header: null,

@@ -1,19 +1,11 @@
 'use strict';
 import React, { useRef, useState, useCallback } from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Animated,
-  Platform,
-  ViewPagerAndroid,
-} from 'react-native';
-import PropTypes from 'prop-types';
+import { View, StyleSheet, Animated } from 'react-native';
 import SegmentedBar from './SegmentedBar';
 import SceneView from './SceneView';
 
 function ContentView(props) {
-  const { children, onScroll, onLayout, layout } = props;
+  const { children, onScroll, onLayout, contentLayout } = props;
 
   return (
     <Animated.ScrollView
@@ -28,7 +20,10 @@ function ContentView(props) {
     >
       {React.Children.map(children, (item, index) => {
         return (
-          <SceneView key={`page_${item.key || index}`} layout={layout}>
+          <SceneView
+            key={`page_${item.key || index}`}
+            contentLayout={contentLayout}
+          >
             {item}
           </SceneView>
         );
@@ -38,37 +33,38 @@ function ContentView(props) {
 }
 
 function SegmentedView(props) {
-  const { children } = props;
+  const { children, barStyle, indicatorStyle } = props;
 
   const animatedXRef = useRef(new Animated.Value(0));
-  const [layout, setLayout] = useState({ width: 0, height: 0 });
+  const [contentLayout, setContentLayout] = useState({ width: 0, height: 0 });
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const onLayout = useCallback((event) => {
-    setLayout(event.nativeEvent.layout);
+    setContentLayout(event.nativeEvent.layout);
   }, []);
 
   const onScroll = useCallback(
     (event) => {
       const { contentOffset } = event.nativeEvent;
-      const index = Math.round(contentOffset.x / layout.width);
+      const index = Math.round(contentOffset.x / contentLayout.width);
       if (index !== currentIndex) {
         setCurrentIndex(index);
       }
     },
-    [currentIndex, layout.width],
+    [contentLayout.width, currentIndex],
   );
 
   return (
     <View style={styles.container}>
       <SegmentedBar
         animatedX={animatedXRef.current}
-        contentLayout={layout}
         sceneChildren={children}
         currentIndex={currentIndex}
+        style={barStyle}
+        indicatorStyle={indicatorStyle}
       />
       <ContentView
-        layout={layout}
+        contentLayout={contentLayout}
         onLayout={onLayout}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: animatedXRef.current } } }],

@@ -70,7 +70,7 @@ function DemoList() {
       loadingStyle={{}}
       emptyStyle={{}}
     >
-      <NavigationBar title={'DemoList'} />
+      {/* <NavigationBar title={'DemoList'} /> */}
       <ListView
         ref={listRef}
         style={styles.container}

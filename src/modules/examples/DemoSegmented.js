@@ -2,30 +2,17 @@
 import React from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import { NavigationBar, PageContainer, SegmentedView } from '../../components';
+import { Images } from '../../assets';
+import DemoList from './DemoList';
 
-const data = [11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11];
-const pageData = [
-  { title: '' },
-  { title: '' },
-  { title: '' },
-  { title: '' },
-  { title: '' },
-  { title: '' },
-  { title: '' },
-  { title: '' },
-  { title: '' },
-  { title: '' },
-  { title: '' },
-  { title: '' },
-  { title: '' },
-  { title: '' },
-];
+const data = [...new Array(30)];
+const pageData = [...new Array(30)];
 
 function DemoSegmented() {
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'DemoSegmented'} />
-      <SegmentedView>
+      <SegmentedView indicatorStyle={{}}>
         {pageData.map((item, index) => {
           let title = '';
           if (index === 0) {
@@ -40,9 +27,10 @@ function DemoSegmented() {
               key={index}
               itemKey={index}
               title={title}
+              icon={Images.icon_toast_warn}
               style={{}}
             >
-              <FlatList
+              <DemoList
                 keyExtractor={(item, index) => index + ''}
                 data={data}
                 renderItem={() => {

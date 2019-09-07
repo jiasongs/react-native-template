@@ -4,21 +4,36 @@ import { View, StyleSheet } from 'react-native';
 import Button from '../Touchable/Button';
 
 function SegmentedBarItem(props) {
-  const { title, index, onLayout } = props;
+  const {
+    style,
+    index,
+    onBoxLayout,
+    onItemLayout,
+    children,
+    ...others
+  } = props;
 
-  const onLayoutBack = useCallback(
+  const onBoxLayoutBack = useCallback(
     (event) => {
-      onLayout && onLayout(event, index);
+      onBoxLayout && onBoxLayout(event, index);
     },
-    [index, onLayout],
+    [index, onBoxLayout],
+  );
+
+  const onItemLayoutBack = useCallback(
+    (event) => {
+      onItemLayout && onItemLayout(event, index);
+    },
+    [index, onItemLayout],
   );
 
   return (
-    <View style={styles.container} onLayout={onLayoutBack}>
+    <View style={styles.container} onLayout={onBoxLayoutBack}>
       <Button
+        onLayout={onItemLayoutBack}
+        style={{ backgroundColor: 'red' }}
         type={'clear'}
-        style={{ backgroundColor: 'blue' }}
-        title={title}
+        {...others}
       />
     </View>
   );
@@ -32,6 +47,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
     borderRightWidth: 1,
     borderLeftWidth: 1,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
     // borderRightWidth: StyleSheet.hairlineWidth,
   },
 });
