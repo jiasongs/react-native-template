@@ -10,8 +10,6 @@ const w2 = 750 / defaultPixel;
 const h2 = 1334 / defaultPixel;
 const scale = Math.min(deviceHeight / h2, deviceWidth / w2); //获取缩放比例
 
-console.log(pixelRatio, deviceWidth, deviceHeight);
-
 export function fontSize(size) {
   if (pixelRatio === 2) {
     // iphone 5s and older Androids
@@ -41,7 +39,6 @@ export function fontSize(size) {
       // a tad but not too much
     }
     if (deviceHeight >= 667 && deviceHeight <= 737) {
-      console.log('size');
       return size * 1.2;
     }
     // iphoneX的字体需要特殊适配

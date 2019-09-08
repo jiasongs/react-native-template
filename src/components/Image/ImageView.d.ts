@@ -7,7 +7,7 @@ export interface ImageViewProps extends FastImageProperties {
   maxImageWidth?: boolean;
   useOpacity?: boolean;
   placeholderImage?: ImageSourcePropType;
-  placeholderStyle?: ImageStyle;
+  placeholderStyle?: StyleProp<ImageStyle>;
 }
 
 const ImageView: React.ComponentClass<ImageViewProps>;

@@ -34,7 +34,6 @@ function DemoAlert() {
       title: '温馨提示',
       onPress: (item) => {
         ActionManager.hide();
-        console.log(item);
       },
       actions: [
         {

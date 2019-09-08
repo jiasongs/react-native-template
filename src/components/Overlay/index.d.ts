@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleProp, ViewProps } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 
 type RootTransform = 'none' | 'translate' | 'scale';
 
@@ -18,7 +18,7 @@ interface CustomBounds {
 }
 
 export interface OverlayBaseProps {
-  style?: StyleProp;
+  style?: StyleProp<ViewStyle>;
   modal?: boolean;
   animated: boolean;
   overlayOpacity?: number;
@@ -31,14 +31,14 @@ export interface OverlayBaseProps {
 
 export interface OverlayPopProps extends OverlayBaseProps {
   type?: 'none' | 'zoomOut' | 'zoomIn' | 'custom';
-  containerStyle?: StyleProp;
+  containerStyle?: StyleProp<ViewStyle>;
   containerPointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto';
   customBounds?: CustomBounds;
 }
 
 export interface OverlayPullProps extends OverlayBaseProps {
   type?: 'top' | 'bottom' | 'left' | 'right';
-  containerStyle?: StyleProp;
+  containerStyle?: StyleProp<ViewStyle>;
   containerPointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto';
   rootTransform?: RootTransform | Array<Transform>;
   panGestureEnabled: boolean;

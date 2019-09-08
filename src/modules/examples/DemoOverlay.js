@@ -11,7 +11,7 @@ import { Predefine } from '../../config/predefine';
 
 function DemoOverlay() {
   const w = Math.round(Predefine.screenWidth * 0.8);
-  console.log('w', w);
+
   useEffect(() => {
     const com = (
       <ScrollView

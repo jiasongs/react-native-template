@@ -53,11 +53,6 @@ function RenderAction(props) {
       {actions.map((item, index) => {
         const { title, titleStyle, actionStyle: itemStyle } = item;
         const separator = actions.length - 1 === index ? null : separatorStyle;
-        console.log(
-          'separator',
-          [actionStyle, separator, itemStyle],
-          separator,
-        );
         return (
           <TouchableOpacity
             style={[actionStyle, separator, itemStyle]}

@@ -30,17 +30,16 @@ UIManager.setLayoutAnimationEnabledExperimental &&
  * @屏蔽调试警告
  */
 YellowBox.ignoreWarnings([
-  'Required dispatch_sync to load constants for RNDeviceInfo',
   'It looks',
   'Require cycle:',
   'Remote debugger is in a background',
-  'Required dispatch_sync',
   'Warning: isMounted(...)',
   'Warning: Slider',
   'Warning: ViewPagerAndroid',
   'Accessing view manager configs directly off UIManager',
   'Module AudioRecorderManager requires main queue setup since it overrides',
   'Warning: componentWillMount is',
+  'Required dispatch_sync',
 ]);
 /**
  * @屏蔽输出

@@ -230,7 +230,7 @@ export default class ListView extends React.PureComponent {
     ) {
       return;
     }
-    // console.log('_onEndReached', this._currentEndReachedStatus)
+
     if (this._currentEndReachedStatus === EndReachedStatus.FIRST_LOADED) {
       this._currentEndReachedStatus = EndReachedStatus.WAITING_LOADING;
       return;

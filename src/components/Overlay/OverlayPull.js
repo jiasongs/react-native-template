@@ -129,7 +129,7 @@ class OverlayPull extends OverlayBase {
         default:
           break;
       }
-      console.log('_onHandlerStateChange', event.nativeEvent);
+
       const size = Math.abs(this.offsetSize);
       const translation =
         type === 'left' || type === 'right'

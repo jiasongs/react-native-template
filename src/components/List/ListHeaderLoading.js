@@ -38,11 +38,9 @@ function ListHeaderLoading(props) {
 
   const onEndRefreshCallBack = useCallback((state) => {
     currentState.current = state;
-    console.log('----', 4);
   }, []);
 
   const onIdleRefreshCallBack = useCallback((state) => {
-    console.log('----', 1);
     if (currentState.current === RefreshState.End) {
       if (Predefine.isIOS) {
         setTimeout(() => {

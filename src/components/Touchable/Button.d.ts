@@ -5,22 +5,23 @@ import {
   ImageStyle,
   TouchableOpacityProps,
   TextStyle,
+  ViewStyle,
 } from 'react-native';
 
 export interface ButtonPorps extends TouchableOpacityProps {
   type?: 'solid' | 'clear' | 'outline';
   icon?: ImageSourcePropType;
-  iconStyle?: ImageStyle;
+  iconStyle?: StyleProp<ImageStyle>;
   iconPosition?: 'top' | 'left' | 'bottom' | 'right';
   title?: string | number;
-  titleStyle?: TextStyle;
+  titleStyle?: StyleProp<TextStyle>;
   spacingIconAndTitle?: number;
   backgroundImage?: number;
   disabled?: boolean;
-  disabledStyle?: StyleProp;
-  disabledTitleStyle?: TextStyle;
+  disabledStyle?: StyleProp<ViewStyle>;
+  disabledTitleStyle?: StyleProp<TextStyle>;
   loading?: boolean;
-  loadingStyle?: StyleProp;
+  loadingStyle?: StyleProp<ViewStyle>;
   raised?: boolean;
   clickInterval?: number;
 }
