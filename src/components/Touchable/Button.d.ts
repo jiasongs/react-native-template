@@ -6,9 +6,10 @@ import {
   TouchableOpacityProps,
   TextStyle,
   ViewStyle,
+  ViewProps,
 } from 'react-native';
 
-export interface ButtonPorps extends TouchableOpacityProps {
+export interface ButtonPorps extends TouchableOpacityProps, ViewProps {
   type?: 'solid' | 'clear' | 'outline';
   icon?: ImageSourcePropType;
   iconStyle?: StyleProp<ImageStyle>;

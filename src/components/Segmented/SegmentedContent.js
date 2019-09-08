@@ -1,14 +1,6 @@
 'use strict';
-import React, { useRef, useState, useCallback, useEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  Animated,
-  ViewPropTypes,
-  ScrollView,
-} from 'react-native';
-import PropTypes from 'prop-types';
-import SegmentedBar from './SegmentedBar';
+import React, { useState, useCallback } from 'react';
+import { Animated, ScrollView } from 'react-native';
 import SegmentedContentScene from './SegmentedContentScene';
 
 function SegmentedContent(props) {

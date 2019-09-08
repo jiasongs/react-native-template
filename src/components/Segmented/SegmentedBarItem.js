@@ -65,17 +65,23 @@ function SegmentedBarItem(props) {
   ]);
 
   return (
-    <View style={styles.container} onLayout={onBoxLayoutBack}>
+    <Button
+      type={'clear'}
+      onPress={onPressBack}
+      style={styles.container}
+      onLayout={onBoxLayoutBack}
+    >
       <Button
         {...others}
+        type={'clear'}
+        activeOpacity={1.0}
         onLayout={onItemLayoutBack}
         style={buildStyles.style}
         titleStyle={buildStyles.titleStyle}
         iconStyle={buildStyles.iconStyle}
-        type={'clear'}
         onPress={onPressBack}
       />
-    </View>
+    </Button>
   );
 }
 
@@ -84,12 +90,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRightWidth: 1,
-    borderLeftWidth: 1,
   },
   normalStyle: {
     marginHorizontal: 20,
-    marginVertical: 10,
+    marginVertical: 12,
   },
   activeStyle: {},
   normalTitleStyle: {},

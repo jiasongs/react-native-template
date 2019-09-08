@@ -131,6 +131,11 @@ function SegmentedView(props) {
         lazy={lazy}
         onLayout={onLayout}
         currentIndex={activeIndex !== -1 ? activeIndex : currentIndex}
+        // onScroll={(event) => {
+        //   // 掉帧
+        //   animatedXRef.current.setValue(event.nativeEvent.contentOffset.x);
+        //   onScroll(event);
+        // }}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: animatedXRef.current } } }],
           { useNativeDriver: true, listener: onScroll },

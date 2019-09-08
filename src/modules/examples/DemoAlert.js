@@ -32,7 +32,7 @@ function DemoAlert() {
   const onPress2 = useCallback(() => {
     ActionManager.show({
       title: '温馨提示',
-      onPress: (item) => {
+      onPress: () => {
         ActionManager.hide();
       },
       actions: [

@@ -32,7 +32,6 @@ function SegmentedBar(props) {
     currentIndex,
     indicatorStyle,
     onPressItem,
-    ...others
   } = props;
 
   const scrollViewRef = useRef(React.createRef());

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
@@ -11,7 +12,7 @@ import { Images } from '../../assets';
 import DemoList from './DemoList';
 
 const data = [...new Array(30)];
-const pageData = [...new Array(2)];
+const pageData = [...new Array(15)];
 
 function DemoSegmented() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -25,12 +26,13 @@ function DemoSegmented() {
         onChange={(index) => {
           console.log('onChange', index);
         }}
-        itemStyle={{ backgroundColor: 'red' }}
-        itemActiveStyle={{ backgroundColor: 'blue' }}
-        itemTitleStyle={{ color: '#333' }}
-        itemActiveTitleStyle={{ color: 'red' }}
-        itemIconStyle={{ tintColor: '#333' }}
-        itemActiveIconStyle={{ tintColor: 'red' }}
+        indicatorType={'item'}
+        itemStyle={{ marginHorizontal: 10 }}
+        // itemActiveStyle={{ backgroundColor: 'blue' }}
+        // itemTitleStyle={{ color: '#333' }}
+        // itemActiveTitleStyle={{ color: 'red' }}
+        // itemIconStyle={{ tintColor: '#333' }}
+        // itemActiveIconStyle={{ }}
       >
         {pageData.map((item, index) => {
           let title = '';
@@ -42,13 +44,10 @@ function DemoSegmented() {
             title = 'Scene' + index;
           }
           return (
-            <SegmentedScene
-              key={index}
-              itemTitle={title}
-              itemIcon={Images.icon_toast_warn}
-            >
-              <FlatList
-                keyExtractor={(item, index) => index + ''}
+            <SegmentedScene key={index} itemTitle={title}>
+              <DemoList
+                showNavBar={false}
+                keyExtractor={(itemKey, indexKey) => indexKey + ''}
                 data={data}
                 renderItem={() => {
                   return <Text style={{ height: 50 }}>124</Text>;

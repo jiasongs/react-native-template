@@ -9,7 +9,7 @@ import {
 } from '../../components';
 import { ServiceHome } from '../../services';
 
-function DemoList() {
+function DemoList({ showNavBar = true }) {
   const listRef = useRef(React.createRef());
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -70,7 +70,7 @@ function DemoList() {
       loadingStyle={{}}
       emptyStyle={{}}
     >
-      {/* <NavigationBar title={'DemoList'} /> */}
+      {showNavBar ? <NavigationBar title={'DemoList'} /> : null}
       <ListView
         ref={listRef}
         style={styles.container}
