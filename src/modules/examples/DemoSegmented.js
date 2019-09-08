@@ -31,8 +31,6 @@ function DemoSegmented() {
         itemActiveTitleStyle={{ color: 'red' }}
         itemIconStyle={{ tintColor: '#333' }}
         itemActiveIconStyle={{ tintColor: 'red' }}
-        indicatorType={'custom'}
-       
       >
         {pageData.map((item, index) => {
           let title = '';
