@@ -29,9 +29,9 @@ function SegmentedView(props) {
 
   const scrollViewRef = useRef(React.createRef());
   const animatedXRef = useRef(new Animated.Value(0));
-  const currentIndexRef = useRef(initialPage);
   const itemPressIndexRef = useRef(-1);
   const isHandleInitialPageRef = useRef(false);
+  const currentIndexRef = useRef(initialPage);
 
   const [contentLayout, setContentLayout] = useState({ width: 0, height: 0 });
   const [currentIndex, setCurrentIndex] = useState(initialPage);
@@ -86,7 +86,8 @@ function SegmentedView(props) {
   const onScroll = useCallback(
     (event) => {
       const { contentOffset } = event.nativeEvent;
-      const index = Math.round(contentOffset.x / contentLayout.width);
+      const radio = contentOffset.x / contentLayout.width;
+      const index = Math.round(radio);
       if (itemPressIndexRef.current !== -1) {
         if (itemPressIndexRef.current === index) {
           setActiveIndex(index);
@@ -130,12 +131,7 @@ function SegmentedView(props) {
         style={buildStyles.contentStyle}
         lazy={lazy}
         onLayout={onLayout}
-        currentIndex={activeIndex !== -1 ? activeIndex : currentIndex}
-        // onScroll={(event) => {
-        //   // 掉帧
-        //   animatedXRef.current.setValue(event.nativeEvent.contentOffset.x);
-        //   onScroll(event);
-        // }}
+        currentIndex={currentIndex}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: animatedXRef.current } } }],
           { useNativeDriver: true, listener: onScroll },

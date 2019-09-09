@@ -1,6 +1,6 @@
 'use strict';
 import React, { useCallback, useMemo } from 'react';
-import { View, StyleSheet, ViewPropTypes, Text, Image } from 'react-native';
+import { StyleSheet, ViewPropTypes, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import Button from '../Touchable/Button';
 

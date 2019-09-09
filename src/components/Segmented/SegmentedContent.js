@@ -34,7 +34,7 @@ function SegmentedContent(props) {
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
       bounces={true}
-      scrollEventThrottle={1}
+      scrollEventThrottle={16}
       onScroll={onScroll}
       {...others}
     >

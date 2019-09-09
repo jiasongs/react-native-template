@@ -8,6 +8,7 @@ import {
   ListRow,
 } from '../../components';
 import { ServiceHome } from '../../services';
+import { Predefine } from '../../config/predefine';
 
 function DemoList({ showNavBar = true }) {
   const listRef = useRef(React.createRef());
@@ -67,7 +68,7 @@ function DemoList({ showNavBar = true }) {
     <PageContainer
       style={styles.container}
       loading={loading}
-      loadingStyle={{}}
+      loadingStyle={{ top: showNavBar ? Predefine.contentTop : 0 }}
       emptyStyle={{}}
     >
       {showNavBar ? <NavigationBar title={'DemoList'} /> : null}

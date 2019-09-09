@@ -6,13 +6,7 @@ import React, {
   useMemo,
   useCallback,
 } from 'react';
-import {
-  Animated,
-  View,
-  StyleSheet,
-  ScrollView,
-  ViewPropTypes,
-} from 'react-native';
+import { Animated, View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import SegmentedBarItem from './SegmentedBarItem';
 
@@ -85,6 +79,7 @@ function SegmentedBar(props) {
       ],
     };
     newIndicatorStyle.push({ width: contentItemWidth });
+    console.log('buildStyles');
     return {
       indicatorStyle: [...newIndicatorStyle, indicatorStyle, transform],
       contentContainerStyle: [styles.contentContainerStyle],
@@ -97,7 +92,7 @@ function SegmentedBar(props) {
     const offsetX =
       itemLayout.x - contentLayout.width / 2 + itemLayout.width / 2;
     if (offsetX) {
-      scrollViewRef.current.scrollTo({
+      scrollViewRef.current._component.scrollTo({
         x: offsetX,
         y: 0,
         animated: true,
@@ -208,7 +203,7 @@ function SegmentedBar(props) {
 
   return (
     <View style={styles.container}>
-      <ScrollView
+      <Animated.ScrollView
         ref={scrollViewRef}
         onLayout={onLayout}
         horizontal={true}
@@ -216,6 +211,7 @@ function SegmentedBar(props) {
         onContentSizeChange={onContentSizeChange}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
       >
         {React.Children.map(sceneChildren, (item, index) => {
           const itemProps = item.props ? item.props : {};
@@ -251,7 +247,7 @@ function SegmentedBar(props) {
           style={buildStyles.indicatorStyle}
           animatedX={animatedX}
         />
-      </ScrollView>
+      </Animated.ScrollView>
     </View>
   );
 }
