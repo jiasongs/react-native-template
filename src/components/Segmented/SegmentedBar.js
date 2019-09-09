@@ -98,7 +98,9 @@ function SegmentedBar(props) {
   } = props;
 
   const scrollViewRef = useRef(React.createRef());
+  const boxLayoutsRef = useRef([]);
 
+  const [boxLayouts, setBoxLayouts] = useState([]);
   const [interpolate, setInterpolate] = useState({
     inputRangeX: [0, 0],
     outputRangeX: [0, 0],
@@ -106,8 +108,6 @@ function SegmentedBar(props) {
     outputRangeScale: [0, 0],
   });
   const [scrollLayout, setScrollLayout] = useState({ width: 0, height: 0 });
-  const [boxLayouts, setBoxLayouts] = useState([]);
-  const [itemLayouts, setItemLayouts] = useState([]);
 
   const contentItemWidth = useMemo(() => {
     if (type === 'custom') {
@@ -118,6 +118,8 @@ function SegmentedBar(props) {
         console.error('当类型为customWidth时，style必须设置宽度');
       }
       return flattenStyle.width || 0;
+    } else if (type === 'none') {
+      return 0;
     } else {
       return 80;
     }
@@ -144,54 +146,27 @@ function SegmentedBar(props) {
     (event, index) => {
       const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;
       const layout = event.nativeEvent.layout;
-      const boxLayout = boxLayouts[index];
+      const boxLayout = boxLayoutsRef.current[index];
       if (!layout) {
         return;
       }
-      boxLayouts[index] = layout;
       if (boxLayout) {
         if (Math.round(boxLayout.width) !== Math.round(layout.width)) {
-          setBoxLayouts(boxLayouts.slice());
+          boxLayoutsRef.current[index] = layout;
+          setBoxLayouts(boxLayoutsRef.current.slice());
           console.log('boxLayouts22222');
         }
       } else {
-        const layoutLength = boxLayouts.filter((item) => item).length;
+        boxLayoutsRef.current[index] = layout;
+        const layoutLength = boxLayoutsRef.current.filter((item) => item)
+          .length;
         if (layoutLength === length) {
-          setBoxLayouts(boxLayouts.slice());
+          setBoxLayouts(boxLayoutsRef.current.slice());
           console.log('boxLayouts1111');
         }
       }
     },
-    [boxLayouts, sceneChildren],
-  );
-
-  const onItemLayout = useCallback(
-    (event, index) => {
-      const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;
-      const layout = event.nativeEvent.layout;
-      const itemLayout = itemLayouts[index];
-      if (!layout) {
-        return;
-      }
-      itemLayouts[index] = layout;
-      if (itemLayout) {
-        if (Math.round(itemLayout.width) !== Math.round(layout.width)) {
-          setItemLayouts(itemLayouts.slice());
-          console.log('itemLayoutss2222');
-        }
-      } else {
-        const layoutLength = itemLayouts.filter((item) => item).length;
-        if (layoutLength === length) {
-          setItemLayouts(itemLayouts.slice());
-          console.log('itemLayoutss111');
-        }
-      }
-      // if (layoutLength === length && !isHandleItemLayoutsRef.current) {
-      //   isHandleItemLayoutsRef.current = true;
-      //   setItemLayouts(itemLayouts.slice());
-      // }
-    },
-    [itemLayouts, sceneChildren],
+    [sceneChildren],
   );
 
   useEffect(() => {
@@ -210,11 +185,10 @@ function SegmentedBar(props) {
   useEffect(() => {
     const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;
     const boxLength = boxLayouts.filter((item) => item).length;
-    const itemLength = itemLayouts.filter((item) => item).length;
+    console.log('boxLayouts', boxLength);
     if (
       type !== 'none' &&
       boxLength >= length &&
-      itemLength >= length &&
       contentLayout.width !== 0 &&
       contentItemWidth !== 0
     ) {
@@ -225,16 +199,12 @@ function SegmentedBar(props) {
         let currentLayout = {};
         let layoutX = 0;
         const boxLayout = boxLayouts[ii];
-        const itemLayout = itemLayouts[ii];
-        if (type === 'box') {
-          currentLayout = boxLayout;
-          layoutX = boxLayout.x;
-        } else if (type === 'item') {
-          currentLayout = itemLayout;
-          layoutX = boxLayout.x + itemLayout.x;
-        } else if (type === 'custom') {
+        if (type === 'custom') {
           currentLayout = { width: contentItemWidth };
           layoutX = boxLayout.x + (boxLayout.width - contentItemWidth) / 2;
+        } else {
+          currentLayout = boxLayout;
+          layoutX = boxLayout.x;
         }
         const multiple = currentLayout.width / contentItemWidth; // 缩放倍数
         const transformx = (contentItemWidth * (1 - multiple)) / 2;
@@ -253,14 +223,7 @@ function SegmentedBar(props) {
         outputRangeScale: outputRangeScale,
       });
     }
-  }, [
-    boxLayouts,
-    contentItemWidth,
-    contentLayout,
-    itemLayouts,
-    sceneChildren,
-    type,
-  ]);
+  }, [boxLayouts, contentItemWidth, contentLayout, sceneChildren, type]);
 
   return (
     <View style={buildStyles.style}>
@@ -289,9 +252,9 @@ function SegmentedBar(props) {
             <SegmentedBarItem
               index={index}
               onBoxLayout={onBoxLayout}
-              onItemLayout={onItemLayout}
               onPress={onPressItem}
               active={index === currentIndex}
+              barType={type}
               {...itemProps}
             />
           );

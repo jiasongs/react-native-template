@@ -8,7 +8,6 @@ function SegmentedBarItem(props) {
   const {
     index,
     onBoxLayout,
-    onItemLayout,
     children,
     onPress,
     active,
@@ -18,6 +17,7 @@ function SegmentedBarItem(props) {
     activeTitleStyle,
     iconStyle,
     activeIconStyle,
+    barType,
     ...others
   } = props;
 
@@ -28,27 +28,30 @@ function SegmentedBarItem(props) {
     [index, onBoxLayout],
   );
 
-  const onItemLayoutBack = useCallback(
-    (event) => {
-      onItemLayout && onItemLayout(event, index);
-    },
-    [index, onItemLayout],
-  );
-
   const onPressBack = useCallback(() => {
     onPress && onPress(index);
   }, [index, onPress]);
 
   const buildStyles = useMemo(() => {
-    const newStyle = [styles.normalStyle, style];
-    const newTitleStyle = [styles.normalTitleStyle, titleStyle];
-    const newIconStyle = [styles.normalIconStyle, iconStyle];
+    const newStyle = [];
+    const newTitleStyle = [styles.normalTitleStyle];
+    const newIconStyle = [styles.normalIconStyle];
+    if (barType === 'item') {
+      newStyle.push({
+        marginHorizontal: 20,
+        marginVertical: 12,
+      });
+    } else {
+      newStyle.push(styles.normalStyle);
+    }
+    newStyle.push(style);
+    newTitleStyle.push(titleStyle);
+    newIconStyle.push(iconStyle);
     if (active) {
       newStyle.push([styles.activeStyle, activeStyle]);
       newTitleStyle.push([styles.activeTitleSyle, activeTitleStyle]);
       newIconStyle.push([styles.activeIconSyle, activeIconStyle]);
     }
-
     return {
       style: [...newStyle],
       titleStyle: [...newTitleStyle],
@@ -59,6 +62,7 @@ function SegmentedBarItem(props) {
     activeIconStyle,
     activeStyle,
     activeTitleStyle,
+    barType,
     iconStyle,
     style,
     titleStyle,
@@ -66,22 +70,15 @@ function SegmentedBarItem(props) {
 
   return (
     <Button
+      {...others}
       type={'clear'}
-      onPress={onPressBack}
-      style={styles.container}
+      activeOpacity={1.0}
       onLayout={onBoxLayoutBack}
-    >
-      <Button
-        {...others}
-        type={'clear'}
-        activeOpacity={1.0}
-        onLayout={onItemLayoutBack}
-        style={buildStyles.style}
-        titleStyle={buildStyles.titleStyle}
-        iconStyle={buildStyles.iconStyle}
-        onPress={onPressBack}
-      />
-    </Button>
+      style={buildStyles.style}
+      titleStyle={buildStyles.titleStyle}
+      iconStyle={buildStyles.iconStyle}
+      onPress={onPressBack}
+    />
   );
 }
 
@@ -92,18 +89,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   normalStyle: {
-    marginHorizontal: 20,
-    marginVertical: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
   },
   activeStyle: {},
   normalTitleStyle: {},
-  activeTitleSyle: {
-    color: 'blue',
-  },
+  activeTitleSyle: {},
   normalIconStyle: {},
-  activeIconSyle: {
-    tintColor: 'blue',
-  },
+  activeIconSyle: {},
 });
 
 SegmentedBarItem.propTypes = {

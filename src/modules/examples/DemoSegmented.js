@@ -49,7 +49,7 @@ function DemoSegmented() {
           console.log('onChange', index);
         }}
         // barStyle={{ marginHorizontal: 50 }}
-        indicatorType={'item'}
+        indicatorType={'box'}
         indicatorStyle={{ height: 3, bottom: 0 }}
         itemStyle={{}}
         // itemActiveStyle={{  }}
