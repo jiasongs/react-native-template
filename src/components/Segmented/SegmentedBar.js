@@ -67,7 +67,7 @@ function SegmentedBar(props) {
       }
       return flattenStyle.width;
     } else {
-      return 100;
+      return 80;
     }
   }, [indicatorStyle, type]);
 
