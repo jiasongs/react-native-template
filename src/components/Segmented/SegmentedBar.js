@@ -155,6 +155,7 @@ function SegmentedBar(props) {
           boxLayoutsRef.current[index] = layout;
           setBoxLayouts(boxLayoutsRef.current.slice());
           console.log('boxLayouts22222');
+          console.log('加提示');
         }
       } else {
         boxLayoutsRef.current[index] = layout;
@@ -187,7 +188,6 @@ function SegmentedBar(props) {
     const boxLength = boxLayouts.filter((item) => item).length;
     console.log('boxLayouts', boxLength);
     if (
-      type !== 'none' &&
       boxLength >= length &&
       contentLayout.width !== 0 &&
       contentItemWidth !== 0

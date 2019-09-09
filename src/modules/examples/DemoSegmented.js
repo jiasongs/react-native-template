@@ -49,12 +49,17 @@ function DemoSegmented() {
           console.log('onChange', index);
         }}
         // barStyle={{ marginHorizontal: 50 }}
-        indicatorType={'box'}
-        indicatorStyle={{ height: 3, bottom: 0 }}
-        itemStyle={{}}
+        indicatorType={'custom'}
+        indicatorStyle={{ width: 20, height: 3, bottom: 0 }}
+        itemStyle={{
+          width: 90,
+          paddingVertical: 12,
+          paddingHorizontal: 0,
+          borderRightWidth: 1,
+        }}
         // itemActiveStyle={{  }}
         // itemTitleStyle={{ color: '#333' }}
-        itemActiveTitleStyle={{ color: 'red' }}
+        itemActiveTitleStyle={{ color: 'red', fontSize: 18 }}
 
         // itemIconStyle={{ tintColor: '#333' }}
         // itemActiveIconStyle={{ }}
