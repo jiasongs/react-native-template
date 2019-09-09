@@ -48,13 +48,14 @@ function DemoSegmented() {
         onChange={(index) => {
           console.log('onChange', index);
         }}
-        indicatorType={'box'}
+        // barStyle={{ marginHorizontal: 50 }}
+        indicatorType={'item'}
         indicatorStyle={{ height: 3, bottom: 0 }}
         itemStyle={{}}
         // itemActiveStyle={{  }}
         // itemTitleStyle={{ color: '#333' }}
         itemActiveTitleStyle={{ color: 'red' }}
-        barAction={<Text>1236</Text>}
+
         // itemIconStyle={{ tintColor: '#333' }}
         // itemActiveIconStyle={{ }}
       >

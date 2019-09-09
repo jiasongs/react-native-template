@@ -22,6 +22,9 @@ export interface SegmentedBarProps {
   type?: IndicatorType;
   style?: StyleProp<ViewStyle>;
   indicatorStyle?: StyleProp<ViewStyle>;
+  sidebarPosition: 'left' | 'right';
+  sidebar: React.ComponentType<any> | React.ReactElement;
+  backgroundImage: ImageSourcePropType;
   itemType?: 'solid' | 'clear' | 'outline';
   itemStyle?: StyleProp<ViewStyle>;
   itemActiveStyle?: StyleProp<ViewStyle>;
@@ -46,6 +49,7 @@ export interface SegmentedBarProps {
 export interface SegmentedViewProps extends SegmentedBarProps {
   style?: StyleProp<ViewStyle>;
   barStyle?: StyleProp<ViewStyle>;
+  barBackgroundImage: ImageSourcePropType;
   indicatorType?: IndicatorType;
   showSegmentedBar?: boolean;
   initialPage?: number;

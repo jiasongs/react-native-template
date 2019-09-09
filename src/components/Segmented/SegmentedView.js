@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useEffect,
 } from 'react';
-import { View, StyleSheet, Animated, ViewPropTypes } from 'react-native';
+import { View, StyleSheet, Animated, ViewPropTypes, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import SegmentedBar from './SegmentedBar';
 import SegmentedContent from './SegmentedContent';
@@ -24,6 +24,7 @@ function SegmentedView(props) {
     lazy,
     activeIndex,
     onChange,
+    barBackgroundImage,
     ...others
   } = props;
 
@@ -142,6 +143,7 @@ function SegmentedView(props) {
           indicatorStyle={buildStyles.barIndicatorStyle}
           contentLayout={contentLayout}
           onPressItem={onPressItem}
+          backgroundImage={barBackgroundImage}
         />
       ) : null}
       <SegmentedContent
@@ -177,8 +179,9 @@ SegmentedView.propTypes = {
   activeIndex: PropTypes.number,
   lazy: PropTypes.bool, // 懒加载
   onChange: PropTypes.func,
-  barActionPosition: PropTypes.oneOf(['left', 'right']),
-  barAction: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  sidebarPosition: PropTypes.oneOf(['left', 'right']),
+  sidebar: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  barBackgroundImage: Image.propTypes.source,
 };
 
 SegmentedView.defaultProps = {

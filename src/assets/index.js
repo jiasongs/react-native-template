@@ -22,6 +22,9 @@ export const Images = {
   get img_no_record() {
     return require('./img/img_no_record.png');
   },
+  get img_bg_navbar() {
+    return require('./img/img_bg_navbar.png');
+  },
   get icon_nav_left() {
     return require('./icon/icon_nav_left.png');
   },
