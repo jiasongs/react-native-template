@@ -12,45 +12,61 @@ import { Images } from '../../assets';
 import DemoList from './DemoList';
 
 const data = [...new Array(30)];
-const pageData = [...new Array(15)];
+const pageData = [...new Array(10)];
 
 function DemoSegmented() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [dataSource, setDataSource] = useState(pageData);
 
   return (
     <PageContainer style={styles.container}>
-      <NavigationBar title={'DemoSegmented'} />
+      <NavigationBar
+        title={'DemoSegmented'}
+        renderRightAction={[
+          {
+            title: '添加',
+            onPress: () => {
+              setDataSource((preData) => {
+                return preData.concat([...new Array(5)]);
+              });
+            },
+          },
+          {
+            title: '减少',
+            onPress: () => {
+              setDataSource((preData) => {
+                const newData = preData.slice();
+                newData.splice(0, 1);
+                return newData;
+              });
+            },
+          },
+        ]}
+      />
       <SegmentedView
-        // indicatorType={'itemWidth'}
         // // indicatorStyle={{ width: 50 }}
         onChange={(index) => {
           console.log('onChange', index);
         }}
-        indicatorType={'item'}
-        itemStyle={{ marginHorizontal: 10 }}
-        // itemActiveStyle={{ backgroundColor: 'blue' }}
+        indicatorType={'box'}
+        indicatorStyle={{ height: 3, bottom: 0 }}
+        itemStyle={{}}
+        // itemActiveStyle={{  }}
         // itemTitleStyle={{ color: '#333' }}
-        // itemActiveTitleStyle={{ color: 'red' }}
+        itemActiveTitleStyle={{ color: 'red' }}
+        barAction={<Text>1236</Text>}
         // itemIconStyle={{ tintColor: '#333' }}
         // itemActiveIconStyle={{ }}
       >
-        {pageData.map((item, index) => {
-          let title = '';
-          if (index === 0) {
-            title = 'Scene';
-          } else if (index === 1) {
-            title = index;
-          } else {
-            title = 'Scene' + index;
-          }
+        {dataSource.map((item, index) => {
+          let title = '你好吗' + index;
           return (
-            <SegmentedScene key={index} itemTitle={title}>
-              <DemoList
-                showNavBar={false}
+            <SegmentedScene key={title} itemTitle={title}>
+              <FlatList
                 keyExtractor={(itemKey, indexKey) => indexKey + ''}
                 data={data}
                 renderItem={() => {
-                  return <Text style={{ height: 50 }}>124</Text>;
+                  return <Text style={{ height: 50 }}>{index}</Text>;
                 }}
               />
             </SegmentedScene>

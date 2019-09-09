@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
   normalStyle: {
     marginHorizontal: 20,
     marginVertical: 12,
+    backgroundColor: 'red',
   },
   activeStyle: {},
   normalTitleStyle: {},

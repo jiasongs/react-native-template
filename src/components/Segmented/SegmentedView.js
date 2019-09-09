@@ -32,9 +32,11 @@ function SegmentedView(props) {
   const itemPressIndexRef = useRef(-1);
   const isHandleInitialPageRef = useRef(false);
   const currentIndexRef = useRef(initialPage);
+  const currentFocusRef = useRef(initialPage);
 
   const [contentLayout, setContentLayout] = useState({ width: 0, height: 0 });
   const [currentIndex, setCurrentIndex] = useState(initialPage);
+  const [currentFocus, setCurrentFocus] = useState(initialPage);
 
   const buildStyles = useMemo(() => {
     return {
@@ -58,6 +60,13 @@ function SegmentedView(props) {
     },
     [activeIndex, onChange],
   );
+
+  const setFocusIndex = useCallback((index) => {
+    if (currentFocusRef.current !== index) {
+      currentFocusRef.current = index;
+      setCurrentFocus(index);
+    }
+  }, []);
 
   const scrollToIndex = useCallback(
     ({ index, animated }) => {
@@ -90,13 +99,17 @@ function SegmentedView(props) {
       const index = Math.round(radio);
       if (itemPressIndexRef.current !== -1) {
         if (itemPressIndexRef.current === index) {
+          setFocusIndex(index);
           setActiveIndex(index);
         }
       } else {
+        if (Number.isInteger(radio)) {
+          setFocusIndex(index);
+        }
         setActiveIndex(index);
       }
     },
-    [contentLayout, setActiveIndex],
+    [contentLayout, setActiveIndex, setFocusIndex],
   );
 
   const onLayout = useCallback((event) => {
@@ -112,6 +125,10 @@ function SegmentedView(props) {
     }
   }, [contentLayout, initialPage, scrollToIndex]);
 
+  if (!children || (Array.isArray(children) && children.length === 0)) {
+    return null;
+  }
+
   return (
     <View style={buildStyles.style}>
       {showSegmentedBar ? (
@@ -123,6 +140,7 @@ function SegmentedView(props) {
           sceneChildren={children}
           currentIndex={activeIndex !== -1 ? activeIndex : currentIndex}
           indicatorStyle={buildStyles.barIndicatorStyle}
+          contentLayout={contentLayout}
           onPressItem={onPressItem}
         />
       ) : null}
@@ -131,7 +149,7 @@ function SegmentedView(props) {
         style={buildStyles.contentStyle}
         lazy={lazy}
         onLayout={onLayout}
-        currentIndex={currentIndex}
+        currentFocus={currentFocus}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: animatedXRef.current } } }],
           { useNativeDriver: true, listener: onScroll },
@@ -159,6 +177,8 @@ SegmentedView.propTypes = {
   activeIndex: PropTypes.number,
   lazy: PropTypes.bool, // 懒加载
   onChange: PropTypes.func,
+  barActionPosition: PropTypes.oneOf(['left', 'right']),
+  barAction: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
 };
 
 SegmentedView.defaultProps = {

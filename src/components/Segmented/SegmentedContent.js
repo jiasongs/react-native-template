@@ -11,7 +11,7 @@ function SegmentedContent(props) {
     onLayout,
     contentLayout,
     lazy,
-    currentIndex,
+    currentFocus,
     forwardedRef,
     ...others
   } = props;
@@ -42,7 +42,7 @@ function SegmentedContent(props) {
         return (
           <SegmentedContentScene
             key={`page_${item.key || index}`}
-            active={lazy ? currentIndex === index : true}
+            active={lazy ? currentFocus === index : true}
             contentLayout={layout}
           >
             {item}
