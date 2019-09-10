@@ -160,11 +160,11 @@ const styles = StyleSheet.create({
   },
   title: {
     marginVertical: 10,
-    // marginTop: 20,
+    marginHorizontal: 20,
   },
   detail: {
     marginVertical: 10,
-    // marginTop: 12,
+    marginHorizontal: 20,
   },
   actionContainer: {
     marginTop: 10,
@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 17,
   },
   actionText: {},
   separator: {},

@@ -1,8 +1,9 @@
 'use strict';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useContext } from 'react';
 import { StyleSheet, ViewPropTypes, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import Button from '../Touchable/Button';
+import { ThemeContext } from '../../config/theme';
 
 function SegmentedBarItem(props) {
   const {
@@ -17,9 +18,11 @@ function SegmentedBarItem(props) {
     activeTitleStyle,
     iconStyle,
     activeIconStyle,
-    barType,
+    indicatorType,
     ...others
   } = props;
+
+  const themeValue = useContext(ThemeContext);
 
   const onBoxLayoutBack = useCallback(
     (event) => {
@@ -33,25 +36,44 @@ function SegmentedBarItem(props) {
   }, [index, onPress]);
 
   const buildStyles = useMemo(() => {
-    const newStyle = [];
-    const newTitleStyle = [styles.normalTitleStyle];
-    const newIconStyle = [styles.normalIconStyle];
-    if (barType === 'item') {
-      newStyle.push({
-        marginHorizontal: 20,
-        marginVertical: 12,
-      });
+    const segmentedBarItem = themeValue.segmented.segmentedBarItem;
+    const newStyle = [segmentedBarItem.style];
+    const newTitleStyle = [segmentedBarItem.titleStyle];
+    const newIconStyle = [segmentedBarItem.iconStyle];
+    if (indicatorType === 'item') {
+      newStyle.push(styles.indicatorItemStyle);
     } else {
-      newStyle.push(styles.normalStyle);
+      newStyle.push(styles.indicatorBoxStyle);
     }
     newStyle.push(style);
-    newTitleStyle.push(titleStyle);
-    newIconStyle.push(iconStyle);
+    newTitleStyle.push(
+      StyleSheet.flatten([styles.normalTitleStyle, titleStyle]),
+    );
+    newIconStyle.push(StyleSheet.flatten([styles.normalIconStyle, iconStyle]));
     if (active) {
-      newStyle.push([styles.activeStyle, activeStyle]);
-      newTitleStyle.push([styles.activeTitleSyle, activeTitleStyle]);
-      newIconStyle.push([styles.activeIconSyle, activeIconStyle]);
+      newStyle.push(
+        StyleSheet.flatten([
+          segmentedBarItem.activeStyle,
+          styles.activeStyle,
+          activeStyle,
+        ]),
+      );
+      newTitleStyle.push(
+        StyleSheet.flatten([
+          segmentedBarItem.activeTitleStyle,
+          styles.activeTitleSyle,
+          activeTitleStyle,
+        ]),
+      );
+      newIconStyle.push(
+        StyleSheet.flatten([
+          segmentedBarItem.activeIconStyle,
+          styles.activeIconSyle,
+          activeIconStyle,
+        ]),
+      );
     }
+
     return {
       style: [...newStyle],
       titleStyle: [...newTitleStyle],
@@ -62,9 +84,10 @@ function SegmentedBarItem(props) {
     activeIconStyle,
     activeStyle,
     activeTitleStyle,
-    barType,
     iconStyle,
+    indicatorType,
     style,
+    themeValue,
     titleStyle,
   ]);
 
@@ -83,14 +106,14 @@ function SegmentedBarItem(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  indicatorBoxStyle: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  normalStyle: {
     paddingHorizontal: 20,
     paddingVertical: 12,
+  },
+  indicatorItemStyle: {
+    marginHorizontal: 12,
+    marginVertical: 12,
   },
   activeStyle: {},
   normalTitleStyle: {},

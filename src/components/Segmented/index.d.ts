@@ -19,7 +19,7 @@ export interface SegmentedBarItemProps extends ButtonPorps {
 }
 
 export interface SegmentedBarProps {
-  type?: IndicatorType;
+  indicatorType?: IndicatorType;
   style?: StyleProp<ViewStyle>;
   indicatorStyle?: StyleProp<ViewStyle>;
   sidebarPosition: 'left' | 'right';

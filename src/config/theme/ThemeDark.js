@@ -1,5 +1,5 @@
 'use strict';
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
 
 const primary = {
   color: {
@@ -140,21 +140,20 @@ export default {
    */
   alert: {
     style: {
-      width: 260,
+      width: Dimensions.get('screen').width - 80,
       minHeight: 52,
       backgroundColor: primary.color.reverse,
     },
     titleStyle: {
-      maxWidth: 200,
       fontSize: 16,
       color: primary.color.main,
       fontWeight: 'bold',
     },
     detailStyle: {
-      maxWidth: 230,
       fontSize: 16,
       color: primary.color.main,
-      lineHeight: 20,
+      lineHeight: 22,
+      textAlign: 'center',
     },
     actionContainerStyle: {
       width: '100%',
@@ -165,7 +164,6 @@ export default {
     },
     actionStyle: {
       backgroundColor: primary.color.reverse,
-      paddingVertical: 17,
     },
     actionTitleStyle: {
       fontSize: 14,
@@ -319,6 +317,32 @@ export default {
         borderRadius: 8 / 2,
       },
       countStyle: {},
+    },
+  },
+  segmented: {
+    style: {},
+    segmentedBar: {
+      style: {},
+      indicatorStyle: {
+        backgroundColor: primary.color.main,
+      },
+    },
+    segmentedBarItem: {
+      style: {},
+      activeStyle: {},
+      titleStyle: {
+        color: primary.color.second,
+        fontSize: 14,
+      },
+      activeTitleStyle: {
+        color: primary.color.main,
+      },
+      iconStyle: {
+        tintColor: primary.color.second,
+      },
+      activeIconStyle: {
+        tintColor: primary.color.main,
+      },
     },
   },
 };

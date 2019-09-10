@@ -44,25 +44,15 @@ function DemoSegmented() {
         ]}
       />
       <SegmentedView
-        // // indicatorStyle={{ width: 50 }}
         onChange={(index) => {
           console.log('onChange', index);
         }}
-        // barStyle={{ marginHorizontal: 50 }}
-        indicatorType={'custom'}
-        indicatorStyle={{ width: 20, height: 3, bottom: 0 }}
+        indicatorType={'box'}
+        barStyle={{}}
         itemStyle={{
-          width: 90,
-          paddingVertical: 12,
-          paddingHorizontal: 0,
           borderRightWidth: 1,
+          borderLeftWidth: 1,
         }}
-        // itemActiveStyle={{  }}
-        // itemTitleStyle={{ color: '#333' }}
-        itemActiveTitleStyle={{ color: 'red', fontSize: 18 }}
-
-        // itemIconStyle={{ tintColor: '#333' }}
-        // itemActiveIconStyle={{ }}
       >
         {dataSource.map((item, index) => {
           let title = '你好吗' + index;

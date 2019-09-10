@@ -1,10 +1,16 @@
 import * as React from 'react';
-import { StyleProp, TextStyle, GestureResponderEvent } from 'react-native';
+import {
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+  GestureResponderEvent,
+} from 'react-native';
 import { OverlayPopProps } from '../Overlay';
 
 export interface Alert {
   title: string;
   titleStyle: StyleProp<TextStyle>;
+  actionStyle: StyleProp<ViewStyle>;
   onPress: () => void;
 }
 

@@ -126,7 +126,7 @@ function SegmentedView(props) {
     }
   }, [contentLayout, initialPage, scrollToIndex]);
 
-  if (!children || (Array.isArray(children) && children.length === 0)) {
+  if (!children || (Array.isArray(children) && children.length <= 1)) {
     return null;
   }
 
@@ -136,7 +136,7 @@ function SegmentedView(props) {
         <SegmentedBar
           {...others}
           style={buildStyles.barStyle}
-          type={indicatorType}
+          indicatorType={indicatorType}
           animatedX={animatedXRef.current}
           sceneChildren={children}
           currentIndex={activeIndex !== -1 ? activeIndex : currentIndex}
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
 SegmentedView.propTypes = {
   ...SegmentedBar.type.propTypes,
   style: ViewPropTypes.style,
-  indicatorType: SegmentedBar.type.propTypes.type,
+  indicatorType: SegmentedBar.type.propTypes.indicatorType,
   barStyle: ViewPropTypes.style,
   showSegmentedBar: PropTypes.bool,
   initialPage: PropTypes.number,
@@ -186,7 +186,7 @@ SegmentedView.propTypes = {
 
 SegmentedView.defaultProps = {
   showSegmentedBar: true,
-  initialPage: 1,
+  initialPage: 0,
   lazy: true,
   activeIndex: -1,
 };

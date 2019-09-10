@@ -5,6 +5,7 @@ import React, {
   useState,
   useMemo,
   useCallback,
+  useContext,
 } from 'react';
 import {
   Animated,
@@ -15,6 +16,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import SegmentedBarItem from './SegmentedBarItem';
+import { ThemeContext } from '../../config/theme';
 
 function mergeProps(aProps, bProps) {
   const itemProps = aProps ? aProps : {};
@@ -60,9 +62,8 @@ function RenderIndicator(props) {
         },
       ],
     };
-    newStyle.push({ width: contentItemWidth });
     return {
-      style: [...newStyle, style, transform],
+      style: [...newStyle, style, { width: contentItemWidth }, transform],
     };
   }, [animatedX, contentItemWidth, interpolate, style]);
 
@@ -84,7 +85,7 @@ const MemoRenderIndicator = React.memo(RenderIndicator);
 
 function SegmentedBar(props) {
   const {
-    type,
+    indicatorType,
     style,
     animatedX,
     sceneChildren,
@@ -97,6 +98,7 @@ function SegmentedBar(props) {
     backgroundImage,
   } = props;
 
+  const themeValue = useContext(ThemeContext);
   const scrollViewRef = useRef(React.createRef());
   const boxLayoutsRef = useRef([]);
 
@@ -110,46 +112,41 @@ function SegmentedBar(props) {
   const [scrollLayout, setScrollLayout] = useState({ width: 0, height: 0 });
 
   const contentItemWidth = useMemo(() => {
-    if (type === 'custom') {
+    if (indicatorType === 'custom') {
       const flattenStyle = StyleSheet.flatten(
         indicatorStyle ? indicatorStyle : {},
       );
       if (!flattenStyle.width) {
-        console.error('当类型为customWidth时，style必须设置宽度');
+        console.error('error: 当类型为custom时，style必须设置宽度');
       }
       return flattenStyle.width || 0;
-    } else if (type === 'none') {
+    } else if (indicatorType === 'none') {
       return 0;
-    } else {
-      return 80;
     }
-  }, [indicatorStyle, type]);
+    return 80;
+  }, [indicatorStyle, indicatorType]);
 
   const buildStyles = useMemo(() => {
+    const segmentedBar = themeValue.segmented.segmentedBar;
     return {
-      style: [styles.container, style],
-      indicatorStyle: [indicatorStyle],
+      style: [segmentedBar.style, styles.container, style],
+      indicatorStyle: [segmentedBar.indicatorStyle, indicatorStyle],
       contentContainerStyle: [styles.contentContainerStyle],
     };
-  }, [indicatorStyle, style]);
+  }, [indicatorStyle, style, themeValue]);
 
   const onLayout = useCallback((event) => {
     setScrollLayout(event.nativeEvent.layout);
-    console.log('onLayout');
-    // if (!isHandleContentLayoutRef.current) {
-    //   isHandleContentLayoutRef.current = true;
-
-    // }
   }, []);
 
   const onBoxLayout = useCallback(
     (event, index) => {
-      const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;
       const layout = event.nativeEvent.layout;
-      const boxLayout = boxLayoutsRef.current[index];
       if (!layout) {
         return;
       }
+      const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;
+      const boxLayout = boxLayoutsRef.current[index];
       if (boxLayout) {
         if (Math.round(boxLayout.width) !== Math.round(layout.width)) {
           boxLayoutsRef.current[index] = layout;
@@ -174,6 +171,7 @@ function SegmentedBar(props) {
     let boxLayout = boxLayouts[currentIndex];
     boxLayout = boxLayout ? boxLayout : { x: 0, width: 0 };
     const offsetX = boxLayout.x - scrollLayout.width / 2 + boxLayout.width / 2;
+    console.log('useEffect', currentIndex);
     if (offsetX) {
       scrollViewRef.current._component.scrollTo({
         x: offsetX,
@@ -199,7 +197,8 @@ function SegmentedBar(props) {
         let currentLayout = {};
         let layoutX = 0;
         const boxLayout = boxLayouts[ii];
-        if (type === 'custom') {
+        console.log('boxLayout', boxLayout);
+        if (indicatorType === 'custom') {
           currentLayout = { width: contentItemWidth };
           layoutX = boxLayout.x + (boxLayout.width - contentItemWidth) / 2;
         } else {
@@ -208,7 +207,6 @@ function SegmentedBar(props) {
         }
         const multiple = currentLayout.width / contentItemWidth; // 缩放倍数
         const transformx = (contentItemWidth * (1 - multiple)) / 2;
-        console.log('layoutX', layoutX, transformx);
         inputRange.push(contentLayout.width * ii);
         outputRangeX.push(Math.round(layoutX - transformx));
         outputRangeScale.push(multiple);
@@ -223,7 +221,13 @@ function SegmentedBar(props) {
         outputRangeScale: outputRangeScale,
       });
     }
-  }, [boxLayouts, contentItemWidth, contentLayout, sceneChildren, type]);
+  }, [
+    boxLayouts,
+    contentItemWidth,
+    contentLayout,
+    indicatorType,
+    sceneChildren,
+  ]);
 
   return (
     <View style={buildStyles.style}>
@@ -234,9 +238,7 @@ function SegmentedBar(props) {
           resizeMode={'stretch'}
         />
       ) : null}
-      {sidebarPosition === 'left' ? (
-        <MemoRenderSidebar sidebar={sidebar} />
-      ) : null}
+      {sidebarPosition === 'left' && <MemoRenderSidebar sidebar={sidebar} />}
       <Animated.ScrollView
         ref={scrollViewRef}
         onLayout={onLayout}
@@ -254,7 +256,7 @@ function SegmentedBar(props) {
               onBoxLayout={onBoxLayout}
               onPress={onPressItem}
               active={index === currentIndex}
-              barType={type}
+              indicatorType={indicatorType}
               {...itemProps}
             />
           );
@@ -266,9 +268,7 @@ function SegmentedBar(props) {
           contentItemWidth={contentItemWidth}
         />
       </Animated.ScrollView>
-      {sidebarPosition === 'right' ? (
-        <MemoRenderSidebar sidebar={sidebar} />
-      ) : null}
+      {sidebarPosition === 'right' && <MemoRenderSidebar sidebar={sidebar} />}
     </View>
   );
 }
@@ -285,15 +285,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     height: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'blue',
   },
 });
 
 SegmentedBar.propTypes = {
   ...SegmentedBarItem.type.propTypes,
-  type: PropTypes.oneOf(['none', 'box', 'item', 'custom']),
+  indicatorType: PropTypes.oneOf(['none', 'box', 'item', 'custom']),
   style: ViewPropTypes.style,
   indicatorStyle: ViewPropTypes.style,
   sidebarPosition: PropTypes.oneOf(['left', 'right']),
@@ -305,7 +302,7 @@ SegmentedBar.propTypes = {
 };
 
 SegmentedBar.defaultProps = {
-  type: 'box',
+  indicatorType: 'box',
   sidebarPosition: 'right',
 };
 
