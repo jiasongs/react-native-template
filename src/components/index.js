@@ -10,11 +10,12 @@ import { Picker } from './Picker';
 import { Checkbox, Radio, Badge } from './Form';
 import { PageContainer, GirdContainer } from './Container';
 import {
-  OverlayManager,
-  OverlayPop,
-  OverlayPull,
+  // OverlayManager,
+  // OverlayPop,
+  // OverlayPull,
   OverlayTopContainer,
 } from './Overlay';
+import { OverlayBase, OverlayPop } from './Overlay_new';
 import { ToastManager, ToastView } from './Toast';
 import { AlertManager, AlertView } from './Alert';
 import { ActionManager, ActionSheetView } from './ActionSheet';
@@ -22,6 +23,10 @@ import { DevRefresh } from './Development';
 import { SegmentedView, SegmentedScene } from './Segmented';
 
 export {
+  OverlayBase,
+  OverlayPop,
+  /* eslint-disable no-trailing-spaces */
+
   SegmentedView,
   SegmentedScene,
   PageContainer,
@@ -34,9 +39,9 @@ export {
   Button,
   ListRow,
   TabBottomBar,
-  OverlayManager,
-  OverlayPop,
-  OverlayPull,
+  // OverlayManager,
+  // OverlayPop,
+  // OverlayPull,
   OverlayTopContainer,
   ToastManager,
   ToastView,

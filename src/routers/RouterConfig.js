@@ -80,7 +80,7 @@ const StackNavigatorRouter = {
 };
 
 const StackNavigatorConfig = {
-  initialRouteName: 'Tab',
+  initialRouteName: 'DemoOverlay',
   initialRouteParams: {},
   defaultNavigationOptions: {
     header: null,

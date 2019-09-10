@@ -5,10 +5,28 @@ import { DeviceEventEmitter } from 'react-native';
 let keyValue = 0;
 
 export default class OverlayManager {
+  static keys = [];
+
   static show(overlayView) {
     const onDisappearCompletedSave = overlayView.props.onDisappearCompleted;
+    const onPrepareSave = overlayView.props.onPrepare;
+    console.log('overlayView', overlayView);
     const key = this._add(
       React.cloneElement(overlayView, {
+        onPrepare: (appear, disappear) => {
+          const index = this.keys.findIndex((item) => item.key === key);
+          if (index === -1) {
+            this.keys.push({ key, appear, disappear });
+          } else {
+            this.keys[index] = { key, appear, disappear };
+          }
+          onPrepareSave &&
+            onPrepareSave({
+              key,
+              appear,
+              disappear,
+            });
+        },
         onDisappearCompleted: () => {
           this._remove(key);
           onDisappearCompletedSave && onDisappearCompletedSave();
@@ -19,7 +37,11 @@ export default class OverlayManager {
   }
 
   static hide(key) {
-    this._remove(key);
+    const index = this.keys.findIndex((item) => item.key === key);
+    if (index !== -1) {
+      const { disappear } = this.keys[index];
+      disappear && disappear();
+    }
   }
 
   static transformRoot(transform, animated, animatesOnly = null) {
