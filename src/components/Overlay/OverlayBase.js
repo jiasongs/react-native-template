@@ -48,11 +48,23 @@ class OverlayBase extends React.PureComponent {
     }
   }
 
+  get maskOpacity() {
+    const { maskOpacity } = this.props;
+    // const overlay = themeValue.overlay;
+    if (maskOpacity) {
+      return maskOpacity;
+    }
+    // if (overlay.maskOpacity) {
+    //   return overlay.maskOpacity;
+    // }
+    return 0.3;
+  }
+
   get appearAnimates() {
     const duration = 200;
     const animates = [
       Animated.timing(this.animates.opacity, {
-        toValue: this.props.overlayOpacity,
+        toValue: this.maskOpacity,
         duration,
         useNativeDriver: true,
       }),
@@ -77,7 +89,7 @@ class OverlayBase extends React.PureComponent {
   }
 
   appear(animated = this.props.animated, additionAnimates = null) {
-    const { overlayOpacity, onAppearCompleted } = this.props;
+    const { onAppearCompleted } = this.props;
     if (animated) {
       this.animates.opacity.setValue(0);
       Animated.parallel(this.appearAnimates.concat(additionAnimates)).start(
@@ -86,23 +98,23 @@ class OverlayBase extends React.PureComponent {
         },
       );
     } else {
-      this.animates.opacity.setValue(overlayOpacity);
+      this.animates.opacity.setValue(this.maskOpacity);
       onAppearCompleted && onAppearCompleted();
     }
   }
 
   disappear(animated = this.props.animated, additionAnimates = null) {
-    const { overlayOpacity, onDisappearCompleted } = this.props;
+    const { onDisappearCompleted } = this.props;
     if (animated) {
       Animated.parallel(this.disappearAnimates.concat(additionAnimates)).start(
         () => {
-          if (overlayOpacity < 0.3) {
+          if (this.maskOpacity < 0.3) {
             this.animates.opacity.removeAllListeners();
             onDisappearCompleted && onDisappearCompleted();
           }
         },
       );
-      if (overlayOpacity >= 0.3) {
+      if (this.maskOpacity >= 0.3) {
         this.animates.opacity.addListener((event) => {
           if (event.value < 0.01) {
             this.animates.opacity.stopAnimation();
@@ -156,15 +168,15 @@ class OverlayBase extends React.PureComponent {
   }
 
   render() {
-    const { overlayPointerEvents } = this.props;
+    const { maskPointerEvents } = this.props;
     return (
       <View
         style={[StyleSheet.absoluteFill, this.buildStyle()]}
-        pointerEvents={overlayPointerEvents}
+        pointerEvents={maskPointerEvents}
       >
         <TouchableWithoutFeedback onPress={this.closePanRelease}>
           <Animated.View
-            pointerEvents={overlayPointerEvents}
+            pointerEvents={maskPointerEvents}
             style={[styles.maskStyle, { opacity: this.animates.opacity }]}
           />
         </TouchableWithoutFeedback>
@@ -189,8 +201,8 @@ OverlayBase.propTypes = {
   style: ViewPropTypes.style,
   modal: PropTypes.bool,
   animated: PropTypes.bool,
-  overlayOpacity: PropTypes.number,
-  overlayPointerEvents: ViewPropTypes.pointerEvents,
+  maskOpacity: PropTypes.number,
+  maskPointerEvents: ViewPropTypes.pointerEvents,
   closeOnHardwareBackPress: PropTypes.bool,
   onAppearCompleted: PropTypes.func,
   onDisappearCompleted: PropTypes.func,
@@ -200,9 +212,8 @@ OverlayBase.propTypes = {
 OverlayBase.defaultProps = {
   modal: false,
   animated: true,
-  overlayPointerEvents: 'auto',
+  maskPointerEvents: 'auto',
   closeOnHardwareBackPress: true,
-  overlayOpacity: 0.3,
 };
 
 export default OverlayBase;

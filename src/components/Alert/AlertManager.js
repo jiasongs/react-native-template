@@ -4,9 +4,8 @@ import AlertView from './AlertView';
 import { OverlayManager, OverlayPop } from '../Overlay';
 
 const defaultOption = {
-  type: 'zoomOut',
+  type: 'zoomIn',
   modal: false,
-  overlayOpacity: 0.3,
 };
 
 export default class AlertManager {

@@ -7,9 +7,9 @@ const defaultOption = {
   style: { justifyContent: 'center', alignItems: 'center' },
   type: 'none',
   modal: true,
-  overlayOpacity: 0.0,
+  maskOpacity: 0.0,
   duration: 2000,
-  overlayPointerEvents: 'box-only',
+  maskPointerEvents: 'box-only',
 };
 
 export default class ToastManager {

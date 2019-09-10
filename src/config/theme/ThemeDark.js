@@ -136,11 +136,17 @@ export default {
     },
   },
   /**
+   * @Overlay
+   */
+  overlay: {
+    maskOpacity: 0,
+  },
+  /**
    * @Alert
    */
   alert: {
     style: {
-      width: Dimensions.get('screen').width - 80,
+      width: Dimensions.get('screen').width * 0.7,
       minHeight: 52,
       backgroundColor: primary.color.reverse,
     },
@@ -157,19 +163,19 @@ export default {
     },
     actionContainerStyle: {
       width: '100%',
+      marginTop: 1,
       borderTopWidth: StyleSheet.hairlineWidth,
-      borderTopColor: primary.color.separator,
+      borderColor: primary.color.separator,
       borderBottomLeftRadius: 10,
       borderBottomRightRadius: 10,
     },
-    actionStyle: {
-      backgroundColor: primary.color.reverse,
-    },
+    actionStyle: {},
     actionTitleStyle: {
       fontSize: 14,
       color: primary.color.main,
     },
     separatorStyle: {
+      marginRight: StyleSheet.hairlineWidth,
       borderRightWidth: StyleSheet.hairlineWidth,
       borderColor: primary.color.separator,
     },
@@ -319,6 +325,9 @@ export default {
       countStyle: {},
     },
   },
+  /**
+   * @Segmented
+   */
   segmented: {
     style: {},
     segmentedBar: {

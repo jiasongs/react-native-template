@@ -21,8 +21,8 @@ export interface OverlayBaseProps {
   style?: StyleProp<ViewStyle>;
   modal?: boolean;
   animated: boolean;
-  overlayOpacity?: number;
-  overlayPointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto';
+  maskOpacity?: number;
+  maskPointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto';
   closeOnHardwareBackPress: boolean;
   onAppearCompleted?: () => void;
   onDisappearCompleted?: () => void;
@@ -47,3 +47,4 @@ export interface OverlayPullProps extends OverlayBaseProps {
 export const OverlayTopContainer: React.ComponentClass<>;
 export const OverlayPop: React.ComponentClass<OverlayPopProps>;
 export const OverlayPull: React.ComponentClass<OverlayPullProps>;
+export const OverlayManager: React.ClassType;

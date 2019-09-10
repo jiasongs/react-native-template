@@ -26,18 +26,24 @@
 - Overlay
 - Badge
 - Theme 支持切换主题
+- Segmented
 
 # 待完成
 - WebBrowser
 - Card
 - PermissionsManager
 - Popover
-- Segmented
+
 - Banner
 - Stepper
 - PayManager
 - MediaPickerManager
 - Services 结构
+
+# 问题记录
+- Segmented安卓需要处理下更新contentSize后，bar的偏移问题
+- 用hook重写Overlay
+- 用hook重写ListView
 
 ## Installation
 

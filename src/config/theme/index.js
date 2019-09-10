@@ -1,9 +1,13 @@
 import ThemeLight from './ThemeLight';
 import ThemeDark from './ThemeDark';
-import {
-  ThemeContext,
-  ThemeManager,
-  useThemeValue,
-} from '../theme/ThemeManager';
+import ThemeManager from '../theme/ThemeManager';
+import ThemeProvider, { ThemeContext, withTheme } from './ThemeProvider';
 
-export { ThemeLight, ThemeDark, ThemeManager, ThemeContext, useThemeValue };
+export {
+  ThemeLight,
+  ThemeDark,
+  ThemeManager,
+  ThemeContext,
+  ThemeProvider,
+  withTheme,
+};

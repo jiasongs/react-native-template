@@ -227,21 +227,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// OverlayTopContainer.registerProvider = function () {
-//   if (!AppRegistry.__overlayRegisterComponentOld) {
-//     AppRegistry.__overlayRegisterComponentOld = AppRegistry.registerComponent;
-//     AppRegistry.registerComponent = function (appKey, componentProvider) {
-//       function RootElement(props) {
-//         const Component = componentProvider();
-//         return (
-//           <OverlayTopContainer>
-//             <Component {...props} />
-//           </OverlayTopContainer>
-//         );
-//       }
-//       return AppRegistry.__overlayRegisterComponentOld(appKey, () => React.memo(RootElement));
-//     };
-//   }
-// };
-
 export default OverlayTopContainer;

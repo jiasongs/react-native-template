@@ -63,7 +63,7 @@ function PickerIOS(props) {
       };
     });
     setItems(newData);
-  }, [themeValue, data, renderLabelString, buildStyles]);
+  }, [buildStyles, data, renderLabelString]);
 
   useEffect(() => {
     _currentIndex.current = selectedIndex;

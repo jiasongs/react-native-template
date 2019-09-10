@@ -4,13 +4,11 @@ import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import NavigationContainer from './routers/NavigationContainer';
 import { OverlayTopContainer, DevRefresh } from './components';
-import { ThemeContext, useThemeValue } from './config/theme';
+import { ThemeProvider } from './config/theme';
 import RouterHelper from './routers/RouterHelper';
 import { useBackExitApp } from './common/hooks';
 
 function App() {
-  const value = useThemeValue();
-
   useEffect(() => {
     SplashScreen.hide();
   }, []);
@@ -25,12 +23,12 @@ function App() {
   });
 
   return (
-    <ThemeContext.Provider value={value}>
+    <ThemeProvider>
       <OverlayTopContainer>
         <NavigationContainer />
         {__DEV__ && <DevRefresh />}
       </OverlayTopContainer>
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
 }
 

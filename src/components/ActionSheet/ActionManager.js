@@ -6,7 +6,6 @@ import { OverlayManager, OverlayPull } from '../Overlay';
 const defaultOption = {
   type: 'bottom',
   modal: false,
-  overlayOpacity: 0.3,
 };
 
 export default class ActionManager {

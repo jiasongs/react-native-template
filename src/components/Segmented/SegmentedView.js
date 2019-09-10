@@ -6,7 +6,14 @@ import React, {
   useMemo,
   useEffect,
 } from 'react';
-import { View, StyleSheet, Animated, ViewPropTypes, Image } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Animated,
+  ViewPropTypes,
+  Image,
+  Platform,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import SegmentedBar from './SegmentedBar';
 import SegmentedContent from './SegmentedContent';
@@ -116,6 +123,15 @@ function SegmentedView(props) {
   const onLayout = useCallback((event) => {
     setContentLayout(event.nativeEvent.layout);
   }, []);
+
+  useEffect(() => {
+    if (
+      Platform.OS === 'android' &&
+      currentIndexRef.current > children.length - 1
+    ) {
+      // scrollToIndex({ index: children.length - 1, animated: false });
+    }
+  }, [children, scrollToIndex]);
 
   useEffect(() => {
     if (contentLayout.width !== 0) {
