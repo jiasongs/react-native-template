@@ -15,6 +15,7 @@ import {
   OverlayBase,
   OverlayPop,
   AlertManager,
+  OverlayManager,
 } from '../../components';
 import { Predefine } from '../../config/predefine';
 
@@ -45,30 +46,32 @@ function DemoOverlay() {
       <ListRow
         title={'测试'}
         onPress={() => {
-          AlertManager.show({
+          let key1 = 0,
+            key2 = 0;
+          key1 = AlertManager.show({
             title: '123',
             detail: '321',
             actions: [{ title: 'asd' }],
           });
-          // const com = (
-          //   <TouchableOpacity
-          //     contentContainerStyle={{}}
-          //     style={{
-          //       height: 200,
-          //       width: w,
-          //       backgroundColor: '#fff',
-          //       overflow: 'hidden',
-          //     }}
-          //     onPress={() => {
-          //       ActionManager.hide();
-          //     }}
-          //   >
-          //     {[...new Array(30)].map((item, index) => {
-          //       return <Text key={index}>测试</Text>;
-          //     })}
-          //   </TouchableOpacity>
-          // );
-          // ActionManager.showView(com, {});
+          const com = (
+            <TouchableOpacity
+              contentContainerStyle={{}}
+              style={{
+                height: 200,
+                width: 375,
+                backgroundColor: '#fff',
+                overflow: 'hidden',
+              }}
+              onPress={() => {
+                ActionManager.hide(key1);
+              }}
+            >
+              {[...new Array(30)].map((item, index) => {
+                return <Text key={index}>测试</Text>;
+              })}
+            </TouchableOpacity>
+          );
+          key2 = ActionManager.showView(com, {});
         }}
       />
     </PageContainer>

@@ -12,15 +12,15 @@ export default class AlertManager {
   static show(props = {}) {
     const { option, ...others } = props;
     const component = <AlertView {...others} />;
-    this.showView(component, option);
+    return this.showView(component, option);
   }
 
   static showView(component, option = {}) {
     const newOption = { ...defaultOption, ...option };
-    OverlayManager.pop(component, newOption);
+    return OverlayManager.pop(component, newOption);
   }
 
-  static hide() {
-    OverlayManager.hide();
+  static hide(key) {
+    OverlayManager.hide(key);
   }
 }

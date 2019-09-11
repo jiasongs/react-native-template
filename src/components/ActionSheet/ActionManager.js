@@ -14,15 +14,16 @@ export default class ActionManager {
     const component = (
       <ActionSheetView {...others} onCancel={() => this.hide()} />
     );
-    this.showView(component, option);
+    return this.showView(component, option);
   }
 
   static showView(component, option = {}) {
     const newOption = { ...defaultOption, ...option };
-    OverlayManager.pull(component, newOption);
+    return OverlayManager.pull(component, newOption);
   }
 
-  static hide() {
-    OverlayManager.hide();
+  static hide(key) {
+    console.log('key', key);
+    OverlayManager.hide(key);
   }
 }

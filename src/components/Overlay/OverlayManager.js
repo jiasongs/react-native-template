@@ -9,11 +9,11 @@ export default class OverlayManager {
   static keys = [];
 
   static pull(component, option) {
-    this.show(<OverlayPull {...option}>{component}</OverlayPull>);
+    return this.show(<OverlayPull {...option}>{component}</OverlayPull>);
   }
 
   static pop(component, option) {
-    this.show(<OverlayPop {...option}>{component}</OverlayPop>);
+    return this.show(<OverlayPop {...option}>{component}</OverlayPop>);
   }
 
   static show(overlayView) {
@@ -28,9 +28,7 @@ export default class OverlayManager {
         onPrepare: (appear, disappear) => {
           const index = this.keys.findIndex((item) => item.key === key);
           const overlay = { key, appear, disappear };
-          if (index === -1) {
-            this.keys.push(overlay);
-          } else {
+          if (index !== -1) {
             this.keys[index] = overlay;
           }
           if (onPrepareSave) {
@@ -45,7 +43,6 @@ export default class OverlayManager {
         },
       }),
     );
-    this.keys.push({ key });
     return key;
   }
 
@@ -54,18 +51,15 @@ export default class OverlayManager {
     if (key) {
       index = this.keys.findIndex((item) => item.key === key);
     } else {
-      if (this.keys.length > 0) {
-        index = this.keys.length - 1;
-      }
+      index = this.keys.length - 1;
     }
     if (index !== -1) {
-      const { disappear } = this.keys[index];
+      const { key: _key, disappear } = this.keys[index];
       if (disappear) {
         disappear();
       } else {
-        this._remove(key);
+        this._remove(_key);
       }
-      this.keys.splice(index, 1);
     }
   }
 
@@ -74,16 +68,24 @@ export default class OverlayManager {
   }
 
   static _add(element) {
-    let key = ++keyValue;
+    const key = ++keyValue;
+    this.keys.push({ key });
+    console.log('_add', this.keys);
     DeviceEventEmitter.emit('addOverlay', { key, element });
     return key;
   }
 
   static _remove(key) {
+    const index = this.keys.findIndex((item) => item.key === key);
+    if (index !== -1) {
+      this.keys.splice(index, 1);
+    }
+    console.log('_remove', this.keys);
     DeviceEventEmitter.emit('removeOverlay', { key });
   }
 
   static _removeAll() {
+    this.keys = [];
     DeviceEventEmitter.emit('removeAllOverlay', {});
   }
 }

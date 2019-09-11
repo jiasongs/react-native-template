@@ -23,10 +23,10 @@ export interface ActionSheetProps extends OverlayPullProps {
 }
 
 export class ActionManager {
-  static show(props: ActionSheetProps): void;
+  static show(props: ActionSheetProps): number;
   static showView(
     component: React.ReactElement,
     option: OverlayPullProps,
-  ): void;
-  static hide(): void;
+  ): number;
+  static hide(key: number): void;
 }

@@ -46,18 +46,15 @@ const styles = StyleSheet.create({
 OverlayBase.propTypes = {
   style: ViewPropTypes.style,
   modal: PropTypes.bool,
-  animated: PropTypes.bool,
   maskOpacity: PropTypes.number,
   maskPointerEvents: ViewPropTypes.pointerEvents,
   closeOnHardwareBackPress: PropTypes.bool,
   onAppearCompleted: PropTypes.func,
   onDisappearCompleted: PropTypes.func,
-  onCloseRequest: PropTypes.func,
 };
 
 OverlayBase.defaultProps = {
   modal: false,
-  animated: true,
   maskPointerEvents: 'auto',
   closeOnHardwareBackPress: true,
 };

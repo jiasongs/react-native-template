@@ -24,7 +24,10 @@ export interface AlertViewProps extends OverlayPopProps {
 }
 
 export class AlertManager {
-  static show(props: AlertViewProps): void;
-  static showView(component: React.ReactElement, option: OverlayPopProps): void;
-  static hide(): void;
+  static show(props: AlertViewProps): number;
+  static showView(
+    component: React.ReactElement,
+    option: OverlayPopProps,
+  ): number;
+  static hide(key: number): void;
 }
