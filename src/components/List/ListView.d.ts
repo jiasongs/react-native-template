@@ -1,17 +1,35 @@
 import * as React from 'react';
-import { StyleProp, ImageURISource, FlatListProps } from 'react-native';
+import {
+  StyleProp,
+  ViewStyle,
+  ImageURISource,
+  FlatListProps,
+  SectionListProps,
+} from 'react-native';
 
-export interface ListViewProps extends FlatListProps {
-  data: Array | object;
-  listType: 'FlatList' | 'SectionList';
-  initialRefresh: boolean;
-  enableLoadMore: boolean;
-  enableRefresh: boolean;
-  emptyStyle: StyleProp;
-  emptySource: ImageSourcePropType;
-  emptyTitle: string;
+interface Params = {
+  allLoad: boolean;
+};
+
+export interface ListViewProps<ItemT>
+  extends FlatListProps,
+    SectionListProps<ItemT> {
+  listType?: 'FlatList' | 'SectionList';
+  initialRefresh?: boolean;
+  enableLoadMore?: boolean;
+  enableRefresh?: boolean;
+  emptyStyle?: StyleProp<ViewStyle>;
+  emptySource?: ImageSourcePropType;
+  emptyTitle?: string;
+  onRefresh: (stopRefresh: () => void) => void;
+  onEndReached: (stopEndReached: (params?: Params) => void) => void;
 }
 
-const ListView: React.ComponentClass<ListViewProps>;
+class ListView<ItemT> extends React.Component<ListViewProps<ItemT>> {
+  startRefresh: () => void;
+  stopRefresh: () => void;
+  startEndReached: () => void;
+  stopEndReached: (params?: Params) => void;
+}
 
 export default ListView;

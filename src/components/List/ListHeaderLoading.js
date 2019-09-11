@@ -55,7 +55,6 @@ function ListHeaderLoading(props) {
 
   const onChangeOffsetCallBack = useCallback((event) => {
     const { offset } = event.nativeEvent;
-
     if (
       currentState.current !== RefreshState.Refreshing &&
       currentState.current !== RefreshState.End

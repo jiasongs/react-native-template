@@ -14,68 +14,7 @@ const EndReachedStatus = {
   ALL_LOADED: 'ALL_LOADED',
 };
 
-export default class ListView extends React.PureComponent {
-  static propTypes = {
-    data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-    listType: PropTypes.oneOf(['FlatList', 'SectionList']),
-
-    initialNumToRender: PropTypes.number,
-    initialRefresh: PropTypes.bool, //列表初始化时是否显示刷新按钮,请求数据结束后需要手动调用stopRefresh方法
-    enableLoadMore: PropTypes.bool, //是否能上拉加载
-    enableRefresh: PropTypes.bool, //是否能下拉刷新
-
-    onRefresh: PropTypes.func,
-    onEndReached: PropTypes.func,
-
-    refreshableColors: PropTypes.array,
-    refreshableProgressBackgroundColor: PropTypes.string,
-    refreshableSize: PropTypes.any,
-    refreshableTintColor: PropTypes.string,
-    refreshableTitle: PropTypes.string,
-    refreshableTitleColor: PropTypes.string,
-    refreshableProgressViewOffset: PropTypes.number,
-
-    ListHeaderComponent: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.element,
-    ]),
-    ListFooterComponent: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.element,
-    ]),
-    ListEmptyComponent: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.element,
-    ]),
-    ItemSeparatorComponent: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.element,
-    ]),
-
-    emptyStyle: ViewPropTypes.style,
-    emptySource: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.shape({ uri: PropTypes.string }),
-    ]),
-    emptyTitle: PropTypes.string,
-
-    extraData: PropTypes.any,
-  };
-
-  static defaultProps = {
-    data: [],
-    listType: 'FlatList',
-    initialNumToRender: 8,
-    initialRefresh: false,
-    enableRefresh: true,
-    enableLoadMore: true,
-
-    refreshableColors: ['#333'],
-    // refreshableTintColor: '#333',
-    // refreshableTitleColor: '#333',
-    refreshableTitle: '  正在加载...',
-  };
-
+class ListView extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -393,3 +332,33 @@ export default class ListView extends React.PureComponent {
     return null;
   }
 }
+
+ListView.propTypes = {
+  ...FlatList.propTypes,
+  ...SectionList.propTypes,
+  listType: PropTypes.oneOf(['FlatList', 'SectionList']),
+  initialRefresh: PropTypes.bool, //列表初始化时是否显示刷新按钮,请求数据结束后需要手动调用stopRefresh方法
+  enableLoadMore: PropTypes.bool, //是否能上拉加载
+  enableRefresh: PropTypes.bool, //是否能下拉刷新
+  onRefresh: PropTypes.func,
+  onEndReached: PropTypes.func,
+  emptyStyle: ViewPropTypes.style,
+  emptySource: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.shape({ uri: PropTypes.string }),
+  ]),
+  emptyTitle: PropTypes.string,
+};
+
+ListView.defaultProps = {
+  ...FlatList.defaultProps,
+  ...SectionList.defaultProps,
+  data: [],
+  listType: 'FlatList',
+  initialNumToRender: 8,
+  initialRefresh: false,
+  enableRefresh: true,
+  enableLoadMore: true,
+};
+
+export default ListView;

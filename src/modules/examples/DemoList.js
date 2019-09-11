@@ -46,6 +46,7 @@ function DemoList({ showNavBar = true }) {
         setData((preData) => {
           return preData.concat([1, 1, 1, 1]);
         });
+
         stopEndReached({ allLoad: data.length > 1000 });
       }, 2000);
     },
