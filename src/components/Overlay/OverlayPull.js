@@ -7,7 +7,13 @@ import OverlayBase from './OverlayBase';
 import { usePullAnimated } from './OverlayHook';
 
 function OverlayPull(props) {
-  const { type, panGestureEnabled, children } = props;
+  const {
+    type,
+    containerStyle,
+    containerPointerEvents,
+    panGestureEnabled,
+    children,
+  } = props;
 
   const {
     maskOpacityRef,
@@ -152,13 +158,14 @@ function OverlayPull(props) {
       baseStyle: [sideStyle],
       maskStyle: { opacity: maskOpacityRef.current },
       style: [
+        containerStyle,
         {
           opacity: opacityRef.current,
           transform: [transform],
         },
       ],
     };
-  }, [maskOpacityRef, opacityRef, translateRef, type]);
+  }, [containerStyle, maskOpacityRef, opacityRef, translateRef, type]);
 
   return (
     <OverlayBase
@@ -171,7 +178,11 @@ function OverlayPull(props) {
         onGestureEvent={onGestureEventRef.current}
         enabled={panGestureEnabled}
       >
-        <Animated.View style={buildStyles.style} onLayout={onLayout}>
+        <Animated.View
+          style={buildStyles.style}
+          onLayout={onLayout}
+          containerPointerEvents={containerPointerEvents}
+        >
           {children}
         </Animated.View>
       </PanGestureHandler>
@@ -180,7 +191,7 @@ function OverlayPull(props) {
 }
 
 OverlayPull.propTypes = {
-  ...OverlayBase.propTypes,
+  ...OverlayBase.type.propTypes,
   type: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   containerStyle: ViewPropTypes.style,
   containerPointerEvents: ViewPropTypes.pointerEvents,
@@ -188,7 +199,7 @@ OverlayPull.propTypes = {
 };
 
 OverlayPull.defaultProps = {
-  ...OverlayBase.defaultProps,
+  ...OverlayBase.type.defaultProps,
   type: 'bottom',
   animated: true,
   panGestureEnabled: true,

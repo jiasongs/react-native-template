@@ -14,12 +14,13 @@ export interface Alert {
   onPress: () => void;
 }
 
-export interface AlertViewProps extends OverlayPopProps {
+export interface AlertViewProps {
   title?: string | React.ReactElement;
   titleStyle?: StyleProp<TextStyle>;
   detail?: string | React.ReactElement;
   detailStyle?: StyleProp<TextStyle>;
   actions: Array<Alert>;
+  option?: OverlayPopProps;
   onPress?: (item) => void;
 }
 

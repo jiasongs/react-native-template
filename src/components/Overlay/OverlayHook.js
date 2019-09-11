@@ -10,13 +10,15 @@ function useOverlay(props) {
     onAppearCompleted,
     onDisappearCompleted,
     closeOnHardwareBackPress,
+    maskOpacity,
   } = props;
+  console.log('maskOpacity', maskOpacity);
   const displayRef = useRef(false);
   const maskOpacityRef = useRef(new Animated.Value(0));
   const maskAnimatesRef = useRef({
     appearAnimates: [
       Animated.timing(maskOpacityRef.current, {
-        toValue: 0.3,
+        toValue: maskOpacity,
         duration: 230,
         useNativeDriver: true,
       }),

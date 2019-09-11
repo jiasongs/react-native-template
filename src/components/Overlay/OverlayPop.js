@@ -6,7 +6,7 @@ import OverlayBase from './OverlayBase';
 import { usePopAnimated } from './OverlayHook';
 
 function OverlayPop(props) {
-  const { children } = props;
+  const { containerStyle, containerPointerEvents, children } = props;
 
   const {
     maskOpacityRef,
@@ -24,6 +24,7 @@ function OverlayPop(props) {
       baseStyle: [{ justifyContent: 'center', alignItems: 'center' }],
       maskStyle: { opacity: maskOpacityRef.current },
       style: [
+        containerStyle,
         {
           opacity: opacityRef.current,
           transform: [
@@ -36,6 +37,7 @@ function OverlayPop(props) {
       ],
     };
   }, [
+    containerStyle,
     maskOpacityRef,
     opacityRef,
     scaleXRef,
@@ -50,7 +52,11 @@ function OverlayPop(props) {
       maskStyle={buildStyles.maskStyle}
       onPressMask={onPressMask}
     >
-      <Animated.View style={buildStyles.style} onLayout={onLayout}>
+      <Animated.View
+        style={buildStyles.style}
+        onLayout={onLayout}
+        containerPointerEvents={containerPointerEvents}
+      >
         {children}
       </Animated.View>
     </OverlayBase>
@@ -62,6 +68,7 @@ OverlayPop.propTypes = {
   type: PropTypes.oneOf(['none', 'zoomOut', 'zoomIn']),
   containerStyle: ViewPropTypes.style,
   containerPointerEvents: ViewPropTypes.pointerEvents,
+  maskOpacity: PropTypes.number,
 };
 
 OverlayPop.defaultProps = {
@@ -69,6 +76,7 @@ OverlayPop.defaultProps = {
   type: 'zoomOut',
   animated: true,
   containerPointerEvents: 'box-none',
+  maskOpacity: 0.3,
 };
 
 export default React.memo(OverlayPop);

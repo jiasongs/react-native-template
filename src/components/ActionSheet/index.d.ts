@@ -14,12 +14,13 @@ export interface Action {
   onPress: () => void;
 }
 
-export interface ActionSheetProps extends OverlayPullProps {
+export interface ActionSheetProps {
   title?: string | React.ReactElement;
   titleStyle?: StyleProp<TextStyle>;
   actions: Array<Action>;
   onPress?: (item) => void;
   onCancel?: () => void;
+  option?: OverlayPullProps;
 }
 
 export class ActionManager {

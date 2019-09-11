@@ -57,6 +57,7 @@ OverlayBase.defaultProps = {
   modal: false,
   maskPointerEvents: 'auto',
   closeOnHardwareBackPress: true,
+  maskOpacity: 0.3,
 };
 
 export default React.memo(OverlayBase);

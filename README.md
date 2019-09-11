@@ -27,6 +27,7 @@
 - Badge
 - Theme 支持切换主题
 - Segmented
+- 用hook重写Overlay
 
 # 待完成
 - WebBrowser
@@ -42,7 +43,6 @@
 
 # 问题记录
 - Segmented安卓需要处理下更新contentSize后，bar的偏移问题
-- 用hook重写Overlay
 - 用hook重写ListView
 
 ## Installation
