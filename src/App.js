@@ -3,7 +3,7 @@ import './config/global';
 import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import NavigationContainer from './routers/NavigationContainer';
-import { OverlayTopContainer, DevRefresh } from './components';
+import { OverlayProvider, DevRefresh } from './components';
 import { ThemeProvider } from './config/theme';
 import RouterHelper from './routers/RouterHelper';
 import { useBackExitApp } from './common/hooks';
@@ -24,10 +24,10 @@ function App() {
 
   return (
     <ThemeProvider>
-      <OverlayTopContainer>
+      <OverlayProvider>
         <NavigationContainer />
         {__DEV__ && <DevRefresh />}
-      </OverlayTopContainer>
+      </OverlayProvider>
     </ThemeProvider>
   );
 }

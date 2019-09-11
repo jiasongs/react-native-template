@@ -32,17 +32,11 @@ function withTheme(WrappedComponent) {
       );
     }
   }
-  // function ThemeComponent(props) {
-  //   const { forwardedRef } = props;
-  //   return (
-
-  //   );
-  // }
   const ForwardTheme = React.forwardRef((props, ref) => {
     return <ThemeComponent forwardedRef={ref} {...props} />;
   });
-  // ForwardTheme.displayName = WrappedComponent.displayName;
-  return ForwardTheme;
+  ForwardTheme.displayName = WrappedComponent.displayName;
+  return hoistNonReactStatics(ForwardTheme, WrappedComponent);
 }
 
 // 最外层的主题

@@ -1,4 +1,11 @@
 import { useBackExitApp, useBackHandler } from './HookBackHandler';
 import { useKeyboard, useKeyboardSpace } from './HookKeyboard';
+import { useEventListener } from './HookEventListener';
 
-export { useBackExitApp, useBackHandler, useKeyboard, useKeyboardSpace };
+export {
+  useEventListener,
+  useBackExitApp,
+  useBackHandler,
+  useKeyboard,
+  useKeyboardSpace,
+};

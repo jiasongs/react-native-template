@@ -24,7 +24,6 @@ export interface OverlayBaseProps {
   maskOpacity?: number;
   maskPointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto';
   closeOnHardwareBackPress: boolean;
-  onPrepare?: () => void;
   onAppearCompleted?: () => void;
   onDisappearCompleted?: () => void;
   onCloseRequest?: () => void;
@@ -45,7 +44,7 @@ export interface OverlayPullProps extends OverlayBaseProps {
   panGestureEnabled: boolean;
 }
 
-export const OverlayProvider: React.ComponentClass<>;
+export const OverlayTopContainer: React.ComponentClass<>;
 export const OverlayPop: React.ComponentClass<OverlayPopProps>;
 export const OverlayPull: React.ComponentClass<OverlayPullProps>;
 export const OverlayManager: React.ClassType;

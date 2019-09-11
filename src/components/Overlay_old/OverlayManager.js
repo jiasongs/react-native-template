@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
-import { OverlayPull, OverlayPop } from '.';
+import { OverlayPull, OverlayPop } from '../Overlay';
 
 let keyValue = 0;
 
@@ -73,6 +73,14 @@ export default class OverlayManager {
     this._removeAll();
   }
 
+  static transformRoot(transform, animated, animatesOnly = null) {
+    this._transform(transform, animated, animatesOnly);
+  }
+
+  static restoreRoot(animated, animatesOnly = null) {
+    this._restore(animated, animatesOnly);
+  }
+
   static _add(element) {
     let key = ++keyValue;
     DeviceEventEmitter.emit('addOverlay', { key, element });
@@ -85,5 +93,17 @@ export default class OverlayManager {
 
   static _removeAll() {
     DeviceEventEmitter.emit('removeAllOverlay', {});
+  }
+
+  static _transform(transform, animated, animatesOnly = null) {
+    DeviceEventEmitter.emit('transformRoot', {
+      transform,
+      animated,
+      animatesOnly,
+    });
+  }
+
+  static _restore(animated, animatesOnly = null) {
+    DeviceEventEmitter.emit('restoreRoot', { animated, animatesOnly });
   }
 }

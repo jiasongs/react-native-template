@@ -1,29 +1,22 @@
 'use strict';
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import { BackHandler, ToastAndroid } from 'react-native';
+import { useEventListener } from './HookEventListener';
 
 export function useBackHandler(handler) {
-  const handleCall = useCallback(handler, []);
-
-  useEffect(() => {
-    const listener = BackHandler.addEventListener(
-      'hardwareBackPress',
-      handleCall,
-    );
-    return () => {
-      listener.remove();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEventListener('hardwareBackPress', handler);
 }
 
 export function useBackExitApp(handler) {
   const lastActionTimeRef = useRef(0);
+  const hanldeRef = useRef(handler);
 
-  const callBack = useCallback(handler, []);
+  useEffect(() => {
+    hanldeRef.current = handler;
+  }, [handler]);
 
   useBackHandler(() => {
-    const isTopRouter = callBack();
+    const isTopRouter = hanldeRef.current();
     if (isTopRouter) {
       const nowTime = new Date().getTime();
       const delay = 2000;

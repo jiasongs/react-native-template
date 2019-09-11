@@ -1,7 +1,14 @@
 'use strict';
-import OverlayPull from './OverlayPull';
+import OverlayBase from './OverlayBase';
 import OverlayPop from './OverlayPop';
+import OverlayPull from './OverlayPull';
 import OverlayManager from './OverlayManager';
-import OverlayTopContainer from './OverlayTopContainer';
+import OverlayProvider from './OverlayProvider';
 
-export { OverlayManager, OverlayTopContainer, OverlayPop, OverlayPull };
+export {
+  OverlayBase,
+  OverlayPop,
+  OverlayPull,
+  OverlayManager,
+  OverlayProvider,
+};

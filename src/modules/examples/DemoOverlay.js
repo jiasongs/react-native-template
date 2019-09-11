@@ -45,25 +45,30 @@ function DemoOverlay() {
       <ListRow
         title={'测试'}
         onPress={() => {
-          const com = (
-            <TouchableOpacity
-              contentContainerStyle={{}}
-              style={{
-                height: 200,
-                width: w,
-                backgroundColor: '#fff',
-                overflow: 'hidden',
-              }}
-              onPress={() => {
-                AlertManager.hide();
-              }}
-            >
-              {[...new Array(30)].map((item, index) => {
-                return <Text key={index}>测试</Text>;
-              })}
-            </TouchableOpacity>
-          );
-          AlertManager.showView(com, {});
+          AlertManager.show({
+            title: '123',
+            detail: '321',
+            actions: [{ title: 'asd' }],
+          });
+          // const com = (
+          //   <TouchableOpacity
+          //     contentContainerStyle={{}}
+          //     style={{
+          //       height: 200,
+          //       width: w,
+          //       backgroundColor: '#fff',
+          //       overflow: 'hidden',
+          //     }}
+          //     onPress={() => {
+          //       ActionManager.hide();
+          //     }}
+          //   >
+          //     {[...new Array(30)].map((item, index) => {
+          //       return <Text key={index}>测试</Text>;
+          //     })}
+          //   </TouchableOpacity>
+          // );
+          // ActionManager.showView(com, {});
         }}
       />
     </PageContainer>

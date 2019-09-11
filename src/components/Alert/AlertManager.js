@@ -1,17 +1,14 @@
 'use strict';
 import React from 'react';
 import AlertView from './AlertView';
-import { OverlayManager } from '../Overlay';
-import { OverlayPop } from '../Overlay_new';
+import OverlayManager from '../Overlay/OverlayManager';
 
 const defaultOption = {
-  type: 'zoomIn',
-  modal: true,
+  type: 'zoomOut',
+  modal: false,
 };
 
 export default class AlertManager {
-  static alertKeys = [];
-
   static show(props = {}) {
     const { option, ...others } = props;
     const component = <AlertView {...others} />;
@@ -20,22 +17,10 @@ export default class AlertManager {
 
   static showView(component, option = {}) {
     const newOption = { ...defaultOption, ...option };
-    const key = OverlayManager.show(
-      <OverlayPop
-        // ref={(view) => view && this.alertKeys.push(view)}
-        // onCloseRequest={() => this.hide()}
-        {...newOption}
-      >
-        {component}
-      </OverlayPop>,
-    );
-    this.alertKeys.push(key);
+    OverlayManager.pop(component, newOption);
   }
 
   static hide() {
-    if (this.alertKeys.length > 0) {
-      const key = this.alertKeys.shift();
-      OverlayManager.hide(key);
-    }
+    OverlayManager.hide();
   }
 }
