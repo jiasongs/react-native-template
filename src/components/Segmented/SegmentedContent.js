@@ -17,6 +17,7 @@ function SegmentedContent(props) {
   } = props;
 
   const [layout, setLayout] = useState({ width: 0, height: 0 });
+
   const onLayoutBack = useCallback(
     (event) => {
       setLayout(event.nativeEvent.layout);

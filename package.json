@@ -36,10 +36,10 @@
     "react-native-video": "^5.0.2",
     "react-native-webview": "^7.0.5",
     "react-native-wheel-picker-android": "^2.0.5",
-    "react-navigation": "^4.0.2",
-    "react-navigation-drawer": "^2.1.1",
-    "react-navigation-stack": "^1.5.4",
-    "react-navigation-tabs": "^2.4.1",
+    "react-navigation": "^4.0.3",
+    "react-navigation-drawer": "^2.1.2",
+    "react-navigation-stack": "^1.5.5",
+    "react-navigation-tabs": "^2.4.2",
     "rn-fetch-blob": "^0.10.16"
   },
   "devDependencies": {

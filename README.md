@@ -10,7 +10,7 @@
 
 - Container
 - Error
-- Image
+- ImageView
 - Loading
 - Navigation
 - Touchable(Button)
@@ -29,6 +29,7 @@
 - 用hook重写Overlay
 
 # 待完成
+- ImageView失败的提示
 - WebBrowser
 - Card
 - PermissionsManager
@@ -40,8 +41,8 @@
 - Services 结构
 
 # 问题记录
-- Segmented安卓需要处理下更新contentSize后，bar的偏移问题
-- 用hook重写ListView -- FlatList不太适合用Hook写法，具体参见源码
+- Segmented安卓需要处理下更新contentSize后，bar的偏移问题，懒加载的问题!!!
+- ~~用hook重写ListView -- FlatList不太适合用Hook写法包装，具体参见源码~~
 
 ## Installation
 

@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
-import hoistNonReactStatics from 'hoist-non-react-statics';
 import ThemeManager, { CHANGEEVENT } from './ThemeManager';
 import ThemeLight from './ThemeLight';
 
@@ -11,33 +10,6 @@ const InitialTheme = ThemeLight;
 
 // 创建上下文
 const ThemeContext = React.createContext(InitialTheme);
-
-// 高阶组件，适用于Class写的组件，Hook组件请用useContext
-function withTheme(WrappedComponent) {
-  class ThemeComponent extends React.PureComponent {
-    render() {
-      const { forwardedRef, ...others } = this.props;
-      return (
-        <ThemeContext.Consumer>
-          {(context) => {
-            return (
-              <WrappedComponent
-                {...others}
-                ref={forwardedRef}
-                themeValue={context}
-              />
-            );
-          }}
-        </ThemeContext.Consumer>
-      );
-    }
-  }
-  const ForwardTheme = React.forwardRef((props, ref) => {
-    return <ThemeComponent forwardedRef={ref} {...props} />;
-  });
-  ForwardTheme.displayName = WrappedComponent.displayName;
-  return hoistNonReactStatics(ForwardTheme, WrappedComponent);
-}
 
 // 最外层的主题
 function ThemeProvider(props) {
@@ -76,6 +48,6 @@ ThemeProvider.defaultProps = {
   themeValue: {},
 };
 
-export { ThemeContext, withTheme };
+export { ThemeContext };
 
 export default React.memo(ThemeProvider);

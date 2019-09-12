@@ -11,6 +11,12 @@ export default {
     bottom: 0,
     right: 0,
   },
+  Inset10: {
+    top: 10,
+    left: 10,
+    bottom: 10,
+    right: 10,
+  },
   RCA: {
     flexDirection: 'row',
     alignItems: 'center',

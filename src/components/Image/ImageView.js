@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useCallback,
 } from 'react';
-import { View, StyleSheet, Animated, Image } from 'react-native';
+import { View, StyleSheet, Animated, Image, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
 
@@ -17,22 +17,45 @@ const ImageStatus = {
   ERROR: 'ERROR', // 加载错误
 };
 
-function RenderPlaceholder(props) {
+function RenderError(props) {
   const {
-    maxImageWidth,
     imageStatus,
     placeholderImage,
+    placeholderImageStyle,
     placeholderStyle,
   } = props;
   if (
-    !maxImageWidth &&
-    placeholderImage &&
-    (imageStatus === ImageStatus.START || imageStatus === ImageStatus.LOADING)
+    imageStatus === ImageStatus.START ||
+    imageStatus === ImageStatus.LOADING
   ) {
     return (
-      <View style={styles.placeholderContainer}>
+      <View style={[styles.placeholderStyle, placeholderStyle]}>
         <Image
-          style={[styles.placeholderStyle, placeholderStyle]}
+          style={[styles.placeholderImageStyle, placeholderImageStyle]}
+          source={placeholderImage}
+          resizeMode={'contain'}
+        />
+      </View>
+    );
+  }
+  return null;
+}
+
+function RenderPlaceholder(props) {
+  const {
+    imageStatus,
+    placeholderImage,
+    placeholderImageStyle,
+    placeholderStyle,
+  } = props;
+  if (
+    imageStatus === ImageStatus.START ||
+    imageStatus === ImageStatus.LOADING
+  ) {
+    return (
+      <View style={[styles.placeholderStyle, placeholderStyle]}>
+        <Image
+          style={[styles.placeholderImageStyle, placeholderImageStyle]}
           source={placeholderImage}
           resizeMode={'contain'}
         />
@@ -43,15 +66,33 @@ function RenderPlaceholder(props) {
 }
 
 function RenderOpacityMask(props) {
-  const { maxImageWidth, useOpacity, opacity } = props;
-  if (maxImageWidth && useOpacity) {
-    return <Animated.View style={[styles.opacityMask, { opacity: opacity }]} />;
-  }
-  return null;
+  const { imageStatus } = props;
+  const opacityRef = useRef(new Animated.Value(1.0));
+
+  useEffect(() => {
+    const opacityAnimation = opacityRef.current;
+    if (imageStatus === ImageStatus.END) {
+      opacityRef.current.setValue(1.0);
+      Animated.spring(opacityRef.current, {
+        toValue: 0,
+        useNativeDriver: true,
+      }).start();
+    }
+    return () => {
+      opacityAnimation.stopAnimation();
+    };
+  }, [imageStatus]);
+
+  return (
+    <Animated.View
+      style={[styles.opacityMask, { opacity: opacityRef.current }]}
+    />
+  );
 }
 
 const MemoRenderPlaceholder = React.memo(RenderPlaceholder);
 const MemoRenderOpacityMask = React.memo(RenderOpacityMask);
+const MemoRenderRenderError = React.memo(RenderError);
 
 function ImageView(props) {
   const {
@@ -60,11 +101,12 @@ function ImageView(props) {
     onLoad,
     onLoadEnd,
     onError,
-    useOpacity,
+    useGradient,
     maxImageWidth,
     style,
     source,
     placeholderImage,
+    placeholderImageStyle,
     placeholderStyle,
     children,
     forwardedRef,
@@ -74,19 +116,9 @@ function ImageView(props) {
   } = props;
 
   const _imageStatusRef = useRef(ImageStatus.START);
-  const opacityRef = useRef(new Animated.Value(1.0));
 
   const [imageSize, setImageSize] = useState(null);
   const [imageStatus, setImageStatus] = useState(ImageStatus.START);
-
-  function startOpacityAnimated() {
-    opacityRef.current.setValue(1.0);
-    Animated.timing(opacityRef.current, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start(() => {});
-  }
 
   const onImageProgress = useCallback(
     (event) => {
@@ -137,20 +169,6 @@ function ImageView(props) {
     [onError],
   );
 
-  useEffect(() => {
-    const opacityAnimation = opacityRef.current;
-    if (
-      maxImageWidth &&
-      useOpacity &&
-      _imageStatusRef.current === ImageStatus.END
-    ) {
-      startOpacityAnimated();
-    }
-    return () => {
-      opacityAnimation.stopAnimation();
-    };
-  }, [imageStatus, maxImageWidth, useOpacity]);
-
   const newSource = useMemo(() => {
     if (
       source &&
@@ -172,7 +190,7 @@ function ImageView(props) {
   }, [imageSize, resizeMode, style, tintColor]);
 
   if (typeof source === 'number') {
-    return <Image {...props} resizeMode={buildStyles.resizeMode} />;
+    return <Image {...props} ref={forwardedRef} style={buildStyles.style} />;
   }
 
   return (
@@ -190,33 +208,32 @@ function ImageView(props) {
       resizeMode={buildStyles.resizeMode}
       tintColor={buildStyles.tintColor}
     >
-      <MemoRenderPlaceholder
-        maxImageWidth={maxImageWidth}
-        imageStatus={imageStatus}
-        placeholderImage={placeholderImage}
-        placeholderStyle={placeholderStyle}
-      />
-      <MemoRenderOpacityMask
-        maxImageWidth={maxImageWidth}
-        useOpacity={useOpacity}
-        opacity={opacityRef.current}
-      />
+      {/* {useGradient && <MemoRenderOpacityMask imageStatus={imageStatus} />} */}
+      {placeholderImage ? (
+        <MemoRenderPlaceholder
+          imageStatus={imageStatus}
+          placeholderStyle={placeholderStyle}
+          placeholderImage={placeholderImage}
+          placeholderImageStyle={placeholderImageStyle}
+        />
+      ) : null}
+      {/* <MemoRenderRenderError /> */}
       {children}
     </FastImage>
   );
 }
 
 const styles = StyleSheet.create({
-  placeholderContainer: {
+  placeholderStyle: {
     ...StyleSheet.absoluteFillObject,
     width: '100%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#eef2f4',
+    backgroundColor: 'transparent',
     zIndex: -2,
   },
-  placeholderStyle: {
+  placeholderImageStyle: {
     width: '100%',
     height: '100%',
     backgroundColor: 'transparent',
@@ -232,14 +249,18 @@ ImageView.propTypes = {
   ...FastImage.propTypes,
   style: Image.propTypes.style,
   maxImageWidth: PropTypes.number,
-  useOpacity: PropTypes.bool,
+  useGradient: PropTypes.bool,
+  placeholderStyle: ViewPropTypes.style,
   placeholderImage: Image.propTypes.source,
-  placeholderStyle: Image.propTypes.style,
+  placeholderImageStyle: Image.propTypes.style,
+  errorStyle: ViewPropTypes.style,
+  errorImage: Image.propTypes.source,
+  errorImageStyle: Image.propTypes.style,
 };
 
 ImageView.defaultProps = {
   ...FastImage.defaultProps,
-  useOpacity: true,
+  useGradient: true,
 };
 
 export default React.memo(ImageView);

@@ -80,7 +80,7 @@ const StackNavigatorRouter = {
 };
 
 const StackNavigatorConfig = {
-  initialRouteName: 'DemoList',
+  initialRouteName: 'DemoSegmented',
   initialRouteParams: {},
   defaultNavigationOptions: {
     header: null,

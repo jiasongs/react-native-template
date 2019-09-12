@@ -39,6 +39,7 @@ function SegmentedView(props) {
   const animatedXRef = useRef(new Animated.Value(0));
   const itemPressIndexRef = useRef(-1);
   const isHandleInitialPageRef = useRef(false);
+  const preChildenLength = useRef(-1);
   const currentIndexRef = useRef(initialPage);
   const currentFocusRef = useRef(initialPage);
 
@@ -104,20 +105,28 @@ function SegmentedView(props) {
     (event) => {
       const { contentOffset } = event.nativeEvent;
       const radio = contentOffset.x / contentLayout.width;
-      const index = Math.round(radio);
+      const roundIndex = Math.round(radio);
       if (itemPressIndexRef.current !== -1) {
-        if (itemPressIndexRef.current === index) {
-          setFocusIndex(index);
-          setActiveIndex(index);
+        if (itemPressIndexRef.current === roundIndex) {
+          setFocusIndex(roundIndex);
+          setActiveIndex(roundIndex);
         }
       } else {
-        if (Number.isInteger(radio)) {
-          setFocusIndex(index);
-        }
-        setActiveIndex(index);
+        setActiveIndex(roundIndex);
       }
+      console.log('onScroll', event.nativeEvent);
     },
     [contentLayout, setActiveIndex, setFocusIndex],
+  );
+
+  const onMomentumScrollEnd = useCallback(
+    (event) => {
+      const { contentOffset } = event.nativeEvent;
+      const radio = contentOffset.x / contentLayout.width;
+      const roundIndex = Math.round(radio);
+      setFocusIndex(roundIndex);
+    },
+    [contentLayout, setFocusIndex],
   );
 
   const onLayout = useCallback((event) => {
@@ -125,13 +134,28 @@ function SegmentedView(props) {
   }, []);
 
   useEffect(() => {
-    if (
-      Platform.OS === 'android' &&
-      currentIndexRef.current > children.length - 1
-    ) {
-      // scrollToIndex({ index: children.length - 1, animated: false });
+    if (Array.isArray(children)) {
+      if (preChildenLength.current !== children.length) {
+        // children减少
+        if (
+          preChildenLength.current !== -1 &&
+          children.length < preChildenLength.current
+        ) {
+          console.log(
+            'children改变',
+            currentIndexRef.current,
+            currentFocusRef.current,
+            preChildenLength.current - 1,
+            children.length,
+          );
+          if (currentFocusRef.current === preChildenLength.current - 1) {
+            setFocusIndex(currentFocusRef.current - 1);
+          }
+        }
+        preChildenLength.current = children.length;
+      }
     }
-  }, [children, scrollToIndex]);
+  }, [children, scrollToIndex, setActiveIndex, setFocusIndex]);
 
   useEffect(() => {
     if (contentLayout.width !== 0) {
@@ -172,6 +196,7 @@ function SegmentedView(props) {
           [{ nativeEvent: { contentOffset: { x: animatedXRef.current } } }],
           { useNativeDriver: true, listener: onScroll },
         )}
+        onMomentumScrollEnd={onMomentumScrollEnd}
       >
         {children}
       </SegmentedContent>

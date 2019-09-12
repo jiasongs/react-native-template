@@ -179,7 +179,7 @@ function SegmentedBar(props) {
         animated: true,
       });
     }
-  }, [scrollLayout, currentIndex, boxLayouts]);
+  }, [scrollLayout, currentIndex, boxLayouts, sceneChildren]);
 
   useEffect(() => {
     const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;
@@ -246,7 +246,7 @@ function SegmentedBar(props) {
         contentContainerStyle={buildStyles.contentContainerStyle}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        scrollEventThrottle={16}
+        scrollEventThrottle={1}
       >
         {React.Children.map(sceneChildren, (item, index) => {
           const itemProps = mergeProps(item.props, props);
