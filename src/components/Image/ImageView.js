@@ -131,11 +131,7 @@ function ImageView(props) {
 
   const onImageLoadStart = useCallback(
     (event) => {
-      if (useGradient) {
-        opacityRef.current.setValue(0.0);
-      } else {
-        opacityRef.current.setValue(1.0);
-      }
+      opacityRef.current.setValue(useGradient ? 0.0 : 1.0);
       opacityPlaceholderRef.current.setValue(1.0);
       onLoadStart && onLoadStart(event);
     },
