@@ -264,9 +264,20 @@ export default {
     style: {
       backgroundColor: primary.color.reverse,
     },
+    iconStyle: {
+      width: 25,
+      height: 25,
+      tintColor: primary.color.main,
+    },
     titleStyle: {
       color: primary.color.main,
-      fontSize: 15,
+      fontSize: 16,
+      lineHeight: 18,
+    },
+    subtitleStyle: {
+      color: primary.color.second,
+      fontSize: 13,
+      lineHeight: 16,
     },
     detailStyle: {
       color: primary.color.second,

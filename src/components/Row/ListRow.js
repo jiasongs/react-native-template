@@ -14,7 +14,7 @@ function RenderIcon(props) {
   } else if (typeof icon === 'function') {
     return icon();
   } else if (typeof icon === 'number' || typeof icon === 'object') {
-    return <ImageView style={[styles.rowImage, iconStyle]} source={icon} />;
+    return <ImageView style={iconStyle} source={icon} />;
   }
   return null;
 }
@@ -27,6 +27,19 @@ function RenderTitle(props) {
     return title();
   } else if (typeof title === 'string') {
     return <Text style={titleStyle}>{title}</Text>;
+  }
+  return null;
+}
+
+function RenderSubtitle(props) {
+  const { subtitle, subtitleStyle } = props;
+
+  if (React.isValidElement(subtitle)) {
+    return subtitle;
+  } else if (typeof subtitle === 'function') {
+    return subtitle();
+  } else if (typeof subtitle === 'string') {
+    return <Text style={subtitleStyle}>{subtitle}</Text>;
   }
   return null;
 }
@@ -83,6 +96,7 @@ function RenderBottomSeparator(props) {
 
 const MemoRenderIcon = React.memo(RenderIcon);
 const MemoRenderTitle = React.memo(RenderTitle);
+const MemoRenderSubtitle = React.memo(RenderSubtitle);
 const MemoRenderDetail = React.memo(RenderDetail);
 const MemoRenderAccessory = React.memo(RenderAccessory);
 const MemoRenderBottomSeparator = React.memo(RenderBottomSeparator);
@@ -91,8 +105,11 @@ function ListRow(props) {
   const {
     style,
     contentStyle,
+    spacingIconAndTitle,
     title,
     titleStyle,
+    subtitle,
+    subtitleStyle,
     icon,
     iconStyle,
     detail,
@@ -109,16 +126,40 @@ function ListRow(props) {
 
   const buildStyles = useMemo(() => {
     const listRow = themeValue.listRow;
+    const newSubtitleStyle = [listRow.subtitleStyle, styles.subtitleStyle];
+    if (title) {
+      newSubtitleStyle.push({ marginTop: 5 });
+    }
     return {
       style: [listRow.style, styles.container, style],
+      titleSubtitleContainer: [
+        styles.titleSubtitleContainer,
+        {
+          marginLeft: icon ? spacingIconAndTitle : 0,
+          marginRight: spacingIconAndTitle,
+        },
+      ],
+      iconStyle: [listRow.iconStyle, styles.iconStyle, iconStyle],
       titleStyle: [listRow.titleStyle, styles.titleStyle, titleStyle],
+      subtitleStyle: [newSubtitleStyle, subtitleStyle],
       detailStyle: [listRow.detailStyle, detailStyle],
       bottomSeparatorStyle: [
         listRow.bottomSeparatorStyle,
         bottomSeparatorStyle,
       ],
     };
-  }, [themeValue, style, titleStyle, detailStyle, bottomSeparatorStyle]);
+  }, [
+    themeValue.listRow,
+    style,
+    icon,
+    spacingIconAndTitle,
+    iconStyle,
+    titleStyle,
+    title,
+    subtitleStyle,
+    detailStyle,
+    bottomSeparatorStyle,
+  ]);
 
   return (
     <Button
@@ -128,9 +169,18 @@ function ListRow(props) {
       onPress={onPress}
     >
       <View style={[styles.contentContainer, contentStyle]}>
-        <View style={[Predefine.RCA, { paddingRight: 20 }]}>
-          <MemoRenderIcon icon={icon} iconStyle={iconStyle} />
-          <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
+        <View style={[Predefine.RCA, { flex: 1 }]}>
+          <MemoRenderIcon icon={icon} iconStyle={buildStyles.iconStyle} />
+          <View style={buildStyles.titleSubtitleContainer}>
+            <MemoRenderTitle
+              title={title}
+              titleStyle={buildStyles.titleStyle}
+            />
+            <MemoRenderSubtitle
+              subtitle={subtitle}
+              subtitleStyle={buildStyles.subtitleStyle}
+            />
+          </View>
         </View>
         <View style={[Predefine.RCC, styles.detailContainer]}>
           <MemoRenderDetail
@@ -167,19 +217,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     justifyContent: 'space-between',
   },
-  titleStyle: {
+  titleSubtitleContainer: {
     flex: 1,
   },
+  titleStyle: {},
+  subtitleStyle: {},
   detailContainer: {
-    flex: 1,
     alignSelf: 'stretch',
-    justifyContent: 'flex-end',
   },
-  rowImage: {
-    width: 16,
-    height: 16,
-    marginRight: 10,
-  },
+  iconStyle: {},
   sepFull: {
     alignSelf: 'stretch',
     height: 1,
@@ -198,13 +244,20 @@ const styles = StyleSheet.create({
 ListRow.propTypes = {
   style: ViewPropTypes.style,
   contentStyle: ViewPropTypes.style,
+  spacingIconAndTitle: PropTypes.number,
   title: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.string,
     PropTypes.func,
   ]),
   titleStyle: Text.propTypes.style,
-  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  subtitle: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.string,
+    PropTypes.func,
+  ]),
+  subtitleStyle: Text.propTypes.style,
+  icon: Image.propTypes.source,
   iconStyle: Image.propTypes.style,
   detail: PropTypes.oneOfType([
     PropTypes.element,
@@ -229,6 +282,7 @@ ListRow.propTypes = {
 };
 
 ListRow.defaultProps = {
+  spacingIconAndTitle: 10,
   bottomSeparator: 'full',
   accessory: 'indicator',
 };

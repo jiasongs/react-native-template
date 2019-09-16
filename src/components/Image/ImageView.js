@@ -112,10 +112,10 @@ function ImageView(props) {
 
   const onClickError = useCallback(
     (event) => {
+      setError(false);
       if (onPressError) {
         onPressError(event);
       } else {
-        setError(false);
         setRefreshCount((pre) => pre + 1);
       }
     },

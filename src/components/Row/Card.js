@@ -4,6 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Button from '../Touchable/Button';
 import { Predefine } from '../../config/predefine';
 import { ThemeContext } from '../../config/theme';
+import ImageView from '../Image/ImageView';
 
 function Card(props) {
   const { style } = props;
@@ -23,7 +24,11 @@ function Card(props) {
       type={'clear'}
       style={buildStyles.style}
       onPress={() => {}}
-    />
+    >
+      <ImageView />
+      <Text>title</Text>
+      <Text>subTitle</Text>
+    </Button>
   );
 }
 

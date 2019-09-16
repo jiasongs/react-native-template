@@ -47,7 +47,6 @@ function Badge(props) {
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'flex-start',
     justifyContent: 'center',
     alignItems: 'center',
   },
