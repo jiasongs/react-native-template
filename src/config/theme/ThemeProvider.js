@@ -1,8 +1,8 @@
 'use strict';
 import React, { useRef, useState, useEffect } from 'react';
-import { Animated, DeviceEventEmitter, Platform } from 'react-native';
+import { Animated, Platform } from 'react-native';
 import PropTypes from 'prop-types';
-import ThemeManager, { CHANGEEVENT } from './ThemeManager';
+import ThemeManager from './ThemeManager';
 import ThemeLight from './ThemeLight';
 
 // 初始的配置文件
@@ -16,13 +16,10 @@ function ThemeProvider(props) {
   const { themeValue } = props;
 
   const opacityRef = useRef(new Animated.Value(1.0));
-  const [value, setValue] = useState({
-    ...InitialTheme,
-    ...themeValue,
-  });
+  const [value, setValue] = useState(InitialTheme);
 
   useEffect(() => {
-    const listenerName = DeviceEventEmitter.addListener(CHANGEEVENT, (data) => {
+    const listenerName = ThemeManager.addListener((data) => {
       if (Platform.OS === 'ios') {
         // 只支持iOS，安卓效果不太好
         opacityRef.current.setValue(0.2);
@@ -41,6 +38,12 @@ function ThemeProvider(props) {
   useEffect(() => {
     ThemeManager.currentTheme = value;
   }, [value]);
+
+  useEffect(() => {
+    setValue((preValue) => {
+      return { ...preValue, ...themeValue };
+    });
+  }, [themeValue]);
 
   return (
     <ThemeContext.Provider value={value}>
