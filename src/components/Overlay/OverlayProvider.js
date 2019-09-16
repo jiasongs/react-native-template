@@ -1,6 +1,6 @@
 'use strict';
 import React, { useState, useCallback } from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useEventListener } from '../../common/hooks';
 
 function OverlayProvider(props) {
@@ -38,7 +38,7 @@ function OverlayProvider(props) {
 
   return (
     <View style={styles.container}>
-      <Animated.View style={[styles.container]}>{children}</Animated.View>
+      {children}
       {elements.map((item) => {
         return React.cloneElement(item.element, {
           key: '__Top' + item.key,
