@@ -11,15 +11,6 @@ import {
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
 
-const AnimatedFastImage = Animated.createAnimatedComponent(FastImage);
-
-const ImageStatus = {
-  START: 'START', // 开始加载
-  LOADING: 'LOADING', // 加载中
-  END: 'END', // 结束加载
-  ERROR: 'ERROR', // 加载错误
-};
-
 function RenderError(props) {
   const {
     onPress,
@@ -69,7 +60,7 @@ function RenderPlaceholder(props) {
         {
           opacity: opacityAnimated.interpolate({
             inputRange: [0, 1],
-            outputRange: [1, 0],
+            outputRange: [0, 1],
           }),
         },
       ]}
@@ -83,6 +74,7 @@ function RenderPlaceholder(props) {
   );
 }
 
+const AnimatedFastImage = Animated.createAnimatedComponent(FastImage);
 const MemoRenderPlaceholder = React.memo(RenderPlaceholder);
 const MemoRenderRenderError = React.memo(RenderError);
 
@@ -111,11 +103,11 @@ function ImageView(props) {
     ...others
   } = props;
 
-  const opacityRef = useRef(new Animated.Value(0.0));
+  const opacityRef = useRef(new Animated.Value(useGradient ? 0.0 : 1.0));
+  const opacityPlaceholderRef = useRef(new Animated.Value(1.0));
 
   const [refreshCount, setRefreshCount] = useState(0);
   const [imageSize, setImageSize] = useState(null);
-  // const [imageStatus, setImageStatus] = useState(ImageStatus.START);
   const [error, setError] = useState(false);
 
   const onClickError = useCallback(
@@ -139,23 +131,34 @@ function ImageView(props) {
 
   const onImageLoadStart = useCallback(
     (event) => {
-      // setImageStatus(ImageStatus.LOADING);
+      if (useGradient) {
+        opacityRef.current.setValue(0.0);
+      } else {
+        opacityRef.current.setValue(1.0);
+      }
+      opacityPlaceholderRef.current.setValue(1.0);
       onLoadStart && onLoadStart(event);
     },
-    [onLoadStart],
+    [onLoadStart, useGradient],
   );
 
   const onImageLoadEnd = useCallback(
     (event) => {
       if (useGradient) {
-        Animated.spring(opacityRef.current, {
-          toValue: 1.0,
-          useNativeDriver: true,
-        }).start();
+        Animated.parallel([
+          Animated.spring(opacityRef.current, {
+            toValue: 1.0,
+            useNativeDriver: true,
+          }),
+          Animated.spring(opacityPlaceholderRef.current, {
+            toValue: 0.0,
+            useNativeDriver: true,
+          }),
+        ]).start();
       } else {
         opacityRef.current.setValue(1.0);
+        opacityPlaceholderRef.current.setValue(0.0);
       }
-      // setImageStatus(ImageStatus.END);
       onLoadEnd && onLoadEnd(event);
     },
     [onLoadEnd, useGradient],
@@ -198,7 +201,7 @@ function ImageView(props) {
   const buildStyles = useMemo(() => {
     const newStyles = StyleSheet.flatten(style ? style : {});
     return {
-      style: [newStyles, imageSize],
+      style: [newStyles, styles.container, imageSize],
       resizeMode: newStyles.resizeMode || resizeMode,
       tintColor: newStyles.tintColor || tintColor,
     };
@@ -212,7 +215,7 @@ function ImageView(props) {
     <View style={buildStyles.style}>
       {placeholderImage ? (
         <MemoRenderPlaceholder
-          opacityAnimated={opacityRef.current}
+          opacityAnimated={opacityPlaceholderRef.current}
           placeholderStyle={placeholderStyle}
           placeholderImage={placeholderImage}
           placeholderImageStyle={placeholderImageStyle}
@@ -256,6 +259,9 @@ function ImageView(props) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+  },
   placeholderStyle: {
     ...StyleSheet.absoluteFillObject,
     width: '100%',
