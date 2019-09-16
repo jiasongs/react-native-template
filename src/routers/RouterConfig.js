@@ -1,4 +1,5 @@
 'use strict';
+import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { tabOptions, transitionConfig } from './RouterTool';
@@ -18,6 +19,7 @@ import {
   Example,
   DemoBadge,
   DemoSegmented,
+  DemoCard,
 } from '../modules';
 
 const TabNavigatorRouter = {
@@ -77,14 +79,15 @@ const StackNavigatorRouter = {
   DemoTheme: { screen: DemoTheme },
   DemoBadge: { screen: DemoBadge },
   DemoSegmented: { screen: DemoSegmented },
+  DemoCard: { screen: DemoCard },
 };
 
 const StackNavigatorConfig = {
-  initialRouteName: 'DemoSegmented',
+  initialRouteName: 'Tab',
   initialRouteParams: {},
   defaultNavigationOptions: {
     header: null,
-    gesturesEnabled: true,
+    gesturesEnabled: Platform.OS === 'ios',
   },
   cardStyle: {},
   cardShadowEnabled: true,

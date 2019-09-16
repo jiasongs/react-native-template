@@ -6,14 +6,7 @@ import React, {
   useMemo,
   useEffect,
 } from 'react';
-import {
-  View,
-  StyleSheet,
-  Animated,
-  ViewPropTypes,
-  Image,
-  Platform,
-} from 'react-native';
+import { View, StyleSheet, Animated, ViewPropTypes, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import SegmentedBar from './SegmentedBar';
 import SegmentedContent from './SegmentedContent';
@@ -150,6 +143,10 @@ function SegmentedView(props) {
           );
           if (currentFocusRef.current === preChildenLength.current - 1) {
             setFocusIndex(currentFocusRef.current - 1);
+            scrollToIndex({
+              index: currentFocusRef.current,
+              animated: false,
+            });
           }
         }
         preChildenLength.current = children.length;
@@ -192,6 +189,10 @@ function SegmentedView(props) {
         lazy={lazy}
         onLayout={onLayout}
         currentFocus={currentFocus}
+        // onScroll={(event) => {
+        //   animatedXRef.current.setValue(event.nativeEvent.contentOffset.x);
+        //   onScroll && onScroll(event);
+        // }}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: animatedXRef.current } } }],
           { useNativeDriver: true, listener: onScroll },

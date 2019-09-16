@@ -14,6 +14,10 @@ export interface ImageViewProps extends FastImageProperties {
   placeholderStyle?: StyleProp<ViewStyle>;
   placeholderImage?: ImageSourcePropType;
   placeholderImageStyle?: StyleProp<ImageStyle>;
+  errorStyle?: StyleProp<ViewStyle>;
+  errorImage?: ImageSourcePropType;
+  errorImageStyle?: StyleProp<ImageStyle>;
+  onPressError?: () => void;
 }
 
 const ImageView: React.ComponentClass<ImageViewProps>;

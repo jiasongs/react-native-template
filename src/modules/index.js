@@ -12,8 +12,10 @@ import Example from './examples/Example';
 import DemoTheme from './examples/DemoTheme';
 import DemoBadge from './examples/DemoBadge';
 import DemoSegmented from './examples/DemoSegmented';
+import DemoCard from './examples/DemoCard';
 
 export {
+  DemoCard,
   DemoTheme,
   About,
   DemoAlert,

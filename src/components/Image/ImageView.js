@@ -1,14 +1,17 @@
 'use strict';
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useMemo,
-  useCallback,
-} from 'react';
-import { View, StyleSheet, Animated, Image, ViewPropTypes } from 'react-native';
+import React, { useState, useRef, useMemo, useCallback } from 'react';
+import {
+  TouchableWithoutFeedback,
+  View,
+  StyleSheet,
+  Animated,
+  Image,
+  ViewPropTypes,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
+
+const AnimatedFastImage = Animated.createAnimatedComponent(FastImage);
 
 const ImageStatus = {
   START: 'START', // 开始加载
@@ -19,79 +22,68 @@ const ImageStatus = {
 
 function RenderError(props) {
   const {
-    imageStatus,
-    placeholderImage,
-    placeholderImageStyle,
-    placeholderStyle,
+    onPress,
+    opacityAnimated,
+    errorStyle,
+    errorImage,
+    errorImageStyle,
   } = props;
-  if (
-    imageStatus === ImageStatus.START ||
-    imageStatus === ImageStatus.LOADING
-  ) {
-    return (
-      <View style={[styles.placeholderStyle, placeholderStyle]}>
+
+  return (
+    <TouchableWithoutFeedback onPress={onPress}>
+      <Animated.View
+        style={[
+          styles.errorStyle,
+          errorStyle,
+          {
+            opacity: opacityAnimated.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 1],
+            }),
+          },
+        ]}
+      >
         <Image
-          style={[styles.placeholderImageStyle, placeholderImageStyle]}
-          source={placeholderImage}
+          style={[styles.errorImageStyle, errorImageStyle]}
+          source={errorImage}
           resizeMode={'contain'}
         />
-      </View>
-    );
-  }
-  return null;
+      </Animated.View>
+    </TouchableWithoutFeedback>
+  );
 }
 
 function RenderPlaceholder(props) {
   const {
-    imageStatus,
+    opacityAnimated,
     placeholderImage,
     placeholderImageStyle,
     placeholderStyle,
   } = props;
-  if (
-    imageStatus === ImageStatus.START ||
-    imageStatus === ImageStatus.LOADING
-  ) {
-    return (
-      <View style={[styles.placeholderStyle, placeholderStyle]}>
-        <Image
-          style={[styles.placeholderImageStyle, placeholderImageStyle]}
-          source={placeholderImage}
-          resizeMode={'contain'}
-        />
-      </View>
-    );
-  }
-  return null;
-}
-
-function RenderOpacityMask(props) {
-  const { imageStatus } = props;
-  const opacityRef = useRef(new Animated.Value(1.0));
-
-  useEffect(() => {
-    const opacityAnimation = opacityRef.current;
-    if (imageStatus === ImageStatus.END) {
-      opacityRef.current.setValue(1.0);
-      Animated.spring(opacityRef.current, {
-        toValue: 0,
-        useNativeDriver: true,
-      }).start();
-    }
-    return () => {
-      opacityAnimation.stopAnimation();
-    };
-  }, [imageStatus]);
 
   return (
     <Animated.View
-      style={[styles.opacityMask, { opacity: opacityRef.current }]}
-    />
+      style={[
+        styles.placeholderStyle,
+        placeholderStyle,
+        {
+          opacity: opacityAnimated.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 0],
+          }),
+        },
+      ]}
+    >
+      <Image
+        style={[styles.placeholderImageStyle, placeholderImageStyle]}
+        source={placeholderImage}
+        resizeMode={'contain'}
+      />
+    </Animated.View>
   );
 }
 
 const MemoRenderPlaceholder = React.memo(RenderPlaceholder);
-const MemoRenderOpacityMask = React.memo(RenderOpacityMask);
 const MemoRenderRenderError = React.memo(RenderError);
 
 function ImageView(props) {
@@ -112,13 +104,31 @@ function ImageView(props) {
     forwardedRef,
     resizeMode,
     tintColor,
+    errorStyle,
+    errorImage,
+    errorImageStyle,
+    onPressError,
     ...others
   } = props;
 
-  const _imageStatusRef = useRef(ImageStatus.START);
+  const opacityRef = useRef(new Animated.Value(0.0));
 
+  const [refreshCount, setRefreshCount] = useState(0);
   const [imageSize, setImageSize] = useState(null);
-  const [imageStatus, setImageStatus] = useState(ImageStatus.START);
+  // const [imageStatus, setImageStatus] = useState(ImageStatus.START);
+  const [error, setError] = useState(false);
+
+  const onClickError = useCallback(
+    (event) => {
+      if (onPressError) {
+        onPressError(event);
+      } else {
+        setError(false);
+        setRefreshCount((pre) => pre + 1);
+      }
+    },
+    [onPressError],
+  );
 
   const onImageProgress = useCallback(
     (event) => {
@@ -129,8 +139,7 @@ function ImageView(props) {
 
   const onImageLoadStart = useCallback(
     (event) => {
-      _imageStatusRef.current = ImageStatus.LOADING;
-      setImageStatus(ImageStatus.LOADING);
+      // setImageStatus(ImageStatus.LOADING);
       onLoadStart && onLoadStart(event);
     },
     [onLoadStart],
@@ -138,11 +147,18 @@ function ImageView(props) {
 
   const onImageLoadEnd = useCallback(
     (event) => {
-      _imageStatusRef.current = ImageStatus.END;
-      setImageStatus(ImageStatus.END);
+      if (useGradient) {
+        Animated.spring(opacityRef.current, {
+          toValue: 1.0,
+          useNativeDriver: true,
+        }).start();
+      } else {
+        opacityRef.current.setValue(1.0);
+      }
+      // setImageStatus(ImageStatus.END);
       onLoadEnd && onLoadEnd(event);
     },
-    [onLoadEnd],
+    [onLoadEnd, useGradient],
   );
 
   const onImageLoad = useCallback(
@@ -162,8 +178,7 @@ function ImageView(props) {
 
   const onImageError = useCallback(
     (event) => {
-      _imageStatusRef.current = ImageStatus.ERROR;
-      setImageStatus(ImageStatus.ERROR);
+      setError(true);
       onError && onError(event);
     },
     [onError],
@@ -194,32 +209,49 @@ function ImageView(props) {
   }
 
   return (
-    <FastImage
-      {...others}
-      ref={forwardedRef}
-      style={buildStyles.style}
-      source={{ priority: FastImage.priority.low, ...newSource }}
-      onLoadStart={onImageLoadStart}
-      onProgress={onImageProgress}
-      onLoad={onImageLoad}
-      onLoadEnd={onImageLoadEnd}
-      onError={onImageError}
-      fallback={false}
-      resizeMode={buildStyles.resizeMode}
-      tintColor={buildStyles.tintColor}
-    >
-      {/* {useGradient && <MemoRenderOpacityMask imageStatus={imageStatus} />} */}
+    <View style={buildStyles.style}>
       {placeholderImage ? (
         <MemoRenderPlaceholder
-          imageStatus={imageStatus}
+          opacityAnimated={opacityRef.current}
           placeholderStyle={placeholderStyle}
           placeholderImage={placeholderImage}
           placeholderImageStyle={placeholderImageStyle}
         />
       ) : null}
-      {/* <MemoRenderRenderError /> */}
+      <AnimatedFastImage
+        {...others}
+        ref={forwardedRef}
+        style={[
+          StyleSheet.absoluteFill,
+          {
+            opacity: opacityRef.current,
+          },
+        ]}
+        source={{
+          refreshCount: refreshCount,
+          priority: FastImage.priority.low,
+          ...newSource,
+        }}
+        onLoadStart={onImageLoadStart}
+        onProgress={onImageProgress}
+        onLoad={onImageLoad}
+        onLoadEnd={onImageLoadEnd}
+        onError={onImageError}
+        resizeMode={buildStyles.resizeMode}
+        tintColor={buildStyles.tintColor}
+        fallback={false}
+      />
       {children}
-    </FastImage>
+      {errorImage && error ? (
+        <MemoRenderRenderError
+          opacityAnimated={opacityRef.current}
+          errorStyle={errorStyle}
+          errorImage={errorImage}
+          errorImageStyle={errorImageStyle}
+          onPress={onClickError}
+        />
+      ) : null}
+    </View>
   );
 }
 
@@ -231,17 +263,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
-    zIndex: -2,
   },
   placeholderImageStyle: {
     width: '100%',
     height: '100%',
     backgroundColor: 'transparent',
   },
-  opacityMask: {
+  errorStyle: {
+    ...StyleSheet.absoluteFillObject,
     width: '100%',
     height: '100%',
-    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  errorImageStyle: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'transparent',
   },
 });
 
@@ -256,6 +295,7 @@ ImageView.propTypes = {
   errorStyle: ViewPropTypes.style,
   errorImage: Image.propTypes.source,
   errorImageStyle: Image.propTypes.style,
+  onPressError: PropTypes.func,
 };
 
 ImageView.defaultProps = {
