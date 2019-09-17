@@ -1,6 +1,6 @@
 'use strict';
 import './config/global';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import NavigationContainer from './routers/NavigationContainer';
 import { OverlayProvider, DevRefresh } from './components';
@@ -13,12 +13,14 @@ function App() {
   const [state, setState] = useState({});
 
   useEffect(() => {
-    StorageManager.load('THEME').then((data) => {
+    async function loadTheme() {
+      const data = await StorageManager.load('THEME');
       if (data) {
         setState(data);
       }
       SplashScreen.hide();
-    });
+    }
+    loadTheme();
   }, []);
 
   useBackExitApp(() => {

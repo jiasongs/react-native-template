@@ -1,14 +1,9 @@
 'use strict';
 import { Dimensions, Platform, StatusBar } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
+import DeviceInfo from './DeviceInfo';
 import DefineColors from './DefineColors';
 import DefineStyles from './DefineStyles';
-import {
-  fontSize,
-  scaleSize,
-  addDefaultProps,
-  getDeviceInfo,
-} from './Adaptation';
+import { fontSize, scaleSize, addDefaultProps } from './Adaptation';
 
 const Predefine = {
   ...DefineColors,
@@ -18,9 +13,6 @@ const Predefine = {
   scaleSize,
   addDefaultProps,
 
-  get deviceInfo() {
-    return getDeviceInfo();
-  },
   get isIOS() {
     return Platform.OS === 'ios';
   },

@@ -1,6 +1,5 @@
 'use strict';
 import { Dimensions, PixelRatio } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
 
 const deviceWidth = Math.ceil(Dimensions.get('window').width); //设备的宽度
 const deviceHeight = Math.ceil(Dimensions.get('window').height); //设备的高度
@@ -82,25 +81,5 @@ export function addDefaultProps(WrapComponent, customProps) {
   NewWrapComponent.defaultProps = {
     ...componentDefaultProps,
     ...customProps,
-  };
-}
-
-export function getDeviceInfo() {
-  return {
-    apiLevel: DeviceInfo.getAPILevel(), // api版本，安卓可用
-    appName: DeviceInfo.getApplicationName(), // app名字
-    brandName: DeviceInfo.getBrand(), // 设备品牌
-    buildNumber: DeviceInfo.getBuildNumber(), // 设备的build版本
-    bundleId: DeviceInfo.getBundleId(), // 设备的BuildID
-    carrier: DeviceInfo.getCarrier(), // 运营商名称
-    deviceCountry: DeviceInfo.getDeviceCountry(), // 设备的国家
-    deviceLocale: DeviceInfo.getDeviceLocale(), // 设备的本地设置
-    settingFontScale: DeviceInfo.getFontScale(), // 设备设置的字体比率
-    diskStorage: DeviceInfo.getFreeDiskStorage(), // 设备的可存储大小
-    systemVersion: DeviceInfo.getSystemVersion(), // 设备的系统版本
-    timezone: DeviceInfo.getTimezone(), // 设备的时区
-    uniqueId: DeviceInfo.getUniqueID(), // 设备的唯一ID
-    appVersion: DeviceInfo.getVersion(), // app的版本
-    isTablet: DeviceInfo.isTablet(), // 是否为平板电脑
   };
 }
