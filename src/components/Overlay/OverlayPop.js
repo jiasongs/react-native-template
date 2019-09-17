@@ -6,32 +6,42 @@ import OverlayBase from './OverlayBase';
 import { usePopAnimated } from './OverlayHook';
 
 function OverlayPop(props) {
-  const { containerStyle, containerPointerEvents, children } = props;
+  const { style, containerStyle, containerPointerEvents, children } = props;
 
   const {
     maskOpacityRef,
     opacityRef,
+    scaleRef,
     translateXRef,
     translateYRef,
-    scaleXRef,
-    scaleYRef,
     onLayout,
     onPressMask,
   } = usePopAnimated(props);
 
   const buildStyles = useMemo(() => {
     return {
-      baseStyle: [{ justifyContent: 'center', alignItems: 'center' }],
+      baseStyle: [{ justifyContent: 'center', alignItems: 'center' }, style],
       maskStyle: { opacity: maskOpacityRef.current },
-      style: [
+      containerStyle: [
         containerStyle,
         {
           opacity: opacityRef.current,
           transform: [
+            {
+              translateX: translateXRef.current.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, -1],
+              }),
+            },
+            {
+              translateY: translateYRef.current.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, -1],
+              }),
+            },
+            { scale: scaleRef.current },
             { translateX: translateXRef.current },
             { translateY: translateYRef.current },
-            { scaleX: scaleXRef.current },
-            { scaleY: scaleYRef.current },
           ],
         },
       ],
@@ -40,8 +50,8 @@ function OverlayPop(props) {
     containerStyle,
     maskOpacityRef,
     opacityRef,
-    scaleXRef,
-    scaleYRef,
+    scaleRef,
+    style,
     translateXRef,
     translateYRef,
   ]);
@@ -53,7 +63,7 @@ function OverlayPop(props) {
       onPressMask={onPressMask}
     >
       <Animated.View
-        style={buildStyles.style}
+        style={buildStyles.containerStyle}
         onLayout={onLayout}
         containerPointerEvents={containerPointerEvents}
       >
@@ -65,6 +75,17 @@ function OverlayPop(props) {
 
 OverlayPop.propTypes = {
   ...OverlayBase.type.propTypes,
+  anchorPoint: PropTypes.oneOf([
+    'center',
+    'left',
+    'leftTop',
+    'leftBottom',
+    'top',
+    'bottom',
+    'right',
+    'rightTop',
+    'rightBottom',
+  ]),
   type: PropTypes.oneOf(['none', 'zoomOut', 'zoomIn']),
   containerStyle: ViewPropTypes.style,
   containerPointerEvents: ViewPropTypes.pointerEvents,
@@ -74,7 +95,7 @@ OverlayPop.propTypes = {
 OverlayPop.defaultProps = {
   ...OverlayBase.type.defaultProps,
   type: 'zoomOut',
-  animated: true,
+  anchorPoint: 'center',
   containerPointerEvents: 'box-none',
   maskOpacity: 0.3,
 };

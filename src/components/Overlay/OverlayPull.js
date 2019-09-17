@@ -9,6 +9,7 @@ import { usePullAnimated } from './OverlayHook';
 function OverlayPull(props) {
   const {
     type,
+    style,
     containerStyle,
     containerPointerEvents,
     panGestureEnabled,
@@ -155,9 +156,9 @@ function OverlayPull(props) {
         break;
     }
     return {
-      baseStyle: [sideStyle],
+      baseStyle: [sideStyle, style],
       maskStyle: { opacity: maskOpacityRef.current },
-      style: [
+      containerStyle: [
         containerStyle,
         {
           opacity: opacityRef.current,
@@ -165,7 +166,7 @@ function OverlayPull(props) {
         },
       ],
     };
-  }, [containerStyle, maskOpacityRef, opacityRef, translateRef, type]);
+  }, [containerStyle, maskOpacityRef, opacityRef, style, translateRef, type]);
 
   return (
     <OverlayBase
@@ -179,7 +180,7 @@ function OverlayPull(props) {
         enabled={panGestureEnabled}
       >
         <Animated.View
-          style={buildStyles.style}
+          style={buildStyles.containerStyle}
           onLayout={onLayout}
           containerPointerEvents={containerPointerEvents}
         >

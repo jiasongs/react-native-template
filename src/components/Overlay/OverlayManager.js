@@ -13,6 +13,7 @@ export default class OverlayManager {
   }
 
   static pop(component, option) {
+    console.log('option', option);
     return this.show(<OverlayPop {...option}>{component}</OverlayPop>);
   }
 

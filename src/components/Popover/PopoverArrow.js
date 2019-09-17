@@ -1,6 +1,8 @@
 'use strict';
 import React, { useMemo, useState, useCallback } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { StyleSheet, View, ViewPropTypes } from 'react-native';
+// eslint-disable-next-line no-unused-vars
 import PropTypes from 'prop-types';
 
 const Theme = {
@@ -13,7 +15,7 @@ const Theme = {
 };
 
 function Name(props) {
-  const { contentStyle, arrow } = props;
+  const { style, contentStyle, arrow } = props;
   const [layout, setLayout] = useState({ width: 0, height: 0 });
 
   const buildStyles = useMemo(() => {
@@ -236,22 +238,19 @@ function Name(props) {
     ].concat(popoverLayouts[useArrow]);
 
     return {
-      popoverStyle,
+      popoverStyle: [popoverStyle, style],
       contentStyle: [flattenStyle, { padding: 10 }],
       headerStyle,
       arrowStyle,
     };
-  }, [arrow, contentStyle, layout]);
+  }, [arrow, contentStyle, layout.height, layout.width, style]);
 
   const onLayout = useCallback((event) => {
     setLayout(event.nativeEvent.layout);
   }, []);
 
   return (
-    <View
-      style={[buildStyles.popoverStyle, { backgroundColor: 'gray' }]}
-      onLayout={onLayout}
-    >
+    <View style={[buildStyles.popoverStyle, {}]} onLayout={onLayout}>
       <View style={buildStyles.contentStyle}>{props.children}</View>
       {!arrow || arrow === 'none' ? null : (
         <View style={[buildStyles.headerStyle]}>

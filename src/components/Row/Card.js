@@ -1,6 +1,6 @@
 'use strict';
 import React, { useContext, useMemo } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import Button from '../Touchable/Button';
 import { Predefine } from '../../config/predefine';
 import { ThemeContext } from '../../config/theme';

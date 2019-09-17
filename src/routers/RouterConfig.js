@@ -87,7 +87,7 @@ const StackNavigatorRouter = {
 };
 
 const StackNavigatorConfig = {
-  initialRouteName: 'DemoPopover',
+  initialRouteName: 'Tab',
   initialRouteParams: {},
   defaultNavigationOptions: {
     header: null,

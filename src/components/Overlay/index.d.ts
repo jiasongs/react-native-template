@@ -1,6 +1,17 @@
 import * as React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 
+type AnchorPoint =
+  | 'center'
+  | 'left'
+  | 'leftTop'
+  | 'leftBottom'
+  | 'top'
+  | 'bottom'
+  | 'right'
+  | 'rightTop'
+  | 'rightBottom';
+
 export interface OverlayBaseProps {
   style?: StyleProp<ViewStyle>;
   modal?: boolean;
@@ -14,6 +25,7 @@ export interface OverlayBaseProps {
 
 export interface OverlayPopProps extends OverlayBaseProps {
   type?: 'none' | 'zoomOut' | 'zoomIn';
+  anchorPoint?: AnchorPoint;
   containerStyle?: StyleProp<ViewStyle>;
   containerPointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto';
 }

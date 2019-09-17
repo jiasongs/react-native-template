@@ -12,21 +12,21 @@ function useOverlay(props) {
     closeOnHardwareBackPress,
     maskOpacity,
   } = props;
-  console.log('maskOpacity', maskOpacity);
+
   const displayRef = useRef(false);
   const maskOpacityRef = useRef(new Animated.Value(0));
   const maskAnimatesRef = useRef({
     appearAnimates: [
       Animated.timing(maskOpacityRef.current, {
         toValue: maskOpacity,
-        duration: 230,
+        duration: 210,
         useNativeDriver: true,
       }),
     ],
     disappearAnimates: [
       Animated.timing(maskOpacityRef.current, {
         toValue: 0,
-        duration: 230,
+        duration: 210,
         useNativeDriver: true,
       }),
     ],
@@ -100,19 +100,18 @@ function useOverlay(props) {
 }
 
 function usePopAnimated(props) {
-  const { type } = props;
+  const { type, anchorPoint } = props;
   const { maskOpacityRef, setAnimates, onPressMask } = useOverlay(props);
   const opacityRef = useRef(new Animated.Value(0));
   const translateXRef = useRef(new Animated.Value(0));
   const translateYRef = useRef(new Animated.Value(0));
-  const scaleXRef = useRef(new Animated.Value(1));
-  const scaleYRef = useRef(new Animated.Value(1));
+  const scaleRef = useRef(new Animated.Value(1));
 
   const setAnimatesWithLayout = useCallback(
     (layout) => {
       if (layout) {
         let zoomRate = 0.3;
-        const duration = 200;
+        const duration = 210;
         switch (type) {
           case 'none':
             zoomRate = 1.0;
@@ -126,47 +125,55 @@ function usePopAnimated(props) {
           default:
             break;
         }
-        const bounds = {
-          x: layout.x - (layout.width * zoomRate - layout.width) / 2,
-          y: layout.y - (layout.height * zoomRate - layout.height) / 2,
-          width: layout.width * zoomRate,
-          height: layout.height * zoomRate,
-        };
-        const transform = {
-          translateX:
-            bounds.x + bounds.width / 2 - (layout.x + layout.width / 2),
-          translateY:
-            bounds.y + bounds.height / 2 - (layout.y + layout.height / 2),
-          scaleX: bounds.width / layout.width,
-          scaleY: bounds.height / layout.height,
-        };
+        switch (anchorPoint) {
+          case 'center':
+            translateXRef.current.setValue(0);
+            translateYRef.current.setValue(0);
+            break;
+          case 'left':
+            translateXRef.current.setValue(layout.width / 2);
+            translateYRef.current.setValue(0);
+            break;
+          case 'leftTop':
+            translateXRef.current.setValue(layout.width / 2);
+            translateYRef.current.setValue(layout.height / 2);
+            break;
+          case 'leftBottom':
+            translateXRef.current.setValue(layout.width / 2);
+            translateYRef.current.setValue(-layout.height / 2);
+            break;
+          case 'top':
+            translateXRef.current.setValue(0);
+            translateYRef.current.setValue(layout.height / 2);
+            break;
+          case 'bottom':
+            translateXRef.current.setValue(0);
+            translateYRef.current.setValue(-layout.height / 2);
+            break;
+          case 'right':
+            translateXRef.current.setValue(-layout.width / 2);
+            translateYRef.current.setValue(0);
+            break;
+          case 'rightTop':
+            translateXRef.current.setValue(-layout.width / 2);
+            translateYRef.current.setValue(layout.height / 2);
+            break;
+          case 'rightBottom':
+            translateXRef.current.setValue(-layout.width / 2);
+            translateYRef.current.setValue(-layout.height / 2);
+            break;
+          default:
+            break;
+        }
         opacityRef.current.setValue(0);
-        translateXRef.current.setValue(transform.translateX);
-        translateYRef.current.setValue(transform.translateY);
-        scaleXRef.current.setValue(transform.scaleX);
-        scaleYRef.current.setValue(transform.scaleY);
+        scaleRef.current.setValue(zoomRate);
         const appearAnimates = [
           Animated.timing(opacityRef.current, {
             toValue: 1,
             duration,
             useNativeDriver: true,
           }),
-          Animated.timing(translateXRef.current, {
-            toValue: 0,
-            duration,
-            useNativeDriver: true,
-          }),
-          Animated.timing(translateYRef.current, {
-            toValue: 0,
-            duration,
-            useNativeDriver: true,
-          }),
-          Animated.timing(scaleXRef.current, {
-            toValue: 1,
-            duration,
-            useNativeDriver: true,
-          }),
-          Animated.timing(scaleYRef.current, {
+          Animated.timing(scaleRef.current, {
             toValue: 1,
             duration,
             useNativeDriver: true,
@@ -178,23 +185,8 @@ function usePopAnimated(props) {
             duration,
             useNativeDriver: true,
           }),
-          Animated.timing(translateXRef.current, {
-            toValue: transform.translateX,
-            duration,
-            useNativeDriver: true,
-          }),
-          Animated.timing(translateYRef.current, {
-            toValue: transform.translateY,
-            duration,
-            useNativeDriver: true,
-          }),
-          Animated.timing(scaleXRef.current, {
-            toValue: transform.scaleX,
-            duration,
-            useNativeDriver: true,
-          }),
-          Animated.timing(scaleYRef.current, {
-            toValue: transform.scaleY,
+          Animated.timing(scaleRef.current, {
+            toValue: zoomRate,
             duration,
             useNativeDriver: true,
           }),
@@ -205,7 +197,7 @@ function usePopAnimated(props) {
         });
       }
     },
-    [setAnimates, type],
+    [anchorPoint, setAnimates, type],
   );
 
   const onLayout = useCallback(
@@ -223,10 +215,9 @@ function usePopAnimated(props) {
     onPressMask,
     // [pop]
     opacityRef,
+    scaleRef,
     translateXRef,
     translateYRef,
-    scaleXRef,
-    scaleYRef,
     onLayout,
   };
 }
@@ -277,7 +268,7 @@ function usePullAnimated(props) {
         const disappearAnimates = [
           Animated.timing(translateRef.current, {
             toValue: offsetSize,
-            duration: 250,
+            duration: 249,
             useNativeDriver: true,
           }),
         ];

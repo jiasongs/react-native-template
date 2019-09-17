@@ -4,7 +4,8 @@ import AlertView from './AlertView';
 import OverlayManager from '../Overlay/OverlayManager';
 
 const defaultOption = {
-  type: 'zoomOut',
+  type: 'zoomIn',
+  anchorPoint: 'center',
   modal: false,
 };
 
