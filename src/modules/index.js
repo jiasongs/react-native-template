@@ -14,8 +14,10 @@ import DemoBadge from './examples/DemoBadge';
 import DemoSegmented from './examples/DemoSegmented';
 import DemoCard from './examples/DemoCard';
 import DemoWebBrowser from './examples/DemoWebBrowser';
+import DemoPopover from './examples/DemoPopover';
 
 export {
+  DemoPopover,
   DemoCard,
   DemoTheme,
   About,

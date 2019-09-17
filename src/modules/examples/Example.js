@@ -50,6 +50,10 @@ function Example() {
             title={'ListRow'}
             onPress={() => RouterHelper.navigate('DemoRow')}
           />
+          <ListRow
+            title={'Popover'}
+            onPress={() => RouterHelper.navigate('DemoPopover')}
+          />
         </ScrollView>
       </RefreshLayout>
     </PageContainer>

@@ -21,6 +21,7 @@ import {
   DemoSegmented,
   DemoCard,
   DemoWebBrowser,
+  DemoPopover,
 } from '../modules';
 
 const TabNavigatorRouter = {
@@ -82,10 +83,11 @@ const StackNavigatorRouter = {
   DemoSegmented: { screen: DemoSegmented },
   DemoCard: { screen: DemoCard },
   DemoWebBrowser: { screen: DemoWebBrowser },
+  DemoPopover: { screen: DemoPopover },
 };
 
 const StackNavigatorConfig = {
-  initialRouteName: 'DemoWebBrowser',
+  initialRouteName: 'DemoPopover',
   initialRouteParams: {},
   defaultNavigationOptions: {
     header: null,

@@ -30,10 +30,8 @@
 - ImageView失败的提示
 
 # 待完成
-- Card
-- WebBrowser
-- PermissionsManager
 - Popover
+- PermissionsManager
 - Banner
 - Stepper
 - PayManager
@@ -41,6 +39,8 @@
 - Services 结构
 
 # 问题记录
+- Card的需求
+- WebBrowser的需求
 - ~~Segmented安卓需要处理下更新contentSize后，bar的偏移问题，懒加载的问题!!!~~
 - ~~用hook重写ListView -- FlatList不太适合用Hook写法包装，具体参见源码~~
 
