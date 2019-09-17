@@ -7,7 +7,11 @@ type AnchorPoint =
   | 'leftTop'
   | 'leftBottom'
   | 'top'
+  | 'topLeft'
+  | 'topRight'
   | 'bottom'
+  | 'bottomLeft'
+  | 'bottomRight'
   | 'right'
   | 'rightTop'
   | 'rightBottom';

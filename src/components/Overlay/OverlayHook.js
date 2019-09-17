@@ -134,10 +134,12 @@ function usePopAnimated(props) {
             translateXRef.current.setValue(layout.width / 2);
             translateYRef.current.setValue(0);
             break;
+          case 'topLeft':
           case 'leftTop':
             translateXRef.current.setValue(layout.width / 2);
             translateYRef.current.setValue(layout.height / 2);
             break;
+          case 'bottomLeft':
           case 'leftBottom':
             translateXRef.current.setValue(layout.width / 2);
             translateYRef.current.setValue(-layout.height / 2);
@@ -154,10 +156,12 @@ function usePopAnimated(props) {
             translateXRef.current.setValue(-layout.width / 2);
             translateYRef.current.setValue(0);
             break;
+          case 'topRight':
           case 'rightTop':
             translateXRef.current.setValue(-layout.width / 2);
             translateYRef.current.setValue(layout.height / 2);
             break;
+          case 'bottomRight':
           case 'rightBottom':
             translateXRef.current.setValue(-layout.width / 2);
             translateYRef.current.setValue(-layout.height / 2);

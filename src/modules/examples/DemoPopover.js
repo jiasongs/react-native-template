@@ -1,12 +1,15 @@
 'use strict';
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import {
   NavigationBar,
   PageContainer,
   PopoverArrow,
   AlertManager,
+  ListRow,
+  ImageView,
 } from '../../components';
+import { Predefine } from '../../config/predefine';
 
 function DemoPopover() {
   return (
@@ -23,11 +26,12 @@ function DemoPopover() {
                 </PopoverArrow>,
                 {
                   type: 'zoomIn',
-                  containerStyle: { marginRight: 20, marginTop: 64 },
-                  style: {
-                    justifyContent: 'flex-start',
-                    alignItems: 'flex-end',
+                  containerStyle: {
+                    position: 'absolute',
+                    right: 20,
+                    top: 64,
                   },
+                  style: {},
                   anchorPoint: 'rightTop',
                 },
               );
