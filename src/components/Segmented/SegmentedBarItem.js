@@ -14,8 +14,12 @@ function SegmentedBarItem(props) {
     active,
     style,
     activeStyle,
+    title,
+    activeTitle,
     titleStyle,
     activeTitleStyle,
+    icon,
+    activeIcon,
     iconStyle,
     activeIconStyle,
     indicatorType,
@@ -37,6 +41,8 @@ function SegmentedBarItem(props) {
 
   const buildStyles = useMemo(() => {
     const segmentedBarItem = themeValue.segmented.segmentedBarItem;
+    let newIcon = icon;
+    let newTitle = title;
     const newStyle = [segmentedBarItem.style];
     const newTitleStyle = [segmentedBarItem.titleStyle];
     const newIconStyle = [segmentedBarItem.iconStyle];
@@ -51,6 +57,12 @@ function SegmentedBarItem(props) {
     );
     newIconStyle.push(StyleSheet.flatten([styles.normalIconStyle, iconStyle]));
     if (active) {
+      if (activeIcon) {
+        newIcon = activeIcon;
+      }
+      if (activeTitle) {
+        newTitle = activeTitle;
+      }
       newStyle.push(
         StyleSheet.flatten([
           segmentedBarItem.activeStyle,
@@ -75,19 +87,25 @@ function SegmentedBarItem(props) {
     }
 
     return {
+      icon: newIcon,
+      title: newTitle,
       style: [...newStyle],
       titleStyle: [...newTitleStyle],
       iconStyle: [...newIconStyle],
     };
   }, [
     active,
+    activeIcon,
     activeIconStyle,
     activeStyle,
+    activeTitle,
     activeTitleStyle,
+    icon,
     iconStyle,
     indicatorType,
     style,
-    themeValue,
+    themeValue.segmented.segmentedBarItem,
+    title,
     titleStyle,
   ]);
 
@@ -98,7 +116,9 @@ function SegmentedBarItem(props) {
       activeOpacity={1.0}
       onLayout={onBoxLayoutBack}
       style={buildStyles.style}
+      title={buildStyles.title}
       titleStyle={buildStyles.titleStyle}
+      icon={buildStyles.icon}
       iconStyle={buildStyles.iconStyle}
       onPress={onPressBack}
     />
@@ -127,8 +147,10 @@ SegmentedBarItem.propTypes = {
   active: PropTypes.bool,
   style: ViewPropTypes.style,
   activeStyle: ViewPropTypes.style,
+  activeTitle: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   titleStyle: Text.propTypes.style,
   activeTitleStyle: Text.propTypes.style,
+  activeIcon: Image.propTypes.source,
   iconStyle: Image.propTypes.style,
   activeIconStyle: Image.propTypes.style,
 };

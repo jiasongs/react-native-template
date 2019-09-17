@@ -13,6 +13,7 @@ import DemoTheme from './examples/DemoTheme';
 import DemoBadge from './examples/DemoBadge';
 import DemoSegmented from './examples/DemoSegmented';
 import DemoCard from './examples/DemoCard';
+import DemoWebBrowser from './examples/DemoWebBrowser';
 
 export {
   DemoCard,
@@ -29,5 +30,6 @@ export {
   DemoToast,
   DemoBadge,
   DemoSegmented,
+  DemoWebBrowser,
   Example,
 };

@@ -20,6 +20,7 @@ import {
   DemoBadge,
   DemoSegmented,
   DemoCard,
+  DemoWebBrowser,
 } from '../modules';
 
 const TabNavigatorRouter = {
@@ -80,10 +81,11 @@ const StackNavigatorRouter = {
   DemoBadge: { screen: DemoBadge },
   DemoSegmented: { screen: DemoSegmented },
   DemoCard: { screen: DemoCard },
+  DemoWebBrowser: { screen: DemoWebBrowser },
 };
 
 const StackNavigatorConfig = {
-  initialRouteName: 'Tab',
+  initialRouteName: 'DemoWebBrowser',
   initialRouteParams: {},
   defaultNavigationOptions: {
     header: null,

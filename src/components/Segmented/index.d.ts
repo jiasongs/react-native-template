@@ -13,6 +13,8 @@ export type IndicatorType = 'none' | 'box' | 'item' | 'custom';
 
 export interface SegmentedBarItemProps extends ButtonPorps {
   active: boolean;
+  activeTitle?: string | number;
+  activeIcon?: ImageSourcePropType;
   activeStyle: StyleProp<ViewStyle>;
   activeTitleStyle: StyleProp<TextStyle>;
   activeIconStyle: StyleProp<ImageStyle>;
@@ -29,10 +31,12 @@ export interface SegmentedBarProps {
   itemStyle?: StyleProp<ViewStyle>;
   itemActiveStyle?: StyleProp<ViewStyle>;
   itemIcon?: ImageSourcePropType;
+  itemActiveIcon?: ImageSourcePropType;
   itemIconStyle?: StyleProp<ImageStyle>;
   itemActiveIconStyle?: StyleProp<ImageStyle>;
   itemIconPosition?: 'top' | 'left' | 'bottom' | 'right';
   itemTitle?: string | number;
+  itemActiveTitle?: string | number;
   itemTitleStyle?: StyleProp<TextStyle>;
   itemActiveTitleStyle?: StyleProp<TextStyle>;
   itemSpacingIconAndTitle?: number;

@@ -7,6 +7,7 @@ import Button from './Touchable/Button';
 import ListRow from './Row/ListRow';
 import TabBottomBar from './Navigation/TabBottomBar';
 import Card from './Row/Card';
+import WebBrowser from './WebView/WebBrowser';
 import { Picker } from './Picker';
 import { Checkbox, Radio, Badge } from './Form';
 import { PageContainer, GirdContainer } from './Container';
@@ -53,4 +54,5 @@ export {
   Badge,
   DevRefresh,
   Card,
+  WebBrowser,
 };
