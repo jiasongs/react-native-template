@@ -9,7 +9,7 @@ const defaultOption = {
 };
 
 export default class PopoverManager {
-  static show(props = {}) {
+  static showMenu(props = {}) {
     const { viewRef, option, ...others } = props;
     viewRef.measure((x, y, width, height, pageX, pageY) => {
       const newOption = {

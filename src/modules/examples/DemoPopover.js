@@ -1,41 +1,55 @@
 'use strict';
 import React, { useRef } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
   NavigationBar,
   PageContainer,
-  PopoverArrow,
-  AlertManager,
   PopoverManager,
   Button,
 } from '../../components';
+import { Images } from '../../assets';
 
 function DemoPopover() {
   const buttonRef = useRef(React.createRef());
 
   return (
     <PageContainer style={styles.container}>
-      <NavigationBar
-        title={'DemoPopover'}
-        renderRightAction={
-          <Button
-            ref={buttonRef}
-            style={{ marginRight: 50 }}
-            type={'clear'}
-            title={'点击'}
-            onPress={() => {
-              PopoverManager.show({
-                viewRef: buttonRef.current,
-                arrow: 'topRight',
-                contentStyle: {},
-                option: {
-                  anchorPoint: 'topRight',
+      <NavigationBar title={'DemoPopover'} renderLeftAction={null} />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Button
+          ref={buttonRef}
+          style={{}}
+          type={'clear'}
+          title={'点击'}
+          onPress={() => {
+            PopoverManager.showMenu({
+              viewRef: buttonRef.current,
+              arrow: 'bottom',
+              type: 'horizontal',
+              actions: [
+                {
+                  title: 'Search',
+                  icon: Images.icon_toast_warn,
+                  onPress: () => alert('Search'),
                 },
-              });
-            }}
-          />
-        }
-      />
+                {
+                  title: 'Edit',
+                  icon: Images.icon_toast_warn,
+                  onPress: () => alert('Edit'),
+                },
+                {
+                  title: 'Remove',
+                  icon: Images.icon_toast_warn,
+                  onPress: () => alert('Remove'),
+                },
+              ],
+              option: {
+                anchorPoint: 'bottom',
+              },
+            });
+          }}
+        />
+      </View>
     </PageContainer>
   );
 }

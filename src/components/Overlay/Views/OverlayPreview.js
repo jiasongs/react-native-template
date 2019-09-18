@@ -85,7 +85,6 @@ function OverlayPreview(props) {
 OverlayPreview.propTypes = {
   ...OverlayBase.type.propTypes,
   anchorPoint: PropTypes.oneOf([
-    'center',
     'left',
     'leftTop',
     'leftBottom',

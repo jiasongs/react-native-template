@@ -1,14 +1,27 @@
 'use strict';
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useMemo } from 'react';
+import { StyleSheet } from 'react-native';
 import Button from '../Touchable/Button';
 
 function PopoverMenuItem(props) {
-  return <Button {...props} />;
+  const { style } = props;
+
+  const buildStyles = useMemo(() => {
+    return {
+      style: [styles.menuItem, style],
+    };
+  }, [style]);
+
+  return <Button {...props} style={buildStyles.style} />;
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  menuItem: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 18,
+  },
 });
 
 PopoverMenuItem.propTypes = {

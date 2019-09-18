@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 import './config/global';
 import React, { useState, useEffect } from 'react';
@@ -5,19 +6,19 @@ import SplashScreen from 'react-native-splash-screen';
 import NavigationContainer from './routers/NavigationContainer';
 import { OverlayProvider, DevRefresh } from './components';
 import { ThemeProvider } from './config/theme';
-import RouterHelper from './routers/RouterHelper';
 import { useBackExitApp } from './common/hooks';
 import { StorageManager } from './common/manager';
+import RouterHelper from './routers/RouterHelper';
 
 function App() {
   const [state, setState] = useState({});
 
   useEffect(() => {
     async function loadTheme() {
-      const data = await StorageManager.load('THEME');
-      if (data) {
-        setState(data);
-      }
+      // const data = await StorageManager.load('THEME');
+      // if (data) {
+      //   setState(data);
+      // }
       SplashScreen.hide();
     }
     loadTheme();

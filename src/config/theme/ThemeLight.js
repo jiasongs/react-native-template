@@ -371,10 +371,11 @@ export default {
     popoverArrow: {
       style: {},
       contentStyle: {
-        padding: 10,
+        paddingHorizontal: 10,
+        paddingVertical: 7,
         backgroundColor: primary.color.reverse,
         borderColor: 'rgba(0, 0, 0, 0.15)',
-        borderRadius: 4,
+        borderRadius: 6,
         borderWidth: StyleSheet.hairlineWidth,
       },
     },
