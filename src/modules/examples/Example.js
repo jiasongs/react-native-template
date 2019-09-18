@@ -51,6 +51,10 @@ function Example() {
             onPress={() => RouterHelper.navigate('DemoRow')}
           />
           <ListRow
+            title={'Segmented'}
+            onPress={() => RouterHelper.navigate('DemoSegmented')}
+          />
+          <ListRow
             title={'Popover'}
             onPress={() => RouterHelper.navigate('DemoPopover')}
           />

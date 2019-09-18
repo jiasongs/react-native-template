@@ -41,10 +41,22 @@ export interface OverlayPullProps extends OverlayBaseProps {
   panGestureEnabled: boolean;
 }
 
+export interface OverlayPreviewProps extends OverlayBaseProps {
+  type?: 'none' | 'zoomIn';
+  anchorPoint?: AnchorPoint;
+  containerStyle?: StyleProp<ViewStyle>;
+  containerPointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto';
+}
+
 export const OverlayProvider: React.ComponentClass<>;
 export const OverlayPop: React.ComponentClass<OverlayPopProps>;
 export const OverlayPull: React.ComponentClass<OverlayPullProps>;
+export const OverlayPreview: React.ComponentClass<OverlayPreviewProps>;
 export class OverlayManager {
+  static preview(
+    component: React.ReactElement,
+    option: OverlayPreviewProps,
+  ): number;
   static pull(component: React.ReactElement, option: OverlayPullProps): number;
   static pop(component: React.ReactElement, option: OverlayPopProps): number;
   static show(component: React.ReactElement): number;

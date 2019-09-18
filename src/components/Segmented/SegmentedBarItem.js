@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
 });
 
 SegmentedBarItem.propTypes = {
-  ...Button.type.propTypes,
+  ...Button.propTypes,
   active: PropTypes.bool,
   style: ViewPropTypes.style,
   activeStyle: ViewPropTypes.style,
@@ -156,7 +156,7 @@ SegmentedBarItem.propTypes = {
 };
 
 SegmentedBarItem.defaultProps = {
-  ...Button.type.defaultProps,
+  ...Button.defaultProps,
 };
 
 export default React.memo(SegmentedBarItem);

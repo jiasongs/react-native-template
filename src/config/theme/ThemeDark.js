@@ -365,4 +365,19 @@ export default {
       },
     },
   },
+  /**
+   * @Popover
+   */
+  popover: {
+    popoverArrow: {
+      style: {},
+      contentStyle: {
+        padding: 10,
+        backgroundColor: primary.color.reverse,
+        borderColor: 'rgba(0, 0, 0, 0.15)',
+        borderRadius: 4,
+        borderWidth: StyleSheet.hairlineWidth,
+      },
+    },
+  },
 };

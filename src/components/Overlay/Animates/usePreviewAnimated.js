@@ -1,0 +1,145 @@
+'use strict';
+import { useRef, useCallback } from 'react';
+import { Animated } from 'react-native';
+import useOverlay from './useOverlay';
+
+export default function usePreviewAnimated(props) {
+  const { fromLayout, toLayout, type, anchorPoint } = props;
+  const { maskOpacityRef, setAnimates, onPressMask } = useOverlay(props);
+  const opacityRef = useRef(new Animated.Value(0));
+  const anchorPointXRef = useRef(new Animated.Value(0));
+  const anchorPointYRef = useRef(new Animated.Value(0));
+  const translateXRef = useRef(new Animated.Value(0));
+  const translateYRef = useRef(new Animated.Value(0));
+  const scaleRef = useRef(new Animated.Value(1));
+
+  const setAnimatesWithLayout = useCallback(
+    (layout) => {
+      if (layout) {
+        let zoomRate = 0.3;
+        const duration = 210;
+        switch (type) {
+          case 'none':
+            zoomRate = 1.0;
+            break;
+          case 'zoomOut':
+            zoomRate = 1.3;
+            break;
+          case 'zoomIn':
+            zoomRate = 0.3;
+            break;
+          default:
+            break;
+        }
+        if (fromLayout) {
+          const bounds = {
+            x: fromLayout.x - layout.width / 2 - fromLayout.width / 2,
+            y: fromLayout.y + fromLayout.height + 10,
+          };
+          translateXRef.current.setValue(bounds.x);
+          translateYRef.current.setValue(bounds.y);
+        }
+        if (toLayout) {
+        }
+        switch (anchorPoint) {
+          case 'center':
+            anchorPointXRef.current.setValue(0);
+            anchorPointYRef.current.setValue(0);
+            break;
+          case 'left':
+            anchorPointXRef.current.setValue(layout.width / 2);
+            anchorPointYRef.current.setValue(0);
+            break;
+          case 'topLeft':
+          case 'leftTop':
+            anchorPointXRef.current.setValue(layout.width / 2);
+            anchorPointYRef.current.setValue(layout.height / 2);
+            break;
+          case 'bottomLeft':
+          case 'leftBottom':
+            anchorPointXRef.current.setValue(layout.width / 2);
+            anchorPointYRef.current.setValue(-layout.height / 2);
+            break;
+          case 'top':
+            anchorPointXRef.current.setValue(0);
+            anchorPointYRef.current.setValue(layout.height / 2);
+            break;
+          case 'bottom':
+            anchorPointXRef.current.setValue(0);
+            anchorPointYRef.current.setValue(-layout.height / 2);
+            break;
+          case 'right':
+            anchorPointXRef.current.setValue(-layout.width / 2);
+            anchorPointYRef.current.setValue(0);
+            break;
+          case 'topRight':
+          case 'rightTop':
+            anchorPointXRef.current.setValue(-layout.width / 2);
+            anchorPointYRef.current.setValue(layout.height / 2);
+            break;
+          case 'bottomRight':
+          case 'rightBottom':
+            anchorPointXRef.current.setValue(-layout.width / 2);
+            anchorPointYRef.current.setValue(-layout.height / 2);
+            break;
+          default:
+            break;
+        }
+        opacityRef.current.setValue(0);
+        scaleRef.current.setValue(zoomRate);
+        const appearAnimates = [
+          Animated.timing(opacityRef.current, {
+            toValue: 1,
+            duration,
+            useNativeDriver: true,
+          }),
+          Animated.timing(scaleRef.current, {
+            toValue: 1,
+            duration,
+            useNativeDriver: true,
+          }),
+        ];
+        const disappearAnimates = [
+          Animated.timing(opacityRef.current, {
+            toValue: 0,
+            duration,
+            useNativeDriver: true,
+          }),
+          Animated.timing(scaleRef.current, {
+            toValue: zoomRate,
+            duration,
+            useNativeDriver: true,
+          }),
+        ];
+        setAnimates({
+          appearAnimates,
+          disappearAnimates,
+        });
+      }
+    },
+    [anchorPoint, fromLayout, setAnimates, toLayout, type],
+  );
+
+  const onLayout = useCallback(
+    (event) => {
+      if (event.nativeEvent.layout) {
+        setAnimatesWithLayout(event.nativeEvent.layout);
+      }
+    },
+    [setAnimatesWithLayout],
+  );
+
+  return {
+    // [base]
+    maskOpacityRef,
+    onPressMask,
+    // [pop]
+    opacityRef,
+    scaleRef,
+    anchorPointXRef,
+    anchorPointYRef,
+    translateXRef,
+    translateYRef,
+    onLayout,
+  };
+}

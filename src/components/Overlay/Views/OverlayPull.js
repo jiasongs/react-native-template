@@ -4,7 +4,7 @@ import { Animated, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import OverlayBase from './OverlayBase';
-import { usePullAnimated } from './OverlayHook';
+import { usePullAnimated } from '../Animates';
 
 function OverlayPull(props) {
   const {

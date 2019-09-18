@@ -1,7 +1,7 @@
 'use strict';
 import React, { useState, useCallback } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { useEventListener } from '../../common/hooks';
+import { useEventListener } from '../../../common/hooks';
 
 function OverlayProvider(props) {
   const { children } = props;

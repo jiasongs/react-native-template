@@ -3,50 +3,59 @@ import React, { useMemo } from 'react';
 import { Animated, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import OverlayBase from './OverlayBase';
-import { usePopAnimated } from './OverlayHook';
+import { usePreviewAnimated } from '../Animates';
 
-function OverlayPop(props) {
+function OverlayPreview(props) {
   const { style, containerStyle, containerPointerEvents, children } = props;
 
   const {
     maskOpacityRef,
     opacityRef,
     scaleRef,
+    anchorPointXRef,
+    anchorPointYRef,
     translateXRef,
     translateYRef,
     onLayout,
     onPressMask,
-  } = usePopAnimated(props);
+  } = usePreviewAnimated(props);
 
   const buildStyles = useMemo(() => {
     return {
-      baseStyle: [{ justifyContent: 'center', alignItems: 'center' }, style],
+      baseStyle: [
+        { justifyContent: 'flex-start', alignItems: 'flex-start' },
+        style,
+      ],
       maskStyle: { opacity: maskOpacityRef.current },
       containerStyle: [
         containerStyle,
         {
           opacity: opacityRef.current,
           transform: [
+            { translateX: translateXRef.current },
+            { translateY: translateYRef.current },
             {
-              translateX: translateXRef.current.interpolate({
+              translateX: anchorPointXRef.current.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0, -1],
               }),
             },
             {
-              translateY: translateYRef.current.interpolate({
+              translateY: anchorPointYRef.current.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0, -1],
               }),
             },
             { scale: scaleRef.current },
-            { translateX: translateXRef.current },
-            { translateY: translateYRef.current },
+            { translateX: anchorPointXRef.current },
+            { translateY: anchorPointYRef.current },
           ],
         },
       ],
     };
   }, [
+    anchorPointXRef,
+    anchorPointYRef,
     containerStyle,
     maskOpacityRef,
     opacityRef,
@@ -73,7 +82,7 @@ function OverlayPop(props) {
   );
 }
 
-OverlayPop.propTypes = {
+OverlayPreview.propTypes = {
   ...OverlayBase.type.propTypes,
   anchorPoint: PropTypes.oneOf([
     'center',
@@ -90,18 +99,18 @@ OverlayPop.propTypes = {
     'rightTop',
     'rightBottom',
   ]),
-  type: PropTypes.oneOf(['none', 'zoomOut', 'zoomIn']),
+  type: PropTypes.oneOf(['none', 'zoomIn']),
   containerStyle: ViewPropTypes.style,
   containerPointerEvents: ViewPropTypes.pointerEvents,
   maskOpacity: PropTypes.number,
 };
 
-OverlayPop.defaultProps = {
+OverlayPreview.defaultProps = {
   ...OverlayBase.type.defaultProps,
-  type: 'zoomOut',
-  anchorPoint: 'center',
+  type: 'zoomIn',
+  anchorPoint: 'topRight',
   containerPointerEvents: 'box-none',
   maskOpacity: 0.3,
 };
 
-export default React.memo(OverlayPop);
+export default React.memo(OverlayPreview);

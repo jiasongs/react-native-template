@@ -271,4 +271,13 @@ Button.defaultProps = {
   raised: false,
 };
 
-export default React.memo(Button);
+const MemoButton = React.memo(Button);
+const ForwardButton = React.forwardRef((props, ref) => {
+  return <MemoButton {...props} forwardedRef={ref} />;
+});
+
+ForwardButton.propTypes = Button.propTypes;
+ForwardButton.defaultProps = Button.defaultProps;
+ForwardButton.displayName = 'Button';
+
+export default ForwardButton;

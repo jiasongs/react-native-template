@@ -1,41 +1,44 @@
 'use strict';
-import React, { useMemo, useState, useCallback } from 'react';
-// eslint-disable-next-line no-unused-vars
+import React, { useMemo, useState, useCallback, useContext } from 'react';
 import { StyleSheet, View, ViewPropTypes } from 'react-native';
-// eslint-disable-next-line no-unused-vars
 import PropTypes from 'prop-types';
+import { ThemeContext } from '../../config/theme';
 
-const Theme = {
-  pixelSize: 1,
-  popoverColor: '#fff',
-  popoverBorderColor: 'rgba(0, 0, 0, 0.15)',
-  popoverBorderRadius: 4,
-  popoverBorderWidth: 1,
-  popoverPaddingCorner: 8,
-};
+function PopoverArrow(props) {
+  const {
+    style,
+    contentStyle,
+    arrow,
+    arrowSize,
+    arrowPadding,
+    onLayout,
+    children,
+    ...others
+  } = props;
 
-function Name(props) {
-  const { style, contentStyle, arrow } = props;
+  const themeValue = useContext(ThemeContext);
   const [layout, setLayout] = useState({ width: 0, height: 0 });
 
   const buildStyles = useMemo(() => {
+    const popoverArrow = themeValue.popover.popoverArrow;
+    const newStyle = [popoverArrow.style, styles.container];
+    const headerStyle = [styles.headerStyle];
+    const arrowStyle = [styles.arrowStyle];
     const flattenStyle = StyleSheet.flatten([
+      popoverArrow.contentStyle,
       styles.contentContainer,
       contentStyle,
     ]);
-    const paddingCorner = 8;
-    const arrowSize = 7;
-    let halfSquareSize = Math.sqrt(arrowSize * arrowSize * 2) / 2;
-    halfSquareSize =
-      Math.ceil(halfSquareSize / Theme.pixelSize) * Theme.pixelSize;
+    const pixelSize = StyleSheet.hairlineWidth;
+    const paddingCorner = arrowPadding;
+    const halfSquareSize =
+      Math.ceil(Math.sqrt(arrowSize * arrowSize * 2) / 2 / pixelSize) *
+      pixelSize;
     const headerSize = halfSquareSize + flattenStyle.borderWidth;
     const headerPadding = headerSize - arrowSize / 2;
-    const headerPaddingCorner = paddingCorner
-      ? paddingCorner
-      : Theme.popoverPaddingCorner;
+    const headerPaddingCorner = paddingCorner;
     const contentPadding = halfSquareSize;
-
-    let headerLayouts = {
+    const headerLayouts = {
       none: {},
       topLeft: {
         top: 0,
@@ -151,7 +154,7 @@ function Name(props) {
         paddingTop: headerPaddingCorner,
       },
     };
-    let arrowLayouts = {
+    const arrowLayouts = {
       none: {},
       topLeft: { transform: [{ rotate: '45deg' }] },
       top: { transform: [{ rotate: '45deg' }] },
@@ -166,7 +169,7 @@ function Name(props) {
       left: { transform: [{ rotate: '315deg' }] },
       leftTop: { transform: [{ rotate: '315deg' }] },
     };
-    let popoverLayouts = {
+    const popoverLayouts = {
       none: {},
       topLeft: { paddingTop: contentPadding },
       top: { paddingTop: contentPadding },
@@ -208,71 +211,93 @@ function Name(props) {
         }
         break;
     }
-
-    const headerStyle = Object.assign(
-      {
-        position: 'absolute',
-        overflow: 'hidden',
-        backgroundColor: 'rgba(0, 0, 0, 0)',
-      },
-      headerLayouts[useArrow],
-    );
-    const arrowStyle = Object.assign(
-      {
-        backgroundColor: flattenStyle.backgroundColor,
-        width: arrowSize,
-        height: arrowSize,
-        borderColor: flattenStyle.borderColor,
-        borderTopWidth: flattenStyle.borderWidth,
-        borderLeftWidth: flattenStyle.borderWidth,
-      },
-      arrowLayouts[useArrow],
-    );
-
-    const popoverStyle = [
-      { alignSelf: 'center' },
-      {
-        backgroundColor:
-          useArrow === 'none' ? Theme.popoverColor : 'rgba(0, 0, 0, 0)',
-      },
-    ].concat(popoverLayouts[useArrow]);
-
+    headerStyle.push(headerLayouts[useArrow]);
+    arrowStyle.push({
+      backgroundColor: flattenStyle.backgroundColor,
+      width: arrowSize,
+      height: arrowSize,
+      borderColor: flattenStyle.borderColor,
+      borderTopWidth: flattenStyle.borderWidth,
+      borderLeftWidth: flattenStyle.borderWidth,
+      ...arrowLayouts[useArrow],
+    });
+    newStyle.push(popoverLayouts[useArrow]);
     return {
-      popoverStyle: [popoverStyle, style],
-      contentStyle: [flattenStyle, { padding: 10 }],
+      style: [newStyle, style],
+      contentStyle: flattenStyle,
       headerStyle,
       arrowStyle,
     };
-  }, [arrow, contentStyle, layout.height, layout.width, style]);
+  }, [
+    arrow,
+    arrowPadding,
+    arrowSize,
+    contentStyle,
+    layout.height,
+    layout.width,
+    style,
+    themeValue.popover.popoverArrow,
+  ]);
 
-  const onLayout = useCallback((event) => {
-    setLayout(event.nativeEvent.layout);
-  }, []);
+  const onLayoutBack = useCallback(
+    (event) => {
+      setLayout(event.nativeEvent.layout);
+      onLayout && onLayout(event);
+    },
+    [onLayout],
+  );
 
   return (
-    <View style={[buildStyles.popoverStyle, {}]} onLayout={onLayout}>
-      <View style={buildStyles.contentStyle}>{props.children}</View>
-      {!arrow || arrow === 'none' ? null : (
-        <View style={[buildStyles.headerStyle]}>
+    <View {...others} style={buildStyles.style} onLayout={onLayoutBack}>
+      <View style={buildStyles.contentStyle}>{children}</View>
+      {arrow !== 'none' ? (
+        <View style={buildStyles.headerStyle}>
           <View style={buildStyles.arrowStyle} />
         </View>
-      )}
+      ) : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
-  contentContainer: {
-    backgroundColor: Theme.popoverColor,
-    borderColor: Theme.popoverBorderColor,
-    borderRadius: Theme.popoverBorderRadius,
-    borderWidth: Theme.popoverBorderWidth,
+  container: {
+    alignSelf: 'center',
   },
+  contentContainer: {},
+  headerStyle: {
+    position: 'absolute',
+    overflow: 'hidden',
+    backgroundColor: 'transparent',
+  },
+  arrowStyle: {},
 });
 
-Name.propTypes = {};
+PopoverArrow.propTypes = {
+  style: ViewPropTypes.style,
+  contentStyle: ViewPropTypes.style,
+  arrow: PropTypes.oneOf([
+    'none',
+    'topLeft',
+    'top',
+    'topRight',
+    'rightTop',
+    'right',
+    'rightBottom',
+    'bottomRight',
+    'bottom',
+    'bottomLeft',
+    'leftBottom',
+    'left',
+    'leftTop',
+  ]),
+  arrowSize: PropTypes.number,
+  arrowPadding: PropTypes.number,
+};
 
-Name.defaultProps = {};
+PopoverArrow.defaultProps = {
+  arrow: 'none',
+  arrowSize: 7,
+  arrowPadding: 8,
+};
 
-export default Name;
+export default React.memo(PopoverArrow);

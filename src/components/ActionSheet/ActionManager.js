@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import ActionSheetView from './ActionSheetView';
-import OverlayManager from '../Overlay/OverlayManager';
+import { OverlayManager } from '../Overlay';
 
 const defaultOption = {
   type: 'bottom',

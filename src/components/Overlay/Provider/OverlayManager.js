@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
-import { OverlayPull, OverlayPop } from '.';
+import { OverlayPull, OverlayPop, OverlayPreview } from '..';
 
 let keyValue = 0;
 
@@ -15,6 +15,11 @@ export default class OverlayManager {
   static pop(component, option) {
     console.log('option', option);
     return this.show(<OverlayPop {...option}>{component}</OverlayPop>);
+  }
+
+  static preview(component, option) {
+    console.log('option', option);
+    return this.show(<OverlayPreview {...option}>{component}</OverlayPreview>);
   }
 
   static show(overlayView) {
