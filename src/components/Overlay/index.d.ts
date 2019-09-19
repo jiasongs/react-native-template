@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle, LayoutRectangle } from 'react-native';
 
 type AnchorPoint =
   | 'center'
@@ -27,6 +27,15 @@ export interface OverlayBaseProps {
   onDisappearCompleted?: () => void;
 }
 
+export interface OverlayPreviewProps extends OverlayBaseProps {
+  type?: 'none' | 'zoomIn';
+  anchorPoint?: AnchorPoint;
+  fromLayout: LayoutRectangle;
+  toLayout: LayoutRectangle | null;
+  containerStyle?: StyleProp<ViewStyle>;
+  containerPointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto';
+}
+
 export interface OverlayPopProps extends OverlayBaseProps {
   type?: 'none' | 'zoomOut' | 'zoomIn';
   anchorPoint?: AnchorPoint;
@@ -39,13 +48,6 @@ export interface OverlayPullProps extends OverlayBaseProps {
   containerStyle?: StyleProp<ViewStyle>;
   containerPointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto';
   panGestureEnabled: boolean;
-}
-
-export interface OverlayPreviewProps extends OverlayBaseProps {
-  type?: 'none' | 'zoomIn';
-  anchorPoint?: AnchorPoint;
-  containerStyle?: StyleProp<ViewStyle>;
-  containerPointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto';
 }
 
 export const OverlayProvider: React.ComponentClass<>;

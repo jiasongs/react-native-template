@@ -9,7 +9,7 @@ import {
   ViewProps,
 } from 'react-native';
 
-export interface ButtonPorps extends TouchableOpacityProps, ViewProps {
+export interface ButtonProps extends TouchableOpacityProps, ViewProps {
   type?: 'solid' | 'clear' | 'outline';
   icon?: ImageSourcePropType;
   iconStyle?: StyleProp<ImageStyle>;
@@ -27,6 +27,6 @@ export interface ButtonPorps extends TouchableOpacityProps, ViewProps {
   clickInterval?: number;
 }
 
-const Button: React.ComponentClass<ButtonPorps>;
+const Button: React.ComponentClass<ButtonProps>;
 
 export default Button;

@@ -24,8 +24,8 @@ function DemoPopover() {
           onPress={() => {
             PopoverManager.showMenu({
               viewRef: buttonRef.current,
-              arrow: 'bottom',
-              type: 'horizontal',
+              arrow: 'topRight',
+              type: 'vertical',
               actions: [
                 {
                   title: 'Search',
@@ -43,9 +43,6 @@ function DemoPopover() {
                   onPress: () => alert('Remove'),
                 },
               ],
-              option: {
-                anchorPoint: 'bottom',
-              },
             });
           }}
         />

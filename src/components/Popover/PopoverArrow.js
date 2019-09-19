@@ -1,6 +1,6 @@
 'use strict';
 import React, { useMemo, useState, useCallback, useContext } from 'react';
-import { StyleSheet, View, ViewPropTypes } from 'react-native';
+import { StyleSheet, View, ViewPropTypes, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../config/theme';
 
@@ -34,124 +34,124 @@ function PopoverArrow(props) {
     const halfSquareSize =
       Math.ceil(Math.sqrt(arrowSize * arrowSize * 2) / 2 / pixelSize) *
       pixelSize;
-    const headerSize = halfSquareSize + flattenStyle.borderWidth;
+    const headerSize =
+      halfSquareSize + (flattenStyle.borderWidth || StyleSheet.hairlineWidth);
     const headerPadding = headerSize - arrowSize / 2;
-    const headerPaddingCorner = paddingCorner;
-    const contentPadding = halfSquareSize;
+    const positionOffset = Platform.OS === 'ios' ? 0 : StyleSheet.hairlineWidth;
     const headerLayouts = {
       none: {},
       topLeft: {
-        top: 0,
-        left: 0,
-        right: 0,
+        top: positionOffset,
+        left: positionOffset,
+        right: positionOffset,
         height: headerSize,
         paddingTop: headerPadding,
         alignItems: 'flex-start',
-        paddingLeft: headerPaddingCorner,
+        paddingLeft: paddingCorner,
       },
       top: {
-        top: 0,
-        left: 0,
-        right: 0,
+        top: positionOffset,
+        left: positionOffset,
+        right: positionOffset,
         height: headerSize,
         paddingTop: headerPadding,
         alignItems: 'center',
       },
       topRight: {
-        top: 0,
-        left: 0,
-        right: 0,
+        top: positionOffset,
+        left: positionOffset,
+        right: positionOffset,
         height: headerSize,
         paddingTop: headerPadding,
         alignItems: 'flex-end',
-        paddingRight: headerPaddingCorner,
+        paddingRight: paddingCorner,
       },
       rightTop: {
-        top: 0,
-        bottom: 0,
-        right: 0,
+        top: positionOffset,
+        bottom: positionOffset,
+        right: positionOffset,
         width: headerSize,
         paddingRight: headerPadding,
         alignItems: 'flex-end',
         justifyContent: 'flex-start',
-        paddingTop: headerPaddingCorner,
+        paddingTop: paddingCorner,
       },
       right: {
-        top: 0,
-        bottom: 0,
-        right: 0,
+        top: positionOffset,
+        bottom: positionOffset,
+        right: positionOffset,
         width: headerSize,
         paddingRight: headerPadding,
         alignItems: 'flex-end',
         justifyContent: 'center',
       },
       rightBottom: {
-        top: 0,
-        bottom: 0,
-        right: 0,
+        top: positionOffset,
+        bottom: positionOffset,
+        right: positionOffset,
         width: headerSize,
         paddingRight: headerPadding,
         alignItems: 'flex-end',
         justifyContent: 'flex-end',
-        paddingBottom: headerPaddingCorner,
+        paddingBottom: paddingCorner,
       },
       bottomRight: {
-        bottom: 0,
-        left: 0,
-        right: 0,
+        bottom: positionOffset,
+        left: positionOffset,
+        right: positionOffset,
         height: headerSize,
         paddingBottom: headerPadding,
         alignItems: 'flex-end',
         justifyContent: 'flex-end',
-        paddingRight: headerPaddingCorner,
+        paddingRight: paddingCorner,
       },
       bottom: {
-        bottom: 0,
-        left: 0,
-        right: 0,
+        bottom: positionOffset,
+        left: positionOffset,
+        right: positionOffset,
         height: headerSize,
         paddingBottom: headerPadding,
         alignItems: 'center',
         justifyContent: 'flex-end',
       },
       bottomLeft: {
-        bottom: 0,
-        left: 0,
-        right: 0,
+        bottom: positionOffset,
+        left: positionOffset,
+        right: positionOffset,
         height: headerSize,
         paddingBottom: headerPadding,
         alignItems: 'flex-start',
         justifyContent: 'flex-end',
-        paddingLeft: headerPaddingCorner,
+        paddingLeft: paddingCorner,
       },
       leftBottom: {
-        top: 0,
-        bottom: 0,
-        left: 0,
+        top: positionOffset,
+        bottom: positionOffset,
+        left: positionOffset,
         width: headerSize,
         paddingLeft: headerPadding,
         alignItems: 'flex-start',
         justifyContent: 'flex-end',
-        paddingBottom: headerPaddingCorner,
+        paddingBottom: paddingCorner,
       },
       left: {
-        top: 0,
-        bottom: 0,
-        left: 0,
+        top: positionOffset,
+        bottom: positionOffset,
+        left: positionOffset,
         width: headerSize,
         paddingLeft: headerPadding,
         alignItems: 'flex-start',
         justifyContent: 'center',
       },
       leftTop: {
-        top: 0,
-        bottom: 0,
-        left: 0,
+        top: positionOffset,
+        bottom: positionOffset,
+        left: positionOffset,
         width: headerSize,
         paddingLeft: headerPadding,
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        paddingTop: headerPaddingCorner,
+        paddingTop: paddingCorner,
       },
     };
     const arrowLayouts = {
@@ -171,57 +171,57 @@ function PopoverArrow(props) {
     };
     const popoverLayouts = {
       none: {},
-      topLeft: { paddingTop: contentPadding },
-      top: { paddingTop: contentPadding },
-      topRight: { paddingTop: contentPadding },
-      rightTop: { paddingRight: contentPadding },
-      right: { paddingRight: contentPadding },
-      rightBottom: { paddingRight: contentPadding },
-      bottomRight: { paddingBottom: contentPadding },
-      bottom: { paddingBottom: contentPadding },
-      bottomLeft: { paddingBottom: contentPadding },
-      leftBottom: { paddingLeft: contentPadding },
-      left: { paddingLeft: contentPadding },
-      leftTop: { paddingLeft: contentPadding },
+      topLeft: { paddingTop: halfSquareSize },
+      top: { paddingTop: halfSquareSize },
+      topRight: { paddingTop: halfSquareSize },
+      rightTop: { paddingRight: halfSquareSize },
+      right: { paddingRight: halfSquareSize },
+      rightBottom: { paddingRight: halfSquareSize },
+      bottomRight: { paddingBottom: halfSquareSize },
+      bottom: { paddingBottom: halfSquareSize },
+      bottomLeft: { paddingBottom: halfSquareSize },
+      leftBottom: { paddingLeft: halfSquareSize },
+      left: { paddingLeft: halfSquareSize },
+      leftTop: { paddingLeft: halfSquareSize },
     };
     let useArrow = arrow;
     switch (arrow) {
       case 'topLeft':
       case 'topRight':
-        if (headerPaddingCorner + contentPadding > layout.width / 2) {
+        if (paddingCorner + halfSquareSize > layout.width / 2) {
           useArrow = 'top';
         }
         break;
       case 'rightTop':
       case 'rightBottom':
-        if (headerPaddingCorner + contentPadding > layout.height / 2) {
+        if (paddingCorner + halfSquareSize > layout.height / 2) {
           useArrow = 'right';
         }
         break;
       case 'bottomRight':
       case 'bottomLeft':
-        if (headerPaddingCorner + contentPadding > layout.width / 2) {
+        if (paddingCorner + halfSquareSize > layout.width / 2) {
           useArrow = 'bottom';
         }
         break;
       case 'leftBottom':
       case 'leftTop':
-        if (headerPaddingCorner + contentPadding > layout.height / 2) {
+        if (paddingCorner + halfSquareSize > layout.height / 2) {
           useArrow = 'left';
         }
         break;
     }
+    newStyle.push(popoverLayouts[useArrow]);
     headerStyle.push(headerLayouts[useArrow]);
     arrowStyle.push({
       backgroundColor: flattenStyle.backgroundColor,
       width: arrowSize,
       height: arrowSize,
       borderColor: flattenStyle.borderColor,
-      borderTopWidth: flattenStyle.borderWidth,
-      borderLeftWidth: flattenStyle.borderWidth,
+      borderTopWidth: flattenStyle.borderWidth || 0,
+      borderLeftWidth: flattenStyle.borderWidth || 0,
       ...arrowLayouts[useArrow],
     });
-    newStyle.push(popoverLayouts[useArrow]);
     return {
       style: [newStyle, style],
       contentStyle: flattenStyle,
@@ -296,7 +296,7 @@ PopoverArrow.propTypes = {
 
 PopoverArrow.defaultProps = {
   arrow: 'none',
-  arrowSize: 7,
+  arrowSize: 10,
   arrowPadding: 8,
 };
 

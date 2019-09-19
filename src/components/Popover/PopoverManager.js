@@ -10,20 +10,33 @@ const defaultOption = {
 
 export default class PopoverManager {
   static showMenu(props = {}) {
-    const { viewRef, option, ...others } = props;
-    viewRef.measure((x, y, width, height, pageX, pageY) => {
+    const { viewRef, option, arrow, ...others } = props;
+    const component = <PopoverMenu arrow={arrow} {...others} />;
+    if (viewRef) {
+      viewRef.measure((x, y, width, height, pageX, pageY) => {
+        const newOption = {
+          ...option,
+          anchorPoint:
+            option && option.anchorPoint ? option.anchorPoint : arrow,
+          fromLayout: { x: pageX, y: pageY, width, height },
+          toLayout: null,
+        };
+        this.showView(component, newOption);
+      });
+    } else {
       const newOption = {
         ...option,
-        fromLayout: { x: pageX, y: pageY, width, height },
-        toLayout: null,
+        anchorPoint: option && option.anchorPoint ? option.anchorPoint : arrow,
       };
-      const component = <PopoverMenu {...others} />;
       this.showView(component, newOption);
-    });
+    }
   }
 
   static showView(component, option = {}) {
-    const newOption = { ...defaultOption, ...option };
+    const newOption = {
+      ...defaultOption,
+      ...option,
+    };
     OverlayManager.preview(component, newOption);
   }
 

@@ -34,6 +34,12 @@ export default function usePreviewAnimated(props) {
         if (toLayout) {
         }
         switch (anchorPoint) {
+          case 'none':
+            translateXRef.current.setValue(0);
+            translateYRef.current.setValue(0);
+            anchorPointXRef.current.setValue(0);
+            anchorPointYRef.current.setValue(0);
+            break;
           case 'left':
             if (fromLayout) {
               const _fromX = fromLayout.x + fromLayout.width + 7;
@@ -47,9 +53,8 @@ export default function usePreviewAnimated(props) {
             anchorPointYRef.current.setValue(0);
             break;
           case 'topLeft':
-          case 'leftTop':
             if (fromLayout) {
-              const _fromX = fromLayout.x;
+              const _fromX = fromLayout.x + 4;
               const _fromY = fromLayout.y + fromLayout.height + 10;
               console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
@@ -58,11 +63,33 @@ export default function usePreviewAnimated(props) {
             anchorPointXRef.current.setValue(layout.width / 2);
             anchorPointYRef.current.setValue(layout.height / 2);
             break;
+          case 'leftTop':
+            if (fromLayout) {
+              const _fromX = fromLayout.x + fromLayout.width + 8;
+              const _fromY = fromLayout.y - 5;
+              console.log('bounds', _fromX, _fromY);
+              translateXRef.current.setValue(_fromX);
+              translateYRef.current.setValue(_fromY);
+            }
+            anchorPointXRef.current.setValue(layout.width / 2);
+            anchorPointYRef.current.setValue(layout.height / 2);
+            break;
           case 'bottomLeft':
-          case 'leftBottom':
             if (fromLayout) {
               const _fromX = fromLayout.x;
               const _fromY = fromLayout.y - layout.height - 7;
+              console.log('bounds', _fromX, _fromY);
+              translateXRef.current.setValue(_fromX);
+              translateYRef.current.setValue(_fromY);
+            }
+            anchorPointXRef.current.setValue(layout.width / 2);
+            anchorPointYRef.current.setValue(-layout.height / 2);
+            break;
+          case 'leftBottom':
+            if (fromLayout) {
+              const _fromX = fromLayout.x + fromLayout.width + 8;
+              const _fromY =
+                fromLayout.y - layout.height + fromLayout.height + 7;
               console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
@@ -107,7 +134,6 @@ export default function usePreviewAnimated(props) {
             anchorPointYRef.current.setValue(0);
             break;
           case 'topRight':
-          case 'rightTop':
             if (fromLayout) {
               const _fromX = fromLayout.x - layout.width + fromLayout.width;
               const _fromY = fromLayout.y + fromLayout.height + 8;
@@ -118,11 +144,33 @@ export default function usePreviewAnimated(props) {
             anchorPointXRef.current.setValue(-layout.width / 2);
             anchorPointYRef.current.setValue(layout.height / 2);
             break;
+          case 'rightTop':
+            if (fromLayout) {
+              const _fromX = fromLayout.x - layout.width - 7;
+              const _fromY = fromLayout.y - 8;
+              console.log('bounds', _fromX, _fromY);
+              translateXRef.current.setValue(_fromX);
+              translateYRef.current.setValue(_fromY);
+            }
+            anchorPointXRef.current.setValue(-layout.width / 2);
+            anchorPointYRef.current.setValue(layout.height / 2);
+            break;
           case 'bottomRight':
-          case 'rightBottom':
             if (fromLayout) {
               const _fromX = fromLayout.x - layout.width + fromLayout.width;
               const _fromY = fromLayout.y - layout.height - 8;
+              console.log('bounds', _fromX, _fromY);
+              translateXRef.current.setValue(_fromX);
+              translateYRef.current.setValue(_fromY);
+            }
+            anchorPointXRef.current.setValue(-layout.width / 2);
+            anchorPointYRef.current.setValue(-layout.height / 2);
+            break;
+          case 'rightBottom':
+            if (fromLayout) {
+              const _fromX = fromLayout.x - layout.width - 5;
+              const _fromY =
+                fromLayout.y - layout.height + fromLayout.height + 5;
               console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);

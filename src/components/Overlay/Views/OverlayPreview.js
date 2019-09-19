@@ -85,6 +85,7 @@ function OverlayPreview(props) {
 OverlayPreview.propTypes = {
   ...OverlayBase.type.propTypes,
   anchorPoint: PropTypes.oneOf([
+    'none',
     'left',
     'leftTop',
     'leftBottom',
@@ -101,7 +102,18 @@ OverlayPreview.propTypes = {
   type: PropTypes.oneOf(['none', 'zoomIn']),
   containerStyle: ViewPropTypes.style,
   containerPointerEvents: ViewPropTypes.pointerEvents,
-  maskOpacity: PropTypes.number,
+  fromLayout: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }),
+  toLayout: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }),
 };
 
 OverlayPreview.defaultProps = {

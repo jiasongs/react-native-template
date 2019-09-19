@@ -7,11 +7,11 @@ import {
   ImageStyle,
   ImageSourcePropType,
 } from 'react-native';
-import { ButtonPorps } from '../Touchable/Button';
+import { ButtonProps } from '../Touchable/Button';
 
 export type IndicatorType = 'none' | 'box' | 'item' | 'custom';
 
-export interface SegmentedBarItemProps extends ButtonPorps {
+export interface SegmentedBarItemProps extends ButtonProps {
   active: boolean;
   activeTitle?: string | number;
   activeIcon?: ImageSourcePropType;
