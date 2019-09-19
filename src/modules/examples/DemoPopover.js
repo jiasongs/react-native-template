@@ -14,7 +14,7 @@ function DemoPopover() {
 
   return (
     <PageContainer style={styles.container}>
-      <NavigationBar title={'DemoPopover'} renderLeftAction={null} />
+      <NavigationBar title={'DemoPopover'} />
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Button
           ref={buttonRef}

@@ -15,8 +15,10 @@ import DemoSegmented from './examples/DemoSegmented';
 import DemoCard from './examples/DemoCard';
 import DemoWebBrowser from './examples/DemoWebBrowser';
 import DemoPopover from './examples/DemoPopover';
+import DemoPermissions from './examples/DemoPermissions';
 
 export {
+  DemoPermissions,
   DemoPopover,
   DemoCard,
   DemoTheme,

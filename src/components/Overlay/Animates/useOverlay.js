@@ -6,6 +6,7 @@ import { useBackHandler } from '../../../common/hooks/HookBackHandler';
 export default function useOverlay(props) {
   const {
     onPrepare,
+    onPrepareCompleted,
     modal,
     onAppearCompleted,
     onDisappearCompleted,
@@ -80,13 +81,15 @@ export default function useOverlay(props) {
     }
   }, [animates, onDisappearCompleted]);
 
+  // 后执行
   useEffect(() => {
     const appearAnimates = animates.appearAnimates;
     const disappearAnimates = animates.disappearAnimates;
+    onPrepare && onPrepare(appear, disappear);
     if (Array.isArray(appearAnimates) && Array.isArray(disappearAnimates)) {
-      onPrepare && onPrepare(appear, disappear);
+      onPrepareCompleted && onPrepareCompleted();
     }
-  }, [animates, appear, disappear, onPrepare]);
+  }, [animates, appear, disappear, onPrepare, onPrepareCompleted]);
 
   return {
     maskOpacityRef,

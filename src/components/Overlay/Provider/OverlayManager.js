@@ -6,7 +6,7 @@ import { OverlayPull, OverlayPop, OverlayPreview } from '..';
 let keyValue = 0;
 
 export default class OverlayManager {
-  static keys = [];
+  static overlayKeys = [];
 
   static pull(component, option) {
     return this.show(<OverlayPull {...option}>{component}</OverlayPull>);
@@ -23,24 +23,38 @@ export default class OverlayManager {
   }
 
   static show(overlayView) {
-    const onDisappearCompletedSave = overlayView.props
-      ? overlayView.props.onDisappearCompleted
-      : null;
     const onPrepareSave = overlayView.props
       ? overlayView.props.onPrepare
       : null;
+    const onPrepareCompletedSave = overlayView.props
+      ? overlayView.props.onPrepareCompleted
+      : null;
+    const onDisappearCompletedSave = overlayView.props
+      ? overlayView.props.onDisappearCompleted
+      : null;
     const key = this._add(
       React.cloneElement(overlayView, {
+        // 准备
         onPrepare: (appear, disappear) => {
-          const index = this.keys.findIndex((item) => item.key === key);
+          const index = this.overlayKeys.findIndex((item) => item.key === key);
           const overlay = { key, appear, disappear };
           if (index !== -1) {
-            this.keys[index] = overlay;
+            this.overlayKeys[index] = overlay;
           }
-          if (onPrepareSave) {
-            onPrepareSave(overlay);
-          } else {
-            appear && appear();
+          console.log('onPrepare');
+          onPrepareSave && onPrepareSave(overlay);
+        },
+        // 准备完成，可以弹出界面
+        onPrepareCompleted: () => {
+          console.log('onPrepareCompleted');
+          const index = this.overlayKeys.findIndex((item) => item.key === key);
+          if (index !== -1) {
+            const overlay = this.overlayKeys[index];
+            if (onPrepareCompletedSave) {
+              onPrepareCompletedSave(overlay);
+            } else {
+              overlay.appear && overlay.appear();
+            }
           }
         },
         onDisappearCompleted: () => {
@@ -55,12 +69,12 @@ export default class OverlayManager {
   static hide(key) {
     let index = -1;
     if (key) {
-      index = this.keys.findIndex((item) => item.key === key);
+      index = this.overlayKeys.findIndex((item) => item.key === key);
     } else {
-      index = this.keys.length - 1;
+      index = this.overlayKeys.length - 1;
     }
     if (index !== -1) {
-      const { key: _key, disappear } = this.keys[index];
+      const { key: _key, disappear } = this.overlayKeys[index];
       if (disappear) {
         disappear();
       } else {
@@ -75,23 +89,23 @@ export default class OverlayManager {
 
   static _add(element) {
     const key = ++keyValue;
-    this.keys.push({ key });
-    console.log('_add', this.keys);
+    this.overlayKeys.push({ key });
+    console.log('_add', this.overlayKeys);
     DeviceEventEmitter.emit('addOverlay', { key, element });
     return key;
   }
 
   static _remove(key) {
-    const index = this.keys.findIndex((item) => item.key === key);
+    const index = this.overlayKeys.findIndex((item) => item.key === key);
     if (index !== -1) {
-      this.keys.splice(index, 1);
+      this.overlayKeys.splice(index, 1);
     }
-    console.log('_remove', this.keys);
+    console.log('_remove', this.overlayKeys);
     DeviceEventEmitter.emit('removeOverlay', { key });
   }
 
   static _removeAll() {
-    this.keys = [];
+    this.overlayKeys = [];
     DeviceEventEmitter.emit('removeAllOverlay', {});
   }
 }

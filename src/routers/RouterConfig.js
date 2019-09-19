@@ -22,6 +22,7 @@ import {
   DemoCard,
   DemoWebBrowser,
   DemoPopover,
+  DemoPermissions,
 } from '../modules';
 
 const TabNavigatorRouter = {
@@ -84,10 +85,11 @@ const StackNavigatorRouter = {
   DemoCard: { screen: DemoCard },
   DemoWebBrowser: { screen: DemoWebBrowser },
   DemoPopover: { screen: DemoPopover },
+  DemoPermissions: { screen: DemoPermissions },
 };
 
 const StackNavigatorConfig = {
-  initialRouteName: 'DemoPopover',
+  initialRouteName: 'Tab',
   initialRouteParams: {},
   defaultNavigationOptions: {
     header: null,
