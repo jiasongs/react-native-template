@@ -17,10 +17,10 @@ function DemoList({ showNavBar = true }) {
 
   useEffect(() => {
     ServiceHome.getHomeList({ limit: 20 }).then((result) => {
-      if (result.success) {
-        setData(result.data);
-        setLoading(false);
+      if (result) {
+        setData(result);
       }
+      setLoading(false);
     });
     return () => {
       console.log('销毁');
