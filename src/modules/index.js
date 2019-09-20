@@ -16,8 +16,10 @@ import DemoCard from './examples/DemoCard';
 import DemoWebBrowser from './examples/DemoWebBrowser';
 import DemoPopover from './examples/DemoPopover';
 import DemoPermissions from './examples/DemoPermissions';
+import DemoForm from './examples/DemoForm';
 
 export {
+  DemoForm,
   DemoPermissions,
   DemoPopover,
   DemoCard,

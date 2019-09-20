@@ -23,7 +23,6 @@ function DemoPopover() {
           title={'点击'}
           onPress={() => {
             PopoverManager.showMenu({
-              viewRef: buttonRef.current,
               arrow: 'topRight',
               type: 'vertical',
               actions: [
@@ -43,6 +42,9 @@ function DemoPopover() {
                   onPress: () => alert('Remove'),
                 },
               ],
+              option: {
+                viewRef: buttonRef.current,
+              },
             });
           }}
         />

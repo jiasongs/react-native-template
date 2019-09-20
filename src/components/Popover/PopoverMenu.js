@@ -6,7 +6,7 @@ import PopoverArrow from './PopoverArrow';
 import PopoverMenuItem from './PopoverMenuItem';
 
 function PopoverMenu(props) {
-  const { type, actions, style, contentStyle, ...others } = props;
+  const { type, actions, style, contentStyle, children, ...others } = props;
 
   const buildStyles = useMemo(() => {
     const newContentStyle = [];
@@ -49,6 +49,7 @@ function PopoverMenu(props) {
           />
         );
       })}
+      {children}
     </PopoverArrow>
   );
 }
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
 
 PopoverMenu.propTypes = {
   ...PopoverArrow.type.propTypes,
-  type: PropTypes.oneOf(['vertical', 'horizontal']),
+  type: PropTypes.oneOf(['none', 'vertical', 'horizontal']),
   actions: PropTypes.arrayOf(PropTypes.shape(PopoverMenuItem.type.propTypes)),
 };
 

@@ -10,34 +10,34 @@ const defaultOption = {
 
 export default class PopoverManager {
   static showMenu(props = {}) {
-    const { viewRef, option, arrow, ...others } = props;
+    const { option, arrow, ...others } = props;
     const component = <PopoverMenu arrow={arrow} {...others} />;
-    if (viewRef) {
-      viewRef.measure((x, y, width, height, pageX, pageY) => {
-        const newOption = {
-          ...option,
-          anchorPoint:
-            option && option.anchorPoint ? option.anchorPoint : arrow,
-          fromLayout: { x: pageX, y: pageY, width, height },
-          toLayout: null,
-        };
-        this.showView(component, newOption);
-      });
-    } else {
-      const newOption = {
-        ...option,
-        anchorPoint: option && option.anchorPoint ? option.anchorPoint : arrow,
-      };
-      this.showView(component, newOption);
-    }
+    const newOption = {
+      ...option,
+      anchorPoint: option && option.anchorPoint ? option.anchorPoint : arrow,
+    };
+    this.showView(component, newOption);
   }
 
   static showView(component, option = {}) {
-    const newOption = {
-      ...defaultOption,
-      ...option,
-    };
-    OverlayManager.preview(component, newOption);
+    const { viewRef, ...others } = option;
+    if (viewRef) {
+      viewRef.measure((x, y, width, height, pageX, pageY) => {
+        const newOption = {
+          ...defaultOption,
+          ...others,
+          fromLayout: { x: pageX, y: pageY, width, height },
+          toLayout: null,
+        };
+        OverlayManager.preview(component, newOption);
+      });
+    } else {
+      const newOption = {
+        ...defaultOption,
+        ...others,
+      };
+      OverlayManager.preview(component, newOption);
+    }
   }
 
   static hide(key) {

@@ -26,21 +26,19 @@ export interface PopoverArrowProps {
   arrowPadding?: number;
 }
 
-export interface PopoverMenuProps extends PopoverArrowProps {
-  type?: 'vertical' | 'horizontal';
-  actions: Array<ButtonProps>;
+export interface Option extends OverlayPreviewProps {
+  viewRef?: React.ReactElement;
 }
 
-export interface MenuManagerProps extends PopoverMenuProps {
-  viewRef: React.ReactElement;
-  option: OverlayPreviewProps;
+export interface PopoverMenuProps extends PopoverArrowProps {
+  type?: 'none' | 'vertical' | 'horizontal';
+  actions?: Array<ButtonProps>;
+  children?: React.ReactChildren;
+  option?: Option;
 }
 
 export class PopoverManager {
-  static showMenu(props: MenuManagerProps): number;
-  static showView(
-    component: React.ReactElement,
-    option: OverlayPreviewProps,
-  ): void;
+  static showMenu(props: PopoverMenuProps): number;
+  static showView(component: React.ReactElement, option: Option): void;
   static hide(key: number): void;
 }

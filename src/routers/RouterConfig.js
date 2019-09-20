@@ -23,6 +23,7 @@ import {
   DemoWebBrowser,
   DemoPopover,
   DemoPermissions,
+  DemoForm,
 } from '../modules';
 
 const TabNavigatorRouter = {
@@ -86,6 +87,7 @@ const StackNavigatorRouter = {
   DemoWebBrowser: { screen: DemoWebBrowser },
   DemoPopover: { screen: DemoPopover },
   DemoPermissions: { screen: DemoPermissions },
+  DemoForm: { screen: DemoForm },
 };
 
 const StackNavigatorConfig = {

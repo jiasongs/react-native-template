@@ -10,7 +10,7 @@ import Card from './Row/Card';
 import WebBrowser from './WebView/WebBrowser';
 import { PopoverArrow, PopoverManager, PopoverMenu } from './Popover';
 import { Picker } from './Picker';
-import { Checkbox, Radio, Badge } from './Form';
+import { Checkbox, Radio, Badge, Stepper } from './Form';
 import { PageContainer, GirdContainer } from './Container';
 import {
   OverlayManager,
@@ -26,6 +26,7 @@ import { DevRefresh } from './Development';
 import { SegmentedView, SegmentedScene } from './Segmented';
 
 export {
+  Stepper,
   PopoverArrow,
   PopoverManager,
   PopoverMenu,

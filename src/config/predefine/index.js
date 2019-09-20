@@ -21,7 +21,7 @@ const Predefine = {
   },
   get isNotchedScreen() {
     if (Platform.OS === 'ios') {
-      return DeviceInfo.hasNotch();
+      return DeviceInfo.isNotch;
     }
     return false;
   },

@@ -18,6 +18,7 @@ function OverlayPull(props) {
 
   const {
     maskOpacityRef,
+    displayRef,
     onPressMask,
     appear,
     disappear,
@@ -83,13 +84,14 @@ function OverlayPull(props) {
             ? Math.abs(translationX)
             : Math.abs(translationY);
         if (translation <= size / 3) {
+          displayRef.current = false;
           appear();
         } else {
           disappear();
         }
       }
     },
-    [appear, disappear, offsetSizeRef, type],
+    [appear, disappear, displayRef, offsetSizeRef, type],
   );
 
   const buildStyles = useMemo(() => {

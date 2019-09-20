@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 'use strict';
+import './config/predefine';
 import './config/global';
 import React, { useState, useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';

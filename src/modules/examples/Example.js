@@ -58,6 +58,10 @@ function Example() {
             title={'Popover'}
             onPress={() => RouterHelper.navigate('DemoPopover')}
           />
+          <ListRow
+            title={'Form'}
+            onPress={() => RouterHelper.navigate('DemoForm')}
+          />
         </ScrollView>
       </RefreshLayout>
     </PageContainer>

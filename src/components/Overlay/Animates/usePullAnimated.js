@@ -11,6 +11,7 @@ export default function usePullAnimated(props) {
     appear,
     disappear,
     onPressMask,
+    displayRef,
   } = useOverlay(props);
   const opacityRef = useRef(new Animated.Value(0));
   const translateRef = useRef(new Animated.Value(0));
@@ -74,6 +75,7 @@ export default function usePullAnimated(props) {
   return {
     // [base]
     maskOpacityRef,
+    displayRef,
     onPressMask,
     appear,
     disappear,
