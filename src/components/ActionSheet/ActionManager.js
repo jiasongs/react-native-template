@@ -25,7 +25,6 @@ export default class ActionManager {
   }
 
   static hide(key) {
-    console.log('key', key);
     OverlayManager.hide(key);
   }
 }

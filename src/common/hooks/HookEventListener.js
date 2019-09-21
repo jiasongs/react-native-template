@@ -1,23 +1,30 @@
 import { useEffect, useRef } from 'react';
-import { BackHandler, DeviceEventEmitter } from 'react-native';
+import { BackHandler, DeviceEventEmitter, Keyboard } from 'react-native';
 
 export function useEventListener(eventName, handler) {
-  const hanldeRef = useRef(handler);
+  const handlerRef = useRef(handler);
 
   useEffect(() => {
-    hanldeRef.current = handler;
+    handlerRef.current = handler;
   }, [handler]);
 
   useEffect(() => {
     let listener = null;
-    if (eventName === 'hardwareBackPress') {
-      listener = BackHandler.addEventListener(eventName, hanldeRef.current);
+    if (eventName.indexOf('keyboard') !== -1) {
+      listener = Keyboard.addListener(eventName, (data) => {
+        handlerRef.current(data);
+      });
+    } else if (eventName.indexOf('hardware') !== -1) {
+      listener = BackHandler.addEventListener(eventName, (data) => {
+        return handlerRef.current(data);
+      });
     } else {
-      listener = DeviceEventEmitter.addListener(eventName, hanldeRef.current);
+      listener = DeviceEventEmitter.addListener(eventName, (data) => {
+        handlerRef.current(data);
+      });
     }
     return () => {
       listener && listener.remove();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [eventName]);
 }

@@ -37,26 +37,6 @@ export default function useOverlay(props) {
     disappearAnimates: null,
   });
 
-  useBackHandler(() => {
-    if (closeOnHardwareBackPress) {
-      onPressMask && onPressMask();
-      return true;
-    } else {
-      return false;
-    }
-  });
-
-  function onPressMask() {
-    if (modal) {
-      return;
-    }
-    if (TextInput.State.currentlyFocusedField()) {
-      Keyboard.dismiss();
-      return;
-    }
-    disappear();
-  }
-
   const appear = useCallback(() => {
     if (!displayRef.current) {
       displayRef.current = true;
@@ -80,6 +60,28 @@ export default function useOverlay(props) {
       );
     }
   }, [animates, onDisappearCompleted]);
+
+  const onPressMask = useCallback(() => {
+    if (modal) {
+      return;
+    }
+    if (TextInput.State.currentlyFocusedField()) {
+      Keyboard.dismiss();
+      return;
+    }
+    disappear();
+  }, [disappear, modal]);
+
+  useBackHandler(
+    useCallback(() => {
+      if (closeOnHardwareBackPress) {
+        onPressMask();
+        return true;
+      } else {
+        return false;
+      }
+    }, [closeOnHardwareBackPress, onPressMask]),
+  );
 
   // 后执行
   useEffect(() => {

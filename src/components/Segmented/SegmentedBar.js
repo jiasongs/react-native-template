@@ -151,8 +151,6 @@ function SegmentedBar(props) {
         if (Math.round(boxLayout.width) !== Math.round(layout.width)) {
           boxLayoutsRef.current[index] = layout;
           setBoxLayouts(boxLayoutsRef.current.slice());
-          console.log('boxLayouts22222');
-          console.log('加提示');
         }
       } else {
         boxLayoutsRef.current[index] = layout;
@@ -160,7 +158,6 @@ function SegmentedBar(props) {
           .length;
         if (layoutLength === length) {
           setBoxLayouts(boxLayoutsRef.current.slice());
-          console.log('boxLayouts1111');
         }
       }
     },
@@ -171,7 +168,6 @@ function SegmentedBar(props) {
     let boxLayout = boxLayouts[currentIndex];
     boxLayout = boxLayout ? boxLayout : { x: 0, width: 0 };
     const offsetX = boxLayout.x - scrollLayout.width / 2 + boxLayout.width / 2;
-    console.log('useEffect', currentIndex);
     if (offsetX) {
       scrollViewRef.current._component.scrollTo({
         x: offsetX,
@@ -184,7 +180,6 @@ function SegmentedBar(props) {
   useEffect(() => {
     const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;
     const boxLength = boxLayouts.filter((item) => item).length;
-    console.log('boxLayouts', boxLength);
     if (
       boxLength >= length &&
       contentLayout.width !== 0 &&
@@ -197,7 +192,6 @@ function SegmentedBar(props) {
         let currentLayout = {};
         let layoutX = 0;
         const boxLayout = boxLayouts[ii];
-        console.log('boxLayout', boxLayout);
         if (indicatorType === 'custom') {
           currentLayout = { width: contentItemWidth };
           layoutX = boxLayout.x + (boxLayout.width - contentItemWidth) / 2;
@@ -211,9 +205,6 @@ function SegmentedBar(props) {
         outputRangeX.push(Math.round(layoutX - transformx));
         outputRangeScale.push(multiple);
       });
-      console.log('inputRangeX', inputRange);
-      console.log('outputRangeX', outputRangeX);
-      console.log('outputRangeScale', outputRangeScale);
       setInterpolate({
         inputRangeX: inputRange,
         outputRangeX: outputRangeX,

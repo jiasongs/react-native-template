@@ -107,7 +107,6 @@ function SegmentedView(props) {
       } else {
         setActiveIndex(roundIndex);
       }
-      console.log('onScroll', event.nativeEvent);
     },
     [contentLayout, setActiveIndex, setFocusIndex],
   );
@@ -134,13 +133,6 @@ function SegmentedView(props) {
           preChildenLength.current !== -1 &&
           children.length < preChildenLength.current
         ) {
-          console.log(
-            'children改变',
-            currentIndexRef.current,
-            currentFocusRef.current,
-            preChildenLength.current - 1,
-            children.length,
-          );
           if (currentFocusRef.current === preChildenLength.current - 1) {
             setFocusIndex(currentFocusRef.current - 1);
             scrollToIndex({

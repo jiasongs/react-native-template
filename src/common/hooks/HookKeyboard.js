@@ -1,23 +1,20 @@
 'use strict';
 import { useEffect, useCallback, useState } from 'react';
-import { Keyboard, Platform } from 'react-native';
+import { Platform } from 'react-native';
+import { useEventListener } from './HookEventListener';
 
 export function useKeyboard() {
   const [keyboardState, setKeyboardState] = useState(null);
 
-  useEffect(() => {
-    const showName =
-      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
-    const hidename =
-      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
-    const showListener = Keyboard.addListener(showName, onKeyboardShow);
-    const hideListener = Keyboard.addListener(hidename, onKeyboardHide);
-    return () => {
-      showListener.remove();
-      hideListener.remove();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEventListener(
+    Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
+    onKeyboardShow,
+  );
+
+  useEventListener(
+    Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
+    onKeyboardHide,
+  );
 
   const onKeyboardShow = useCallback((event) => {
     if (!event.isEventFromThisApp) {

@@ -45,7 +45,6 @@ export default function usePreviewAnimated(props) {
               const _fromX = fromLayout.x + fromLayout.width + 7;
               const _fromY =
                 fromLayout.y - (layout.height - fromLayout.height) / 2;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -56,7 +55,6 @@ export default function usePreviewAnimated(props) {
             if (fromLayout) {
               const _fromX = fromLayout.x + 4;
               const _fromY = fromLayout.y + fromLayout.height + 10;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -67,7 +65,6 @@ export default function usePreviewAnimated(props) {
             if (fromLayout) {
               const _fromX = fromLayout.x + fromLayout.width + 8;
               const _fromY = fromLayout.y - 5;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -78,7 +75,6 @@ export default function usePreviewAnimated(props) {
             if (fromLayout) {
               const _fromX = fromLayout.x;
               const _fromY = fromLayout.y - layout.height - 7;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -90,7 +86,6 @@ export default function usePreviewAnimated(props) {
               const _fromX = fromLayout.x + fromLayout.width + 8;
               const _fromY =
                 fromLayout.y - layout.height + fromLayout.height + 7;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -102,7 +97,6 @@ export default function usePreviewAnimated(props) {
               const _fromX =
                 fromLayout.x - (layout.width - fromLayout.width) / 2;
               const _fromY = fromLayout.y + fromLayout.height + 10;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -114,7 +108,6 @@ export default function usePreviewAnimated(props) {
               const _fromX =
                 fromLayout.x - (layout.width - fromLayout.width) / 2;
               const _fromY = fromLayout.y - layout.height - 10;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -126,7 +119,6 @@ export default function usePreviewAnimated(props) {
               const _fromX = fromLayout.x - layout.width - 8;
               const _fromY =
                 fromLayout.y - (layout.height - fromLayout.height) / 2;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -137,7 +129,6 @@ export default function usePreviewAnimated(props) {
             if (fromLayout) {
               const _fromX = fromLayout.x - layout.width + fromLayout.width;
               const _fromY = fromLayout.y + fromLayout.height + 8;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -148,7 +139,6 @@ export default function usePreviewAnimated(props) {
             if (fromLayout) {
               const _fromX = fromLayout.x - layout.width - 7;
               const _fromY = fromLayout.y - 8;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -159,7 +149,6 @@ export default function usePreviewAnimated(props) {
             if (fromLayout) {
               const _fromX = fromLayout.x - layout.width + fromLayout.width;
               const _fromY = fromLayout.y - layout.height - 8;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -171,7 +160,6 @@ export default function usePreviewAnimated(props) {
               const _fromX = fromLayout.x - layout.width - 5;
               const _fromY =
                 fromLayout.y - layout.height + fromLayout.height + 5;
-              console.log('bounds', _fromX, _fromY);
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }

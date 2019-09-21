@@ -71,7 +71,6 @@ function OverlayProvider(props) {
       if (preStyle.length === 0) {
         return preStyle;
       }
-      console.log('重置', key);
       const newPreStyle = preStyle.slice();
       const index = newPreStyle.findIndex((item) => item.key === key);
       if (index !== -1) {
@@ -86,7 +85,6 @@ function OverlayProvider(props) {
   useEventListener('removeAllOverlay', removeAll);
 
   const buildStyles = useMemo(() => {
-    console.log('animateStyle', animateStyle);
     return {
       contentStyle: [{ flex: 1 }, animateStyle],
     };

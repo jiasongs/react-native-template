@@ -13,12 +13,10 @@ export default class OverlayManager {
   }
 
   static pop(component, option) {
-    console.log('option', option);
     return this.show(<OverlayPop {...option}>{component}</OverlayPop>);
   }
 
   static preview(component, option) {
-    console.log('option', option);
     return this.show(<OverlayPreview {...option}>{component}</OverlayPreview>);
   }
 
@@ -41,12 +39,10 @@ export default class OverlayManager {
           if (index !== -1) {
             this.overlayKeys[index] = overlay;
           }
-          console.log('onPrepare');
           onPrepareSave && onPrepareSave(overlay);
         },
         // 准备完成，可以弹出界面
         onPrepareCompleted: () => {
-          console.log('onPrepareCompleted');
           const index = this.overlayKeys.findIndex((item) => item.key === key);
           if (index !== -1) {
             const overlay = this.overlayKeys[index];
@@ -90,7 +86,6 @@ export default class OverlayManager {
   static _add(element) {
     const key = ++keyValue;
     this.overlayKeys.push({ key });
-    console.log('_add', this.overlayKeys);
     DeviceEventEmitter.emit('addOverlay', { key, element });
     return key;
   }
@@ -100,7 +95,6 @@ export default class OverlayManager {
     if (index !== -1) {
       this.overlayKeys.splice(index, 1);
     }
-    console.log('_remove', this.overlayKeys);
     DeviceEventEmitter.emit('removeOverlay', { key });
   }
 

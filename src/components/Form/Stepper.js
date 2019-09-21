@@ -20,7 +20,7 @@ function Stepper(props) {
       const floatValue = parseFloat(preValue);
       if (!isNaN(floatValue)) {
         const newValue = floatValue - step;
-        if (min != undefined) {
+        if (min !== undefined) {
           if (newValue >= min) {
             return newValue;
           } else {
@@ -40,7 +40,7 @@ function Stepper(props) {
       const floatValue = parseFloat(preValue);
       if (!isNaN(floatValue)) {
         const newValue = floatValue + step;
-        if (max != undefined) {
+        if (max !== undefined) {
           if (newValue <= max) {
             return newValue;
           } else {

@@ -376,7 +376,7 @@ export default {
         paddingVertical: 7,
         backgroundColor: primary.color.reverse,
         borderColor: 'rgba(0, 0, 0, 0.15)',
-        borderRadius: 10,
+        borderRadius: 6,
         borderWidth: StyleSheet.hairlineWidth,
       },
     },

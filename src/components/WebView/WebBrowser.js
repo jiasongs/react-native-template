@@ -56,7 +56,6 @@ function WebBrowser(props) {
 
   const onNavStateChange = useCallback(
     (state) => {
-      console.log('onNavStateChange', state);
       navStateRef.current = state;
       onNavigationStateChange && onNavigationStateChange(state);
     },
@@ -65,7 +64,6 @@ function WebBrowser(props) {
 
   const onLoadStartBack = useCallback(
     (event) => {
-      console.log('onLoadStart', event.nativeEvent);
       const state = event.nativeEvent;
       navStateRef.current = state;
       setNavState({ title: state.title, loading: state.loading });
@@ -76,7 +74,6 @@ function WebBrowser(props) {
 
   const onLoadEndBack = useCallback(
     (event) => {
-      console.log('onLoadEnd', event.nativeEvent);
       const state = event.nativeEvent;
       navStateRef.current = state;
       setNavState({ title: state.title, loading: state.loading });
@@ -90,8 +87,6 @@ function WebBrowser(props) {
       style: [styles.webStyle, style],
     };
   }, [style]);
-
-  console.log('forwardedRef', forwardedRef);
 
   return (
     <PageContainer loading={navState.loading}>

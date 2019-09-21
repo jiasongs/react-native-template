@@ -9,7 +9,6 @@ function SegmentedContentScene(props) {
 
   useEffect(() => {
     if (!focused) {
-      console.log('focused', focused);
       setFocused(active);
     }
   }, [active, focused]);
