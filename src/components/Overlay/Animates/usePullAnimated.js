@@ -4,7 +4,7 @@ import { Animated } from 'react-native';
 import useOverlay from './useOverlay';
 
 export default function usePullAnimated(props) {
-  const { type } = props;
+  const { type, onProviderAnimated, rootScale, rootStyle } = props;
   const {
     maskOpacityRef,
     setAnimates,
@@ -54,13 +54,29 @@ export default function usePullAnimated(props) {
             useNativeDriver: true,
           }),
         ];
+        if (rootScale) {
+          onProviderAnimated([
+            rootStyle,
+            {
+              transform: [
+                {
+                  scale: translateRef.current.interpolate({
+                    inputRange: [0, offsetSize],
+                    outputRange: [rootScale, 1],
+                    extrapolateLeft: 'clamp',
+                  }),
+                },
+              ],
+            },
+          ]);
+        }
         setAnimates({
           appearAnimates,
           disappearAnimates,
         });
       }
     },
-    [setAnimates, type],
+    [onProviderAnimated, rootScale, rootStyle, setAnimates, type],
   );
 
   const onLayout = useCallback(

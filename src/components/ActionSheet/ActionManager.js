@@ -6,6 +6,8 @@ import { OverlayManager } from '../Overlay';
 const defaultOption = {
   type: 'bottom',
   modal: false,
+  rootScale: 0.9,
+  rootStyle: { borderRadius: 6, overflow: 'hidden' },
 };
 
 export default class ActionManager {

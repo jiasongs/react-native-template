@@ -59,7 +59,7 @@ export default class OverlayManager {
         },
         onDisappearCompleted: () => {
           this._remove(key);
-          onDisappearCompletedSave && onDisappearCompletedSave();
+          onDisappearCompletedSave && onDisappearCompletedSave(key);
         },
       }),
     );
