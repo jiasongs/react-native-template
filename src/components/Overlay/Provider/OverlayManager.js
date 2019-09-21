@@ -3,7 +3,7 @@ import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
 import OverlayPop from '../Views/OverlayPop';
 import OverlayPull from '../Views/OverlayPull';
-import OverlayPreview from '../Views/OverlayPop';
+import OverlayPreview from '../Views/OverlayPreview';
 
 let keyValue = 0;
 
