@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import Button from '../Touchable/Button';
+import { Button } from '../Touchable';
 
 function Checkbox(props) {
   const {

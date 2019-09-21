@@ -29,14 +29,14 @@ const MemoChildren = React.memo((props) => {
 });
 
 function OverlayProvider(props) {
-  const { children } = props;
+  const { style, children } = props;
 
   const [animateStyle, setAnimateStyle] = useState([]);
   const [elements, setElements] = useState([]);
 
   const add = useCallback(({ key, element }) => {
     setElements((preElements) => {
-      let newElements = preElements.slice();
+      const newElements = preElements.slice();
       newElements.push({ key, element });
       return newElements;
     });
@@ -44,7 +44,7 @@ function OverlayProvider(props) {
 
   const remove = useCallback(({ key }) => {
     setElements((preElements) => {
-      let newElements = preElements.slice();
+      const newElements = preElements.slice();
       for (let i = newElements.length - 1; i >= 0; --i) {
         if (newElements[i].key === key) {
           newElements.splice(i, 1);
@@ -59,9 +59,9 @@ function OverlayProvider(props) {
     setElements([]);
   }, []);
 
-  const onProviderAnimated = useCallback((key, style) => {
+  const onProviderAnimated = useCallback((key, aStyle) => {
     setAnimateStyle((preStyle) => {
-      return preStyle.concat([{ ...StyleSheet.flatten(style), key }]);
+      return preStyle.concat([{ ...StyleSheet.flatten(aStyle), key }]);
     });
   }, []);
 
@@ -86,12 +86,13 @@ function OverlayProvider(props) {
 
   const buildStyles = useMemo(() => {
     return {
+      style: [styles.container, style],
       contentStyle: [{ flex: 1 }, animateStyle],
     };
-  }, [animateStyle]);
+  }, [animateStyle, style]);
 
   return (
-    <View style={styles.container}>
+    <View style={buildStyles.style}>
       <Animated.View style={buildStyles.contentStyle}>
         <MemoChildren children={children} />
       </Animated.View>

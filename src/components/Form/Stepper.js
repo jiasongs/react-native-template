@@ -8,7 +8,7 @@ import {
   Keyboard,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { Button } from '..';
+import { Button } from '../Touchable';
 
 function Stepper(props) {
   const { defaultValue, step, max, min } = props;

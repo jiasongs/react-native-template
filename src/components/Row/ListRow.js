@@ -3,7 +3,7 @@ import React, { useContext, useMemo } from 'react';
 import { View, Text, StyleSheet, Image, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
-import Button from '../Touchable/Button';
+import { Button } from '../Touchable';
 import { ThemeContext } from '../../config/theme';
 import { Predefine } from '../../config/predefine';
 

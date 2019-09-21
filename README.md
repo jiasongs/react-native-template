@@ -41,7 +41,7 @@
 
 # 问题记录
 
-- Overlay 回调需要重新捋一遍
+- Overlay 管理层有点繁琐，需要简化操作
 - Card 的需求收集
 - WebBrowser 的需求收集
 - ~~Segmented 安卓需要处理下更新 contentSize 后，bar 的偏移问题，懒加载的问题!!!~~

@@ -27,6 +27,4 @@ export interface ButtonProps extends TouchableOpacityProps, ViewProps {
   clickInterval?: number;
 }
 
-const Button: React.ComponentClass<ButtonProps>;
-
-export default Button;
+export const Button: React.ComponentClass<ButtonProps>;

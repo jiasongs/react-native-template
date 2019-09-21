@@ -2,7 +2,7 @@
 import React from 'react';
 import { StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import Button from '../Touchable/Button';
+import { Button } from '../Touchable';
 
 function Radio(props) {
   const { style, title, checked, selectIcon, narmalIcon } = props;

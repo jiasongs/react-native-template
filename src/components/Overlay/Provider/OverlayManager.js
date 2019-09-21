@@ -1,7 +1,9 @@
 'use strict';
 import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
-import { OverlayPull, OverlayPop, OverlayPreview } from '..';
+import OverlayPop from '../Views/OverlayPop';
+import OverlayPull from '../Views/OverlayPull';
+import OverlayPreview from '../Views/OverlayPop';
 
 let keyValue = 0;
 

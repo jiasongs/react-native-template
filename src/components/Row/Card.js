@@ -1,7 +1,7 @@
 'use strict';
 import React, { useContext, useMemo } from 'react';
 import { Text, StyleSheet } from 'react-native';
-import Button from '../Touchable/Button';
+import { Button } from '../Touchable';
 import { Predefine } from '../../config/predefine';
 import { ThemeContext } from '../../config/theme';
 import ImageView from '../Image/ImageView';

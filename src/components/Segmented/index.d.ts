@@ -7,7 +7,7 @@ import {
   ImageStyle,
   ImageSourcePropType,
 } from 'react-native';
-import { ButtonProps } from '../Touchable/Button';
+import { ButtonProps } from '../Touchable';
 
 export type IndicatorType = 'none' | 'box' | 'item' | 'custom';
 

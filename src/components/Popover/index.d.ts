@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import { ButtonProps } from '../Touchable/Button.js';
+import { ButtonProps } from '../Touchable';
 import { OverlayPreviewProps } from '../Overlay';
 
 type AnchorPoint =

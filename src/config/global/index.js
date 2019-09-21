@@ -31,14 +31,14 @@ UIManager.setLayoutAnimationEnabledExperimental &&
  */
 YellowBox.ignoreWarnings([
   'It looks',
-  'Require cycle:',
+  'Require cycle: node_modules/rn-fetch-blob',
   'Remote debugger is in a background',
   'Warning: isMounted(...)',
   'Warning: Slider',
   'Warning: ViewPagerAndroid',
   'Accessing view manager configs directly off UIManager',
   'Module AudioRecorderManager requires main queue setup since it overrides',
-  'Warning: componentWillMount is',
+  'Warning: componentWillMount is deprecated',
   'Required dispatch_sync',
 ]);
 /**

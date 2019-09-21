@@ -16,6 +16,10 @@ type AnchorPoint =
   | 'rightTop'
   | 'rightBottom';
 
+export interface OverlayProviderProps {
+  style?: StyleProp<ViewStyle>;
+}
+
 export interface OverlayBaseProps {
   style?: StyleProp<ViewStyle>;
   modal?: boolean;
@@ -52,7 +56,7 @@ export interface OverlayPullProps extends OverlayBaseProps {
   panGestureEnabled: boolean;
 }
 
-export const OverlayProvider: React.ComponentClass<>;
+export const OverlayProvider: React.ComponentClass<OverlayProviderProps>;
 export const OverlayPop: React.ComponentClass<OverlayPopProps>;
 export const OverlayPull: React.ComponentClass<OverlayPullProps>;
 export const OverlayPreview: React.ComponentClass<OverlayPreviewProps>;

@@ -3,7 +3,7 @@ import LoadingHint from './Loading/LoadingHint';
 import ImageView from './Image/ImageView';
 import ListView from './List/ListView';
 import NavigationBar from './Navigation/NavigationBar';
-import Button from './Touchable/Button';
+import { Button } from './Touchable';
 import ListRow from './Row/ListRow';
 import TabBottomBar from './Navigation/TabBottomBar';
 import Card from './Row/Card';

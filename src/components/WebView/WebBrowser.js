@@ -2,7 +2,8 @@
 import React, { useRef, useMemo, useState, useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 import Webview from 'react-native-webview';
-import { PageContainer, NavigationBar } from '..';
+import PageContainer from '../Container/PageContainer';
+import NavigationBar from '../Navigation/NavigationBar';
 import { useBackHandler } from '../../common/hooks';
 import RouterHelper from '../../routers/RouterHelper';
 

@@ -1,7 +1,7 @@
 'use strict';
 import React, { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
-import Button from '../Touchable/Button';
+import { Button } from '../Touchable';
 
 function PopoverMenuItem(props) {
   const { style } = props;

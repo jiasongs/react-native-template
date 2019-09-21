@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { StyleSheet, NativeModules, Animated } from 'react-native';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
-import Button from '../Touchable/Button';
+import { Button } from '../Touchable';
 import { StorageManager } from '../../common/manager';
 import { Predefine } from '../../config/predefine';
 
