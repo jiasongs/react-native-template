@@ -3,6 +3,8 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 import { useEventListener } from '../../../common/hooks';
 
+const MemoElement = React.memo(() => {});
+
 const MemoOverlayElements = React.memo((props) => {
   const { elements, onProviderAnimated, onElementsDisappear } = props;
 

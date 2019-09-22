@@ -99,6 +99,7 @@ OverlayPreview.propTypes = {
     'rightTop',
     'rightBottom',
   ]),
+  anchorOffset: PropTypes.number,
   type: PropTypes.oneOf(['none', 'zoomIn']),
   containerStyle: ViewPropTypes.style,
   containerPointerEvents: ViewPropTypes.pointerEvents,

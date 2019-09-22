@@ -8,13 +8,23 @@ const defaultOption = {
   modal: false,
 };
 
+const defaultPopover = {
+  arrowSize: 10,
+  arrowPadding: 8,
+};
+
 export default class PopoverManager {
   static showMenu(props = {}) {
     const { option, arrow, ...others } = props;
-    const component = <PopoverMenu arrow={arrow} {...others} />;
+    const newProps = { ...defaultPopover, ...others };
+    const component = <PopoverMenu arrow={arrow} {...newProps} />;
     const newOption = {
       ...option,
       anchorPoint: option && option.anchorPoint ? option.anchorPoint : arrow,
+      anchorOffset:
+        option && option.anchorOffset
+          ? option.anchorOffset
+          : newProps.arrowPadding,
     };
     this.showView(component, newOption);
   }

@@ -34,6 +34,7 @@ export interface OverlayBaseProps {
 export interface OverlayPreviewProps extends OverlayBaseProps {
   type?: 'none' | 'zoomIn';
   anchorPoint?: AnchorPoint;
+  anchorOffset?: number;
   fromLayout: LayoutRectangle;
   toLayout: LayoutRectangle | null;
   containerStyle?: StyleProp<ViewStyle>;

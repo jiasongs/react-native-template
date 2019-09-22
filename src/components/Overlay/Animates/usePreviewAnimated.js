@@ -4,7 +4,7 @@ import { Animated } from 'react-native';
 import useOverlay from './useOverlay';
 
 export default function usePreviewAnimated(props) {
-  const { fromLayout, toLayout, type, anchorPoint } = props;
+  const { fromLayout, toLayout, type, anchorPoint, anchorOffset } = props;
   const { maskOpacityRef, setAnimates, onPressMask } = useOverlay(props);
   const opacityRef = useRef(new Animated.Value(0));
   const anchorPointXRef = useRef(new Animated.Value(0));
@@ -33,6 +33,7 @@ export default function usePreviewAnimated(props) {
         }
         if (toLayout) {
         }
+        console.log('anchorOffset', anchorOffset);
         switch (anchorPoint) {
           case 'none':
             translateXRef.current.setValue(0);

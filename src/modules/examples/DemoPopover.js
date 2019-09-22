@@ -19,7 +19,6 @@ function DemoPopover() {
         <Button
           ref={buttonRef}
           style={{}}
-          type={'clear'}
           title={'点击'}
           onPress={() => {
             PopoverManager.showMenu({
