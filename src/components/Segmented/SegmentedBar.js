@@ -189,34 +189,44 @@ function SegmentedBar(props) {
       let inputRange = [],
         outputRangeX = [],
         outputRangeScale = [],
-        lastLayout = { x: 0 },
-        nextLayout = { x: 0 };
+        nextLayout = {};
       React.Children.forEach(sceneChildren, (item, ii) => {
-        let currentLayout = {};
-        let layoutX = 0;
         const boxLayout = boxLayouts[ii];
+        let layoutX = 0;
+        let multiple = 1; // 缩放倍数
         if (indicatorWidthType === 'custom') {
-          currentLayout = { width: contentItemWidth };
+          multiple = 1;
           layoutX = boxLayout.x + (boxLayout.width - contentItemWidth) / 2;
         } else {
-          currentLayout = boxLayout;
+          multiple = boxLayout.width / contentItemWidth;
           layoutX = boxLayout.x;
         }
-        lastLayout = currentLayout;
-        if (ii < sceneChildren.length - 1) {
-          nextLayout = boxLayouts[ii + 1];
-        }
-        const multiple = currentLayout.width / contentItemWidth; // 缩放倍数
         const transformx = (contentItemWidth * (1 - multiple)) / 2;
-        const multiple2222 =
-          (currentLayout.width + nextLayout.width) / contentItemWidth;
-        const transform222x = (contentItemWidth * (1 - multiple2222)) / 2;
         inputRange.push(contentLayout.width * ii);
-        inputRange.push(contentLayout.width * ii + contentLayout.width / 2);
-        outputRangeX.push(lastLayout.x - transformx);
-        outputRangeX.push(layoutX - transform222x);
+        outputRangeX.push(layoutX - transformx);
         outputRangeScale.push(multiple);
-        outputRangeScale.push(multiple2222);
+        if (indicatorType === 'lengThen') {
+          if (ii < sceneChildren.length - 1) {
+            nextLayout = boxLayouts[ii + 1];
+          }
+          let multiple2 = 1;
+          if (indicatorWidthType === 'custom') {
+            multiple2 =
+              (boxLayout.width -
+                (boxLayout.width - contentItemWidth) / 2 +
+                (nextLayout.width -
+                  (nextLayout.width - contentItemWidth) / 2)) /
+              contentItemWidth;
+          } else {
+            multiple2 =
+              (nextLayout.x - boxLayout.x + nextLayout.width) /
+              contentItemWidth;
+          }
+          const transformx2 = (contentItemWidth * (1 - multiple2)) / 2;
+          inputRange.push(contentLayout.width * ii + contentLayout.width / 2);
+          outputRangeX.push(layoutX - transformx2);
+          outputRangeScale.push(multiple2);
+        }
       });
       console.log('inputRange', inputRange);
       console.log('outputRangeX', outputRangeX);
@@ -232,6 +242,7 @@ function SegmentedBar(props) {
     boxLayouts,
     contentItemWidth,
     contentLayout,
+    indicatorType,
     indicatorWidthType,
     sceneChildren,
   ]);
@@ -297,7 +308,7 @@ const styles = StyleSheet.create({
 
 SegmentedBar.propTypes = {
   ...SegmentedBarItem.type.propTypes,
-  indicatorType: PropTypes.oneOf([1, 2]),
+  indicatorType: PropTypes.oneOf(['normal', 'lengThen']),
   indicatorWidthType: PropTypes.oneOf(['none', 'box', 'item', 'custom']),
   style: ViewPropTypes.style,
   indicatorStyle: ViewPropTypes.style,
@@ -310,7 +321,7 @@ SegmentedBar.propTypes = {
 };
 
 SegmentedBar.defaultProps = {
-  indicatorType: 1,
+  indicatorType: 'normal',
   indicatorWidthType: 'box',
   sidebarPosition: 'right',
 };

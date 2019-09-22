@@ -10,6 +10,7 @@ import {
 import { ButtonProps } from '../Touchable';
 
 export type IndicatorWidthType = 'none' | 'box' | 'item' | 'custom';
+export type IndicatorType = 'normal' | 'lengThen';
 
 export interface SegmentedBarItemProps extends ButtonProps {
   active: boolean;
@@ -21,6 +22,7 @@ export interface SegmentedBarItemProps extends ButtonProps {
 }
 
 export interface SegmentedBarProps {
+  indicatorType?: IndicatorType;
   indicatorWidthType?: IndicatorWidthType;
   style?: StyleProp<ViewStyle>;
   indicatorStyle?: StyleProp<ViewStyle>;
@@ -54,6 +56,7 @@ export interface SegmentedViewProps extends SegmentedBarProps {
   style?: StyleProp<ViewStyle>;
   barStyle?: StyleProp<ViewStyle>;
   barBackgroundImage: ImageSourcePropType;
+  indicatorType?: IndicatorType;
   indicatorWidthType?: IndicatorWidthType;
   showSegmentedBar?: boolean;
   initialPage?: number;

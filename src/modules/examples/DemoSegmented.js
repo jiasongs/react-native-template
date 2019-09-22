@@ -47,12 +47,20 @@ function DemoSegmented() {
         onChange={(index) => {
           console.log('onChange', index);
         }}
+        indicatorType={'normal'}
         indicatorWidthType={'item'}
+        indicatorStyle={{ width: 80 }}
         barStyle={{}}
-        itemStyle={{ borderRightWidth: 1 }}
+        itemStyle={{ borderRightWidth: 1, borderLeftWidth: 1 }}
       >
         {dataSource.map((item, index) => {
           let title = '你好吗' + index;
+          if (index === 2) {
+            title = title + 'mamam';
+          }
+          if (index === 5) {
+            title = title + 'zz';
+          }
           return (
             <SegmentedScene key={title} itemTitle={title}>
               <FlatList
