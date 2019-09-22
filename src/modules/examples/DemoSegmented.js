@@ -47,7 +47,7 @@ function DemoSegmented() {
         onChange={(index) => {
           console.log('onChange', index);
         }}
-        indicatorType={'normal'}
+        indicatorType={'lengThen'}
         indicatorWidthType={'item'}
         indicatorStyle={{ width: 80 }}
         barStyle={{}}
