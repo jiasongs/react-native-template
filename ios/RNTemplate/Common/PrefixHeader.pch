@@ -1,0 +1,26 @@
+//
+//  PrefixHeader.pch
+//  template
+//
+//  Created by jiasong on 2019/3/30.
+//  Copyright © 2019 Facebook. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef DEBUG
+#else
+#define DLog(...)
+#define DeBugLog(...)
+#define NSLog(...)
+#define RCTLog(...)
+#define RCTLogTrace(...)
+#define RCTLogInfo(...)
+#define RCTLogAdvice(string, ...)
+#define RCTLogWarn(...)
+#define RCTLogError(...)
+#define RCTLifecycleLog(...)
+#endif
+
+#endif

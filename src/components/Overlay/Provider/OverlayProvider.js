@@ -1,34 +1,92 @@
 'use strict';
 import React, { useState, useCallback, useMemo } from 'react';
-import { Animated, View, StyleSheet } from 'react-native';
+import { Animated, View, StyleSheet, ViewPropTypes } from 'react-native';
 import { useEventListener } from '../../../common/hooks';
+import OverlayManager, {
+  AddOverlayType,
+  RemoveOverlayType,
+  RemoveAllOverlayType,
+} from '../Provider/OverlayManager';
 
-const MemoElement = React.memo(() => {});
+function OverlayElementItem(props) {
+  const { elementKey, element, onProviderAnimated } = props;
 
-const MemoOverlayElements = React.memo((props) => {
-  const { elements, onProviderAnimated, onElementsDisappear } = props;
+  const onAnimated = useCallback(
+    (style) => {
+      onProviderAnimated(elementKey, style);
+    },
+    [elementKey, onProviderAnimated],
+  );
+
+  const onPrepare = useCallback(
+    (appear, disappear) => {
+      const overlayKeys = OverlayManager.overlayKeys;
+      const onPrepareSave = element.props ? element.props.onPrepare : null;
+      const index = overlayKeys.findIndex((item) => item.key === elementKey);
+      const overlay = { key: elementKey, appear, disappear };
+      if (index !== -1) {
+        overlayKeys[index] = overlay;
+      }
+      onPrepareSave && onPrepareSave(overlay);
+    },
+    [element, elementKey],
+  );
+
+  const onPrepareCompleted = useCallback(() => {
+    const overlayKeys = OverlayManager.overlayKeys;
+    const onPrepareCompletedSave = element.props
+      ? element.props.onPrepareCompleted
+      : null;
+    const index = overlayKeys.findIndex((item) => item.key === elementKey);
+    if (index !== -1) {
+      const overlay = overlayKeys[index];
+      if (onPrepareCompletedSave) {
+        onPrepareCompletedSave(overlay);
+      } else {
+        overlay.appear();
+      }
+    }
+  }, [element, elementKey]);
+
+  const onDisappear = useCallback(() => {
+    const onDisappearCompletedSave = element.props
+      ? element.props.onDisappearCompleted
+      : null;
+    onDisappearCompletedSave && onDisappearCompletedSave();
+    OverlayManager._remove(elementKey);
+  }, [element, elementKey]);
+
+  return React.cloneElement(element, {
+    onPrepare: onPrepare,
+    onPrepareCompleted: onPrepareCompleted,
+    onDisappearCompleted: onDisappear,
+    onProviderAnimated: onAnimated,
+  });
+}
+
+const MemoOverlayElementItem = React.memo(OverlayElementItem);
+
+function OverlayElements(props) {
+  const { elements, onProviderAnimated } = props;
 
   return elements.map((item) => {
-    const onDisappearCompletedSave = item.element.props
-      ? item.element.props.onDisappearCompleted
-      : null;
-    const key = item.key;
-    return React.cloneElement(item.element, {
-      key: '__Top' + key,
-      onProviderAnimated: (style) => {
-        onProviderAnimated(key, style);
-      },
-      onDisappearCompleted: () => {
-        onElementsDisappear(key);
-        onDisappearCompletedSave && onDisappearCompletedSave(key);
-      },
-    });
+    return (
+      <MemoOverlayElementItem
+        key={'__Top' + item.key}
+        elementKey={item.key}
+        element={item.element}
+        onProviderAnimated={onProviderAnimated}
+      />
+    );
   });
-});
+}
 
-const MemoChildren = React.memo((props) => {
+function OverlayChildren(props) {
   return props.children;
-});
+}
+
+const MemoOverlayElements = React.memo(OverlayElements);
+const MemoOverlayChildren = React.memo(OverlayChildren);
 
 function OverlayProvider(props) {
   const { style, children } = props;
@@ -47,28 +105,12 @@ function OverlayProvider(props) {
   const remove = useCallback(({ key }) => {
     setElements((preElements) => {
       const newElements = preElements.slice();
-      for (let i = newElements.length - 1; i >= 0; --i) {
-        if (newElements[i].key === key) {
-          newElements.splice(i, 1);
-          break;
-        }
+      const index = newElements.findIndex((item) => item.key === key);
+      if (index !== -1) {
+        newElements.splice(index, 1);
       }
       return newElements;
     });
-  }, []);
-
-  const removeAll = useCallback(() => {
-    setElements([]);
-  }, []);
-
-  const onProviderAnimated = useCallback((key, aStyle) => {
-    setAnimateStyle((preStyle) => {
-      return preStyle.concat([{ ...StyleSheet.flatten(aStyle), key }]);
-    });
-  }, []);
-
-  const onElementsDisappear = useCallback((key) => {
-    // 重置
     setAnimateStyle((preStyle) => {
       if (preStyle.length === 0) {
         return preStyle;
@@ -82,9 +124,19 @@ function OverlayProvider(props) {
     });
   }, []);
 
-  useEventListener('addOverlay', add);
-  useEventListener('removeOverlay', remove);
-  useEventListener('removeAllOverlay', removeAll);
+  const removeAll = useCallback(() => {
+    setElements([]);
+  }, []);
+
+  const onProviderAnimated = useCallback((key, aStyle) => {
+    setAnimateStyle((preStyle) => {
+      return preStyle.concat([{ ...StyleSheet.flatten(aStyle), key }]);
+    });
+  }, []);
+
+  useEventListener(AddOverlayType, add);
+  useEventListener(RemoveOverlayType, remove);
+  useEventListener(RemoveAllOverlayType, removeAll);
 
   const buildStyles = useMemo(() => {
     return {
@@ -96,12 +148,11 @@ function OverlayProvider(props) {
   return (
     <View style={buildStyles.style}>
       <Animated.View style={buildStyles.contentStyle}>
-        <MemoChildren children={children} />
+        <MemoOverlayChildren children={children} />
       </Animated.View>
       <MemoOverlayElements
         elements={elements}
         onProviderAnimated={onProviderAnimated}
-        onElementsDisappear={onElementsDisappear}
       />
     </View>
   );
@@ -114,7 +165,9 @@ const styles = StyleSheet.create({
   },
 });
 
-OverlayProvider.propTypes = {};
+OverlayProvider.propTypes = {
+  style: ViewPropTypes.style,
+};
 
 OverlayProvider.defaultProps = {};
 

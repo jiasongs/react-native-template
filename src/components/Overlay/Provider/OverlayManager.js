@@ -7,6 +7,10 @@ import OverlayPreview from '../Views/OverlayPreview';
 
 let keyValue = 0;
 
+export const AddOverlayType = '_addOverlay';
+export const RemoveOverlayType = '_removeOverlay';
+export const RemoveAllOverlayType = '_removeAllOverlay';
+
 export default class OverlayManager {
   static overlayKeys = [];
 
@@ -23,45 +27,7 @@ export default class OverlayManager {
   }
 
   static show(overlayView) {
-    const onPrepareSave = overlayView.props
-      ? overlayView.props.onPrepare
-      : null;
-    const onPrepareCompletedSave = overlayView.props
-      ? overlayView.props.onPrepareCompleted
-      : null;
-    const onDisappearCompletedSave = overlayView.props
-      ? overlayView.props.onDisappearCompleted
-      : null;
-    const key = this._add(
-      React.cloneElement(overlayView, {
-        // 准备
-        onPrepare: (appear, disappear) => {
-          const index = this.overlayKeys.findIndex((item) => item.key === key);
-          const overlay = { key, appear, disappear };
-          if (index !== -1) {
-            this.overlayKeys[index] = overlay;
-          }
-          onPrepareSave && onPrepareSave(overlay);
-        },
-        // 准备完成，可以弹出界面
-        onPrepareCompleted: () => {
-          const index = this.overlayKeys.findIndex((item) => item.key === key);
-          if (index !== -1) {
-            const overlay = this.overlayKeys[index];
-            if (onPrepareCompletedSave) {
-              onPrepareCompletedSave(overlay);
-            } else {
-              overlay.appear && overlay.appear();
-            }
-          }
-        },
-        onDisappearCompleted: () => {
-          this._remove(key);
-          onDisappearCompletedSave && onDisappearCompletedSave(key);
-        },
-      }),
-    );
-    return key;
+    return this._add(overlayView);
   }
 
   static hide(key) {
@@ -88,7 +54,7 @@ export default class OverlayManager {
   static _add(element) {
     const key = ++keyValue;
     this.overlayKeys.push({ key });
-    DeviceEventEmitter.emit('addOverlay', { key, element });
+    DeviceEventEmitter.emit(AddOverlayType, { key, element });
     return key;
   }
 
@@ -97,11 +63,11 @@ export default class OverlayManager {
     if (index !== -1) {
       this.overlayKeys.splice(index, 1);
     }
-    DeviceEventEmitter.emit('removeOverlay', { key });
+    DeviceEventEmitter.emit(RemoveOverlayType, { key });
   }
 
   static _removeAll() {
     this.overlayKeys = [];
-    DeviceEventEmitter.emit('removeAllOverlay', {});
+    DeviceEventEmitter.emit(RemoveAllOverlayType, {});
   }
 }

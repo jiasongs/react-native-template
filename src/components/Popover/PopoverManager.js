@@ -24,7 +24,7 @@ export default class PopoverManager {
       anchorOffset:
         option && option.anchorOffset
           ? option.anchorOffset
-          : newProps.arrowPadding,
+          : newProps.arrowPadding + newProps.arrowSize / 2,
     };
     this.showView(component, newOption);
   }

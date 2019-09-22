@@ -198,8 +198,8 @@ OverlayPull.propTypes = {
   type: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   containerStyle: ViewPropTypes.style,
   containerPointerEvents: ViewPropTypes.pointerEvents,
-  rootScale: PropTypes.number,
-  rootStyle: ViewPropTypes.style,
+  providerContentScale: PropTypes.number,
+  providerContentStyle: ViewPropTypes.style,
   panGestureEnabled: PropTypes.bool,
 };
 

@@ -4,7 +4,12 @@ import { Animated } from 'react-native';
 import useOverlay from './useOverlay';
 
 export default function usePullAnimated(props) {
-  const { type, onProviderAnimated, rootScale, rootStyle } = props;
+  const {
+    type,
+    onProviderAnimated,
+    providerContentScale,
+    providerContentStyle,
+  } = props;
   const {
     maskOpacityRef,
     setAnimates,
@@ -54,15 +59,15 @@ export default function usePullAnimated(props) {
             useNativeDriver: true,
           }),
         ];
-        if (rootScale) {
+        if (providerContentScale) {
           onProviderAnimated([
-            rootStyle,
+            providerContentStyle,
             {
               transform: [
                 {
                   scale: translateRef.current.interpolate({
                     inputRange: [0, offsetSize],
-                    outputRange: [rootScale, 1],
+                    outputRange: [providerContentScale, 1],
                     extrapolateLeft: 'clamp',
                   }),
                 },
@@ -76,7 +81,13 @@ export default function usePullAnimated(props) {
         });
       }
     },
-    [onProviderAnimated, rootScale, rootStyle, setAnimates, type],
+    [
+      onProviderAnimated,
+      providerContentScale,
+      providerContentStyle,
+      setAnimates,
+      type,
+    ],
   );
 
   const onLayout = useCallback(

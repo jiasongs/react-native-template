@@ -52,8 +52,8 @@ export interface OverlayPullProps extends OverlayBaseProps {
   type?: 'top' | 'bottom' | 'left' | 'right';
   containerStyle?: StyleProp<ViewStyle>;
   containerPointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto';
-  rootScale?: number;
-  rootStyle?: StyleProp<ViewStyle>;
+  providerContentScale?: number;
+  providerContentStyle?: StyleProp<ViewStyle>;
   panGestureEnabled: boolean;
 }
 

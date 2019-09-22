@@ -59,7 +59,7 @@ export default function usePreviewAnimated(props) {
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
-            anchorPointXRef.current.setValue(layout.width / 2);
+            anchorPointXRef.current.setValue(layout.width / 2 - anchorOffset);
             anchorPointYRef.current.setValue(layout.height / 2);
             break;
           case 'leftTop':
@@ -70,7 +70,7 @@ export default function usePreviewAnimated(props) {
               translateYRef.current.setValue(_fromY);
             }
             anchorPointXRef.current.setValue(layout.width / 2);
-            anchorPointYRef.current.setValue(layout.height / 2);
+            anchorPointYRef.current.setValue(layout.height / 2 - anchorOffset);
             break;
           case 'bottomLeft':
             if (fromLayout) {
@@ -79,7 +79,7 @@ export default function usePreviewAnimated(props) {
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
-            anchorPointXRef.current.setValue(layout.width / 2);
+            anchorPointXRef.current.setValue(layout.width / 2 - anchorOffset);
             anchorPointYRef.current.setValue(-layout.height / 2);
             break;
           case 'leftBottom':
@@ -91,7 +91,7 @@ export default function usePreviewAnimated(props) {
               translateYRef.current.setValue(_fromY);
             }
             anchorPointXRef.current.setValue(layout.width / 2);
-            anchorPointYRef.current.setValue(-layout.height / 2);
+            anchorPointYRef.current.setValue(-layout.height / 2 + anchorOffset);
             break;
           case 'top':
             if (fromLayout) {
@@ -133,7 +133,7 @@ export default function usePreviewAnimated(props) {
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
-            anchorPointXRef.current.setValue(-layout.width / 2);
+            anchorPointXRef.current.setValue(-layout.width / 2 + anchorOffset);
             anchorPointYRef.current.setValue(layout.height / 2);
             break;
           case 'rightTop':
@@ -144,7 +144,7 @@ export default function usePreviewAnimated(props) {
               translateYRef.current.setValue(_fromY);
             }
             anchorPointXRef.current.setValue(-layout.width / 2);
-            anchorPointYRef.current.setValue(layout.height / 2);
+            anchorPointYRef.current.setValue(layout.height / 2 - anchorOffset);
             break;
           case 'bottomRight':
             if (fromLayout) {
@@ -153,7 +153,7 @@ export default function usePreviewAnimated(props) {
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
-            anchorPointXRef.current.setValue(-layout.width / 2);
+            anchorPointXRef.current.setValue(-layout.width / 2 + anchorOffset);
             anchorPointYRef.current.setValue(-layout.height / 2);
             break;
           case 'rightBottom':
@@ -165,7 +165,7 @@ export default function usePreviewAnimated(props) {
               translateYRef.current.setValue(_fromY);
             }
             anchorPointXRef.current.setValue(-layout.width / 2);
-            anchorPointYRef.current.setValue(-layout.height / 2);
+            anchorPointYRef.current.setValue(-layout.height / 2 + anchorOffset);
             break;
           default:
             break;
@@ -173,14 +173,14 @@ export default function usePreviewAnimated(props) {
         opacityRef.current.setValue(0);
         scaleRef.current.setValue(zoomRate);
         const appearAnimates = [
-          Animated.timing(opacityRef.current, {
+          Animated.spring(opacityRef.current, {
             toValue: 1,
-            duration,
+            friction: 9,
             useNativeDriver: true,
           }),
-          Animated.timing(scaleRef.current, {
+          Animated.spring(scaleRef.current, {
             toValue: 1,
-            duration,
+            friction: 9,
             useNativeDriver: true,
           }),
         ];
@@ -202,7 +202,7 @@ export default function usePreviewAnimated(props) {
         });
       }
     },
-    [anchorPoint, fromLayout, setAnimates, toLayout, type],
+    [anchorOffset, anchorPoint, fromLayout, setAnimates, toLayout, type],
   );
 
   const onLayout = useCallback(

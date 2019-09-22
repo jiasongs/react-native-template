@@ -1,6 +1,5 @@
 'use strict';
-import React, { useRef, useState, useEffect } from 'react';
-import { Animated, Platform } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ThemeManager from './ThemeManager';
 import ThemeLight from './ThemeLight';
@@ -13,21 +12,12 @@ const ThemeContext = React.createContext(InitialTheme);
 
 // 最外层的主题
 function ThemeProvider(props) {
-  const { themeValue } = props;
+  const { themeValue, children } = props;
 
-  const opacityRef = useRef(new Animated.Value(1.0));
   const [value, setValue] = useState(InitialTheme);
 
   useEffect(() => {
     const listenerName = ThemeManager.addListener((data) => {
-      if (Platform.OS === 'ios') {
-        // 只支持iOS，安卓效果不太好
-        opacityRef.current.setValue(0.2);
-        Animated.spring(opacityRef.current, {
-          toValue: 1.0,
-          useNativeDriver: true,
-        }).start();
-      }
       setValue((preValue) => {
         return { ...preValue, ...data };
       });
@@ -46,16 +36,7 @@ function ThemeProvider(props) {
   }, [themeValue]);
 
   return (
-    <ThemeContext.Provider value={value}>
-      <Animated.View
-        style={{
-          flex: 1,
-          opacity: opacityRef.current,
-        }}
-      >
-        {props.children}
-      </Animated.View>
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 }
 

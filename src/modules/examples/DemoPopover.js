@@ -22,8 +22,8 @@ function DemoPopover() {
           title={'点击'}
           onPress={() => {
             PopoverManager.showMenu({
-              arrow: 'topRight',
-              type: 'vertical',
+              arrow: 'bottom',
+              type: 'horizontal',
               actions: [
                 {
                   title: 'Search',
