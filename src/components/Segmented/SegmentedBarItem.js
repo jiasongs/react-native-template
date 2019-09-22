@@ -22,7 +22,7 @@ function SegmentedBarItem(props) {
     activeIcon,
     iconStyle,
     activeIconStyle,
-    indicatorType,
+    indicatorWidthType,
     ...others
   } = props;
 
@@ -46,7 +46,7 @@ function SegmentedBarItem(props) {
     const newStyle = [segmentedBarItem.style];
     const newTitleStyle = [segmentedBarItem.titleStyle];
     const newIconStyle = [segmentedBarItem.iconStyle];
-    if (indicatorType === 'item') {
+    if (indicatorWidthType === 'item') {
       newStyle.push(styles.indicatorItemStyle);
     } else {
       newStyle.push(styles.indicatorBoxStyle);
@@ -102,7 +102,7 @@ function SegmentedBarItem(props) {
     activeTitleStyle,
     icon,
     iconStyle,
-    indicatorType,
+    indicatorWidthType,
     style,
     themeValue.segmented.segmentedBarItem,
     title,

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { ButtonProps } from '../Touchable';
 
-export type IndicatorType = 'none' | 'box' | 'item' | 'custom';
+export type IndicatorWidthType = 'none' | 'box' | 'item' | 'custom';
 
 export interface SegmentedBarItemProps extends ButtonProps {
   active: boolean;
@@ -21,7 +21,7 @@ export interface SegmentedBarItemProps extends ButtonProps {
 }
 
 export interface SegmentedBarProps {
-  indicatorType?: IndicatorType;
+  indicatorWidthType?: IndicatorWidthType;
   style?: StyleProp<ViewStyle>;
   indicatorStyle?: StyleProp<ViewStyle>;
   sidebarPosition: 'left' | 'right';
@@ -54,7 +54,7 @@ export interface SegmentedViewProps extends SegmentedBarProps {
   style?: StyleProp<ViewStyle>;
   barStyle?: StyleProp<ViewStyle>;
   barBackgroundImage: ImageSourcePropType;
-  indicatorType?: IndicatorType;
+  indicatorWidthType?: IndicatorWidthType;
   showSegmentedBar?: boolean;
   initialPage?: number;
   activeIndex?: number;

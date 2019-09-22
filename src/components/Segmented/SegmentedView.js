@@ -17,7 +17,7 @@ function SegmentedView(props) {
     style,
     contentStyle,
     barStyle,
-    indicatorType,
+    indicatorWidthType,
     indicatorStyle,
     showSegmentedBar,
     initialPage,
@@ -165,7 +165,7 @@ function SegmentedView(props) {
         <SegmentedBar
           {...others}
           style={buildStyles.barStyle}
-          indicatorType={indicatorType}
+          indicatorWidthType={indicatorWidthType}
           animatedX={animatedXRef.current}
           sceneChildren={children}
           currentIndex={activeIndex !== -1 ? activeIndex : currentIndex}
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
 SegmentedView.propTypes = {
   ...SegmentedBar.type.propTypes,
   style: ViewPropTypes.style,
-  indicatorType: SegmentedBar.type.propTypes.indicatorType,
+  indicatorWidthType: SegmentedBar.type.propTypes.indicatorWidthType,
   barStyle: ViewPropTypes.style,
   showSegmentedBar: PropTypes.bool,
   initialPage: PropTypes.number,

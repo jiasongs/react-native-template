@@ -47,9 +47,9 @@ function DemoSegmented() {
         onChange={(index) => {
           console.log('onChange', index);
         }}
-        indicatorType={'box'}
+        indicatorWidthType={'item'}
         barStyle={{}}
-        itemStyle={{}}
+        itemStyle={{ borderRightWidth: 1 }}
       >
         {dataSource.map((item, index) => {
           let title = '你好吗' + index;

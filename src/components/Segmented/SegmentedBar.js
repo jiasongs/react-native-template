@@ -86,6 +86,7 @@ const MemoRenderIndicator = React.memo(RenderIndicator);
 function SegmentedBar(props) {
   const {
     indicatorType,
+    indicatorWidthType,
     style,
     animatedX,
     sceneChildren,
@@ -112,7 +113,7 @@ function SegmentedBar(props) {
   const [scrollLayout, setScrollLayout] = useState({ width: 0, height: 0 });
 
   const contentItemWidth = useMemo(() => {
-    if (indicatorType === 'custom') {
+    if (indicatorWidthType === 'custom') {
       const flattenStyle = StyleSheet.flatten(
         indicatorStyle ? indicatorStyle : {},
       );
@@ -120,11 +121,11 @@ function SegmentedBar(props) {
         console.error('error: 当类型为custom时，style必须设置宽度');
       }
       return flattenStyle.width || 0;
-    } else if (indicatorType === 'none') {
+    } else if (indicatorWidthType === 'none') {
       return 0;
     }
     return 80;
-  }, [indicatorStyle, indicatorType]);
+  }, [indicatorStyle, indicatorWidthType]);
 
   const buildStyles = useMemo(() => {
     const segmentedBar = themeValue.segmented.segmentedBar;
@@ -187,24 +188,39 @@ function SegmentedBar(props) {
     ) {
       let inputRange = [],
         outputRangeX = [],
-        outputRangeScale = [];
+        outputRangeScale = [],
+        lastLayout = { x: 0 },
+        nextLayout = { x: 0 };
       React.Children.forEach(sceneChildren, (item, ii) => {
         let currentLayout = {};
         let layoutX = 0;
         const boxLayout = boxLayouts[ii];
-        if (indicatorType === 'custom') {
+        if (indicatorWidthType === 'custom') {
           currentLayout = { width: contentItemWidth };
           layoutX = boxLayout.x + (boxLayout.width - contentItemWidth) / 2;
         } else {
           currentLayout = boxLayout;
           layoutX = boxLayout.x;
         }
+        lastLayout = currentLayout;
+        if (ii < sceneChildren.length - 1) {
+          nextLayout = boxLayouts[ii + 1];
+        }
         const multiple = currentLayout.width / contentItemWidth; // 缩放倍数
         const transformx = (contentItemWidth * (1 - multiple)) / 2;
+        const multiple2222 =
+          (currentLayout.width + nextLayout.width) / contentItemWidth;
+        const transform222x = (contentItemWidth * (1 - multiple2222)) / 2;
         inputRange.push(contentLayout.width * ii);
-        outputRangeX.push(Math.round(layoutX - transformx));
+        inputRange.push(contentLayout.width * ii + contentLayout.width / 2);
+        outputRangeX.push(lastLayout.x - transformx);
+        outputRangeX.push(layoutX - transform222x);
         outputRangeScale.push(multiple);
+        outputRangeScale.push(multiple2222);
       });
+      console.log('inputRange', inputRange);
+      console.log('outputRangeX', outputRangeX);
+      console.log('outputRangeScale', outputRangeScale);
       setInterpolate({
         inputRangeX: inputRange,
         outputRangeX: outputRangeX,
@@ -216,7 +232,7 @@ function SegmentedBar(props) {
     boxLayouts,
     contentItemWidth,
     contentLayout,
-    indicatorType,
+    indicatorWidthType,
     sceneChildren,
   ]);
 
@@ -247,7 +263,7 @@ function SegmentedBar(props) {
               onBoxLayout={onBoxLayout}
               onPress={onPressItem}
               active={index === currentIndex}
-              indicatorType={indicatorType}
+              indicatorWidthType={indicatorWidthType}
               {...itemProps}
             />
           );
@@ -281,7 +297,8 @@ const styles = StyleSheet.create({
 
 SegmentedBar.propTypes = {
   ...SegmentedBarItem.type.propTypes,
-  indicatorType: PropTypes.oneOf(['none', 'box', 'item', 'custom']),
+  indicatorType: PropTypes.oneOf([1, 2]),
+  indicatorWidthType: PropTypes.oneOf(['none', 'box', 'item', 'custom']),
   style: ViewPropTypes.style,
   indicatorStyle: ViewPropTypes.style,
   sidebarPosition: PropTypes.oneOf(['left', 'right']),
@@ -293,7 +310,8 @@ SegmentedBar.propTypes = {
 };
 
 SegmentedBar.defaultProps = {
-  indicatorType: 'box',
+  indicatorType: 1,
+  indicatorWidthType: 'box',
   sidebarPosition: 'right',
 };
 
