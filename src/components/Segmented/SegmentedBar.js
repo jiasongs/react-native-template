@@ -165,17 +165,20 @@ function SegmentedBar(props) {
   );
 
   useEffect(() => {
-    let boxLayout = boxLayouts[currentIndex];
-    boxLayout = boxLayout ? boxLayout : { x: 0, width: 0 };
-    const offsetX = boxLayout.x - scrollLayout.width / 2 + boxLayout.width / 2;
-    if (offsetX) {
-      scrollViewRef.current._component.scrollTo({
-        x: offsetX,
-        y: 0,
-        animated: true,
-      });
+    if (boxLayouts.length > 0 && scrollLayout.width !== 0) {
+      let boxLayout = boxLayouts[currentIndex];
+      boxLayout = boxLayout ? boxLayout : { x: 0, width: 0 };
+      const offsetX =
+        boxLayout.x - scrollLayout.width / 2 + boxLayout.width / 2;
+      if (offsetX) {
+        scrollViewRef.current._component.scrollTo({
+          x: offsetX,
+          y: 0,
+          animated: true,
+        });
+      }
     }
-  }, [scrollLayout, currentIndex, boxLayouts, sceneChildren]);
+  }, [scrollLayout, boxLayouts, currentIndex, sceneChildren]);
 
   useEffect(() => {
     const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;

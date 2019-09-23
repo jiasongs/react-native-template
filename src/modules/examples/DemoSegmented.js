@@ -47,9 +47,10 @@ function DemoSegmented() {
         onChange={(index) => {
           console.log('onChange', index);
         }}
+        initialPage={0}
         indicatorType={'lengThen'}
         indicatorWidthType={'item'}
-        indicatorStyle={{ width: 80 }}
+        indicatorStyle={{}}
         barStyle={{}}
         itemStyle={{ borderRightWidth: 1, borderLeftWidth: 1 }}
       >

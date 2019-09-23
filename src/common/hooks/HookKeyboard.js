@@ -6,16 +6,6 @@ import { useEventListener } from './HookEventListener';
 export function useKeyboard() {
   const [keyboardState, setKeyboardState] = useState(null);
 
-  useEventListener(
-    Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
-    onKeyboardShow,
-  );
-
-  useEventListener(
-    Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
-    onKeyboardHide,
-  );
-
   const onKeyboardShow = useCallback((event) => {
     if (!event.isEventFromThisApp) {
       return;
@@ -45,6 +35,16 @@ export function useKeyboard() {
       height: event.endCoordinates.height,
     });
   }, []);
+
+  useEventListener(
+    Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
+    onKeyboardShow,
+  );
+
+  useEventListener(
+    Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
+    onKeyboardHide,
+  );
 
   return keyboardState;
 }

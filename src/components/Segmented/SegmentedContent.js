@@ -37,6 +37,8 @@ function SegmentedContent(props) {
       bounces={true}
       scrollEventThrottle={16}
       onScroll={onScroll}
+      decelerationRate={'normal'}
+      nestedScrollEnabled={true}
       {...others}
     >
       {React.Children.map(children, (item, index) => {
