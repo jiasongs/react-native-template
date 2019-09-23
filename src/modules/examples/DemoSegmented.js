@@ -52,7 +52,7 @@ function DemoSegmented() {
         indicatorWidthType={'item'}
         indicatorStyle={{}}
         barStyle={{}}
-        itemStyle={{ borderRightWidth: 1, borderLeftWidth: 1 }}
+        itemStyle={{}}
       >
         {dataSource.map((item, index) => {
           let title = '你好吗' + index;

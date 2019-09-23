@@ -230,9 +230,9 @@ function SegmentedBar(props) {
           outputRangeScale.push(multiple2);
         }
       });
-      console.log('inputRange', inputRange);
-      console.log('outputRangeX', outputRangeX);
-      console.log('outputRangeScale', outputRangeScale);
+      // console.log('inputRange', inputRange);
+      // console.log('outputRangeX', outputRangeX);
+      // console.log('outputRangeScale', outputRangeScale);
       setInterpolate({
         inputRangeX: inputRange,
         outputRangeX: outputRangeX,
