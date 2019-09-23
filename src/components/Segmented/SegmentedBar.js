@@ -5,7 +5,6 @@ import React, {
   useState,
   useMemo,
   useCallback,
-  useContext,
 } from 'react';
 import {
   Animated,
@@ -16,7 +15,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import SegmentedBarItem from './SegmentedBarItem';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 
 function mergeProps(aProps, bProps) {
   const itemProps = aProps ? aProps : {};
@@ -99,7 +98,7 @@ function SegmentedBar(props) {
     backgroundImage,
   } = props;
 
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('segmented');
   const scrollViewRef = useRef(React.createRef());
   const boxLayoutsRef = useRef([]);
 
@@ -128,7 +127,7 @@ function SegmentedBar(props) {
   }, [indicatorStyle, indicatorWidthType]);
 
   const buildStyles = useMemo(() => {
-    const segmentedBar = themeValue.segmented.segmentedBar;
+    const segmentedBar = themeValue.segmentedBar;
     return {
       style: [segmentedBar.style, styles.container, style],
       indicatorStyle: [segmentedBar.indicatorStyle, indicatorStyle],

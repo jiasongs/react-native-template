@@ -1,5 +1,5 @@
 'use strict';
-import React, { useRef, useCallback, useContext, useMemo } from 'react';
+import React, { useRef, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 import { Predefine } from '../../config/predefine';
 
 function RenderTitle(props) {
@@ -69,7 +69,7 @@ function ActionSheetView(props) {
   const { title, titleStyle, actions, onPress, onCancel } = props;
 
   const lastActionTimeRef = useRef(0);
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('sheet');
 
   const onPressAction = useCallback(
     (actionItem) => {
@@ -86,17 +86,16 @@ function ActionSheetView(props) {
   );
 
   const buildStyles = useMemo(() => {
-    const sheet = themeValue.sheet;
     return {
-      contentContainer: [sheet.contentStyle, styles.contentContainer],
-      titleStyle: [sheet.titleStyle, styles.title, titleStyle],
-      actionStyle: [sheet.actionStyle, styles.actionStyle],
-      actionTitleStyle: [sheet.actionTitleStyle, styles.actionText],
+      contentContainer: [themeValue.contentStyle, styles.contentContainer],
+      titleStyle: [themeValue.titleStyle, styles.title, titleStyle],
+      actionStyle: [themeValue.actionStyle, styles.actionStyle],
+      actionTitleStyle: [themeValue.actionTitleStyle, styles.actionText],
       cancelActionStyle: [
-        sheet.cancelActionStyle,
+        themeValue.cancelActionStyle,
         styles.cancelActionContainer,
       ],
-      cancelTitleStyle: [sheet.cancelTitleStyle, styles.cancelActionText],
+      cancelTitleStyle: [themeValue.cancelTitleStyle, styles.cancelActionText],
     };
   }, [themeValue, titleStyle]);
 

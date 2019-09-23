@@ -1,5 +1,5 @@
 'use strict';
-import React, { useState, useMemo, useCallback, useContext } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import {
 import PropTypes from 'prop-types';
 import NavigationTitle from './NavigationTitle';
 import NavigationAction from './NavigationAction';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 import { Predefine } from '../../config/predefine';
 // 考虑引入是否合理
 import RouterHelper from '../../routers/RouterHelper';
@@ -43,7 +43,7 @@ function NavigationBar(props) {
     extraData,
   } = props;
 
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('navigationBar');
 
   const [leftActionWidth, setLeftActionWidth] = useState(10);
   const [rightActionWidth, setRightActionWidth] = useState(10);
@@ -70,7 +70,7 @@ function NavigationBar(props) {
   }, []);
 
   const defaultLeftAction = useMemo(() => {
-    const action = themeValue.navigationBar.defaultLeftAction;
+    const action = themeValue.defaultLeftAction;
     return [
       {
         icon: defaultLeftSource,
@@ -90,11 +90,10 @@ function NavigationBar(props) {
   }, [defaultLeftAction, extraData, renderLeftAction]);
 
   const buildStyles = useMemo(() => {
-    const navigationBar = themeValue.navigationBar;
     return {
-      style: [navigationBar.style, styles.container, style],
-      statusBarStyle: navigationBar.statusBarStyle,
-      titleStyle: [navigationBar.titleStyle, titleStyle],
+      style: [themeValue.style, styles.container, style],
+      statusBarStyle: themeValue.statusBarStyle,
+      titleStyle: [themeValue.titleStyle, titleStyle],
     };
   }, [themeValue, style, titleStyle]);
 

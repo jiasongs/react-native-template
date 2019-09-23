@@ -1,9 +1,9 @@
 'use strict';
-import React, { useCallback, useMemo, useContext } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { StyleSheet, ViewPropTypes, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from '../Touchable';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 
 function SegmentedBarItem(props) {
   const {
@@ -26,7 +26,7 @@ function SegmentedBarItem(props) {
     ...others
   } = props;
 
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('segmented');
 
   const onBoxLayoutBack = useCallback(
     (event) => {
@@ -40,7 +40,7 @@ function SegmentedBarItem(props) {
   }, [index, onPress]);
 
   const buildStyles = useMemo(() => {
-    const segmentedBarItem = themeValue.segmented.segmentedBarItem;
+    const segmentedBarItem = themeValue.segmentedBarItem;
     let newIcon = icon;
     let newTitle = title;
     const newStyle = [segmentedBarItem.style];
@@ -104,7 +104,7 @@ function SegmentedBarItem(props) {
     iconStyle,
     indicatorWidthType,
     style,
-    themeValue.segmented.segmentedBarItem,
+    themeValue,
     title,
     titleStyle,
   ]);

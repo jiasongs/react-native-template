@@ -41,8 +41,10 @@ export default class RouterHelper {
   }
 
   static setRouter(navition) {
-    this.setNavigation(navition);
-    this.setRouterStacks(navition.state.routes);
+    if (navition) {
+      this.setNavigation(navition);
+      this.setRouterStacks(navition.state ? navition.state.routes : []);
+    }
   }
 
   static setNavigation(navigation) {

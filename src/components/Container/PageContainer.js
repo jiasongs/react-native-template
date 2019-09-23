@@ -1,11 +1,11 @@
 'use strict';
-import React, { useMemo, useContext } from 'react';
+import React, { useMemo } from 'react';
 import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { useNetInfo } from '@react-native-community/netinfo';
 import LoadingHint from '../Loading/LoadingHint';
 import NetworkError from '../Error/NetworkError';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 import { Predefine } from '../../config/predefine';
 
 const MemoRenderNetworkError = React.memo(RenderNetworkError);
@@ -45,10 +45,9 @@ function PageContainer(props) {
     fitNotchedScreenType,
   } = props;
 
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('page');
 
   const buildStyles = useMemo(() => {
-    const page = themeValue.page;
     let notchedScreenStyle;
     if (fitNotchedScreen) {
       if (fitNotchedScreenType === 'padding') {
@@ -68,7 +67,7 @@ function PageContainer(props) {
       notchedScreenStyle = null;
     }
     return {
-      style: [page.style, styles.container, notchedScreenStyle, style],
+      style: [themeValue.style, styles.container, notchedScreenStyle, style],
     };
   }, [fitNotchedScreen, fitNotchedScreenType, style, themeValue]);
 

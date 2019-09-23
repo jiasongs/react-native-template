@@ -1,8 +1,8 @@
 'use strict';
-import React, { useMemo, useState, useCallback, useContext } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { StyleSheet, View, ViewPropTypes, Platform } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 
 function PopoverArrow(props) {
   const {
@@ -16,11 +16,11 @@ function PopoverArrow(props) {
     ...others
   } = props;
 
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('popover');
   const [layout, setLayout] = useState({ width: 0, height: 0 });
 
   const buildStyles = useMemo(() => {
-    const popoverArrow = themeValue.popover.popoverArrow;
+    const popoverArrow = themeValue.popoverArrow;
     const newStyle = [popoverArrow.style, styles.container];
     const headerStyle = [styles.headerStyle];
     const arrowStyle = [styles.arrowStyle];
@@ -236,7 +236,7 @@ function PopoverArrow(props) {
     layout.height,
     layout.width,
     style,
-    themeValue.popover.popoverArrow,
+    themeValue,
   ]);
 
   const onLayoutBack = useCallback(

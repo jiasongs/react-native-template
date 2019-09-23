@@ -1,29 +1,28 @@
 'use strict';
-import React, { useMemo, useContext } from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 
 function Badge(props) {
   const { style, type, count, countStyle, maxCount } = props;
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('badge');
 
   const buildStyles = useMemo(() => {
-    const badge = themeValue.badge;
     const newStyle = [styles.container],
       newCountStyle = [styles.countStyle];
     switch (type) {
       case 'capsule':
-        newStyle.push(badge.capsule.style);
-        newCountStyle.push(badge.capsule.countStyle);
+        newStyle.push(themeValue.capsule.style);
+        newCountStyle.push(themeValue.capsule.countStyle);
         break;
       case 'square':
-        newStyle.push(badge.square.style);
-        newCountStyle.push(badge.square.countStyle);
+        newStyle.push(themeValue.square.style);
+        newCountStyle.push(themeValue.square.countStyle);
         break;
       case 'dot':
-        newStyle.push(badge.dot.style);
-        newCountStyle.push(badge.dot.countStyle);
+        newStyle.push(themeValue.dot.style);
+        newCountStyle.push(themeValue.dot.countStyle);
         break;
       default:
         break;

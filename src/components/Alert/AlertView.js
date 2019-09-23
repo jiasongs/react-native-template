@@ -1,11 +1,5 @@
 'use strict';
-import React, {
-  useEffect,
-  useRef,
-  useMemo,
-  useCallback,
-  useContext,
-} from 'react';
+import React, { useEffect, useRef, useMemo, useCallback } from 'react';
 import {
   View,
   Text,
@@ -14,7 +8,7 @@ import {
   LayoutAnimation,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 import { Predefine } from '../../config/predefine';
 import { useKeyboardSpace } from '../../common/hooks';
 
@@ -77,7 +71,7 @@ function AlertView(props) {
   const lastActionTimeRef = useRef(0);
   const viewLayoutRef = useRef(null);
   const [keyboardSpace, setMaxY] = useKeyboardSpace(-1);
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('alert');
 
   const onPressAction = useCallback(
     (actionItem) => {
@@ -114,18 +108,17 @@ function AlertView(props) {
   }, [keyboardSpace]);
 
   const buildStyles = useMemo(() => {
-    const alert = themeValue.alert;
     return {
-      style: [alert.style, styles.container],
-      titleStyle: [alert.titleStyle, titleStyle],
-      detailStyle: [alert.detailStyle, detailStyle],
+      style: [themeValue.style, styles.container],
+      titleStyle: [themeValue.titleStyle, titleStyle],
+      detailStyle: [themeValue.detailStyle, detailStyle],
       actionContainerStyle: [
-        alert.actionContainerStyle,
+        themeValue.actionContainerStyle,
         styles.actionContainer,
       ],
-      actionStyle: [alert.actionStyle, styles.actionHighlight],
-      actionTitleStyle: [alert.actionTitleStyle, styles.actionText],
-      separatorStyle: [alert.separatorStyle],
+      actionStyle: [themeValue.actionStyle, styles.actionHighlight],
+      actionTitleStyle: [themeValue.actionTitleStyle, styles.actionText],
+      separatorStyle: [themeValue.separatorStyle],
     };
   }, [themeValue, titleStyle, detailStyle]);
 

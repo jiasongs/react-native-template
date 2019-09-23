@@ -1,17 +1,17 @@
 'use strict';
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationBar, PageContainer, Button } from '../../components';
 import {
   ThemeManager,
   ThemeDark,
   ThemeLight,
-  ThemeContext,
+  useTheme,
 } from '../../config/theme';
 import { StorageManager } from '../../common/manager';
 
 function DemoTheme() {
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme();
 
   return (
     <PageContainer>

@@ -1,5 +1,5 @@
 'use strict';
-import React, { useMemo, useRef, useCallback, useContext } from 'react';
+import React, { useMemo, useRef, useCallback } from 'react';
 import {
   Text,
   Image,
@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 
 const IconPosition = {
   PositionTop: 'top',
@@ -45,7 +45,7 @@ function Button(props) {
   } = props;
 
   const lastActionTimeRef = useRef(0);
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('button');
 
   const _onPress = useCallback(
     (event) => {
@@ -61,49 +61,48 @@ function Button(props) {
   );
 
   const buildStyles = useMemo(() => {
-    const button = themeValue.button;
     const newStyle = [],
       newTitleStyle = [],
       newIconStyle = [],
       newLoadingStyle = [];
     if (type === 'solid') {
-      newStyle.push(button.solid.style);
-      newTitleStyle.push(button.solid.titleStyle);
-      newIconStyle.push(button.solid.iconStyle);
+      newStyle.push(themeValue.solid.style);
+      newTitleStyle.push(themeValue.solid.titleStyle);
+      newIconStyle.push(themeValue.solid.iconStyle);
       if (loading) {
-        newLoadingStyle.push(button.solid.loadingStyle);
+        newLoadingStyle.push(themeValue.solid.loadingStyle);
       }
       if (disabled) {
-        newStyle.push(button.solid.disabledStyle);
-        newTitleStyle.push(button.solid.disabledTitleStyle);
+        newStyle.push(themeValue.solid.disabledStyle);
+        newTitleStyle.push(themeValue.solid.disabledTitleStyle);
       }
       if (raised) {
-        newStyle.push(button.raisedStyle);
+        newStyle.push(themeValue.raisedStyle);
       }
     } else if (type === 'outline') {
-      newStyle.push(button.outline.style);
-      newTitleStyle.push(button.outline.titleStyle);
-      newIconStyle.push(button.outline.iconStyle);
+      newStyle.push(themeValue.outline.style);
+      newTitleStyle.push(themeValue.outline.titleStyle);
+      newIconStyle.push(themeValue.outline.iconStyle);
       if (loading) {
-        newLoadingStyle.push(button.outline.loadingStyle);
+        newLoadingStyle.push(themeValue.outline.loadingStyle);
       }
       if (disabled) {
-        newStyle.push(button.outline.disabledStyle);
-        newTitleStyle.push(button.outline.disabledTitleStyle);
+        newStyle.push(themeValue.outline.disabledStyle);
+        newTitleStyle.push(themeValue.outline.disabledTitleStyle);
       }
       if (raised) {
-        newStyle.push(button.raisedStyle);
+        newStyle.push(themeValue.raisedStyle);
       }
     } else if (type === 'clear') {
-      newStyle.push(button.clear.style);
-      newTitleStyle.push(button.clear.titleStyle);
-      newIconStyle.push(button.clear.iconStyle);
+      newStyle.push(themeValue.clear.style);
+      newTitleStyle.push(themeValue.clear.titleStyle);
+      newIconStyle.push(themeValue.clear.iconStyle);
       if (loading) {
-        newLoadingStyle.push(button.clear.loadingStyle);
+        newLoadingStyle.push(themeValue.clear.loadingStyle);
       }
       if (disabled) {
-        newStyle.push(button.clear.disabledStyle);
-        newTitleStyle.push(button.clear.disabledTitleStyle);
+        newStyle.push(themeValue.clear.disabledStyle);
+        newTitleStyle.push(themeValue.clear.disabledTitleStyle);
       }
     }
     const buildStyle = [...newStyle, styles.container];
@@ -116,28 +115,28 @@ function Button(props) {
           type !== 'clear' && buildStyle.push({ paddingVertical: 15 });
           buildIconStyle.push({
             marginBottom: spacingIconAndTitle,
-            ...button.iconVerticalStyle,
+            ...themeValue.iconVerticalStyle,
           });
           break;
         case IconPosition.PositionBottom:
           type !== 'clear' && buildStyle.push({ paddingVertical: 15 });
           buildIconStyle.push({
             marginTop: spacingIconAndTitle,
-            ...button.iconVerticalStyle,
+            ...themeValue.iconVerticalStyle,
           });
           break;
         case IconPosition.PositionLeft:
           buildStyle.push({ flexDirection: 'row' });
           buildIconStyle.push({
             marginRight: spacingIconAndTitle,
-            ...button.iconHorizontalStyle,
+            ...themeValue.iconHorizontalStyle,
           });
           break;
         case IconPosition.PositionRight:
           buildStyle.push({ flexDirection: 'row' });
           buildIconStyle.push({
             marginLeft: spacingIconAndTitle,
-            ...button.iconHorizontalStyle,
+            ...themeValue.iconHorizontalStyle,
           });
           break;
         default:
@@ -174,7 +173,7 @@ function Button(props) {
     raised,
     spacingIconAndTitle,
     style,
-    themeValue.button,
+    themeValue,
     title,
     titleStyle,
     type,

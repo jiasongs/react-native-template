@@ -1,8 +1,8 @@
 'use strict';
-import React, { useRef, useEffect, useMemo, useContext } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 
 function RenderIcon(props) {
   const {
@@ -59,9 +59,9 @@ const MemoRenderText = React.memo(RenderText);
 function ToastView(props) {
   const { type, text, successIcon, failIcon, warnIcon, loadingIcon } = props;
 
+  const themeValue = useTheme('toast');
   const rotateAnimatedRef = useRef(new Animated.Value(0));
   const loopAnimatedRef = useRef(null);
-  const themeValue = useContext(ThemeContext);
 
   useEffect(() => {
     type === 'loading' && startRotateAnimated();
@@ -89,7 +89,6 @@ function ToastView(props) {
   }
 
   const buildStyles = useMemo(() => {
-    const toast = themeValue.toast;
     let newStyle = null;
     if (type === 'message') {
       newStyle = {
@@ -108,8 +107,8 @@ function ToastView(props) {
       };
     }
     return {
-      style: [toast.style, styles.container, newStyle],
-      titleStyle: [toast.titleStyle, styles.toastText],
+      style: [themeValue.style, styles.container, newStyle],
+      titleStyle: [themeValue.titleStyle, styles.toastText],
     };
   }, [type, themeValue]);
 

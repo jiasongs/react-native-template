@@ -5,11 +5,10 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
-  useContext,
 } from 'react';
 import { ViewPropTypes, StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 import { WheelPicker } from 'react-native-wheel-picker-android';
 
 function PickerAndroid(props) {
@@ -24,7 +23,7 @@ function PickerAndroid(props) {
 
   const _currentIndex = useRef(0);
   const [items, setItems] = useState([]);
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('picker');
 
   const onChange = useCallback(
     (index) => {
@@ -47,8 +46,7 @@ function PickerAndroid(props) {
   }, [selectedIndex]);
 
   const buildStyles = useMemo(() => {
-    const picker = themeValue.picker;
-    const newTitleStyle = [picker.titleStyle, titleStyle];
+    const newTitleStyle = [themeValue.titleStyle, titleStyle];
     return {
       style: [styles.picker, style],
       titleStyle: newTitleStyle,

@@ -1,15 +1,15 @@
 'use strict';
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { Button } from '../Touchable';
 import { Predefine } from '../../config/predefine';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 import ImageView from '../Image/ImageView';
 
 function Card(props) {
   const { style } = props;
 
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme();
 
   const buildStyles = useMemo(() => {
     const listRow = themeValue.listRow;

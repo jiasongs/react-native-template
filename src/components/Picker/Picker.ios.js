@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
-  useContext,
 } from 'react';
 import {
   ViewPropTypes,
@@ -14,7 +13,7 @@ import {
   requireNativeComponent,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 
 const RCTPicker = requireNativeComponent('RCTPicker');
 
@@ -30,7 +29,7 @@ function PickerIOS(props) {
   const _picherRef = useRef(null);
   const _currentIndex = useRef(0);
   const [items, setItems] = useState([]);
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('picker');
 
   const onChange = useCallback(
     (event) => {
@@ -70,8 +69,7 @@ function PickerIOS(props) {
   }, [selectedIndex]);
 
   const buildStyles = useMemo(() => {
-    const picker = themeValue.picker;
-    const newTitleStyle = [picker.titleStyle, titleStyle];
+    const newTitleStyle = [themeValue.titleStyle, titleStyle];
     return {
       style: [styles.picker, style],
       titleStyle: newTitleStyle,

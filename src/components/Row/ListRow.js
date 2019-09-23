@@ -1,10 +1,10 @@
 'use strict';
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, Image, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
 import { Button } from '../Touchable';
-import { ThemeContext } from '../../config/theme';
+import { useTheme } from '../../config/theme';
 import { Predefine } from '../../config/predefine';
 
 function RenderIcon(props) {
@@ -122,16 +122,15 @@ function ListRow(props) {
     onPress,
   } = props;
 
-  const themeValue = useContext(ThemeContext);
+  const themeValue = useTheme('listRow');
 
   const buildStyles = useMemo(() => {
-    const listRow = themeValue.listRow;
-    const newSubtitleStyle = [listRow.subtitleStyle, styles.subtitleStyle];
+    const newSubtitleStyle = [themeValue.subtitleStyle, styles.subtitleStyle];
     if (title) {
       newSubtitleStyle.push({ marginTop: 5 });
     }
     return {
-      style: [listRow.style, styles.container, style],
+      style: [themeValue.style, styles.container, style],
       titleSubtitleContainer: [
         styles.titleSubtitleContainer,
         {
@@ -139,23 +138,23 @@ function ListRow(props) {
           marginRight: spacingIconAndTitle,
         },
       ],
-      iconStyle: [listRow.iconStyle, styles.iconStyle, iconStyle],
-      titleStyle: [listRow.titleStyle, styles.titleStyle, titleStyle],
+      iconStyle: [themeValue.iconStyle, styles.iconStyle, iconStyle],
+      titleStyle: [themeValue.titleStyle, styles.titleStyle, titleStyle],
       subtitleStyle: [newSubtitleStyle, subtitleStyle],
-      detailStyle: [listRow.detailStyle, detailStyle],
+      detailStyle: [themeValue.detailStyle, detailStyle],
       bottomSeparatorStyle: [
-        listRow.bottomSeparatorStyle,
+        themeValue.bottomSeparatorStyle,
         bottomSeparatorStyle,
       ],
     };
   }, [
-    themeValue.listRow,
+    themeValue,
+    title,
     style,
     icon,
     spacingIconAndTitle,
     iconStyle,
     titleStyle,
-    title,
     subtitleStyle,
     detailStyle,
     bottomSeparatorStyle,
