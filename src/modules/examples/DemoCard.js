@@ -7,7 +7,7 @@ import { Card } from '../../components';
 function DemoCard() {
   return (
     <PageContainer style={styles.container}>
-      <NavigationBar title={'DemoCard'} />
+      <NavigationBar title={'DemoCard（测试）'} />
       <Card />
     </PageContainer>
   );

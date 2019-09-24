@@ -173,14 +173,14 @@ export default function usePreviewAnimated(props) {
         opacityRef.current.setValue(0);
         scaleRef.current.setValue(zoomRate);
         const appearAnimates = [
-          Animated.spring(opacityRef.current, {
+          Animated.timing(opacityRef.current, {
             toValue: 1,
-            friction: 9,
+            duration,
             useNativeDriver: true,
           }),
-          Animated.spring(scaleRef.current, {
+          Animated.timing(scaleRef.current, {
             toValue: 1,
-            friction: 9,
+            duration,
             useNativeDriver: true,
           }),
         ];

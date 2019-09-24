@@ -8,9 +8,8 @@ import {
   ListRow,
 } from '../../components';
 import { ServiceHome } from '../../services';
-import { Predefine } from '../../config/predefine';
 
-function DemoList({ showNavBar = true }) {
+function DemoList() {
   const listRef = useRef(React.createRef());
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -46,7 +45,6 @@ function DemoList({ showNavBar = true }) {
         setData((preData) => {
           return preData.concat([1, 1, 1, 1]);
         });
-
         stopEndReached({ allLoad: data.length > 1000 });
       }, 2000);
     },
@@ -69,10 +67,10 @@ function DemoList({ showNavBar = true }) {
     <PageContainer
       style={styles.container}
       loading={loading}
-      loadingStyle={{ top: showNavBar ? Predefine.contentTop : 0 }}
+      loadingStyle={{}}
       emptyStyle={{}}
     >
-      {showNavBar ? <NavigationBar title={'DemoList'} /> : null}
+      <NavigationBar title={'DemoList'} />
       <ListView
         ref={listRef}
         style={styles.container}

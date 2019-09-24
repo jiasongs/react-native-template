@@ -6,7 +6,7 @@ import { NavigationBar, PageContainer, Stepper } from '../../components';
 function DemoForm() {
   return (
     <PageContainer style={styles.container}>
-      <NavigationBar title={'DemoForm'} />
+      <NavigationBar title={'DemoForm（测试）'} />
       <Stepper />
     </PageContainer>
   );

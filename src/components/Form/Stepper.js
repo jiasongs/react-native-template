@@ -78,7 +78,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   leftAction: {},
-  input: {},
+  input: {
+    padding: 0,
+  },
   rightAction: {},
 });
 

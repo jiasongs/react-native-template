@@ -6,7 +6,6 @@ import {
   PageContainer,
   ListRow,
   AlertManager,
-  ImageView,
 } from '../../components';
 
 function DemoOverlay() {
@@ -16,22 +15,12 @@ function DemoOverlay() {
       <ListRow
         title={'测试'}
         onPress={() => {
-          // AlertManager.show({
-          //   title: '123',
-          //   detail: '321',
-          //   onPress: () => AlertManager.hide(),
-          //   actions: [{ title: 'asd' }],
-          // });
-          AlertManager.showView(
-            <ImageView
-              style={{ width: 375, height: 385 }}
-              maxImageWidth={375}
-              source={{
-                uri:
-                  'https://mtimg.ruanmei.com/images/todayinhistory/2019/06/12/150426_354.jpg',
-              }}
-            />,
-          );
+          AlertManager.show({
+            title: '123',
+            detail: '321',
+            onPress: () => AlertManager.hide(),
+            actions: [{ title: 'asd' }],
+          });
         }}
       />
     </PageContainer>

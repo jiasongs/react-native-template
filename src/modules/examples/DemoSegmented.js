@@ -67,6 +67,16 @@ function DemoSegmented() {
             <SegmentedScene key={title} itemTitle={title}>
               <ListView
                 keyExtractor={(itemKey, indexKey) => indexKey + ''}
+                onRefresh={(stopRefresh) => {
+                  setTimeout(() => {
+                    stopRefresh();
+                  }, 1000);
+                }}
+                onEndReached={(stopEndReached) => {
+                  setTimeout(() => {
+                    stopEndReached();
+                  }, 2000);
+                }}
                 data={data}
                 renderItem={() => {
                   return <Text style={{ height: 50 }}>{index}</Text>;
