@@ -12,10 +12,26 @@ import {
   StyleSheet,
   ViewPropTypes,
   ImageBackground,
+  ScrollView,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import SegmentedBarItem from './SegmentedBarItem';
 import { useTheme } from '../../config/theme';
+
+function isEqualToLayout(aLayout, bLayout) {
+  if (!aLayout || !bLayout) {
+    return false;
+  }
+  if (
+    Math.round(aLayout.width) !== Math.round(bLayout.width) ||
+    Math.round(aLayout.height) !== Math.round(bLayout.height) ||
+    Math.round(aLayout.x) !== Math.round(bLayout.x) ||
+    Math.round(aLayout.y) !== Math.round(bLayout.y)
+  ) {
+    return false;
+  }
+  return true;
+}
 
 function mergeProps(aProps, bProps) {
   const itemProps = aProps ? aProps : {};
@@ -148,7 +164,7 @@ function SegmentedBar(props) {
       const length = Array.isArray(sceneChildren) ? sceneChildren.length : 1;
       const boxLayout = boxLayoutsRef.current[index];
       if (boxLayout) {
-        if (Math.round(boxLayout.width) !== Math.round(layout.width)) {
+        if (!isEqualToLayout(boxLayout, layout)) {
           boxLayoutsRef.current[index] = layout;
           setBoxLayouts(boxLayoutsRef.current.slice());
         }
@@ -171,7 +187,7 @@ function SegmentedBar(props) {
       const offsetX =
         boxLayout.x - scrollLayout.width / 2 + boxLayout.width / 2;
       if (offsetX) {
-        scrollViewRef.current._component.scrollTo({
+        scrollViewRef.current.scrollTo({
           x: offsetX,
           y: 0,
           animated: true,
@@ -259,7 +275,7 @@ function SegmentedBar(props) {
         />
       ) : null}
       {sidebarPosition === 'left' && <MemoRenderSidebar sidebar={sidebar} />}
-      <Animated.ScrollView
+      <ScrollView
         ref={scrollViewRef}
         onLayout={onLayout}
         horizontal={true}
@@ -287,7 +303,7 @@ function SegmentedBar(props) {
           interpolate={interpolate}
           contentItemWidth={contentItemWidth}
         />
-      </Animated.ScrollView>
+      </ScrollView>
       {sidebarPosition === 'right' && <MemoRenderSidebar sidebar={sidebar} />}
     </View>
   );

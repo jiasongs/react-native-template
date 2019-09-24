@@ -1,6 +1,6 @@
 'use strict';
 import React, { useState, useCallback } from 'react';
-import { Animated, ScrollView } from 'react-native';
+import { Animated, FlatList } from 'react-native';
 import SegmentedContentScene from './SegmentedContentScene';
 
 function SegmentedContent(props) {
@@ -13,6 +13,7 @@ function SegmentedContent(props) {
     lazy,
     currentFocus,
     forwardedRef,
+    initialPage,
     ...others
   } = props;
 
@@ -26,8 +27,34 @@ function SegmentedContent(props) {
     [onLayout],
   );
 
+  const renderItem = useCallback(
+    ({ item, index }) => {
+      return (
+        <SegmentedContentScene
+          active={lazy ? currentFocus === index : true}
+          contentLayout={layout}
+        >
+          {item}
+        </SegmentedContentScene>
+      );
+    },
+    [currentFocus, layout, lazy],
+  );
+
+  const getItemLayout = useCallback(
+    (data, index) => {
+      return { length: layout.width, offset: layout.width * index, index };
+    },
+    [layout],
+  );
+
+  const keyExtractor = useCallback((item, index) => {
+    return `scene_${item.key || index}`;
+  }, []);
+
   return (
-    <Animated.ScrollView
+    <Animated.FlatList
+      {...others}
       ref={forwardedRef}
       onLayout={onLayoutBack}
       horizontal={true}
@@ -39,30 +66,21 @@ function SegmentedContent(props) {
       onScroll={onScroll}
       decelerationRate={'normal'}
       nestedScrollEnabled={true}
-      {...others}
-    >
-      {React.Children.map(children, (item, index) => {
-        return (
-          <SegmentedContentScene
-            key={`page_${item.key || index}`}
-            active={lazy ? currentFocus === index : true}
-            contentLayout={layout}
-          >
-            {item}
-          </SegmentedContentScene>
-        );
-      })}
-    </Animated.ScrollView>
+      initialScrollIndex={initialPage}
+      keyExtractor={keyExtractor}
+      getItemLayout={getItemLayout}
+      data={children}
+      renderItem={renderItem}
+      extraData={layout}
+    />
   );
 }
 
 SegmentedContent.propTypes = {
-  ...ScrollView.propTypes,
+  ...FlatList.propTypes,
 };
 
-SegmentedContent.defaultProps = {
-  ...ScrollView.defaultProps,
-};
+SegmentedContent.defaultProps = {};
 
 const MemoSegmentedContent = React.memo(SegmentedContent);
 const ForwardSegmentedContent = React.forwardRef((props, ref) => {

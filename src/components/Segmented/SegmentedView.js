@@ -28,17 +28,16 @@ function SegmentedView(props) {
     ...others
   } = props;
 
-  const scrollViewRef = useRef(React.createRef());
+  const listViewRef = useRef(React.createRef());
   const animatedXRef = useRef(new Animated.Value(0));
   const itemPressIndexRef = useRef(-1);
-  const isHandleInitialPageRef = useRef(false);
   const preChildenLength = useRef(-1);
   const currentIndexRef = useRef(initialPage);
   const currentFocusRef = useRef(initialPage);
 
-  const [contentLayout, setContentLayout] = useState({ width: 0, height: 0 });
   const [currentIndex, setCurrentIndex] = useState(initialPage);
   const [currentFocus, setCurrentFocus] = useState(initialPage);
+  const [contentLayout, setContentLayout] = useState({ width: 0, height: 0 });
 
   const buildStyles = useMemo(() => {
     return {
@@ -73,10 +72,9 @@ function SegmentedView(props) {
   const scrollToIndex = useCallback(
     ({ index, animated }) => {
       if (contentLayout.width !== 0) {
-        const scrollView = scrollViewRef.current._component;
-        scrollView.scrollTo({
-          x: contentLayout.width * index,
-          y: 0,
+        const listView = listViewRef.current._component;
+        listView.scrollToIndex({
+          index,
           animated: animated,
         });
       }
@@ -146,15 +144,6 @@ function SegmentedView(props) {
     }
   }, [children, scrollToIndex, setActiveIndex, setFocusIndex]);
 
-  useEffect(() => {
-    if (contentLayout.width !== 0) {
-      if (!isHandleInitialPageRef.current) {
-        isHandleInitialPageRef.current = true;
-        scrollToIndex({ index: initialPage, animated: false });
-      }
-    }
-  }, [contentLayout, initialPage, scrollToIndex]);
-
   if (!children || (Array.isArray(children) && children.length <= 1)) {
     return null;
   }
@@ -176,15 +165,12 @@ function SegmentedView(props) {
         />
       ) : null}
       <SegmentedContent
-        ref={scrollViewRef}
+        ref={listViewRef}
         style={buildStyles.contentStyle}
         lazy={lazy}
+        initialPage={initialPage}
         onLayout={onLayout}
         currentFocus={currentFocus}
-        // onScroll={(event) => {
-        //   animatedXRef.current.setValue(event.nativeEvent.contentOffset.x);
-        //   onScroll && onScroll(event);
-        // }}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: animatedXRef.current } } }],
           { useNativeDriver: true, listener: onScroll },
