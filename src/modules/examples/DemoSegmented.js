@@ -7,6 +7,7 @@ import {
   PageContainer,
   SegmentedView,
   SegmentedScene,
+  ListView,
 } from '../../components';
 import { Images } from '../../assets';
 import DemoList from './DemoList';
@@ -64,7 +65,7 @@ function DemoSegmented() {
           }
           return (
             <SegmentedScene key={title} itemTitle={title}>
-              <FlatList
+              <ListView
                 keyExtractor={(itemKey, indexKey) => indexKey + ''}
                 data={data}
                 renderItem={() => {
