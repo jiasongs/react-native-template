@@ -64,7 +64,7 @@ function SegmentedContent(props) {
       bounces={true}
       scrollEventThrottle={16}
       onScroll={onScroll}
-      decelerationRate={'normal'}
+      decelerationRate={0.998}
       nestedScrollEnabled={true}
       initialScrollIndex={initialPage}
       keyExtractor={keyExtractor}
