@@ -12,76 +12,75 @@ import { Button } from '../Touchable';
 
 function Stepper(props) {
   const { defaultValue, editable, valueFormat, step, max, min } = props;
-  const [outputData, setOutputData] = useState({
+  const [data, setData] = useState({
     type: 'click',
     value: defaultValue || 0,
   });
 
   const onPressLeft = useCallback(() => {
     Keyboard.dismiss();
-    setOutputData(({ value }) => {
+    setData(({ value }) => {
       const floatValue = parseFloat(value);
       if (!isNaN(floatValue)) {
         const newValue = floatValue - step;
-        return { value: newValue, type: 'click' };
+        return { type: 'click', value: newValue };
       }
-      return { value, type: 'click' };
+      return { type: 'click', value };
     });
   }, [step]);
 
   const onPressRight = useCallback(() => {
     Keyboard.dismiss();
-    setOutputData(({ value }) => {
+    setData(({ value }) => {
       const floatValue = parseFloat(value);
       if (!isNaN(floatValue)) {
         const newValue = floatValue + step;
-        return { value: newValue, type: 'click' };
+        return { type: 'click', value: newValue };
       }
-      return { value, type: 'click' };
+      return { type: 'click', value };
     });
   }, [step]);
 
   const onChangeText = useCallback((text) => {
-    setOutputData({
+    setData({
       type: 'input',
       value: text,
     });
   }, []);
 
   const inputValue = useMemo(() => {
-    if (outputData.type === 'click' && valueFormat) {
-      return `${valueFormat(outputData.value)}`;
+    if (data.type === 'click' && valueFormat) {
+      return `${valueFormat(data.value)}`;
     } else {
-      return `${outputData.value}`;
+      return `${data.value}`;
     }
-  }, [outputData, valueFormat]);
+  }, [data, valueFormat]);
 
   return (
     <View style={styles.container}>
       <Button
-        type={'clear'}
+        type={'outline'}
         style={styles.leftAction}
         title={'-'}
         titleStyle={styles.leftTitle}
         onPress={onPressLeft}
-        disabled={min && outputData.value <= min}
+        disabled={min && data.value <= min}
         clickInterval={0}
       />
       <TextInput
         style={styles.input}
         value={inputValue}
-        placeholder={'1'}
         onChangeText={onChangeText}
         keyboardType={'numeric'}
         editable={editable}
       />
       <Button
-        type={'clear'}
+        type={'outline'}
         style={styles.rightAction}
         title={'+'}
         titleStyle={styles.rightTitle}
         onPress={onPressRight}
-        disabled={max && outputData.value >= max}
+        disabled={max && data.value >= max}
         clickInterval={0}
       />
     </View>
@@ -93,9 +92,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
   },
   leftAction: {
+    paddingHorizontal: 0,
+    paddingVertical: 0,
     width: 35,
     height: 35,
   },
@@ -108,10 +108,13 @@ const styles = StyleSheet.create({
     height: '100%',
     textAlign: 'center',
     paddingHorizontal: 10,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: '#333',
   },
   rightAction: {
+    paddingHorizontal: 0,
+    paddingVertical: 0,
     width: 35,
     height: 35,
   },
