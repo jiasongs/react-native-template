@@ -30,16 +30,10 @@ UIManager.setLayoutAnimationEnabledExperimental &&
  * @屏蔽调试警告
  */
 YellowBox.ignoreWarnings([
-  'It looks',
-  'Require cycle: node_modules/rn-fetch-blob',
   'Remote debugger is in a background',
-  'Warning: isMounted(...)',
-  'Warning: Slider',
-  'Warning: ViewPagerAndroid',
-  'Accessing view manager configs directly off UIManager',
-  'Module AudioRecorderManager requires main queue setup since it overrides',
-  'Warning: componentWillMount is deprecated',
-  'Required dispatch_sync',
+  'Require cycle: node_modules/rn-fetch-blob',
+  'Warning: componentWillMount has been renamed',
+  '-[RCTRootView cancelTouches]',
 ]);
 /**
  * @屏蔽输出

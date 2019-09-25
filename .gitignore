@@ -24,6 +24,7 @@ project.xcworkspace
 Carthage/Build
 Pods/
 Podfile.lock
+xcshareddata
 
 # Android/IntelliJ
 #

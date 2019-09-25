@@ -32,8 +32,8 @@ export default function usePreviewAnimated(props) {
             break;
         }
         if (toLayout) {
+          // todo
         }
-        console.log('anchorOffset', anchorOffset);
         switch (anchorPoint) {
           case 'none':
             translateXRef.current.setValue(0);
@@ -43,7 +43,7 @@ export default function usePreviewAnimated(props) {
             break;
           case 'left':
             if (fromLayout) {
-              const _fromX = fromLayout.x + fromLayout.width + 7;
+              const _fromX = fromLayout.x + fromLayout.width;
               const _fromY =
                 fromLayout.y - (layout.height - fromLayout.height) / 2;
               translateXRef.current.setValue(_fromX);
@@ -54,8 +54,8 @@ export default function usePreviewAnimated(props) {
             break;
           case 'topLeft':
             if (fromLayout) {
-              const _fromX = fromLayout.x + 4;
-              const _fromY = fromLayout.y + fromLayout.height + 10;
+              const _fromX = fromLayout.x;
+              const _fromY = fromLayout.y + fromLayout.height;
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -64,8 +64,8 @@ export default function usePreviewAnimated(props) {
             break;
           case 'leftTop':
             if (fromLayout) {
-              const _fromX = fromLayout.x + fromLayout.width + 8;
-              const _fromY = fromLayout.y - 5;
+              const _fromX = fromLayout.x + fromLayout.width;
+              const _fromY = fromLayout.y;
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -75,7 +75,7 @@ export default function usePreviewAnimated(props) {
           case 'bottomLeft':
             if (fromLayout) {
               const _fromX = fromLayout.x;
-              const _fromY = fromLayout.y - layout.height - 7;
+              const _fromY = fromLayout.y - layout.height;
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -84,9 +84,8 @@ export default function usePreviewAnimated(props) {
             break;
           case 'leftBottom':
             if (fromLayout) {
-              const _fromX = fromLayout.x + fromLayout.width + 8;
-              const _fromY =
-                fromLayout.y - layout.height + fromLayout.height + 7;
+              const _fromX = fromLayout.x + fromLayout.width;
+              const _fromY = fromLayout.y - layout.height + fromLayout.height;
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -97,7 +96,7 @@ export default function usePreviewAnimated(props) {
             if (fromLayout) {
               const _fromX =
                 fromLayout.x - (layout.width - fromLayout.width) / 2;
-              const _fromY = fromLayout.y + fromLayout.height + 10;
+              const _fromY = fromLayout.y + fromLayout.height;
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -108,7 +107,7 @@ export default function usePreviewAnimated(props) {
             if (fromLayout) {
               const _fromX =
                 fromLayout.x - (layout.width - fromLayout.width) / 2;
-              const _fromY = fromLayout.y - layout.height - 10;
+              const _fromY = fromLayout.y - layout.height;
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -117,7 +116,7 @@ export default function usePreviewAnimated(props) {
             break;
           case 'right':
             if (fromLayout) {
-              const _fromX = fromLayout.x - layout.width - 8;
+              const _fromX = fromLayout.x - layout.width;
               const _fromY =
                 fromLayout.y - (layout.height - fromLayout.height) / 2;
               translateXRef.current.setValue(_fromX);
@@ -129,7 +128,7 @@ export default function usePreviewAnimated(props) {
           case 'topRight':
             if (fromLayout) {
               const _fromX = fromLayout.x - layout.width + fromLayout.width;
-              const _fromY = fromLayout.y + fromLayout.height + 8;
+              const _fromY = fromLayout.y + fromLayout.height;
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -138,8 +137,8 @@ export default function usePreviewAnimated(props) {
             break;
           case 'rightTop':
             if (fromLayout) {
-              const _fromX = fromLayout.x - layout.width - 7;
-              const _fromY = fromLayout.y - 8;
+              const _fromX = fromLayout.x - layout.width;
+              const _fromY = fromLayout.y;
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -149,7 +148,7 @@ export default function usePreviewAnimated(props) {
           case 'bottomRight':
             if (fromLayout) {
               const _fromX = fromLayout.x - layout.width + fromLayout.width;
-              const _fromY = fromLayout.y - layout.height - 8;
+              const _fromY = fromLayout.y - layout.height;
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }
@@ -158,9 +157,8 @@ export default function usePreviewAnimated(props) {
             break;
           case 'rightBottom':
             if (fromLayout) {
-              const _fromX = fromLayout.x - layout.width - 5;
-              const _fromY =
-                fromLayout.y - layout.height + fromLayout.height + 5;
+              const _fromX = fromLayout.x - layout.width;
+              const _fromY = fromLayout.y - layout.height + fromLayout.height;
               translateXRef.current.setValue(_fromX);
               translateYRef.current.setValue(_fromY);
             }

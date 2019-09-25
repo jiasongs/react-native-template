@@ -13,7 +13,7 @@ const defaultPopover = {
   arrowPadding: 8,
 };
 
-export default class PopoverManager {
+class PopoverManager {
   static showMenu(props = {}) {
     const { option, arrow, ...others } = props;
     const newProps = { ...defaultPopover, ...others };
@@ -54,3 +54,5 @@ export default class PopoverManager {
     OverlayManager.hide(key);
   }
 }
+
+export default PopoverManager;
