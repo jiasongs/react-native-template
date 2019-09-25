@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 import ThemeManager from './ThemeManager';
 import ThemeLight from './ThemeLight';
 import ThemeFont from './ThemeFont';
+import ThemePrimary from './ThemePrimary';
 
 // 初始的配置文件
 const InitialTheme = {
+  set: function(value) {
+    Object.assign(this, value);
+  },
   ...ThemeLight,
   font: ThemeFont,
 };
@@ -22,11 +26,15 @@ function ThemeProvider(props) {
 
   useEffect(() => {
     const listenerName = ThemeManager.addListener((data) => {
+      if (data.primary) {
+        ThemePrimary.set(data.primary);
+      }
       setValue((preValue) => {
         if (data.font) {
           return { ...preValue, font: { ...preValue.font, ...data.font } };
         } else {
-          return { ...preValue, ...data };
+          console.log('setValue', InitialTheme);
+          return { ...InitialTheme };
         }
       });
     });

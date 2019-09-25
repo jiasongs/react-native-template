@@ -36,7 +36,7 @@ function DemoTheme() {
         title={'点击切换白色主题'}
         titleStyle={{ color: themeValue.primary.color.main }}
         onPress={() => {
-          ThemeManager.changeTheme(ThemeLight); // 异步
+          ThemeManager.changeTheme({ primary: { color: { main: 'green' } } }); // 异步
           StorageManager.save('THEME', ThemeLight);
         }}
       />

@@ -55,7 +55,7 @@ function RenderContent(props) {
 function RenderCancelAction(props) {
   const { style, titleStyle, onPress } = props;
   return (
-    <TouchableOpacity style={style} activeOpacity={0.3} onPress={onPress}>
+    <TouchableOpacity style={style} activeOpacity={0.9} onPress={onPress}>
       <Text style={titleStyle}>取消</Text>
     </TouchableOpacity>
   );

@@ -1,5 +1,6 @@
 'use strict';
 import { StyleSheet, Platform, Dimensions } from 'react-native';
+import ThemePrimary from './ThemePrimary';
 
 const primary = {
   color: {
@@ -17,13 +18,13 @@ export default {
    * @类型 [此属性为必须]
    */
   type: 1,
+  primary: primary,
   /**
    * @Common
    */
-  primary: primary,
   page: {
     style: {
-      backgroundColor: primary.color.reverse,
+      backgroundColor: ThemePrimary.color.reverse,
     },
   },
   /**
@@ -55,42 +56,42 @@ export default {
     },
     solid: {
       style: {
-        backgroundColor: primary.color.main,
+        backgroundColor: ThemePrimary.color.main,
         paddingVertical: 12,
         paddingHorizontal: 25,
         borderRadius: 3,
       },
       titleStyle: {
-        color: primary.color.reverse,
+        color: ThemePrimary.color.reverse,
         fontSize: 14,
       },
       iconStyle: {
-        tintColor: primary.color.reverse,
+        tintColor: ThemePrimary.color.reverse,
       },
       disabledStyle: {
         opacity: 1,
-        backgroundColor: primary.color.disabled,
+        backgroundColor: ThemePrimary.color.disabled,
       },
       disabledTitleStyle: {
-        color: primary.color.second,
+        color: ThemePrimary.color.second,
       },
       loadingStyle: {
         ...StyleSheet.absoluteFillObject,
-        color: primary.color.reverse,
+        color: ThemePrimary.color.reverse,
         size: 'small',
       },
     },
     outline: {
       style: {
-        backgroundColor: primary.color.reverse,
+        backgroundColor: ThemePrimary.color.reverse,
         paddingVertical: 12,
         paddingHorizontal: 25,
         borderRadius: 3,
         borderWidth: StyleSheet.hairlineWidth,
-        borderColor: primary.color.main,
+        borderColor: ThemePrimary.color.main,
       },
       titleStyle: {
-        color: primary.color.main,
+        color: ThemePrimary.color.main,
         fontSize: 14,
         shadowColor: 'rgba(0,0,0, 0)',
         shadowOffset: { height: 0, width: 0 },
@@ -98,39 +99,39 @@ export default {
         shadowRadius: 0,
       },
       iconStyle: {
-        tintColor: primary.color.main,
+        tintColor: ThemePrimary.color.main,
       },
       disabledStyle: {
         opacity: 1,
-        borderColor: primary.color.second,
+        borderColor: ThemePrimary.color.second,
       },
       disabledTitleStyle: {
-        color: primary.color.second,
+        color: ThemePrimary.color.second,
       },
       loadingStyle: {
         ...StyleSheet.absoluteFillObject,
-        color: primary.color.main,
+        color: ThemePrimary.color.main,
         size: 'small',
       },
     },
     clear: {
       style: {},
       titleStyle: {
-        color: primary.color.main,
+        color: ThemePrimary.color.main,
         fontSize: 14,
       },
       iconStyle: {
-        tintColor: primary.color.main,
+        tintColor: ThemePrimary.color.main,
       },
       disabledStyle: {
         opacity: 1,
       },
       disabledTitleStyle: {
-        color: primary.color.second,
+        color: ThemePrimary.color.second,
       },
       loadingStyle: {
         ...StyleSheet.absoluteFillObject,
-        color: primary.color.main,
+        color: ThemePrimary.color.main,
         size: 'small',
       },
     },
@@ -148,35 +149,35 @@ export default {
     style: {
       width: Dimensions.get('screen').width * 0.7,
       minHeight: 52,
-      backgroundColor: primary.color.reverse,
+      backgroundColor: ThemePrimary.color.reverse,
     },
     titleStyle: {
       fontSize: 16,
-      color: primary.color.main,
+      color: ThemePrimary.color.main,
       fontWeight: 'bold',
     },
     detailStyle: {
       fontSize: 16,
-      color: primary.color.main,
+      color: ThemePrimary.color.main,
       lineHeight: 22,
       textAlign: 'center',
     },
     actionContainerStyle: {
       width: '100%',
       borderTopWidth: StyleSheet.hairlineWidth,
-      borderTopColor: primary.color.separator,
+      borderTopColor: ThemePrimary.color.separator,
       borderBottomLeftRadius: 10,
       borderBottomRightRadius: 10,
     },
     actionStyle: {},
     actionTitleStyle: {
       fontSize: 16,
-      color: primary.color.main,
+      color: ThemePrimary.color.main,
     },
     separatorStyle: {
       marginRight: StyleSheet.hairlineWidth,
       borderRightWidth: StyleSheet.hairlineWidth,
-      borderColor: primary.color.separator,
+      borderColor: ThemePrimary.color.separator,
     },
   },
 
@@ -186,12 +187,12 @@ export default {
   sheet: {
     contentStyle: {
       maxHeight: 230,
-      backgroundColor: primary.color.reverse,
+      backgroundColor: ThemePrimary.color.reverse,
       borderRadius: 6,
     },
     titleStyle: {
       fontSize: 12,
-      color: primary.color.second,
+      color: ThemePrimary.color.second,
     },
     actionStyle: {
       borderTopWidth: StyleSheet.hairlineWidth,
@@ -200,12 +201,12 @@ export default {
     },
     actionTitleStyle: {
       fontSize: 14,
-      color: primary.color.main,
+      color: ThemePrimary.color.main,
     },
     cancelActionStyle: {
       paddingVertical: 17,
       borderRadius: 6,
-      backgroundColor: primary.color.reverse,
+      backgroundColor: ThemePrimary.color.reverse,
     },
     cancelTitleStyle: {
       fontSize: 14,
@@ -221,7 +222,7 @@ export default {
       backgroundColor: 'rgba(35,24,21,0.8)',
     },
     titleStyle: {
-      color: primary.color.reverse,
+      color: ThemePrimary.color.reverse,
       fontSize: 14,
       lineHeight: 20,
     },
@@ -230,30 +231,37 @@ export default {
   /**
    * @Navigation
    */
-  navigationBar: {
-    statusBarStyle: 'dark-content',
-    style: {
-      paddingHorizontal: 0,
-      backgroundColor: primary.color.reverse,
-      borderBottomColor: primary.color.separator,
-      borderBottomWidth: StyleSheet.hairlineWidth,
-    },
-    titleStyle: {
-      color: primary.color.main,
-      fontSize: 17,
-      fontWeight: 'bold',
-    },
-    defaultLeftAction: {
-      iconStyle: {
-        tintColor: 'black',
+  get navigationBar() {
+    console.log('navigationBar');
+    console.log(ThemePrimary.color.main);
+    return {
+      statusBarStyle: 'dark-content',
+      style: {
+        paddingHorizontal: 0,
+        backgroundColor: ThemePrimary.color.reverse,
+        borderBottomColor: ThemePrimary.color.separator,
+        borderBottomWidth: StyleSheet.hairlineWidth,
       },
-    },
+      titleStyle: {
+        color: ThemePrimary.color.main,
+        fontSize: 17,
+        fontWeight: 'bold',
+      },
+      defaultLeftAction: {
+        iconStyle: {
+          tintColor: 'black',
+        },
+      },
+    };
   },
+  // navigationBar: {
+
+  // },
   tabBar: {
     style: {
       borderTopWidth: StyleSheet.hairlineWidth,
-      borderTopColor: primary.color.separator,
-      backgroundColor: primary.color.reverse,
+      borderTopColor: ThemePrimary.color.separator,
+      backgroundColor: ThemePrimary.color.reverse,
     },
   },
   /**
@@ -261,29 +269,29 @@ export default {
    */
   listRow: {
     style: {
-      backgroundColor: primary.color.reverse,
+      backgroundColor: ThemePrimary.color.reverse,
     },
     iconStyle: {
       width: 25,
       height: 25,
-      tintColor: primary.color.main,
+      tintColor: ThemePrimary.color.main,
     },
     titleStyle: {
-      color: primary.color.main,
+      color: ThemePrimary.color.main,
       fontSize: 16,
       lineHeight: 18,
     },
     subtitleStyle: {
-      color: primary.color.second,
+      color: ThemePrimary.color.second,
       fontSize: 13,
       lineHeight: 16,
     },
     detailStyle: {
-      color: primary.color.second,
+      color: ThemePrimary.color.second,
       fontSize: 14,
     },
     bottomSeparatorStyle: {
-      backgroundColor: primary.color.separator,
+      backgroundColor: ThemePrimary.color.separator,
     },
   },
   /**
@@ -291,7 +299,7 @@ export default {
    */
   picker: {
     titleStyle: {
-      color: primary.color.main,
+      color: ThemePrimary.color.main,
       fontSize: 14,
     },
   },
@@ -301,33 +309,33 @@ export default {
   badge: {
     capsule: {
       style: {
-        backgroundColor: primary.color.badge,
+        backgroundColor: ThemePrimary.color.badge,
         padding: 5,
         minWidth: 23,
         height: 23,
         borderRadius: 23 / 2,
       },
       countStyle: {
-        color: primary.color.reverse,
+        color: ThemePrimary.color.reverse,
         fontSize: 10,
       },
     },
     square: {
       style: {
-        backgroundColor: primary.color.badge,
+        backgroundColor: ThemePrimary.color.badge,
         padding: 5,
         minWidth: 23,
         height: 23,
         borderRadius: 3,
       },
       countStyle: {
-        color: primary.color.reverse,
+        color: ThemePrimary.color.reverse,
         fontSize: 10,
       },
     },
     dot: {
       style: {
-        backgroundColor: primary.color.badge,
+        backgroundColor: ThemePrimary.color.badge,
         width: 8,
         height: 8,
         borderRadius: 8 / 2,
@@ -343,24 +351,24 @@ export default {
     segmentedBar: {
       style: {},
       indicatorStyle: {
-        backgroundColor: primary.color.main,
+        backgroundColor: ThemePrimary.color.main,
       },
     },
     segmentedBarItem: {
       style: {},
       activeStyle: {},
       titleStyle: {
-        color: primary.color.second,
+        color: ThemePrimary.color.second,
         fontSize: 14,
       },
       activeTitleStyle: {
-        color: primary.color.main,
+        color: ThemePrimary.color.main,
       },
       iconStyle: {
-        tintColor: primary.color.second,
+        tintColor: ThemePrimary.color.second,
       },
       activeIconStyle: {
-        tintColor: primary.color.main,
+        tintColor: ThemePrimary.color.main,
       },
     },
   },
@@ -373,7 +381,7 @@ export default {
       contentStyle: {
         paddingHorizontal: 10,
         paddingVertical: 7,
-        backgroundColor: primary.color.reverse,
+        backgroundColor: ThemePrimary.color.reverse,
         borderRadius: 6,
       },
     },

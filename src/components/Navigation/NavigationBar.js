@@ -90,6 +90,7 @@ function NavigationBar(props) {
   }, [defaultLeftAction, extraData, renderLeftAction]);
 
   const buildStyles = useMemo(() => {
+    console.log('zzzzzz', themeValue.titleStyle);
     return {
       style: [themeValue.style, styles.container, style],
       statusBarStyle: themeValue.statusBarStyle,
