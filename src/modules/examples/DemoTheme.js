@@ -13,9 +13,17 @@ import { StorageManager } from '../../common/manager';
 function DemoTheme() {
   const themeValue = useTheme();
 
+  console.log('themeValue', themeValue);
+
   return (
     <PageContainer>
       <NavigationBar title={'DemoTheme'} />
+      <Button
+        title={'字体大小'}
+        onPress={() => {
+          ThemeManager.changeFont({ multiple: 1.5 }); // 异步
+        }}
+      />
       <Button
         type={'outline'}
         style={[

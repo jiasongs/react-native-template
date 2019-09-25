@@ -3,9 +3,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ThemeManager from './ThemeManager';
 import ThemeLight from './ThemeLight';
+import ThemeFont from './ThemeFont';
 
 // 初始的配置文件
-const InitialTheme = ThemeLight;
+const InitialTheme = {
+  ...ThemeLight,
+  font: ThemeFont,
+};
 
 // 创建上下文
 const ThemeContext = React.createContext(InitialTheme);
@@ -19,7 +23,11 @@ function ThemeProvider(props) {
   useEffect(() => {
     const listenerName = ThemeManager.addListener((data) => {
       setValue((preValue) => {
-        return { ...preValue, ...data };
+        if (data.font) {
+          return { ...preValue, font: { ...preValue.font, ...data.font } };
+        } else {
+          return { ...preValue, ...data };
+        }
       });
     });
     return () => listenerName.remove();

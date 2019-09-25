@@ -6,7 +6,10 @@ function useTheme(key) {
   const themeValue = useContext(ThemeContext);
 
   const keyValue = useMemo(() => {
-    return key ? themeValue[key] : themeValue;
+    if (key) {
+      return { ...themeValue[key], font: { ...themeValue.font } };
+    }
+    return themeValue;
   }, [key, themeValue]);
 
   return keyValue;
