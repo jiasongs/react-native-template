@@ -5,7 +5,14 @@ import useOverlay from './useOverlay';
 
 export default function usePreviewAnimated(props) {
   const { fromLayout, toLayout, type, anchorPoint, anchorOffset } = props;
-  const { maskOpacityRef, setAnimates, onPressMask } = useOverlay(props);
+
+  const {
+    animateDurationRef,
+    maskOpacityRef,
+    setAnimates,
+    onPressMask,
+  } = useOverlay(props);
+
   const opacityRef = useRef(new Animated.Value(0));
   const anchorPointXRef = useRef(new Animated.Value(0));
   const anchorPointYRef = useRef(new Animated.Value(0));
@@ -17,7 +24,6 @@ export default function usePreviewAnimated(props) {
     (layout) => {
       if (layout) {
         let zoomRate = 0.3;
-        const duration = 210;
         switch (type) {
           case 'none':
             zoomRate = 1.0;
@@ -170,6 +176,7 @@ export default function usePreviewAnimated(props) {
         }
         opacityRef.current.setValue(0);
         scaleRef.current.setValue(zoomRate);
+        const duration = animateDurationRef.current;
         const appearAnimates = [
           Animated.timing(opacityRef.current, {
             toValue: 1,
@@ -200,7 +207,15 @@ export default function usePreviewAnimated(props) {
         });
       }
     },
-    [anchorOffset, anchorPoint, fromLayout, setAnimates, toLayout, type],
+    [
+      anchorOffset,
+      anchorPoint,
+      animateDurationRef,
+      fromLayout,
+      setAnimates,
+      toLayout,
+      type,
+    ],
   );
 
   const onLayout = useCallback(

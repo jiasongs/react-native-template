@@ -7,7 +7,12 @@ function DemoForm() {
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'DemoForm（测试）'} />
-      <Stepper />
+      <Stepper
+        defaultValue={1}
+        valueFormat={(value) => {
+          return `${value}%`;
+        }}
+      />
     </PageContainer>
   );
 }

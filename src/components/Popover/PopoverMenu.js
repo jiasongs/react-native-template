@@ -10,21 +10,23 @@ function PopoverMenu(props) {
 
   const buildStyles = useMemo(() => {
     const newContentStyle = [];
-    switch (type) {
-      case 'vertical':
-        newContentStyle.push(styles.verticalContentStyle);
-        break;
-      case 'horizontal':
-        newContentStyle.push(styles.horizontalContentStyle);
-        break;
-      default:
-        break;
+    if (actions.length > 0) {
+      switch (type) {
+        case 'vertical':
+          newContentStyle.push(styles.verticalContentStyle);
+          break;
+        case 'horizontal':
+          newContentStyle.push(styles.horizontalContentStyle);
+          break;
+        default:
+          break;
+      }
     }
     return {
       style: [style],
       contentStyle: [newContentStyle, contentStyle],
     };
-  }, [contentStyle, style, type]);
+  }, [actions.length, contentStyle, style, type]);
 
   return (
     <PopoverArrow

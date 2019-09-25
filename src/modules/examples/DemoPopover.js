@@ -27,11 +27,23 @@ const actions = [
   },
 ];
 
+const arrows = [
+  'left',
+  'leftTop',
+  'leftBottom',
+  'top',
+  'topLeft',
+  'topRight',
+  'bottom',
+  'bottomLeft',
+  'bottomRight',
+  'right',
+  'rightTop',
+  'rightBottom',
+];
+
 function DemoPopover() {
   const buttonRef = useRef(React.createRef());
-  const buttonRef2 = useRef(React.createRef());
-  const buttonRef3 = useRef(React.createRef());
-  const buttonRef4 = useRef(React.createRef());
 
   return (
     <PageContainer style={styles.container}>
@@ -45,63 +57,17 @@ function DemoPopover() {
         }}
       >
         <Button
-          ref={buttonRef3}
+          ref={buttonRef}
           style={{}}
           title={'点击'}
           onPress={() => {
+            const index = Math.floor(Math.random() * 11);
             PopoverManager.showMenu({
-              arrow: 'topRight',
+              arrow: arrows[index],
               type: 'vertical',
               actions: actions,
               option: {
-                viewRef: buttonRef3.current,
-              },
-            });
-          }}
-        />
-        <View>
-          <Button
-            ref={buttonRef}
-            style={{}}
-            title={'点击（水平）'}
-            onPress={() => {
-              PopoverManager.showMenu({
-                arrow: 'bottom',
-                type: 'horizontal',
-                actions: actions,
-                option: {
-                  viewRef: buttonRef.current,
-                },
-              });
-            }}
-          />
-          <Button
-            ref={buttonRef2}
-            style={{ marginTop: 20 }}
-            title={'点击（垂直）'}
-            onPress={() => {
-              PopoverManager.showMenu({
-                arrow: 'top',
-                type: 'vertical',
-                actions: actions,
-                option: {
-                  viewRef: buttonRef2.current,
-                },
-              });
-            }}
-          />
-        </View>
-        <Button
-          ref={buttonRef4}
-          style={{}}
-          title={'点击'}
-          onPress={() => {
-            PopoverManager.showMenu({
-              arrow: 'bottomLeft',
-              type: 'vertical',
-              actions: actions,
-              option: {
-                viewRef: buttonRef4.current,
+                viewRef: buttonRef.current,
               },
             });
           }}

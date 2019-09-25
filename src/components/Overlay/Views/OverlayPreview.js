@@ -123,6 +123,7 @@ OverlayPreview.defaultProps = {
   anchorPoint: 'topRight',
   containerPointerEvents: 'box-none',
   maskOpacity: 0.3,
+  anchorOffset: 0,
 };
 
 export default React.memo(OverlayPreview);

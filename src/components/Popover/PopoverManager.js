@@ -36,7 +36,11 @@ class PopoverManager {
         const newOption = {
           ...defaultOption,
           ...others,
-          fromLayout: { x: pageX, y: pageY, width, height },
+          fromLayout: {
+            ...fillOffsetXY({ anchorPoint: option.anchorPoint, pageX, pageY }),
+            width,
+            height,
+          },
           toLayout: null,
         };
         OverlayManager.preview(component, newOption);
@@ -53,6 +57,40 @@ class PopoverManager {
   static hide(key) {
     OverlayManager.hide(key);
   }
+}
+
+function fillOffsetXY({ anchorPoint, pageX, pageY }) {
+  const offset = 7;
+  let x = pageX,
+    y = pageY;
+  switch (anchorPoint) {
+    case 'left':
+    case 'leftTop':
+    case 'leftBottom':
+      x = pageX + offset;
+      break;
+    case 'top':
+    case 'topLeft':
+    case 'topRight':
+      y = pageY + offset;
+      break;
+    case 'bottom':
+    case 'bottomLeft':
+    case 'bottomRight':
+      y = pageY - offset;
+      break;
+    case 'right':
+    case 'rightTop':
+    case 'rightBottom':
+      x = pageX - offset;
+      break;
+    default:
+      break;
+  }
+  return {
+    x,
+    y,
+  };
 }
 
 export default PopoverManager;

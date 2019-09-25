@@ -10,7 +10,9 @@ export default function usePullAnimated(props) {
     providerContentScale,
     providerContentStyle,
   } = props;
+
   const {
+    animateDurationRef,
     maskOpacityRef,
     setAnimates,
     appear,
@@ -18,6 +20,7 @@ export default function usePullAnimated(props) {
     onPressMask,
     displayRef,
   } = useOverlay(props);
+
   const opacityRef = useRef(new Animated.Value(0));
   const translateRef = useRef(new Animated.Value(0));
   const offsetSizeRef = useRef(0);
@@ -45,6 +48,7 @@ export default function usePullAnimated(props) {
         offsetSizeRef.current = offsetSize;
         translateRef.current.setValue(offsetSize);
         opacityRef.current.setValue(1);
+        const duration = animateDurationRef.current;
         const appearAnimates = [
           Animated.spring(translateRef.current, {
             toValue: 0,
@@ -55,7 +59,7 @@ export default function usePullAnimated(props) {
         const disappearAnimates = [
           Animated.timing(translateRef.current, {
             toValue: offsetSize,
-            duration: 249,
+            duration,
             useNativeDriver: true,
           }),
         ];
@@ -82,6 +86,7 @@ export default function usePullAnimated(props) {
       }
     },
     [
+      animateDurationRef,
       onProviderAnimated,
       providerContentScale,
       providerContentStyle,

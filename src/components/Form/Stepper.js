@@ -1,5 +1,5 @@
 'use strict';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
   View,
   StyleSheet,
@@ -11,77 +11,113 @@ import PropTypes from 'prop-types';
 import { Button } from '../Touchable';
 
 function Stepper(props) {
-  const { defaultValue, step, max, min } = props;
-  const [value, setValue] = useState(defaultValue || 0);
+  const { defaultValue, editable, valueFormat, step, max, min } = props;
+  const [outputData, setOutputData] = useState({
+    type: 'click',
+    value: defaultValue || 0,
+  });
 
   const onPressLeft = useCallback(() => {
     Keyboard.dismiss();
-    setValue((preValue) => {
-      const floatValue = parseFloat(preValue);
+    setOutputData(({ value }) => {
+      const floatValue = parseFloat(value);
       if (!isNaN(floatValue)) {
         const newValue = floatValue - step;
-        if (min !== undefined) {
-          if (newValue >= min) {
-            return newValue;
-          } else {
-            return min;
-          }
-        } else {
-          return newValue;
-        }
+        return { value: newValue, type: 'click' };
       }
-      return floatValue;
+      return { value, type: 'click' };
     });
-  }, [min, step]);
+  }, [step]);
 
   const onPressRight = useCallback(() => {
     Keyboard.dismiss();
-    setValue((preValue) => {
-      const floatValue = parseFloat(preValue);
+    setOutputData(({ value }) => {
+      const floatValue = parseFloat(value);
       if (!isNaN(floatValue)) {
         const newValue = floatValue + step;
-        if (max !== undefined) {
-          if (newValue <= max) {
-            return newValue;
-          } else {
-            return max;
-          }
-        } else {
-          return newValue;
-        }
+        return { value: newValue, type: 'click' };
       }
-      return floatValue;
+      return { value, type: 'click' };
     });
-  }, [max, step]);
+  }, [step]);
 
   const onChangeText = useCallback((text) => {
-    setValue(text);
+    setOutputData({
+      type: 'input',
+      value: text,
+    });
   }, []);
+
+  const inputValue = useMemo(() => {
+    if (outputData.type === 'click' && valueFormat) {
+      return `${valueFormat(outputData.value)}`;
+    } else {
+      return `${outputData.value}`;
+    }
+  }, [outputData, valueFormat]);
 
   return (
     <View style={styles.container}>
-      <Button style={styles.leftAction} title={'-'} onPress={onPressLeft} />
+      <Button
+        type={'clear'}
+        style={styles.leftAction}
+        title={'-'}
+        titleStyle={styles.leftTitle}
+        onPress={onPressLeft}
+        disabled={min && outputData.value <= min}
+        clickInterval={0}
+      />
       <TextInput
         style={styles.input}
-        value={`${value}`}
+        value={inputValue}
         placeholder={'1'}
         onChangeText={onChangeText}
+        keyboardType={'numeric'}
+        editable={editable}
       />
-      <Button style={styles.rightAction} title={'+'} onPress={onPressRight} />
+      <Button
+        type={'clear'}
+        style={styles.rightAction}
+        title={'+'}
+        titleStyle={styles.rightTitle}
+        onPress={onPressRight}
+        disabled={max && outputData.value >= max}
+        clickInterval={0}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
+    borderWidth: 1,
   },
-  leftAction: {},
+  leftAction: {
+    width: 35,
+    height: 35,
+  },
+  leftTitle: {
+    fontSize: 18,
+  },
   input: {
     padding: 0,
+    minWidth: 50,
+    height: '100%',
+    textAlign: 'center',
+    paddingHorizontal: 10,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
   },
-  rightAction: {},
+  rightAction: {
+    width: 35,
+    height: 35,
+  },
+  rightTitle: {
+    fontSize: 18,
+  },
 });
 
 Stepper.propTypes = {
@@ -95,7 +131,6 @@ Stepper.propTypes = {
   valueFormat: PropTypes.func, //(value)
   subButton: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   addButton: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-  showSeparator: PropTypes.bool,
   disabled: PropTypes.bool,
   editable: PropTypes.bool,
   onChange: PropTypes.func, //(value)
@@ -109,7 +144,6 @@ Stepper.defaultProps = {
   subButton: '－',
   addButton: '＋',
   showSeparator: true,
-  disabled: false,
   editable: true,
 };
 

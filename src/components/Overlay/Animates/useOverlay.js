@@ -14,20 +14,21 @@ export default function useOverlay(props) {
     maskOpacity,
   } = props;
 
+  const animateDurationRef = useRef(210);
   const displayRef = useRef(false);
   const maskOpacityRef = useRef(new Animated.Value(0));
   const maskAnimatesRef = useRef({
     appearAnimates: [
       Animated.timing(maskOpacityRef.current, {
         toValue: maskOpacity,
-        duration: 210,
+        duration: animateDurationRef.current,
         useNativeDriver: true,
       }),
     ],
     disappearAnimates: [
       Animated.timing(maskOpacityRef.current, {
         toValue: 0,
-        duration: 210,
+        duration: animateDurationRef.current,
         useNativeDriver: true,
       }),
     ],
@@ -95,6 +96,7 @@ export default function useOverlay(props) {
 
   return {
     maskOpacityRef,
+    animateDurationRef,
     appear,
     disappear,
     displayRef,

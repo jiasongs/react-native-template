@@ -45,8 +45,9 @@ export default class ToastManager {
 
   static showView(component, option = {}) {
     const newOption = { ...defaultOption, ...option };
-    setTimeout(() => this.hide(), newOption.duration);
-    return OverlayManager.pop(component, newOption);
+    const key = OverlayManager.pop(component, newOption);
+    setTimeout(() => this.hide(key), newOption.duration);
+    return key;
   }
 
   static hide(key) {
