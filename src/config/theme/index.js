@@ -1,5 +1,4 @@
-import ThemeLight from './ThemeLight';
-import ThemeDark from './ThemeDark';
+import { ThemeLight, ThemeDark } from './styles';
 import ThemeManager from '../theme/ThemeManager';
 import ThemeProvider, { ThemeContext } from './ThemeProvider';
 import useTheme from './useTheme';

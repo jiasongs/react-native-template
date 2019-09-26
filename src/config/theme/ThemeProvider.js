@@ -1,55 +1,43 @@
 'use strict';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import ThemeManager from './ThemeManager';
-import ThemeLight from './ThemeLight';
-import ThemeFont from './ThemeFont';
-import ThemePrimary from './ThemePrimary';
+import DynamicTheme from './DynamicTheme';
+import { ThemeLight } from './styles';
+import deepmerge from 'deepmerge';
 
-// 初始的配置文件
-const InitialTheme = {
-  set: function(value) {
-    Object.assign(this, value);
-  },
-  ...ThemeLight,
-  font: ThemeFont,
-};
+const initialTheme = DynamicTheme(ThemeLight);
 
-// 创建上下文
-const ThemeContext = React.createContext(InitialTheme);
+const ThemeContext = React.createContext(initialTheme);
 
-// 最外层的主题
 function ThemeProvider(props) {
-  const { themeValue, children } = props;
+  const { defaultValue, children } = props;
 
-  const [value, setValue] = useState(InitialTheme);
+  const defaultValueRef = useRef(defaultValue);
+  const [value, setValue] = useState(deepmerge(initialTheme, defaultValue));
+
+  const setThemeValue = useCallback((data) => {
+    setValue((preValue) => {
+      return DynamicTheme({ ...preValue, ...data });
+    });
+  }, []);
 
   useEffect(() => {
     const listenerName = ThemeManager.addListener((data) => {
-      if (data.primary) {
-        ThemePrimary.set(data.primary);
-      }
-      setValue((preValue) => {
-        if (data.font) {
-          return { ...preValue, font: { ...preValue.font, ...data.font } };
-        } else {
-          console.log('setValue', InitialTheme);
-          return { ...InitialTheme };
-        }
-      });
+      console.log('传进来的主题', data);
+      setThemeValue({ ...defaultValueRef.current, ...data });
     });
     return () => listenerName.remove();
-  }, []);
+  }, [setThemeValue]);
 
   useEffect(() => {
     ThemeManager.currentTheme = value;
   }, [value]);
 
   useEffect(() => {
-    setValue((preValue) => {
-      return { ...preValue, ...themeValue };
-    });
-  }, [themeValue]);
+    setThemeValue(defaultValue);
+    defaultValueRef.current = defaultValue;
+  }, [defaultValue, setThemeValue]);
 
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
@@ -57,11 +45,11 @@ function ThemeProvider(props) {
 }
 
 ThemeProvider.propTypes = {
-  themeValue: PropTypes.object,
+  defaultValue: PropTypes.object,
 };
 
 ThemeProvider.defaultProps = {
-  themeValue: {},
+  defaultValue: {},
 };
 
 export { ThemeContext };

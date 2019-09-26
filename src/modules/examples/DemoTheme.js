@@ -18,12 +18,12 @@ function DemoTheme() {
   return (
     <PageContainer>
       <NavigationBar title={'DemoTheme'} />
-      <Button
+      {/* <Button
         title={'字体大小'}
         onPress={() => {
           ThemeManager.changeFont({ multiple: 1.5 }); // 异步
         }}
-      />
+      /> */}
       <Button
         type={'outline'}
         style={[
@@ -36,8 +36,14 @@ function DemoTheme() {
         title={'点击切换白色主题'}
         titleStyle={{ color: themeValue.primary.color.main }}
         onPress={() => {
-          ThemeManager.changeTheme({ primary: { color: { main: 'green' } } }); // 异步
-          StorageManager.save('THEME', ThemeLight);
+          ThemeManager.changeTheme({
+            navigationBar: {
+              style: {
+                backgroundColor: 'yellow',
+              },
+            },
+          }); // 异步
+          // StorageManager.save('THEME', ThemeLight);
         }}
       />
       <Button
@@ -45,7 +51,7 @@ function DemoTheme() {
         title={'点击切换黑暗主题'}
         onPress={() => {
           ThemeManager.changeTheme(ThemeDark); // 异步
-          StorageManager.save('THEME', ThemeDark);
+          // StorageManager.save('THEME', ThemeDark);
         }}
       />
     </PageContainer>
