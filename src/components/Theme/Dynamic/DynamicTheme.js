@@ -335,7 +335,7 @@ export default function(value = {}) {
           borderRadius: 23 / 2,
         },
         countStyle: {
-          color: primary.color.reverse,
+          color: '#fff',
           fontSize: 10,
         },
       },
@@ -348,7 +348,7 @@ export default function(value = {}) {
           borderRadius: 3,
         },
         countStyle: {
-          color: primary.color.reverse,
+          color: '#fff',
           fontSize: 10,
         },
       },
@@ -403,6 +403,21 @@ export default function(value = {}) {
           backgroundColor: primary.color.reverse,
           borderRadius: 6,
         },
+      },
+    },
+    /**
+     * @Stepper
+     */
+    stepper: {
+      style: {},
+      valueStyle: {
+        minWidth: 50,
+        height: '100%',
+        textAlign: 'center',
+        paddingHorizontal: 10,
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderColor: primary.color.main,
       },
     },
   };

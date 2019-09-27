@@ -10,7 +10,6 @@ import DemoPicker from './examples/DemoPicker';
 import DemoToast from './examples/DemoToast';
 import Example from './examples/Example';
 import DemoTheme from './examples/DemoTheme';
-import DemoBadge from './examples/DemoBadge';
 import DemoSegmented from './examples/DemoSegmented';
 import DemoCard from './examples/DemoCard';
 import DemoWebBrowser from './examples/DemoWebBrowser';
@@ -34,7 +33,6 @@ export {
   DemoOverlay,
   DemoPicker,
   DemoToast,
-  DemoBadge,
   DemoSegmented,
   DemoWebBrowser,
   Example,

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { TextProps, StyleProp, TextInputProps, TextStyle } from 'react-native';
 
 export interface HighlightLabelProps extends TextProps {
-  text: string;
-  highlightText?: string;
+  title: string;
+  highlightTitle?: string;
   highlightStyle?: StyleProp<TextStyle>;
 }
 

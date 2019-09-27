@@ -23,10 +23,6 @@ function Example() {
             onPress={() => RouterHelper.navigate('DemoButton')}
           />
           <ListRow
-            title={'Badge'}
-            onPress={() => RouterHelper.navigate('DemoBadge')}
-          />
-          <ListRow
             title={'Toast'}
             onPress={() => RouterHelper.navigate('DemoToast')}
           />

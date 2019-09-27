@@ -1,43 +1,43 @@
 'use strict';
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Label } from '.';
+import Label from './Label';
 
 function HighlightLabel(props) {
-  const { style, text, highlightText, highlightStyle } = props;
+  const { style, title, highlightTitle, highlightStyle } = props;
 
   const rangeArray = useMemo(() => {
-    let newText = text.slice();
-    let index = newText.toLowerCase().indexOf(highlightText.toLowerCase());
+    let newText = title.slice();
+    let index = newText.toLowerCase().indexOf(highlightTitle.toLowerCase());
     let rangeData = [];
     while (index !== -1) {
       let start = index;
       if (rangeData.length > 0) {
-        start = start + rangeData.length * highlightText.length;
+        start = start + rangeData.length * highlightTitle.length;
       }
       rangeData.push({
         start: start,
-        end: start + highlightText.length,
+        end: start + highlightTitle.length,
       });
       newText =
         newText.slice(0, index) +
-        newText.slice(index + highlightText.length, newText.length);
-      index = newText.toLowerCase().indexOf(highlightText.toLowerCase());
+        newText.slice(index + highlightTitle.length, newText.length);
+      index = newText.toLowerCase().indexOf(highlightTitle.toLowerCase());
     }
     return rangeData;
-  }, [highlightText, text]);
+  }, [highlightTitle, title]);
 
   const content = useMemo(() => {
     let lastEnd = 0;
     const rangeTexts = rangeArray.map((item) => {
       const contentText = (
         <Label style={style} key={`${lastEnd}_${item.start}_${item.end}`}>
-          {text.slice(lastEnd, item.start)}
+          {title.slice(lastEnd, item.start)}
           <Label
             style={highlightStyle}
             key={`center_text_${item.start}-${item.end}`}
           >
-            {text.slice(item.start, item.end)}
+            {title.slice(item.start, item.end)}
           </Label>
         </Label>
       );
@@ -46,7 +46,7 @@ function HighlightLabel(props) {
     });
     rangeTexts.push(
       <Label key={'last_text'} style={style}>
-        {text.slice(lastEnd, text.length)}
+        {title.slice(lastEnd, title.length)}
       </Label>,
     );
     return rangeTexts;
@@ -58,8 +58,8 @@ function HighlightLabel(props) {
 
 HighlightLabel.propTypes = {
   style: Label.propTypes.style,
-  text: PropTypes.string.isRequired,
-  highlightText: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  highlightTitle: PropTypes.string,
   highlightStyle: Label.propTypes.style,
 };
 

@@ -8,6 +8,7 @@ import {
   SegmentedView,
   SegmentedScene,
   ListView,
+  Label,
 } from '../../components';
 import { Images } from '../../assets';
 import DemoList from './DemoList';
@@ -48,7 +49,7 @@ function DemoSegmented() {
         onChange={(index) => {
           console.log('onChange', index);
         }}
-        initialPage={0}
+        initialPage={1}
         indicatorType={'lengThen'}
         indicatorWidthType={'item'}
         indicatorStyle={{}}
@@ -79,7 +80,7 @@ function DemoSegmented() {
                 }}
                 data={data}
                 renderItem={() => {
-                  return <Text style={{ height: 50 }}>{index}</Text>;
+                  return <Label style={{ height: 50 }} title={`${index}`} />;
                 }}
               />
             </SegmentedScene>

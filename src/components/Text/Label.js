@@ -40,7 +40,6 @@ Label.propTypes = {
 
 Label.defaultProps = {
   ...Text.defaultProps,
-  title: null,
 };
 
 const MemoLabel = React.memo(Label);
