@@ -208,7 +208,7 @@ function ImageView(props) {
   }
 
   return (
-    <View style={buildStyles.style}>
+    <View ref={forwardedRef} style={buildStyles.style}>
       {placeholderImage ? (
         <MemoRenderPlaceholder
           opacityAnimated={opacityPlaceholderRef.current}
@@ -305,4 +305,13 @@ ImageView.defaultProps = {
   useGradient: true,
 };
 
-export default React.memo(ImageView);
+const MemoImageView = React.memo(ImageView);
+const ForwardImageView = React.forwardRef((props, ref) => {
+  return <MemoImageView {...props} forwardedRef={ref} />;
+});
+
+ForwardImageView.propTypes = ImageView.propTypes;
+ForwardImageView.defaultProps = ImageView.defaultProps;
+ForwardImageView.displayName = 'ImageView';
+
+export default ForwardImageView;

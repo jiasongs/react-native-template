@@ -12,6 +12,8 @@ function OverlayPreview(props) {
     maskOpacityRef,
     opacityRef,
     scaleRef,
+    scaleXRef,
+    scaleYRef,
     anchorPointXRef,
     anchorPointYRef,
     translateXRef,
@@ -47,6 +49,8 @@ function OverlayPreview(props) {
               }),
             },
             { scale: scaleRef.current },
+            { scaleX: scaleXRef.current },
+            { scaleY: scaleYRef.current },
             { translateX: anchorPointXRef.current },
             { translateY: anchorPointYRef.current },
           ],
@@ -60,6 +64,8 @@ function OverlayPreview(props) {
     maskOpacityRef,
     opacityRef,
     scaleRef,
+    scaleXRef,
+    scaleYRef,
     style,
     translateXRef,
     translateYRef,
@@ -84,8 +90,9 @@ function OverlayPreview(props) {
 
 OverlayPreview.propTypes = {
   ...OverlayBase.type.propTypes,
+  type: PropTypes.oneOf(['none', 'zoomIn']),
   anchorPoint: PropTypes.oneOf([
-    'none',
+    'center',
     'left',
     'leftTop',
     'leftBottom',
@@ -100,7 +107,6 @@ OverlayPreview.propTypes = {
     'rightBottom',
   ]),
   anchorOffset: PropTypes.number,
-  type: PropTypes.oneOf(['none', 'zoomIn']),
   containerStyle: ViewPropTypes.style,
   containerPointerEvents: ViewPropTypes.pointerEvents,
   fromLayout: PropTypes.shape({

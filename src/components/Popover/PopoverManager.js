@@ -49,6 +49,7 @@ class PopoverManager {
       const newOption = {
         ...defaultOption,
         ...others,
+        toLayout: null,
       };
       OverlayManager.preview(component, newOption);
     }
