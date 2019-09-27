@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
+import { useTheme } from '../Theme';
 import { Label } from '../Text';
-import { useTheme } from '../../config/theme';
 
 const IconPosition = {
   PositionTop: 'top',

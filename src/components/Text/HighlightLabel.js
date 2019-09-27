@@ -1,9 +1,9 @@
 'use strict';
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Label } from '../Text';
+import { Label } from '.';
 
-function HighlightText(props) {
+function HighlightLabel(props) {
   const { style, text, highlightText, highlightStyle } = props;
 
   const rangeArray = useMemo(() => {
@@ -56,13 +56,13 @@ function HighlightText(props) {
   return <Label>{content}</Label>;
 }
 
-HighlightText.propTypes = {
+HighlightLabel.propTypes = {
   style: Label.propTypes.style,
   text: PropTypes.string.isRequired,
   highlightText: PropTypes.string,
   highlightStyle: Label.propTypes.style,
 };
 
-HighlightText.defaultProps = {};
+HighlightLabel.defaultProps = {};
 
-export default React.memo(HighlightText);
+export default React.memo(HighlightLabel);

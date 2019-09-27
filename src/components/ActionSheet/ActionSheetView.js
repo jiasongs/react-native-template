@@ -2,7 +2,7 @@
 import React, { useRef, useCallback, useMemo } from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import { useTheme } from '../../config/theme';
+import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
 import { Label } from '../Text';
 

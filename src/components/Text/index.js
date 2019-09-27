@@ -1,5 +1,5 @@
 import Label from './Label';
-import HighlightText from './HighlightText';
+import HighlightLabel from './HighlightLabel';
 import Input from './Input';
 
-export { Label, HighlightText, Input };
+export { Label, HighlightLabel, Input };

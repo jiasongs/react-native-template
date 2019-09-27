@@ -7,7 +7,7 @@ import {
   LayoutAnimation,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { useTheme } from '../../config/theme';
+import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
 import { useKeyboardSpace } from '../../common/hooks';
 import { Label } from '../Text';

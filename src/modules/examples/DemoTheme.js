@@ -1,13 +1,16 @@
 'use strict';
 import React from 'react';
 import { StyleSheet, Slider } from 'react-native';
-import { NavigationBar, PageContainer, Button, Label } from '../../components';
 import {
+  NavigationBar,
+  PageContainer,
+  Button,
+  Label,
   ThemeManager,
   ThemeDark,
   ThemeLight,
   useTheme,
-} from '../../config/theme';
+} from '../../components';
 import { StorageManager } from '../../common/manager';
 
 function DemoTheme() {

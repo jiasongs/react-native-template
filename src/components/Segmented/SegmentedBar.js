@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import SegmentedBarItem from './SegmentedBarItem';
-import { useTheme } from '../../config/theme';
+import { useTheme } from '../Theme';
 import { isEqualToLayout, mergeProps } from './Util';
 
 function RenderIndicator(props) {

@@ -8,10 +8,9 @@ import {
   Platform,
 } from 'react-native';
 import { SafeAreaView } from '@react-navigation/native';
-
 import CrossFadeIcon from 'react-navigation-tabs/src/views/CrossFadeIcon';
 import withDimensions from 'react-navigation-tabs/src/utils/withDimensions';
-import { ThemeContext } from '../../config/theme';
+import { ThemeContext } from '../Theme';
 import { Label } from '../Text';
 
 const AnimatedLabel = Animated.createAnimatedComponent(Label);

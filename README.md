@@ -21,7 +21,7 @@
 - Alert
 - ActionSheet
 - Form
-- HighlightText
+- HighlightLabel
 - Picker
 - Badge
 - Theme 支持切换主题

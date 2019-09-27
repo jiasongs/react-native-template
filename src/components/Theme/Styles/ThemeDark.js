@@ -11,4 +11,7 @@ export default {
       badge: '#8b0000',
     },
   },
+  navigationBar: {
+    statusBarStyle: 'light-content',
+  },
 };

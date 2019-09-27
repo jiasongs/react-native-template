@@ -2,7 +2,7 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { StyleSheet, View, ViewPropTypes, Platform } from 'react-native';
 import PropTypes from 'prop-types';
-import { useTheme } from '../../config/theme';
+import { useTheme } from '../Theme';
 
 function PopoverArrow(props) {
   const {

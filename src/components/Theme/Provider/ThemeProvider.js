@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import deepmerge from 'deepmerge';
 import ThemeManager from './ThemeManager';
-import { DynamicTheme } from '../dynamic';
-import { ThemeLight } from '../styles';
+import { DynamicTheme } from '../Dynamic';
+import { ThemeLight } from '../Styles';
 
 // 初始化系统默认主题
 const initialTheme = DynamicTheme(ThemeLight);
@@ -51,9 +51,7 @@ function ThemeProvider(props) {
     });
   }, [defaultTheme]);
 
-  return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value} children={children} />;
 }
 
 ThemeProvider.propTypes = {

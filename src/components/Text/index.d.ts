@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextProps, StyleProp, TextInputProps, TextStyle } from 'react-native';
 
-export interface HighlightTextProps extends TextProps {
+export interface HighlightLabelProps extends TextProps {
   text: string;
   highlightText?: string;
   highlightStyle?: StyleProp<TextStyle>;
@@ -13,7 +13,7 @@ export interface LabelProps extends TextProps {
 
 export interface InputProps extends TextInputProps {}
 
-export const HighlightText: React.ComponentClass<HighlightTextProps>;
+export const HighlightLabel: React.ComponentClass<HighlightLabelProps>;
 
 export const Label: React.ComponentClass<LabelProps>;
 

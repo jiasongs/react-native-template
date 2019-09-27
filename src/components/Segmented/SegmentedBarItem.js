@@ -3,7 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import { StyleSheet, ViewPropTypes, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from '../Touchable';
-import { useTheme } from '../../config/theme';
+import { useTheme } from '../Theme';
 import { Label } from '../Text';
 
 function SegmentedBarItem(props) {

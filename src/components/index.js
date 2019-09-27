@@ -24,9 +24,25 @@ import { AlertManager, AlertView } from './Alert';
 import { ActionManager, ActionSheetView } from './ActionSheet';
 import { DevRefresh } from './Development';
 import { SegmentedView, SegmentedScene } from './Segmented';
-import { HighlightText, Label } from './Text';
+import { HighlightLabel, Label } from './Text';
+import {
+  DynamicTheme,
+  ThemeLight,
+  ThemeDark,
+  ThemeManager,
+  ThemeContext,
+  ThemeProvider,
+  useTheme,
+} from './Theme';
 
 export {
+  DynamicTheme,
+  ThemeLight,
+  ThemeDark,
+  ThemeManager,
+  ThemeContext,
+  ThemeProvider,
+  useTheme,
   Stepper,
   PopoverArrow,
   PopoverManager,
@@ -61,6 +77,6 @@ export {
   DevRefresh,
   Card,
   WebBrowser,
-  HighlightText,
+  HighlightLabel,
   Label,
 };

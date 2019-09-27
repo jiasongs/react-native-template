@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useNetInfo } from '@react-native-community/netinfo';
 import LoadingHint from '../Loading/LoadingHint';
 import NetworkError from '../Error/NetworkError';
-import { useTheme } from '../../config/theme';
+import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
 
 const MemoRenderNetworkError = React.memo(RenderNetworkError);

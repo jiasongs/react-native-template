@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import NavigationTitle from './NavigationTitle';
 import NavigationAction from './NavigationAction';
 import { Label } from '../Text';
-import { useTheme } from '../../config/theme';
+import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
 // 考虑引入是否合理
 import RouterHelper from '../../routers/RouterHelper';

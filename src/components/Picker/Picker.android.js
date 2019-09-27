@@ -8,9 +8,9 @@ import React, {
 } from 'react';
 import { ViewPropTypes, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { useTheme } from '../../config/theme';
-import { WheelPicker } from 'react-native-wheel-picker-android';
 import { Label } from '../Text';
+import { useTheme } from '../Theme';
+import { WheelPicker } from 'react-native-wheel-picker-android';
 
 function PickerAndroid(props) {
   const {

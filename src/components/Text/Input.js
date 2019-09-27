@@ -1,7 +1,7 @@
 'use strict';
 import React, { useMemo } from 'react';
 import { TextInput, StyleSheet } from 'react-native';
-import { useTheme } from '../../config/theme';
+import { useTheme } from '../Theme';
 
 function Input(props) {
   const { style, forwardedRef, ...others } = props;

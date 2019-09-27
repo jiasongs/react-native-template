@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import { useTheme } from '../../config/theme';
+import { useTheme } from '../Theme';
 import { Label } from '../Text';
 
 function Badge(props) {
