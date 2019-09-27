@@ -41,13 +41,17 @@ export default function(value = {}) {
     label: {
       style: {
         fontSize: 14,
+        color: primary.color.main,
       },
     },
     /**
      * @Input
      */
     input: {
-      style: {},
+      style: {
+        fontSize: 14,
+        color: primary.color.main,
+      },
     },
     /**
      * @Button

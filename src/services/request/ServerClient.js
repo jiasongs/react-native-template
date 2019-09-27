@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use strict';
 import QueryString from 'query-string';
 import FetchBlob from 'rn-fetch-blob';

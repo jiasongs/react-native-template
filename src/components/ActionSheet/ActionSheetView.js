@@ -70,6 +70,7 @@ function ActionSheetView(props) {
     (actionItem) => {
       const nowTime = new Date().getTime();
       if (nowTime - lastActionTimeRef.current <= 200) {
+        // eslint-disable-next-line no-console
         console.warn('间隔时间内重复点击了');
         return;
       }

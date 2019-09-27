@@ -16,13 +16,15 @@ function DemoTheme() {
   return (
     <PageContainer>
       <NavigationBar title={'DemoTheme'} />
-      <Label>文字大小</Label>
+      <Label
+        style={{ alignSelf: 'center', marginVertical: 20 }}
+        title={'文字大小'}
+      />
       <Slider
         style={{ marginHorizontal: 50 }}
         minimumValue={1}
         maximumValue={2}
         onSlidingComplete={(value) => {
-          console.log(value);
           ThemeManager.changeFont({ multiple: value }); // 异步
         }}
       />

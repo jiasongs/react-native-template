@@ -96,6 +96,7 @@ function SegmentedBar(props) {
         indicatorStyle ? indicatorStyle : {},
       );
       if (!flattenStyle.width) {
+        // eslint-disable-next-line no-console
         console.error('error: 当类型为custom时，style必须设置宽度');
       }
       return flattenStyle.width || 0;
