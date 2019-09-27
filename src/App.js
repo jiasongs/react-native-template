@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 'use strict';
 import './config/predefine';
 import './config/global';
@@ -6,33 +5,27 @@ import React, { useState, useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import NavigationContainer from './routers/NavigationContainer';
 import { OverlayProvider, DevRefresh } from './components';
-import { ThemeProvider, useTheme } from './config/theme';
+import { ThemeProvider } from './config/theme';
 import { useBackExitApp } from './common/hooks';
 import { StorageManager } from './common/manager';
 import RouterHelper from './routers/RouterHelper';
 
 function App() {
-  const value = useTheme();
-  const [state, setState] = useState({
-    page: {
-      style: {
-        backgroundColor: 'gary',
-      },
-    },
-  });
+  const [state, setState] = useState({});
 
   useEffect(() => {
     async function loadTheme() {
-      // const data = await StorageManager.load('THEME');
-      // if (data) {
-      //   setState(data);
-      // }
+      const data = await StorageManager.load('THEME');
+      if (data) {
+        setState({
+          ...data,
+          customStyle: {},
+        });
+      }
       SplashScreen.hide();
     }
     loadTheme();
   }, []);
-
-  console.log('value', value);
 
   useBackExitApp(() => {
     const routerStacks = RouterHelper.routerStacks;
@@ -44,7 +37,7 @@ function App() {
   });
 
   return (
-    <ThemeProvider themeValue={state}>
+    <ThemeProvider defaultTheme={state}>
       <OverlayProvider>
         <NavigationContainer />
         {__DEV__ && <DevRefresh />}

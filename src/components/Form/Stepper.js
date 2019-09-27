@@ -1,14 +1,9 @@
 'use strict';
 import React, { useState, useCallback, useMemo } from 'react';
-import {
-  View,
-  StyleSheet,
-  ViewPropTypes,
-  TextInput,
-  Keyboard,
-} from 'react-native';
+import { View, StyleSheet, ViewPropTypes, Keyboard } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from '../Touchable';
+import { Input } from '../Text';
 
 function Stepper(props) {
   const { defaultValue, editable, valueFormat, step, max, min } = props;
@@ -67,7 +62,7 @@ function Stepper(props) {
         disabled={min && data.value <= min}
         clickInterval={0}
       />
-      <TextInput
+      <Input
         style={styles.input}
         value={inputValue}
         onChangeText={onChangeText}
@@ -130,7 +125,7 @@ Stepper.propTypes = {
   step: PropTypes.number,
   max: PropTypes.number,
   min: PropTypes.number,
-  valueStyle: TextInput.propTypes.style,
+  valueStyle: Input.propTypes.style,
   valueFormat: PropTypes.func, //(value)
   subButton: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   addButton: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),

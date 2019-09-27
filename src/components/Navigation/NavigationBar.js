@@ -2,7 +2,6 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   StatusBar,
   ImageBackground,
@@ -12,6 +11,7 @@ import {
 import PropTypes from 'prop-types';
 import NavigationTitle from './NavigationTitle';
 import NavigationAction from './NavigationAction';
+import { Label } from '../Text';
 import { useTheme } from '../../config/theme';
 import { Predefine } from '../../config/predefine';
 // 考虑引入是否合理
@@ -90,7 +90,6 @@ function NavigationBar(props) {
   }, [defaultLeftAction, extraData, renderLeftAction]);
 
   const buildStyles = useMemo(() => {
-    console.log('zzzzzz', themeValue.titleStyle);
     return {
       style: [themeValue.style, styles.container, style],
       statusBarStyle: themeValue.statusBarStyle,
@@ -178,7 +177,7 @@ NavigationBar.propTypes = {
     PropTypes.func,
     PropTypes.element,
   ]),
-  titleStyle: Text.propTypes.style,
+  titleStyle: Label.propTypes.style,
   defaultLeftSource: Image.propTypes.source,
   renderLeftAction: PropTypes.oneOfType([
     PropTypes.array,

@@ -1,21 +1,22 @@
 'use strict';
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, ViewPropTypes } from 'react-native';
+import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { Predefine } from '../../config/predefine';
+import { Label } from '../Text';
 
 function RenderContent(props) {
   const { title, titleStyle, extraData } = props;
   if (typeof title === 'string') {
     return (
-      <Text
+      <Label
         style={[styles.title, titleStyle]}
         numberOfLines={1}
         ellipsizeMode={'middle'}
         extraData={extraData}
       >
         {title}
-      </Text>
+      </Label>
     );
   } else if (typeof title === 'function') {
     return title();
@@ -66,7 +67,7 @@ NavigationTitle.propTypes = {
     PropTypes.func,
     PropTypes.element,
   ]),
-  titleStyle: Text.propTypes.style,
+  titleStyle: Label.propTypes.style,
   leftActionWidth: PropTypes.number,
   rightActionWidth: PropTypes.number,
   extraData: PropTypes.any,

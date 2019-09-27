@@ -11,9 +11,4 @@ export default {
       badge: '#ff190c',
     },
   },
-  page: {
-    style: {
-      backgroundColor: 'green',
-    },
-  },
 };

@@ -1,8 +1,9 @@
 'use strict';
 import React, { useRef, useEffect, useMemo } from 'react';
-import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
+import { View, StyleSheet, Animated, Easing } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTheme } from '../../config/theme';
+import { Label } from '../Text';
 
 function RenderIcon(props) {
   const {
@@ -46,7 +47,7 @@ function RenderIcon(props) {
 function RenderText(props) {
   const { text, titleStyle } = props;
   if (typeof text === 'string') {
-    return <Text style={titleStyle}>{text}</Text>;
+    return <Label style={titleStyle}>{text}</Label>;
   } else if (React.isValidElement(text)) {
     return text;
   }

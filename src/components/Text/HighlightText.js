@@ -1,7 +1,7 @@
 'use strict';
 import React, { useMemo } from 'react';
-import { Text } from 'react-native';
 import PropTypes from 'prop-types';
+import { Label } from '../Text';
 
 function HighlightText(props) {
   const { style, text, highlightText, highlightStyle } = props;
@@ -12,10 +12,10 @@ function HighlightText(props) {
     let rangeData = [];
     while (index !== -1) {
       let start = index;
-      if (rangeArray.length > 0) {
-        start = start + rangeArray.length * highlightText.length;
+      if (rangeData.length > 0) {
+        start = start + rangeData.length * highlightText.length;
       }
-      rangeArray.push({
+      rangeData.push({
         start: start,
         end: start + highlightText.length,
       });
@@ -31,36 +31,36 @@ function HighlightText(props) {
     let lastEnd = 0;
     const rangeTexts = rangeArray.map((item) => {
       const contentText = (
-        <Text style={style} key={`${lastEnd}_${item.start}_${item.end}`}>
+        <Label style={style} key={`${lastEnd}_${item.start}_${item.end}`}>
           {text.slice(lastEnd, item.start)}
-          <Text
+          <Label
             style={highlightStyle}
             key={`center_text_${item.start}-${item.end}`}
           >
             {text.slice(item.start, item.end)}
-          </Text>
-        </Text>
+          </Label>
+        </Label>
       );
       lastEnd = item.end;
       return contentText;
     });
     rangeTexts.push(
-      <Text key={'last_text'} style={style}>
+      <Label key={'last_text'} style={style}>
         {text.slice(lastEnd, text.length)}
-      </Text>,
+      </Label>,
     );
     return rangeTexts;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rangeArray]);
 
-  return <Text>{content}</Text>;
+  return <Label>{content}</Label>;
 }
 
 HighlightText.propTypes = {
-  style: Text.propTypes.style,
+  style: Label.propTypes.style,
   text: PropTypes.string.isRequired,
   highlightText: PropTypes.string,
-  highlightStyle: Text.propTypes.style,
+  highlightStyle: Label.propTypes.style,
 };
 
 HighlightText.defaultProps = {};

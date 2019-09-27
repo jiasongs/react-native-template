@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { NavigationBar, PageContainer, Button } from '../../components';
+import { StyleSheet, Slider } from 'react-native';
+import { NavigationBar, PageContainer, Button, Label } from '../../components';
 import {
   ThemeManager,
   ThemeDark,
@@ -13,17 +13,19 @@ import { StorageManager } from '../../common/manager';
 function DemoTheme() {
   const themeValue = useTheme();
 
-  console.log('themeValue', themeValue);
-
   return (
     <PageContainer>
       <NavigationBar title={'DemoTheme'} />
-      {/* <Button
-        title={'字体大小'}
-        onPress={() => {
-          ThemeManager.changeFont({ multiple: 1.5 }); // 异步
+      <Label>文字大小</Label>
+      <Slider
+        style={{ marginHorizontal: 50 }}
+        minimumValue={1}
+        maximumValue={2}
+        onSlidingComplete={(value) => {
+          console.log(value);
+          ThemeManager.changeFont({ multiple: value }); // 异步
         }}
-      /> */}
+      />
       <Button
         type={'outline'}
         style={[
@@ -36,14 +38,8 @@ function DemoTheme() {
         title={'点击切换白色主题'}
         titleStyle={{ color: themeValue.primary.color.main }}
         onPress={() => {
-          ThemeManager.changeTheme({
-            navigationBar: {
-              style: {
-                backgroundColor: 'yellow',
-              },
-            },
-          }); // 异步
-          // StorageManager.save('THEME', ThemeLight);
+          ThemeManager.changeTheme(ThemeLight); // 异步
+          StorageManager.save('THEME', ThemeLight);
         }}
       />
       <Button
@@ -51,7 +47,7 @@ function DemoTheme() {
         title={'点击切换黑暗主题'}
         onPress={() => {
           ThemeManager.changeTheme(ThemeDark); // 异步
-          // StorageManager.save('THEME', ThemeDark);
+          StorageManager.save('THEME', ThemeDark);
         }}
       />
     </PageContainer>

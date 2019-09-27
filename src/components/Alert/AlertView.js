@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useMemo, useCallback } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   LayoutAnimation,
@@ -11,13 +10,14 @@ import PropTypes from 'prop-types';
 import { useTheme } from '../../config/theme';
 import { Predefine } from '../../config/predefine';
 import { useKeyboardSpace } from '../../common/hooks';
+import { Label } from '../Text';
 
 function RenderTitle(props) {
   const { title, titleStyle } = props;
   if (React.isValidElement(title)) {
     return title;
   } else if (typeof title === 'string' || typeof title === 'number') {
-    return <Text style={[styles.title, titleStyle]}>{title}</Text>;
+    return <Label style={[styles.title, titleStyle]}>{title}</Label>;
   }
   return null;
 }
@@ -27,7 +27,7 @@ function RenderDetail(props) {
   if (React.isValidElement(detail)) {
     return detail;
   } else if (typeof detail === 'string' || typeof detail === 'number') {
-    return <Text style={[styles.detail, detailStyle]}>{detail}</Text>;
+    return <Label style={[styles.detail, detailStyle]}>{detail}</Label>;
   }
   return null;
 }
@@ -53,7 +53,7 @@ function RenderAction(props) {
             key={`action_${index}`}
             onPress={() => onPress(item)}
           >
-            <Text style={[actionTitleStyle, titleStyle]}>{title}</Text>
+            <Label style={[actionTitleStyle, titleStyle]}>{title}</Label>
           </TouchableOpacity>
         );
       })}
@@ -176,13 +176,13 @@ const styles = StyleSheet.create({
 
 AlertView.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  titleStyle: Text.propTypes.style,
+  titleStyle: Label.propTypes.style,
   detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  detailStyle: Text.propTypes.style,
+  detailStyle: Label.propTypes.style,
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      titleStyle: Text.propTypes.style,
+      titleStyle: Label.propTypes.style,
       onPress: PropTypes.func,
     }),
   ),

@@ -12,7 +12,9 @@ import { SafeAreaView } from '@react-navigation/native';
 import CrossFadeIcon from 'react-navigation-tabs/src/views/CrossFadeIcon';
 import withDimensions from 'react-navigation-tabs/src/utils/withDimensions';
 import { ThemeContext } from '../../config/theme';
+import { Label } from '../Text';
 
+const AnimatedLabel = Animated.createAnimatedComponent(Label);
 const majorVersion = parseInt(Platform.Version, 10);
 const isIos = Platform.OS === 'ios';
 const isIOS11 = majorVersion >= 11 && isIos;
@@ -140,7 +142,7 @@ class TabBarBottom extends React.PureComponent {
 
     if (typeof label === 'string') {
       return (
-        <Animated.Text
+        <AnimatedLabel
           numberOfLines={1}
           style={[
             styles.label,
@@ -153,7 +155,7 @@ class TabBarBottom extends React.PureComponent {
           allowFontScaling={allowFontScaling}
         >
           {label}
-        </Animated.Text>
+        </AnimatedLabel>
       );
     }
 

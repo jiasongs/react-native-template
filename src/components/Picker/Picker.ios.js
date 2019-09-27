@@ -8,12 +8,12 @@ import React, {
 } from 'react';
 import {
   ViewPropTypes,
-  Text,
   StyleSheet,
   requireNativeComponent,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTheme } from '../../config/theme';
+import { Label } from '../Text';
 
 const RCTPicker = requireNativeComponent('RCTPicker');
 
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
 
 PickerIOS.propTypes = {
   style: ViewPropTypes.style,
-  titleStyle: Text.propTypes.style,
+  titleStyle: Label.propTypes.style,
   selectedIndex: PropTypes.number.isRequired,
   data: PropTypes.array,
   onValueChange: PropTypes.func,

@@ -1,9 +1,10 @@
 'use strict';
 import React, { useCallback, useMemo } from 'react';
-import { StyleSheet, ViewPropTypes, Text, Image } from 'react-native';
+import { StyleSheet, ViewPropTypes, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from '../Touchable';
 import { useTheme } from '../../config/theme';
+import { Label } from '../Text';
 
 function SegmentedBarItem(props) {
   const {
@@ -148,8 +149,8 @@ SegmentedBarItem.propTypes = {
   style: ViewPropTypes.style,
   activeStyle: ViewPropTypes.style,
   activeTitle: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  titleStyle: Text.propTypes.style,
-  activeTitleStyle: Text.propTypes.style,
+  titleStyle: Label.propTypes.style,
+  activeTitleStyle: Label.propTypes.style,
   activeIcon: Image.propTypes.source,
   iconStyle: Image.propTypes.style,
   activeIconStyle: Image.propTypes.style,

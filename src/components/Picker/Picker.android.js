@@ -6,10 +6,11 @@ import React, {
   useMemo,
   useCallback,
 } from 'react';
-import { ViewPropTypes, StyleSheet, Text } from 'react-native';
+import { ViewPropTypes, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTheme } from '../../config/theme';
 import { WheelPicker } from 'react-native-wheel-picker-android';
+import { Label } from '../Text';
 
 function PickerAndroid(props) {
   const {
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
 
 PickerAndroid.propTypes = {
   style: ViewPropTypes.style,
-  titleStyle: Text.propTypes.style,
+  titleStyle: Label.propTypes.style,
   selectedIndex: PropTypes.number.isRequired,
   data: PropTypes.array,
   onValueChange: PropTypes.func,

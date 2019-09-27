@@ -24,6 +24,7 @@ import { AlertManager, AlertView } from './Alert';
 import { ActionManager, ActionSheetView } from './ActionSheet';
 import { DevRefresh } from './Development';
 import { SegmentedView, SegmentedScene } from './Segmented';
+import { HighlightText, Label } from './Text';
 
 export {
   Stepper,
@@ -60,4 +61,6 @@ export {
   DevRefresh,
   Card,
   WebBrowser,
+  HighlightText,
+  Label,
 };

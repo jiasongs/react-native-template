@@ -1,15 +1,10 @@
 'use strict';
 import React, { useRef, useCallback, useMemo } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTheme } from '../../config/theme';
 import { Predefine } from '../../config/predefine';
+import { Label } from '../Text';
 
 function RenderTitle(props) {
   const { title, titleStyle } = props;
@@ -18,7 +13,7 @@ function RenderTitle(props) {
   } else if (title) {
     return (
       <View style={styles.titleContainer}>
-        <Text style={titleStyle}>{title}</Text>
+        <Label style={titleStyle}>{title}</Label>
       </View>
     );
   }
@@ -44,7 +39,7 @@ function RenderContent(props) {
             activeOpacity={0.3}
             onPress={() => onPress(item)}
           >
-            <Text style={[actionTitleStyle, itemStyle]}>{title}</Text>
+            <Label style={[actionTitleStyle, itemStyle]}>{title}</Label>
           </TouchableOpacity>
         );
       })}
@@ -56,7 +51,7 @@ function RenderCancelAction(props) {
   const { style, titleStyle, onPress } = props;
   return (
     <TouchableOpacity style={style} activeOpacity={0.9} onPress={onPress}>
-      <Text style={titleStyle}>取消</Text>
+      <Label style={titleStyle}>取消</Label>
     </TouchableOpacity>
   );
 }
@@ -154,11 +149,11 @@ const styles = StyleSheet.create({
 
 ActionSheetView.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  titleStyle: Text.propTypes.style,
+  titleStyle: Label.propTypes.style,
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      titleStyle: Text.propTypes.style,
+      titleStyle: Label.propTypes.style,
       onPress: PropTypes.func,
     }),
   ),

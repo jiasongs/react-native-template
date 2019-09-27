@@ -2,13 +2,13 @@
 import React from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   Image,
   ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { Label } from '../Text';
 import { Predefine } from '../../config/predefine';
 
 function NetworkError(props) {
@@ -17,9 +17,9 @@ function NetworkError(props) {
   return (
     <View style={[styles.container, style]}>
       <Image style={styles.errImage} source={source} />
-      <Text style={styles.description}>天呐，网络好像出了点小问题?</Text>
+      <Label style={styles.description}>天呐，网络好像出了点小问题?</Label>
       <TouchableOpacity style={styles.reloadTouch} onPress={onNetworkReload}>
-        <Text style={styles.reloadText}>重新连接</Text>
+        <Label style={styles.reloadText}>重新连接</Label>
       </TouchableOpacity>
     </View>
   );

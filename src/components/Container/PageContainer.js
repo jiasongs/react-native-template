@@ -105,7 +105,7 @@ PageContainer.propTypes = {
 };
 
 PageContainer.defaultProps = {
-  fitNotchedScreen: true,
+  fitNotchedScreen: false,
   fitNotchedScreenType: 'padding',
   loading: false,
   showNetworkError: true,

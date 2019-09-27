@@ -32,7 +32,6 @@
 - PermissionsManager
 
 # 待完成
-
 - Stepper
 - 查看大图，查看视频等，基于 Overlay
 - Services 结构
@@ -40,8 +39,6 @@
 - MediaPickerManager
 
 # 问题记录
-
-- Overlay 管理层有点繁琐，需要简化操作
 - Card 的需求收集
 - WebBrowser 的需求收集
 - ~~Segmented 安卓需要处理下更新 contentSize 后，bar 的偏移问题，懒加载的问题!!!~~

@@ -127,4 +127,8 @@ const ForwardWebBrowser = React.forwardRef((props, ref) => {
   return <MemoWebBrowser {...props} forwardedRef={ref} />;
 });
 
+ForwardWebBrowser.propTypes = WebBrowser.propTypes;
+ForwardWebBrowser.defaultProps = WebBrowser.defaultProps;
+ForwardWebBrowser.displayName = 'WebBrowser';
+
 export default ForwardWebBrowser;

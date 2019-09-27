@@ -1,8 +1,9 @@
 'use strict';
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { Predefine } from '../../config/predefine';
+import { Label } from '../Text';
 
 function ListEmpty(props) {
   const { style, source, title } = props;
@@ -10,7 +11,7 @@ function ListEmpty(props) {
   return (
     <View style={[styles.emptyContainer, style]}>
       <Image style={styles.emptyImage} source={source} />
-      <Text style={styles.emptyText}>{title}</Text>
+      <Label style={styles.emptyText}>{title}</Label>
     </View>
   );
 }

@@ -17,6 +17,14 @@ class ThemeManager {
   static changeTheme(data = {}) {
     DeviceEventEmitter.emit(CHANGEEVENT, data);
   }
+
+  static changePrimary(data = {}) {
+    DeviceEventEmitter.emit(CHANGEEVENT, { primary: data });
+  }
+
+  static changeFont(data = {}) {
+    DeviceEventEmitter.emit(CHANGEEVENT, { primary: { font: data } });
+  }
 }
 
 export default ThemeManager;

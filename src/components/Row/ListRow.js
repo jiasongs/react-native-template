@@ -1,9 +1,10 @@
 'use strict';
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, Image, ViewPropTypes } from 'react-native';
+import { View, StyleSheet, Image, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
 import { Button } from '../Touchable';
+import { Label } from '../Text';
 import { useTheme } from '../../config/theme';
 import { Predefine } from '../../config/predefine';
 
@@ -26,7 +27,7 @@ function RenderTitle(props) {
   } else if (typeof title === 'function') {
     return title();
   } else if (typeof title === 'string') {
-    return <Text style={titleStyle}>{title}</Text>;
+    return <Label style={titleStyle}>{title}</Label>;
   }
   return null;
 }
@@ -39,7 +40,7 @@ function RenderSubtitle(props) {
   } else if (typeof subtitle === 'function') {
     return subtitle();
   } else if (typeof subtitle === 'string') {
-    return <Text style={subtitleStyle}>{subtitle}</Text>;
+    return <Label style={subtitleStyle}>{subtitle}</Label>;
   }
   return null;
 }
@@ -51,7 +52,7 @@ function RenderDetail(props) {
   } else if (typeof detail === 'function') {
     return detail();
   } else if (typeof detail === 'string') {
-    return <Text style={[Predefine.MR10, detailStyle]}>{detail}</Text>;
+    return <Label style={[Predefine.MR10, detailStyle]}>{detail}</Label>;
   }
   return null;
 }
@@ -249,13 +250,13 @@ ListRow.propTypes = {
     PropTypes.string,
     PropTypes.func,
   ]),
-  titleStyle: Text.propTypes.style,
+  titleStyle: Label.propTypes.style,
   subtitle: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.string,
     PropTypes.func,
   ]),
-  subtitleStyle: Text.propTypes.style,
+  subtitleStyle: Label.propTypes.style,
   icon: Image.propTypes.source,
   iconStyle: Image.propTypes.style,
   detail: PropTypes.oneOfType([
@@ -263,7 +264,7 @@ ListRow.propTypes = {
     PropTypes.string,
     PropTypes.func,
   ]),
-  detailStyle: Text.propTypes.style,
+  detailStyle: Label.propTypes.style,
   accessory: PropTypes.oneOfType([
     PropTypes.oneOf(['none', 'indicator']),
     PropTypes.element,

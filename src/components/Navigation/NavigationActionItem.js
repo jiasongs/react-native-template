@@ -1,7 +1,8 @@
 'use strict';
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
+import { Label } from '../Text';
 
 function NavigationActionItem(props) {
   const { title, titleStyle, icon, iconStyle, onPress } = props;
@@ -16,7 +17,7 @@ function NavigationActionItem(props) {
         />
       ) : null}
       {title ? (
-        <Text style={[styles.actionTitle, titleStyle]}>{title}</Text>
+        <Label style={[styles.actionTitle, titleStyle]}>{title}</Label>
       ) : null}
     </TouchableOpacity>
   );
@@ -45,7 +46,7 @@ NavigationActionItem.propTypes = {
     PropTypes.func,
     PropTypes.element,
   ]),
-  titleStyle: Text.propTypes.style,
+  titleStyle: Label.propTypes.style,
   icon: PropTypes.number,
   iconStyle: Image.propTypes.style,
   onPress: PropTypes.func,

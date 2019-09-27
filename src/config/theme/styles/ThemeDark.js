@@ -11,9 +11,4 @@ export default {
       badge: '#8b0000',
     },
   },
-  page: {
-    style: {
-      backgroundColor: 'red',
-    },
-  },
 };

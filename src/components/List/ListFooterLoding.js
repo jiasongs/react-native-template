@@ -1,7 +1,8 @@
 'use strict';
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
+import { Label } from '../Text';
 
 function RenderFooter(props) {
   const { footer } = props;
@@ -39,7 +40,7 @@ function RenderLoading(props) {
         hidesWhenStopped={true}
         color={'#666'}
       />
-      <Text style={styles.footerText}>{title}</Text>
+      <Label style={styles.footerText}>{title}</Label>
     </View>
   );
 }

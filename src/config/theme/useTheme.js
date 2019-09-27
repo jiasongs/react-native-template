@@ -1,6 +1,6 @@
 'use strict';
 import { useContext, useMemo } from 'react';
-import { ThemeContext } from './ThemeProvider';
+import { ThemeContext } from './provider/ThemeProvider';
 
 function useTheme(key) {
   const themeValue = useContext(ThemeContext);

@@ -2,7 +2,7 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
 import deepmerge from 'deepmerge';
 
-const DefaultPrimary = {
+let prePrimary = {
   color: {
     main: '#333',
     second: '#999',
@@ -11,10 +11,10 @@ const DefaultPrimary = {
     separator: '#eee',
     badge: '#ff190c',
   },
+  font: {
+    multiple: 1,
+  },
 };
-
-let prePrimary = DefaultPrimary;
-let preTheme = {};
 
 export default function(value = {}) {
   const { primary: _primary, ...otherThemes } = value;
@@ -25,7 +25,6 @@ export default function(value = {}) {
   } else {
     primary = prePrimary;
   }
-  console.log('primary', primary);
   const themes = {
     primary: primary,
     /**
@@ -35,6 +34,20 @@ export default function(value = {}) {
       style: {
         backgroundColor: primary.color.reverse,
       },
+    },
+    /**
+     * @Label
+     */
+    label: {
+      style: {
+        fontSize: 14,
+      },
+    },
+    /**
+     * @Input
+     */
+    input: {
+      style: {},
     },
     /**
      * @Button
@@ -255,7 +268,7 @@ export default function(value = {}) {
       },
       defaultLeftAction: {
         iconStyle: {
-          tintColor: 'black',
+          tintColor: primary.color.main,
         },
       },
     },
@@ -389,9 +402,5 @@ export default function(value = {}) {
       },
     },
   };
-  const zzzz = deepmerge(preTheme, themes);
-  console.log('已经变化的theme', zzzz);
-  preTheme = deepmerge(zzzz, otherThemes);
-
   return deepmerge(themes, otherThemes);
 }

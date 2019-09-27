@@ -1,7 +1,6 @@
 'use strict';
 import React, { useMemo, useRef, useCallback } from 'react';
 import {
-  Text,
   Image,
   StyleSheet,
   TouchableOpacity,
@@ -11,6 +10,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageView from '../Image/ImageView';
+import { Label } from '../Text';
 import { useTheme } from '../../config/theme';
 
 const IconPosition = {
@@ -203,7 +203,7 @@ function Button(props) {
       {icon && iconTopOrLeft ? (
         <ImageView style={buildStyles.iconStyle} source={icon} />
       ) : null}
-      {title ? <Text style={buildStyles.titleStyle}>{title}</Text> : null}
+      {title ? <Label style={buildStyles.titleStyle}>{title}</Label> : null}
       {icon && !iconTopOrLeft ? (
         <ImageView style={buildStyles.iconStyle} source={icon} />
       ) : null}
@@ -247,12 +247,12 @@ Button.propTypes = {
     IconPosition.PositionRight,
   ]),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  titleStyle: Text.propTypes.style,
+  titleStyle: Label.propTypes.style,
   spacingIconAndTitle: PropTypes.number,
   backgroundImage: PropTypes.number,
   disabled: PropTypes.bool,
   disabledStyle: ViewPropTypes.style,
-  disabledTitleStyle: Text.propTypes.style,
+  disabledTitleStyle: Label.propTypes.style,
   loading: PropTypes.bool,
   loadingStyle: ViewPropTypes.style,
   raised: PropTypes.bool,

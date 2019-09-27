@@ -1,8 +1,9 @@
 'use strict';
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, ViewPropTypes } from 'react-native';
+import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTheme } from '../../config/theme';
+import { Label } from '../Text';
 
 function Badge(props) {
   const { style, type, count, countStyle, maxCount } = props;
@@ -36,9 +37,9 @@ function Badge(props) {
   return (
     <View style={buildStyles.style}>
       {type !== 'dot' ? (
-        <Text style={buildStyles.countStyle}>
+        <Label style={buildStyles.countStyle}>
           {parseInt(count) > maxCount ? `${maxCount}+` : count}
-        </Text>
+        </Label>
       ) : null}
     </View>
   );
@@ -56,7 +57,7 @@ Badge.propTypes = {
   ...ViewPropTypes,
   type: PropTypes.oneOf(['capsule', 'square', 'dot']),
   count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  countStyle: Text.propTypes.style,
+  countStyle: Label.propTypes.style,
   maxCount: PropTypes.number,
 };
 
