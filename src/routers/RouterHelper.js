@@ -25,6 +25,7 @@ export default class RouterHelper {
 
   static checkActionState() {
     if (!this.navigation) {
+      // eslint-disable-next-line no-console
       console.error('请先初始化路由');
       return false;
     }

@@ -97,7 +97,6 @@ function Stepper(props) {
   }, [data, valueFormat]);
 
   const buildStyles = useMemo(() => {
-    console.log('themeValue', themeValue);
     return {
       style: [themeValue.style, styles.container, style],
       valueStyle: [themeValue.valueStyle, styles.input, valueStyle],

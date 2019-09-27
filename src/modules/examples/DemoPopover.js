@@ -13,17 +13,17 @@ const actions = [
   {
     title: '搜索',
     icon: Images.icon_toast_warn,
-    onPress: () => alert('搜索'),
+    onPress: () => {},
   },
   {
     title: '编辑',
     icon: Images.icon_toast_warn,
-    onPress: () => alert('编辑'),
+    onPress: () => {},
   },
   {
     title: '移除',
     icon: Images.icon_toast_warn,
-    onPress: () => alert('移除'),
+    onPress: () => {},
   },
 ];
 
