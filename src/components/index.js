@@ -1,6 +1,6 @@
 import NetworkError from './Error/NetworkError';
 import LoadingHint from './Loading/LoadingHint';
-import { ImageView } from './Image';
+import { ImageView, ImageZoomView } from './Image';
 import ListView from './List/ListView';
 import NavigationBar from './Navigation/NavigationBar';
 import { Button } from './Touchable';
@@ -85,4 +85,5 @@ export {
   WebBrowser,
   HighlightLabel,
   Label,
+  ImageZoomView,
 };

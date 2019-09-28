@@ -7,6 +7,7 @@ import {
   ImageView,
   Button,
   OverlayManager,
+  ImageZoomView,
 } from '../../components';
 import { Images } from '../../assets';
 import { Predefine } from '../../config/predefine';
@@ -41,15 +42,12 @@ function DemoOverlay() {
           viewRef.current.measure &&
             viewRef.current.measure((x, y, width, height, pageX, pageY) => {
               OverlayManager.preview(
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    // backgroundColor: 'red',
+                <ImageZoomView
+                  source={{
+                    uri:
+                      'https://mtimg.ruanmei.com/images/todayinhistory/2019/06/12/150426_354.jpg',
                   }}
-                >
-                  {React.cloneElement(com)}
-                </View>,
+                />,
                 {
                   containerStyle: {
                     backgroundColor: 'green',
@@ -70,6 +68,12 @@ function DemoOverlay() {
       >
         {com}
       </Button>
+      <ImageZoomView
+        source={{
+          uri:
+            'https://mtimg.ruanmei.com/images/todayinhistory/2019/06/12/150426_354.jpg',
+        }}
+      />
     </PageContainer>
   );
 }

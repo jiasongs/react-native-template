@@ -1,3 +1,4 @@
 import ImageView from './ImageView';
+import ImageZoomView from './ImageZoomView';
 
-export { ImageView };
+export { ImageView, ImageZoomView };
