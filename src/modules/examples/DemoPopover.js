@@ -1,11 +1,11 @@
 'use strict';
-import React, { useRef } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
   NavigationBar,
   PageContainer,
-  PopoverManager,
-  Button,
+  PopoverPreview,
+  Label,
 } from '../../components';
 import { Images } from '../../assets';
 
@@ -27,24 +27,7 @@ const actions = [
   },
 ];
 
-const arrows = [
-  'left',
-  'leftTop',
-  'leftBottom',
-  'top',
-  'topLeft',
-  'topRight',
-  'bottom',
-  'bottomLeft',
-  'bottomRight',
-  'right',
-  'rightTop',
-  'rightBottom',
-];
-
 function DemoPopover() {
-  const buttonRef = useRef(React.createRef());
-
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'DemoPopover'} />
@@ -56,22 +39,17 @@ function DemoPopover() {
           alignItems: 'center',
         }}
       >
-        <Button
-          ref={buttonRef}
-          style={{}}
-          title={'点击'}
-          onPress={() => {
-            const index = Math.floor(Math.random() * 11);
-            PopoverManager.showMenu({
-              arrow: arrows[index],
-              type: 'vertical',
-              actions: actions,
-              option: {
-                viewRef: buttonRef.current,
-              },
-            });
-          }}
-        />
+        <PopoverPreview
+          // style={{ backgroundColor: 'red' }}
+          type={'outline'}
+          arrow={'bottom'}
+          menuType={'horizontal'}
+          menuActions={actions}
+          option={{}}
+          // menuChildren={<Label>123</Label>}
+        >
+          <Label title={'点击'} />
+        </PopoverPreview>
       </View>
     </PageContainer>
   );

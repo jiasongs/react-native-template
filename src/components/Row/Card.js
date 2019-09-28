@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { Button } from '../Touchable';
 import { Predefine } from '../../config/predefine';
 import { useTheme } from '../Theme';
-import ImageView from '../Image/ImageView';
+import { ImageView } from '../Image';
 import { Label } from '../Text';
 
 function Card(props) {

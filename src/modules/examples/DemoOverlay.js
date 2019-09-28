@@ -26,6 +26,7 @@ function DemoOverlay() {
       placeholderImage={Images.img_no_record}
       placeholderImageStyle={{}}
       errorImage={Images.img_no_nerwork}
+      useGradient={false}
     />
   );
 
@@ -37,33 +38,34 @@ function DemoOverlay() {
       <Button
         type={'clear'}
         onPress={() => {
-          viewRef.current.measure((x, y, width, height, pageX, pageY) => {
-            OverlayManager.preview(
-              <View
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  // backgroundColor: 'red',
-                }}
-              >
-                {React.cloneElement(com)}
-              </View>,
-              {
-                containerStyle: {
-                  backgroundColor: 'green',
+          viewRef.current.measure &&
+            viewRef.current.measure((x, y, width, height, pageX, pageY) => {
+              OverlayManager.preview(
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    // backgroundColor: 'red',
+                  }}
+                >
+                  {React.cloneElement(com)}
+                </View>,
+                {
+                  containerStyle: {
+                    backgroundColor: 'green',
+                  },
+                  anchorPoint: 'center',
+                  fromLayout: { x: pageX, y: pageY, width, height },
+                  toLayout: {
+                    x: 0,
+                    y: (Predefine.screenHeight - 200) / 2,
+                    width: Predefine.screenWidth,
+                    height: 400,
+                  },
+                  maskOpacity: 1.0,
                 },
-                anchorPoint: 'center',
-                fromLayout: { x: pageX, y: pageY, width, height },
-                toLayout: {
-                  x: 0,
-                  y: (Predefine.screenHeight - 200) / 2,
-                  width: Predefine.screenWidth,
-                  height: 400,
-                },
-                maskOpacity: 1.0,
-              },
-            );
-          });
+              );
+            });
         }}
       >
         {com}

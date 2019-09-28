@@ -13,7 +13,7 @@ const defaultPopover = {
   arrowPadding: 8,
 };
 
-class PopoverManager {
+class PopoverMenuManager {
   static showMenu(props = {}) {
     const { option, arrow, ...others } = props;
     const newProps = { ...defaultPopover, ...others };
@@ -94,4 +94,4 @@ function fillOffsetXY({ anchorPoint, pageX, pageY }) {
   };
 }
 
-export default PopoverManager;
+export default PopoverMenuManager;

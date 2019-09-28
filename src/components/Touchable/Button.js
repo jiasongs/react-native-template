@@ -9,7 +9,7 @@ import {
   ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import ImageView from '../Image/ImageView';
+import { ImageView } from '../Image';
 import { useTheme } from '../Theme';
 import { Label } from '../Text';
 

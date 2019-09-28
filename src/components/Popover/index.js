@@ -1,5 +1,6 @@
 import PopoverArrow from './PopoverArrow';
 import PopoverMenu from './PopoverMenu';
-import PopoverManager from './PopoverManager';
+import PopoverMenuManager from './PopoverMenuManager';
+import PopoverPreview from './PopoverPreview';
 
-export { PopoverArrow, PopoverMenu, PopoverManager };
+export { PopoverArrow, PopoverMenu, PopoverMenuManager, PopoverPreview };

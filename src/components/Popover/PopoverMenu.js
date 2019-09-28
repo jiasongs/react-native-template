@@ -3,7 +3,21 @@ import React, { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import PopoverArrow from './PopoverArrow';
-import PopoverMenuItem from './PopoverMenuItem';
+import { Button } from '../Touchable';
+
+function PopoverMenuItem(props) {
+  const { style } = props;
+
+  const buildStyles = useMemo(() => {
+    return {
+      style: [styles.menuItem, style],
+    };
+  }, [style]);
+
+  return <Button {...props} type={'clear'} style={buildStyles.style} />;
+}
+
+const MemoPopoverMenuItem = React.memo(PopoverMenuItem);
 
 function PopoverMenu(props) {
   const { type, actions, style, contentStyle, children, ...others } = props;
@@ -44,7 +58,7 @@ function PopoverMenu(props) {
           );
         }
         return (
-          <PopoverMenuItem
+          <MemoPopoverMenuItem
             {...item}
             key={index}
             style={[itemStyle, item.style]}
@@ -74,12 +88,18 @@ const styles = StyleSheet.create({
     borderRightColor: '#ddd',
     borderRightWidth: StyleSheet.hairlineWidth,
   },
+  menuItem: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 25,
+  },
 });
 
 PopoverMenu.propTypes = {
   ...PopoverArrow.type.propTypes,
   type: PropTypes.oneOf(['none', 'vertical', 'horizontal']),
-  actions: PropTypes.arrayOf(PropTypes.shape(PopoverMenuItem.type.propTypes)),
+  actions: PropTypes.arrayOf(PropTypes.shape(PopoverMenuItem.propTypes)),
 };
 
 PopoverMenu.defaultProps = {

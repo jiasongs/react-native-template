@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { View, StyleSheet, Image, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import ImageView from '../Image/ImageView';
+import { ImageView } from '../Image';
 import { Button } from '../Touchable';
 import { Label } from '../Text';
 import { useTheme } from '../Theme';
@@ -121,6 +121,7 @@ function ListRow(props) {
     bottomSeparator,
     bottomSeparatorStyle,
     onPress,
+    disabled,
   } = props;
 
   const themeValue = useTheme('listRow');
@@ -167,6 +168,7 @@ function ListRow(props) {
       type={'clear'}
       style={buildStyles.style}
       onPress={onPress}
+      disabled={disabled}
     >
       <View style={[styles.contentContainer, contentStyle]}>
         <View style={[Predefine.RCA, { flex: 1 }]}>
@@ -279,6 +281,7 @@ ListRow.propTypes = {
   ]),
   bottomSeparatorStyle: ViewPropTypes.style,
   onPress: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 ListRow.defaultProps = {

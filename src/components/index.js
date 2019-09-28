@@ -1,6 +1,6 @@
 import NetworkError from './Error/NetworkError';
 import LoadingHint from './Loading/LoadingHint';
-import ImageView from './Image/ImageView';
+import { ImageView } from './Image';
 import ListView from './List/ListView';
 import NavigationBar from './Navigation/NavigationBar';
 import { Button } from './Touchable';
@@ -8,7 +8,12 @@ import ListRow from './Row/ListRow';
 import TabBottomBar from './Navigation/TabBottomBar';
 import Card from './Row/Card';
 import WebBrowser from './WebView/WebBrowser';
-import { PopoverArrow, PopoverManager, PopoverMenu } from './Popover';
+import {
+  PopoverArrow,
+  PopoverMenuManager,
+  PopoverMenu,
+  PopoverPreview,
+} from './Popover';
 import { Picker } from './Picker';
 import { Checkbox, Radio, Badge, Stepper } from './Form';
 import { PageContainer, GirdContainer } from './Container';
@@ -45,8 +50,9 @@ export {
   useTheme,
   Stepper,
   PopoverArrow,
-  PopoverManager,
+  PopoverMenuManager,
   PopoverMenu,
+  PopoverPreview,
   SegmentedView,
   SegmentedScene,
   PageContainer,
