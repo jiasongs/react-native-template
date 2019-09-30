@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTheme } from '../Theme';
+
 function Label(props) {
   const { forwardedRef, style, title, children, ...others } = props;
   const themeValue = useTheme();
