@@ -1,7 +1,7 @@
 'use strict';
 import React, { useState } from 'react';
 import { Text, StyleSheet, ScrollView } from 'react-native';
-import { NavigationBar, PageContainer, Button } from '../../components';
+import { NavigationBar, PageContainer, Button, Label } from '../../components';
 import { Images } from '../../assets';
 
 function DemoButton() {
@@ -66,7 +66,7 @@ function DemoButton() {
           iconPosition={'bottom'}
         />
         <Button style={styles.button}>
-          <Text style={{ color: '#fff' }}>{'solid-被button包裹'}</Text>
+          <Label style={{ color: '#fff' }}>{'solid-被button包裹'}</Label>
         </Button>
         <Button
           type={'outline'}
@@ -124,7 +124,7 @@ function DemoButton() {
           iconPosition={'bottom'}
         />
         <Button type={'outline'} style={styles.button}>
-          <Text style={{ color: '#333' }}>{'outline-被button包裹'}</Text>
+          <Label style={{ color: '#333' }}>{'outline-被button包裹'}</Label>
         </Button>
         <Button type={'clear'} style={styles.button} title={'clear-title'} />
         <Button
@@ -172,7 +172,7 @@ function DemoButton() {
           iconPosition={'bottom'}
         />
         <Button type={'clear'} style={styles.button}>
-          <Text style={{ color: '#333' }}>{'clear-被button包裹'}</Text>
+          <Label style={{ color: '#333' }}>{'clear-被button包裹'}</Label>
         </Button>
       </ScrollView>
     </PageContainer>
