@@ -3,7 +3,14 @@ import React, { useMemo, useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 function SegmentedContentScene(props) {
-  const { children, contentLayout, active } = props;
+  const {
+    style,
+    children,
+    contentLayout,
+    active,
+    forwardedRef,
+    ...others
+  } = props;
 
   const [focused, setFocused] = useState(active);
 
@@ -14,13 +21,22 @@ function SegmentedContentScene(props) {
   }, [active, focused]);
 
   const buildStyles = useMemo(() => {
-    const propsStyle = children && children.props ? children.props.style : null;
+    const childStyle = children && children.props ? children.props.style : null;
     return {
-      style: [styles.container, propsStyle, { width: contentLayout.width }],
+      style: [
+        styles.container,
+        style,
+        childStyle,
+        { width: contentLayout.width },
+      ],
     };
-  }, [children, contentLayout]);
+  }, [children, contentLayout.width, style]);
 
-  return <View style={buildStyles.style}>{focused ? children : null}</View>;
+  return (
+    <View ref={forwardedRef} style={buildStyles.style} {...others}>
+      {focused ? children : null}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -33,4 +49,11 @@ SegmentedContentScene.propTypes = {};
 
 SegmentedContentScene.defaultProps = {};
 
-export default React.memo(SegmentedContentScene);
+const MemoContentScene = React.memo(SegmentedContentScene);
+const ForwardMemoContentScene = React.forwardRef((props, ref) => {
+  return <MemoContentScene forwardedRef={ref} {...props} />;
+});
+
+ForwardMemoContentScene.displayName = 'RCTView';
+
+export default ForwardMemoContentScene;

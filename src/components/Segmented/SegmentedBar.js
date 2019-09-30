@@ -66,7 +66,7 @@ function SegmentedBar(props) {
     indicatorType,
     indicatorWidthType,
     style,
-    animatedX,
+    animatedXRef,
     sceneChildren,
     currentIndex,
     indicatorStyle,
@@ -263,7 +263,7 @@ function SegmentedBar(props) {
         })}
         <MemoRenderIndicator
           style={buildStyles.indicatorStyle}
-          animatedX={animatedX}
+          animatedX={animatedXRef.current}
           interpolate={interpolate}
           contentItemWidth={contentItemWidth}
         />

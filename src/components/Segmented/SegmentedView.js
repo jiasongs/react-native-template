@@ -6,7 +6,14 @@ import React, {
   useMemo,
   useEffect,
 } from 'react';
-import { View, StyleSheet, Animated, ViewPropTypes, Image } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Animated,
+  ViewPropTypes,
+  Image,
+  Platform,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import SegmentedBar from './SegmentedBar';
 import SegmentedContent from './SegmentedContent';
@@ -73,10 +80,14 @@ function SegmentedView(props) {
     ({ index, animated }) => {
       if (contentLayout.width !== 0) {
         const listView = listViewRef.current._component;
-        listView.scrollToIndex({
-          index,
-          animated: animated,
-        });
+        if (Platform.OS === 'android') {
+          listView.setPage(index);
+        } else {
+          listView.scrollToIndex({
+            index,
+            animated: animated,
+          });
+        }
       }
     },
     [contentLayout],
@@ -133,10 +144,6 @@ function SegmentedView(props) {
         ) {
           if (currentFocusRef.current === preChildenLength.current - 1) {
             setFocusIndex(currentFocusRef.current - 1);
-            scrollToIndex({
-              index: currentFocusRef.current,
-              animated: false,
-            });
           }
         }
         preChildenLength.current = children.length;
@@ -155,7 +162,7 @@ function SegmentedView(props) {
           {...others}
           style={buildStyles.barStyle}
           indicatorWidthType={indicatorWidthType}
-          animatedX={animatedXRef.current}
+          animatedXRef={animatedXRef}
           sceneChildren={children}
           currentIndex={activeIndex !== -1 ? activeIndex : currentIndex}
           indicatorStyle={buildStyles.barIndicatorStyle}
@@ -171,10 +178,8 @@ function SegmentedView(props) {
         initialPage={initialPage}
         onLayout={onLayout}
         currentFocus={currentFocus}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: animatedXRef.current } } }],
-          { useNativeDriver: true, listener: onScroll },
-        )}
+        animatedXRef={animatedXRef}
+        onScroll={onScroll}
         onMomentumScrollEnd={onMomentumScrollEnd}
       >
         {children}
