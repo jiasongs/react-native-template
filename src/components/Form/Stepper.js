@@ -33,7 +33,7 @@ function Stepper(props) {
 
   const themeValue = useTheme('stepper');
 
-  const inputRef = useRef(React.createRef());
+  const inputRef = useRef();
   const [data, setData] = useState({
     type: 'click',
     value: 0,

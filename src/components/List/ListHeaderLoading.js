@@ -13,7 +13,7 @@ import { Predefine } from '../../config/predefine';
 function ListHeaderLoading(props) {
   const { refreshing, onRefresh, source, enable } = props;
 
-  const lottieRef = useRef(React.createRef());
+  const lottieRef = useRef();
   const progressRef = useRef(new Animated.Value(1));
   const currentState = useRef(RefreshState.Idle);
 

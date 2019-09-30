@@ -10,7 +10,7 @@ import {
 import { ServiceHome } from '../../services';
 
 function DemoList() {
-  const listRef = useRef(React.createRef());
+  const listRef = useRef();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 

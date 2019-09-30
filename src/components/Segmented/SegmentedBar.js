@@ -78,7 +78,7 @@ function SegmentedBar(props) {
   } = props;
 
   const themeValue = useTheme('segmented');
-  const scrollViewRef = useRef(React.createRef());
+  const scrollViewRef = useRef();
   const boxLayoutsRef = useRef([]);
 
   const [boxLayouts, setBoxLayouts] = useState([]);

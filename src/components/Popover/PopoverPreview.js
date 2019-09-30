@@ -24,7 +24,7 @@ function PopoverPreview(props) {
     ...others
   } = props;
 
-  const viewRef = useRef(React.createRef());
+  const viewRef = useRef();
 
   const showMenu = useCallback(() => {
     PopoverMenuManager.showMenu({

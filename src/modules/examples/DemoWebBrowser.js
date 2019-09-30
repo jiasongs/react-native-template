@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { WebBrowser } from '../../components';
 
 function DemoWebBrowser() {
-  const webViewRef = useRef(React.createRef());
+  const webViewRef = useRef();
 
   return (
     <WebBrowser

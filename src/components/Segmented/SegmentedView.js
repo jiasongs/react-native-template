@@ -35,7 +35,7 @@ function SegmentedView(props) {
     ...others
   } = props;
 
-  const listViewRef = useRef(React.createRef());
+  const listViewRef = useRef();
   const animatedXRef = useRef(new Animated.Value(0));
   const itemPressIndexRef = useRef(-1);
   const preChildenLength = useRef(-1);

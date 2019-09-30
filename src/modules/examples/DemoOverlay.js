@@ -13,7 +13,7 @@ import { Images } from '../../assets';
 import { Predefine } from '../../config/predefine';
 
 function DemoOverlay() {
-  const viewRef = useRef(React.createRef());
+  const viewRef = useRef();
 
   const com = (
     <ImageView

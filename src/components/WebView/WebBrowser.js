@@ -27,7 +27,7 @@ function WebBrowser(props) {
     forwardedRef,
     ...others
   } = props;
-  const webViewRef = useRef(React.createRef());
+  const webViewRef = useRef();
   const navStateRef = useRef(State);
   const [navState, setNavState] = useState({ loading: false, title: '' });
 
