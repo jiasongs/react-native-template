@@ -32,9 +32,9 @@
 - PermissionsManager
 
 # 待完成
+- Services 封装
 - Stepper
 - 查看大图，查看视频等，基于 Overlay
-- Services 结构
 - PayManager
 - MediaPickerManager
 
