@@ -364,9 +364,8 @@ function request(settings) {
 
 function requestBlob(settings) {
   const newSettings = configSettings(settings);
-  // const timeout = timeoutPromise(newSettings);
   const fetchBlob = fetchBlobPromise(newSettings);
-  return Promise.race([fetchBlob]);
+  return fetchBlob;
 }
 
 /**
@@ -379,7 +378,7 @@ function get(url, query, option) {
   const setting = {
     url: url,
     method: 'GET',
-    query: { ...query },
+    query: query,
     ...option,
   };
   return request(setting);
@@ -395,7 +394,7 @@ function post(url, data, option) {
   const setting = {
     url: url,
     method: 'POST',
-    data: { ...data },
+    data: data,
     ...option,
   };
   return request(setting);

@@ -7,37 +7,32 @@ import {
   ListView,
   ListRow,
 } from '../../components';
-import { ServiceHome } from '../../services';
+import { useHomeList } from '../../services';
 
 function DemoList() {
   const listRef = useRef();
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    ServiceHome.getHomeList({ limit: 20 }).then((result) => {
-      if (result) {
-        setData(result);
-      }
-      setLoading(false);
-    });
-    return () => {
-      console.log('销毁');
-    };
-  }, []);
+  const { data, setData, loading, setRequest } = useHomeList({
+    initData: [],
+    limit: 10,
+  });
 
-  const onRefresh = useCallback((stopRefresh) => {
-    // ServiceHome.getHomeList({ limit: 20 }).then((result) => {
-    //   if (result.success) {
-    //     stopRefresh();
-    //     setData(result.data);
-    //   }
-    // });
-    setTimeout(() => {
-      stopRefresh();
-      setData((pre) => pre.slice());
-    }, 1000);
-  }, []);
+  const onRefresh = useCallback(
+    (stopRefresh) => {
+      setRequest();
+      // ServiceHome.getHomeList({ limit: 20 }).then((result) => {
+      //   if (result.success) {
+      //     stopRefresh();
+      //     setData(result.data);
+      //   }
+      // });
+      setTimeout(() => {
+        stopRefresh();
+        setData((pre) => pre.slice());
+      }, 1000);
+    },
+    [setData, setRequest],
+  );
 
   const onEndReached = useCallback(
     (stopEndReached) => {
@@ -48,7 +43,7 @@ function DemoList() {
         stopEndReached({ allLoad: data.length > 1000 });
       }, 2000);
     },
-    [data],
+    [data.length, setData],
   );
 
   const renderItem = useCallback(({ index }) => {
@@ -74,6 +69,7 @@ function DemoList() {
       <ListView
         ref={listRef}
         style={styles.container}
+        initialRefresh={false}
         enableRefresh={true}
         enableLoadMore={true}
         onRefresh={onRefresh}

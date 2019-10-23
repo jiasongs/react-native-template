@@ -1,4 +1,4 @@
 import { ServerClient } from './request';
-import ServiceHome from './business/ServiceHome';
+import { ServiceHome, useHomeList } from './business/ServiceHome';
 
-export { ServerClient, ServiceHome };
+export { ServerClient, ServiceHome, useHomeList };
