@@ -11,6 +11,12 @@ export default {
     bottom: 0,
     right: 0,
   },
+  Inset8: {
+    top: 8,
+    left: 8,
+    bottom: 8,
+    right: 8,
+  },
   Inset10: {
     top: 10,
     left: 10,
@@ -72,6 +78,18 @@ export default {
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  MB5: {
+    marginBottom: 5,
+  },
+  ML5: {
+    marginLeft: 5,
+  },
+  MR5: {
+    marginRight: 5,
+  },
+  MT5: {
+    marginTop: 5,
+  },
   MT7: {
     marginTop: 7,
   },
@@ -90,14 +108,23 @@ export default {
   ML10: {
     marginLeft: 10,
   },
-  MR5: {
-    marginRight: 5,
-  },
   MR10: {
     marginRight: 10,
   },
   MT10: {
     marginTop: 10,
+  },
+  MB12: {
+    marginBottom: 12,
+  },
+  ML12: {
+    marginLeft: 12,
+  },
+  MR12: {
+    marginRight: 12,
+  },
+  MT12: {
+    marginTop: 12,
   },
   SEP: {
     height: StyleSheet.hairlineWidth,
@@ -126,25 +153,29 @@ export default {
     fontSize: 15,
     color: '#333',
   },
-  FC15fff: {
-    fontSize: 15,
-    color: '#fff',
-  },
   FC15666: {
     fontSize: 15,
     color: '#666',
+  },
+  FC15fff: {
+    fontSize: 15,
+    color: '#fff',
   },
   FC14333: {
     fontSize: 14,
     color: '#333',
   },
-  FC13333: {
-    fontSize: 13,
-    color: '#333',
-  },
   FC14666: {
     fontSize: 14,
     color: '#666',
+  },
+  FC14fff: {
+    fontSize: 14,
+    color: '#fff',
+  },
+  FC13333: {
+    fontSize: 13,
+    color: '#333',
   },
   FC13666: {
     fontSize: 13,
@@ -155,6 +186,10 @@ export default {
     color: '#fff',
   },
   FC12333: {
+    fontSize: 12,
+    color: '#333',
+  },
+  FC12666: {
     fontSize: 12,
     color: '#666',
   },
