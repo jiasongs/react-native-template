@@ -1,5 +1,6 @@
 'use strict';
 import React, { useRef, useCallback } from 'react';
+import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createAppContainer } from 'react-navigation';
 import { StackNavigator } from './RouterConfig';
@@ -20,7 +21,15 @@ function NavigationContainer() {
       const navition = navigatorRef.current._navigation;
       RouterHelper.initRouter(navition);
     }, 300);
-    return JSON.parse(await AsyncStorage.getItem(PersistenceKey));
+    return new Promise((resolve, reject) => {
+      AsyncStorage.getItem(PersistenceKey)
+        .then((data) => {
+          resolve(JSON.parse(data));
+        })
+        .catch(() => {
+          reject();
+        });
+    });
   }, []);
 
   const onNavigationStateChange = useCallback(() => {
@@ -42,8 +51,12 @@ function NavigationContainer() {
     <AppNavigationContainer
       ref={captureRef}
       onNavigationStateChange={onNavigationStateChange}
-      persistNavigationState={__DEV__ ? persistNavigationState : null}
-      loadNavigationState={__DEV__ ? loadNavigationState : null}
+      persistNavigationState={
+        __DEV__ && Platform.OS === 'ios' ? persistNavigationState : null
+      }
+      loadNavigationState={
+        __DEV__ && Platform.OS === 'ios' ? loadNavigationState : null
+      }
     />
   );
 }

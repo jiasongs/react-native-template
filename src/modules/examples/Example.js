@@ -12,7 +12,9 @@ function Example() {
         <ScrollView>
           <ListRow
             title={'Theme'}
-            onPress={() => RouterHelper.navigate('DemoTheme')}
+            onPress={() =>
+              RouterHelper.navigate('DemoTheme', { isModal: true })
+            }
           />
           <ListRow
             title={'Alert'}

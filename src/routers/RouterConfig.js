@@ -1,5 +1,4 @@
 'use strict';
-import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { tabOptions, transitionConfig } from './RouterTool';
@@ -91,14 +90,21 @@ const StackNavigatorRouter = {
 const StackNavigatorConfig = {
   initialRouteName: 'Tab',
   initialRouteParams: {},
-  defaultNavigationOptions: {
-    header: null,
-    gesturesEnabled: Platform.OS === 'ios',
+  defaultNavigationOptions: ({ navigation }) => {
+    return {
+      cardStyle: {},
+      cardShadowEnabled: true,
+      cardOverlayEnabled: true,
+      headerShown: false,
+      animationEnabled: true,
+      gestureEnabled: true,
+      gestureResponseDistance: {
+        horizontal: 25,
+        vertical: 135,
+      },
+      ...transitionConfig(navigation),
+    };
   },
-  cardStyle: {},
-  cardShadowEnabled: true,
-  cardOverlayEnabled: true,
-  transitionConfig: transitionConfig,
 };
 
 const StackNavigator = createStackNavigator(
