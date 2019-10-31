@@ -4,26 +4,17 @@ import { Image } from 'react-native';
 import { StackViewTransitionConfigs } from 'react-navigation-stack';
 
 export function transitionConfig(transitionProps, prevTransitionProps) {
-  const params = transitionProps && transitionProps.scene.route.params;
-  const prevParams =
-    prevTransitionProps && prevTransitionProps.scene.route.params;
+  const params = transitionProps.scene.route.params || {};
   let isModal = false;
   if (
     prevTransitionProps &&
-    transitionProps &&
     prevTransitionProps.index > transitionProps.index
   ) {
-    if (prevParams && prevParams.screenInterpolator === 'modal') {
-      isModal = true;
-    }
-  } else if (
-    prevTransitionProps &&
-    transitionProps &&
-    prevTransitionProps.index < transitionProps.index
-  ) {
-    if (params && params.screenInterpolator === 'modal') {
-      isModal = true;
-    }
+    // 出栈操作（goBack）时，取之前栈中的props
+    const prevParams = prevTransitionProps.scene.route.params || {};
+    isModal = prevParams.isModal;
+  } else {
+    isModal = params.isModal;
   }
   return isModal
     ? StackViewTransitionConfigs.ModalSlideFromBottomIOS
