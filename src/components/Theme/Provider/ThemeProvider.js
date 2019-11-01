@@ -51,7 +51,9 @@ function ThemeProvider(props) {
     });
   }, [defaultTheme]);
 
-  return <ThemeContext.Provider value={value} children={children} />;
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
 }
 
 ThemeProvider.propTypes = {
