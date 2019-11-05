@@ -14,9 +14,8 @@ function DemoAlert() {
     AlertManager.show({
       title: '温馨提示',
       detail: '默认弹窗',
-      onPress: (item) => {
+      onPress: () => {
         AlertManager.hide();
-        console.log(item);
       },
       actions: [
         {

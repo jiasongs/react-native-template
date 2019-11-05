@@ -1,5 +1,5 @@
 'use strict';
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   NavigationBar,

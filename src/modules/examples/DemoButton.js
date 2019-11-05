@@ -1,6 +1,6 @@
 'use strict';
 import React, { useState } from 'react';
-import { Text, StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import { NavigationBar, PageContainer, Button, Label } from '../../components';
 import { Images } from '../../assets';
 

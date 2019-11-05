@@ -41,7 +41,6 @@ const TabNavigatorRouter = {
 
 const TabNavigatorConfig = {
   initialRouteName: 'Example',
-  initialRouteParams: {},
   tabBarOptions: {
     showIcon: true,
     indicatorStyle: { height: 0 },
@@ -55,10 +54,7 @@ const TabNavigatorConfig = {
     },
     keyboardHidesTabBar: true,
   },
-  lazy: false, //懒加载
-  swipeEnabled: false,
-  animationEnabled: false,
-  tabBarPosition: 'bottom',
+  lazy: true, //懒加载
   tabBarComponent: TabBottomBar,
 };
 

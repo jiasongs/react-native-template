@@ -7,29 +7,30 @@ import {
   Keyboard,
   Platform,
 } from 'react-native';
-import { SafeAreaView } from '@react-navigation/native';
+import SafeAreaView from 'react-native-safe-area-view';
+import { ThemeColors } from 'react-navigation';
+
 import CrossFadeIcon from 'react-navigation-tabs/src/views/CrossFadeIcon';
 import withDimensions from 'react-navigation-tabs/src/utils/withDimensions';
-import { ThemeContext } from '../Theme';
-import { Label } from '../Text';
 
-const AnimatedLabel = Animated.createAnimatedComponent(Label);
 const majorVersion = parseInt(Platform.Version, 10);
 const isIos = Platform.OS === 'ios';
 const isIOS11 = majorVersion >= 11 && isIos;
 
 const DEFAULT_MAX_TAB_ITEM_WIDTH = 125;
 
-class TouchableWithoutFeedbackWrapper extends React.PureComponent {
+class TouchableWithoutFeedbackWrapper extends React.Component {
   render() {
     const {
+      route,
+      focused,
       onPress,
       onLongPress,
       testID,
       accessibilityLabel,
       accessibilityRole,
       accessibilityStates,
-      ...props
+      ...rest
     } = this.props;
 
     return (
@@ -42,18 +43,24 @@ class TouchableWithoutFeedbackWrapper extends React.PureComponent {
         accessibilityRole={accessibilityRole}
         accessibilityStates={accessibilityStates}
       >
-        <View {...props} />
+        <View {...rest} />
       </TouchableWithoutFeedback>
     );
   }
 }
 
-class TabBarBottom extends React.PureComponent {
+class TabBarBottom extends React.Component {
   static defaultProps = {
-    keyboardHidesTabBar: false,
-    activeTintColor: '#007AFF',
+    keyboardHidesTabBar: true,
+    activeTintColor: {
+      light: '#007AFF',
+      dark: '#fff',
+    },
+    inactiveTintColor: {
+      light: '#8e8e93',
+      dark: '#7f7f7f',
+    },
     activeBackgroundColor: 'transparent',
-    inactiveTintColor: '#8E8E93',
     inactiveBackgroundColor: 'transparent',
     showLabel: true,
     showIcon: true,
@@ -122,64 +129,102 @@ class TabBarBottom extends React.PureComponent {
     });
   };
 
+  _getActiveTintColor = () => {
+    let { activeTintColor } = this.props;
+    if (!activeTintColor) {
+      return;
+    } else if (typeof activeTintColor === 'string') {
+      return activeTintColor;
+    }
+
+    return activeTintColor[this.context];
+  };
+
+  _getInactiveTintColor = () => {
+    let { inactiveTintColor } = this.props;
+    if (!inactiveTintColor) {
+      return;
+    } else if (typeof inactiveTintColor === 'string') {
+      return inactiveTintColor;
+    }
+
+    return inactiveTintColor[this.context];
+  };
+
+  _getActiveBackgroundColor = () => {
+    let { activeBackgroundColor } = this.props;
+    if (!activeBackgroundColor) {
+      return;
+    } else if (typeof activeBackgroundColor === 'string') {
+      return activeBackgroundColor;
+    }
+
+    return activeBackgroundColor[this.context];
+  };
+
+  _getInactiveBackgroundColor = () => {
+    let { inactiveBackgroundColor } = this.props;
+    if (!inactiveBackgroundColor) {
+      return;
+    } else if (typeof inactiveBackgroundColor === 'string') {
+      return inactiveBackgroundColor;
+    }
+
+    return inactiveBackgroundColor[this.context];
+  };
+
   _renderLabel = ({ route, focused }) => {
-    const {
-      activeTintColor,
-      inactiveTintColor,
-      labelStyle,
-      showLabel,
-      showIcon,
-      allowFontScaling,
-    } = this.props;
+    const { labelStyle, showLabel, showIcon, allowFontScaling } = this.props;
 
     if (showLabel === false) {
       return null;
     }
 
+    const activeTintColor = this._getActiveTintColor();
+    const inactiveTintColor = this._getInactiveTintColor();
     const label = this.props.getLabelText({ route });
     const tintColor = focused ? activeTintColor : inactiveTintColor;
+    const horizontal = this._shouldUseHorizontalLabels();
 
     if (typeof label === 'string') {
       return (
-        <AnimatedLabel
+        <Animated.Text
           numberOfLines={1}
           style={[
             styles.label,
             { color: tintColor },
-            showIcon && this._shouldUseHorizontalLabels()
-              ? styles.labelBeside
-              : styles.labelBeneath,
+            showIcon && horizontal ? styles.labelBeside : styles.labelBeneath,
             labelStyle,
           ]}
           allowFontScaling={allowFontScaling}
         >
           {label}
-        </AnimatedLabel>
+        </Animated.Text>
       );
     }
 
     if (typeof label === 'function') {
-      return label({ route, focused, tintColor });
+      return label({
+        focused,
+        tintColor,
+        orientation: horizontal ? 'horizontal' : 'vertical',
+      });
     }
 
     return label;
   };
 
   _renderIcon = ({ route, focused }) => {
-    const {
-      navigation,
-      activeTintColor,
-      inactiveTintColor,
-      renderIcon,
-      showIcon,
-      showLabel,
-    } = this.props;
+    const { renderIcon, showIcon, showLabel } = this.props;
+
     if (showIcon === false) {
       return null;
     }
 
     const horizontal = this._shouldUseHorizontalLabels();
 
+    const activeTintColor = this._getActiveTintColor();
+    const inactiveTintColor = this._getInactiveTintColor();
     const activeOpacity = focused ? 1 : 0;
     const inactiveOpacity = focused ? 0 : 1;
 
@@ -187,7 +232,6 @@ class TabBarBottom extends React.PureComponent {
       <CrossFadeIcon
         route={route}
         horizontal={horizontal}
-        navigation={navigation}
         activeOpacity={activeOpacity}
         inactiveOpacity={inactiveOpacity}
         activeTintColor={activeTintColor}
@@ -204,12 +248,34 @@ class TabBarBottom extends React.PureComponent {
 
   _shouldUseHorizontalLabels = () => {
     const { routes } = this.props.navigation.state;
-    const { isLandscape, dimensions, adaptive, tabStyle } = this.props;
+    const {
+      isLandscape,
+      dimensions,
+      adaptive,
+      tabStyle,
+      labelPosition,
+    } = this.props;
+
+    if (labelPosition) {
+      let position;
+      if (typeof labelPosition === 'string') {
+        position = labelPosition;
+      } else {
+        position = labelPosition({
+          deviceOrientation: isLandscape ? 'horizontal' : 'vertical',
+        });
+      }
+
+      if (position) {
+        return position === 'beside-icon';
+      }
+    }
 
     if (!adaptive) {
       return false;
     }
 
+    // @ts-ignore
     if (Platform.isPad) {
       let maxTabItemWidth = DEFAULT_MAX_TAB_ITEM_WIDTH;
 
@@ -233,8 +299,6 @@ class TabBarBottom extends React.PureComponent {
     const {
       navigation,
       keyboardHidesTabBar,
-      activeBackgroundColor,
-      inactiveBackgroundColor,
       onTabPress,
       onTabLongPress,
       safeAreaInset,
@@ -244,94 +308,130 @@ class TabBarBottom extends React.PureComponent {
 
     const { routes } = navigation.state;
 
+    const activeBackgroundColor = this._getActiveBackgroundColor();
+    const inactiveBackgroundColor = this._getInactiveBackgroundColor();
+
+    const {
+      position,
+      top,
+      left = 0,
+      bottom = 0,
+      right = 0,
+      margin,
+      marginTop,
+      marginLeft,
+      marginBottom,
+      marginRight,
+      marginHorizontal,
+      marginVertical,
+      ...innerStyle
+    } = StyleSheet.flatten(style || {});
+
+    const containerStyle = {
+      position,
+      top,
+      left,
+      bottom,
+      right,
+      margin,
+      marginTop,
+      marginLeft,
+      marginBottom,
+      marginRight,
+      marginHorizontal,
+      marginVertical,
+    };
+
     const tabBarStyle = [
       styles.tabBar,
+      styles.tabBarLight,
+      // @ts-ignore
       this._shouldUseHorizontalLabels() && !Platform.isPad
         ? styles.tabBarCompact
         : styles.tabBarRegular,
-      style,
+      innerStyle,
     ];
+
     return (
-      <ThemeContext.Consumer>
-        {(themeValue) => (
-          <Animated.View
-            style={[
-              styles.container,
-              keyboardHidesTabBar
-                ? {
-                    transform: [
-                      {
-                        translateY: this.state.visible.interpolate({
-                          inputRange: [0, 1],
-                          outputRange: [this.state.layout.height, 0],
-                        }),
-                      },
-                    ],
-                    position: this.state.keyboard ? 'absolute' : null,
-                  }
-                : null,
-            ]}
-            pointerEvents={
-              keyboardHidesTabBar && this.state.keyboard ? 'none' : 'auto'
-            }
-            onLayout={this._handleLayout}
-          >
-            <SafeAreaView
-              style={[tabBarStyle, themeValue.tabBar.style]}
-              forceInset={safeAreaInset}
-            >
-              {routes.map((route, index) => {
-                const focused = index === navigation.state.index;
-                const scene = { route, focused };
-                const accessibilityLabel = this.props.getAccessibilityLabel({
-                  route,
-                });
+      <Animated.View
+        style={[
+          styles.container,
+          keyboardHidesTabBar
+            ? {
+                // When the keyboard is shown, slide down the tab bar
+                transform: [
+                  {
+                    translateY: this.state.visible.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [this.state.layout.height, 0],
+                    }),
+                  },
+                ],
+                // Absolutely position the tab bar so that the content is below it
+                // This is needed to avoid gap at bottom when the tab bar is hidden
+                position: this.state.keyboard ? 'absolute' : null,
+              }
+            : null,
+          containerStyle,
+        ]}
+        pointerEvents={
+          keyboardHidesTabBar && this.state.keyboard ? 'none' : 'auto'
+        }
+        onLayout={this._handleLayout}
+      >
+        <SafeAreaView style={tabBarStyle} forceInset={safeAreaInset}>
+          {routes.map((route, index) => {
+            const focused = index === navigation.state.index;
+            const scene = { route, focused };
+            const accessibilityLabel = this.props.getAccessibilityLabel({
+              route,
+            });
 
-                const accessibilityRole = this.props.getAccessibilityRole({
-                  route,
-                });
+            const accessibilityRole = this.props.getAccessibilityRole({
+              route,
+            });
 
-                const accessibilityStates = this.props.getAccessibilityStates(
-                  scene,
-                );
+            const accessibilityStates = this.props.getAccessibilityStates(
+              scene,
+            );
 
-                const testID = this.props.getTestID({ route });
+            const testID = this.props.getTestID({ route });
 
-                const backgroundColor = focused
-                  ? activeBackgroundColor
-                  : inactiveBackgroundColor;
+            const backgroundColor = focused
+              ? activeBackgroundColor
+              : inactiveBackgroundColor;
 
-                const ButtonComponent =
-                  this.props.getButtonComponent({ route }) ||
-                  TouchableWithoutFeedbackWrapper;
+            const ButtonComponent =
+              this.props.getButtonComponent({ route }) ||
+              TouchableWithoutFeedbackWrapper;
 
-                return (
-                  <ButtonComponent
-                    key={route.key}
-                    onPress={() => onTabPress({ route })}
-                    onLongPress={() => onTabLongPress({ route })}
-                    testID={testID}
-                    accessibilityLabel={accessibilityLabel}
-                    accessibilityRole={accessibilityRole}
-                    accessibilityStates={accessibilityStates}
-                    style={[
-                      styles.tab,
-                      { backgroundColor },
-                      this._shouldUseHorizontalLabels()
-                        ? styles.tabLandscape
-                        : styles.tabPortrait,
-                      tabStyle,
-                    ]}
-                  >
-                    {this._renderIcon(scene)}
-                    {this._renderLabel(scene)}
-                  </ButtonComponent>
-                );
-              })}
-            </SafeAreaView>
-          </Animated.View>
-        )}
-      </ThemeContext.Consumer>
+            return (
+              <ButtonComponent
+                key={route.key}
+                route={route}
+                focused={focused}
+                onPress={() => onTabPress({ route })}
+                onLongPress={() => onTabLongPress({ route })}
+                testID={testID}
+                accessibilityLabel={accessibilityLabel}
+                accessibilityRole={accessibilityRole}
+                accessibilityStates={accessibilityStates}
+                style={[
+                  styles.tab,
+                  { backgroundColor },
+                  this._shouldUseHorizontalLabels()
+                    ? styles.tabLandscape
+                    : styles.tabPortrait,
+                  tabStyle,
+                ]}
+              >
+                {this._renderIcon(scene)}
+                {this._renderLabel(scene)}
+              </ButtonComponent>
+            );
+          })}
+        </SafeAreaView>
+      </Animated.View>
     );
   }
 }
@@ -341,13 +441,18 @@ const COMPACT_HEIGHT = 29;
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: '#fff',
+    borderTopWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
   },
+  tabBarLight: {
+    backgroundColor: ThemeColors.light.header,
+    borderTopColor: ThemeColors.light.headerBorder,
+  },
+  tabBarDark: {
+    backgroundColor: ThemeColors.dark.header,
+    borderTopColor: ThemeColors.dark.headerBorder,
+  },
   container: {
-    left: 0,
-    right: 0,
-    bottom: 0,
     elevation: 8,
   },
   tabBarCompact: {
@@ -375,6 +480,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   iconWithExplicitHeight: {
+    // @ts-ignore
     height: Platform.isPad ? DEFAULT_HEIGHT : COMPACT_HEIGHT,
   },
   label: {
@@ -387,7 +493,7 @@ const styles = StyleSheet.create({
   },
   labelBeside: {
     fontSize: 12,
-    marginLeft: 15,
+    marginLeft: 20,
   },
 });
 

@@ -2,7 +2,6 @@
 import React, { useMemo } from 'react';
 import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import { Predefine } from '../../config/predefine';
 import { Label } from '../Text';
 
 function RenderContent(props) {
@@ -32,16 +31,17 @@ function NavigationTitle(props) {
     title,
     titleStyle,
     extraData,
+    containerWidth,
     leftActionWidth,
     rightActionWidth,
   } = props;
 
   const buildStyles = useMemo(() => {
-    const widthLR = Math.max(leftActionWidth, rightActionWidth) + 3 * 2;
+    const widthLR = Math.max(leftActionWidth, rightActionWidth);
     return {
-      style: [{ width: Predefine.screenWidth - widthLR * 2 }, style],
+      style: [{ width: containerWidth - widthLR * 2 }, style],
     };
-  }, [leftActionWidth, rightActionWidth, style]);
+  }, [containerWidth, leftActionWidth, rightActionWidth, style]);
 
   return (
     <View style={[buildStyles.style]}>

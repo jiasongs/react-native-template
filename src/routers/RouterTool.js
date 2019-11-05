@@ -16,7 +16,7 @@ export function transitionConfig(navigation) {
     },
     cardStyleInterpolator: (props) => {
       if (isModal) {
-        return CardStyleInterpolators.forVerticalIOS(props);
+        return CardStyleInterpolators.forModalPresentationIOS(props);
       } else {
         return CardStyleInterpolators.forHorizontalIOS(props);
       }

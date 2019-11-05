@@ -1,5 +1,5 @@
 'use strict';
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useRef, useState, useMemo, useCallback } from 'react';
 import {
   View,
   StyleSheet,
@@ -9,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import deepmerge from 'deepmerge';
 import NavigationTitle from './NavigationTitle';
 import NavigationAction from './NavigationAction';
 import { Label } from '../Text';
@@ -29,6 +30,7 @@ function RenderImageBackground(props) {
 function NavigationBar(props) {
   const {
     style,
+    contentStyle,
     statusBarColor,
     statusBarStyle,
     animated,
@@ -40,13 +42,20 @@ function NavigationBar(props) {
     backgroundImage,
     defaultLeftSource,
     title,
+    insets,
     extraData,
   } = props;
 
   const themeValue = useTheme('navigationBar');
-
-  const [leftActionWidth, setLeftActionWidth] = useState(10);
-  const [rightActionWidth, setRightActionWidth] = useState(10);
+  const defaultInsetsRef = useRef({
+    top: Predefine.statusBarHeight,
+    left: 10,
+    bottom: 0,
+    right: 10,
+  });
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [leftActionWidth, setLeftActionWidth] = useState(0);
+  const [rightActionWidth, setRightActionWidth] = useState(0);
 
   const _onPressBackFunc = useCallback(
     (event) => {
@@ -59,14 +68,16 @@ function NavigationBar(props) {
     [onPressBack],
   );
 
+  const onLayout = useCallback((event) => {
+    setContainerWidth(event.nativeEvent.layout.width);
+  }, []);
+
   const onLayoutLeft = useCallback((event) => {
-    const width = event.nativeEvent.layout.width;
-    setLeftActionWidth(width);
+    setLeftActionWidth(event.nativeEvent.layout.width);
   }, []);
 
   const onLayoutRight = useCallback((event) => {
-    const width = event.nativeEvent.layout.width;
-    setRightActionWidth(width);
+    setRightActionWidth(event.nativeEvent.layout.width);
   }, []);
 
   const defaultLeftAction = useMemo(() => {
@@ -90,15 +101,29 @@ function NavigationBar(props) {
   }, [defaultLeftAction, extraData, renderLeftAction]);
 
   const buildStyles = useMemo(() => {
+    const newStyle = [themeValue.style, styles.container];
+    const newContentStyle = [styles.navContent];
+    const newInsets = deepmerge(defaultInsetsRef.current, insets);
+    defaultInsetsRef.current = newInsets;
+    newStyle.push({
+      height: Predefine.navBarHeight + newInsets.top,
+    });
+    newContentStyle.push({
+      marginTop: newInsets.top,
+      marginLeft: newInsets.left,
+      marginRight: newInsets.right,
+      marginBottom: newInsets.bottom,
+    });
     return {
-      style: [themeValue.style, styles.container, style],
+      style: [newStyle, style],
+      contentStyle: [newContentStyle, contentStyle],
       statusBarStyle: themeValue.statusBarStyle,
       titleStyle: [themeValue.titleStyle, titleStyle],
     };
-  }, [themeValue, style, titleStyle]);
+  }, [themeValue, insets, style, contentStyle, titleStyle]);
 
   return (
-    <View style={buildStyles.style}>
+    <View style={buildStyles.style} onLayout={onLayout}>
       <StatusBar
         translucent={true}
         backgroundColor={statusBarColor}
@@ -107,7 +132,7 @@ function NavigationBar(props) {
         hidden={statusBarHidden}
       />
       <MemoRenderBackground backgroundImage={backgroundImage} />
-      <View style={styles.navContent}>
+      <View style={buildStyles.contentStyle}>
         {newRenderLeftAction ? (
           <NavigationAction
             style={styles.navLeftContainer}
@@ -123,6 +148,7 @@ function NavigationBar(props) {
             titleStyle={buildStyles.titleStyle}
             leftActionWidth={leftActionWidth}
             rightActionWidth={rightActionWidth}
+            containerWidth={containerWidth}
             extraData={extraData}
           />
         ) : null}
@@ -142,10 +168,8 @@ function NavigationBar(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: Predefine.contentTop,
   },
   navContent: {
-    marginTop: Predefine.statusBarHeight,
     height: Predefine.navBarHeight,
     flexDirection: 'row',
     alignItems: 'center',
@@ -154,12 +178,12 @@ const styles = StyleSheet.create({
   navTitleContainer: {},
   navLeftContainer: {
     position: 'absolute',
-    left: 5,
+    left: 0,
     justifyContent: 'center',
   },
   navRightContainer: {
     position: 'absolute',
-    right: 5,
+    right: 0,
     justifyContent: 'center',
   },
   navImageBack: {
@@ -193,6 +217,12 @@ NavigationBar.propTypes = {
   statusBarStyle: PropTypes.oneOf(['default', 'light-content', 'dark-content']),
   statusBarColor: PropTypes.string,
   statusBarHidden: PropTypes.bool,
+  insets: PropTypes.shape({
+    top: PropTypes.number,
+    left: PropTypes.number,
+    bottom: PropTypes.number,
+    right: PropTypes.number,
+  }),
   extraData: PropTypes.any,
 };
 
@@ -202,6 +232,7 @@ NavigationBar.defaultProps = {
       ? 'rgba(0, 0, 0, 0)'
       : 'rgba(0, 0, 0, 0.3)',
   statusBarHidden: false,
+  insets: {},
 };
 
 export default React.memo(NavigationBar);

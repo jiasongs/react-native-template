@@ -1,6 +1,6 @@
 'use strict';
 import React, { useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   NavigationBar,
   PageContainer,
