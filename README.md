@@ -4,8 +4,6 @@
 
 此库封装了常用 UI 组件和部分项目配置，可用于快速迭代开发基于 RN 的项目。
 
-此库并不是一个 UI 组件库，是一个快速开发 RN 项目的框架，目前没有抽离框架中 UI 组件的计划，主要是因为此库的 UI 组件为了性能，采用 React Hook 的写法，如果单独开源 UI 组件需要改为 Class 的写法来兼容 RN 低版本，性能上不如 Hook 的写法，且本人精力有限，单独维护 UI 组件库需要消耗的精力太多，如果有志同道合者可以协作，会考虑单独抽离 UI 组件。
-
 # 已完成
 
 - Container
@@ -32,23 +30,26 @@
 - PermissionsManager
 
 # 待完成
-- Services 封装
+
+- 网络请求类模板化，参考 swift 中的 moya 库，使用 hook 重写
+- Theme 主题切换采用更加优雅的实现方式，参考 iOS 原生的主题切换
 - Stepper
 - 查看大图，查看视频等，基于 Overlay
 - PayManager
 - MediaPickerManager
 
 # 问题记录
+
 - Card 的需求收集
 - WebBrowser 的需求收集
-- ~~Segmented 安卓需要处理下更新 contentSize 后，bar 的偏移问题，懒加载的问题!!!~~
-- ~~用 hook 重写 ListView -- FlatList 不太适合用 Hook 写法包装，具体参见源码~~
 
 ## Installation
 
 ```
 $ npm install
+$ npm install react-navigation-stack@alpha --save
 $ cd ios && pod install
+$ cd .. && npm run postinstall
 $ npm run ios // npm run android
 
 ```

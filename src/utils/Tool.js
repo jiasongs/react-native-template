@@ -29,14 +29,14 @@ export function checkNumber(number) {
  * @param
  * @returns {Boolean}
  */
-export function checkEmpty(string) {
-  if (typeof string === 'undefined') {
+export function checkEmpty(value) {
+  if (typeof value === 'undefined') {
     return true;
   }
-  if (string === null) {
+  if (value === null) {
     return true;
   }
-  if (string === '') {
+  if (value === '') {
     return true;
   }
   return false;
@@ -52,7 +52,7 @@ export function containsChinese(value) {
   return reg.test(value);
 }
 /**
- * 检查是否为空
+ * 转换
  * @param
  * @returns {String}
  */
@@ -120,8 +120,7 @@ export function bouncerEmpty(arr) {
  * @returns array
  */
 export function bubbleSort(array, sortType = 'ascending') {
-  if (!(array instanceof Array)) {
-    // console.warn('请传入一个数组类型的参数！')
+  if (!Array.isArray(array)) {
     return array;
   }
   let arrayTemp = array.slice();
@@ -137,6 +136,80 @@ export function bubbleSort(array, sortType = 'ascending') {
   }
   return sortType === 'ascending' ? arrayTemp : arrayTemp.reverse();
 }
+/**
+ *
+ * 判断是否是对象
+ * @param any
+ * @returns bool
+ */
+export function isObject(payload) {
+  return Object.prototype.toString.call(payload) === '[object Object]';
+}
+/**
+ *
+ * 去空
+ * @param any
+ * @returns any
+ */
+export function deleteEmpty(payload) {
+  if (checkEmpty(payload)) {
+    return '';
+  }
+  return payload;
+}
+/**
+ *
+ * 去空（数组）
+ * @param array
+ * @returns array
+ */
+export function deleteEmptyInArray(payload) {
+  let newPayload = [];
+  if (Array.isArray(payload)) {
+    payload.forEach((item) => {
+      newPayload.push(deleteEmptyProperty(item));
+    });
+  } else {
+    newPayload = deleteEmpty(payload);
+  }
+  return newPayload;
+}
+/**
+ *
+ * 去空（对象）
+ * @param object
+ * @returns object
+ */
+export function deleteEmptyInObject(payload) {
+  let newPayload;
+  if (isObject(payload)) {
+    newPayload = { ...payload };
+    for (const key in newPayload) {
+      newPayload[key] = deleteEmptyProperty(newPayload[key]);
+    }
+  } else {
+    newPayload = deleteEmpty(payload);
+  }
+  return newPayload;
+}
+/**
+ *
+ * 去空（任意）
+ * @param any
+ * @returns any
+ */
+export function deleteEmptyProperty(payload) {
+  let newPayload;
+  if (Array.isArray(payload)) {
+    newPayload = deleteEmptyInArray(payload);
+  } else if (isObject(payload)) {
+    newPayload = deleteEmptyInObject(payload);
+  } else {
+    newPayload = deleteEmpty(payload);
+  }
+  return newPayload;
+}
+
 // /**
 //  * 转换时间戳
 //  * @param 时间戳
