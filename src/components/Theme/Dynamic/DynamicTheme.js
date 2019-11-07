@@ -273,11 +273,6 @@ export default function(value = {}) {
         fontSize: 17,
         fontWeight: 'bold',
       },
-      defaultLeftAction: {
-        iconStyle: {
-          tintColor: primary.color.main,
-        },
-      },
     },
     tabBar: {
       style: {

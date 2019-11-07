@@ -31,12 +31,12 @@
 
 # 待完成
 
-- 网络请求类模板化，参考 swift 中的 moya 库，使用 hook 重写
-- Theme 主题切换采用更加优雅的实现方式，参考 iOS 原生的主题切换
-- Stepper
-- 查看大图，查看视频等，基于 Overlay
-- PayManager
-- MediaPickerManager
+- 网络请求类模板化，参考 swift 中的 moya 库，使用 hook 重写，优先级 1
+- Theme 主题切换采用更加优雅的实现方式，参考 iOS 原生的主题切换，优先级 2
+- Stepper，优先级 3
+- 查看大图，查看视频等，基于 Overlay，优先级 4
+- PayManager，优先级 5
+- MediaPickerManager，优先级 6
 
 # 问题记录
 
