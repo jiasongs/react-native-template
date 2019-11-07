@@ -18,9 +18,11 @@ export interface ButtonProps extends TouchableOpacityProps, ViewProps {
   titleStyle?: StyleProp<TextStyle>;
   spacingIconAndTitle?: number;
   backgroundImage?: number;
+  disabledOnly?: boolean;
   disabled?: boolean;
   disabledStyle?: StyleProp<ViewStyle>;
   disabledTitleStyle?: StyleProp<TextStyle>;
+  disabledIconStyle?: StyleProp<ImageStyle>;
   loading?: boolean;
   loadingStyle?: StyleProp<ViewStyle>;
   raised?: boolean;

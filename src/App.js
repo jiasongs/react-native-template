@@ -3,7 +3,7 @@ import './config/predefine';
 import './config/global';
 import React, { useState, useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import NavigationContainer from './routers/NavigationContainer';
+import RouterContainer from './routers/RouterContainer';
 import { OverlayProvider, DevRefresh, ThemeProvider } from './components';
 import { useBackExitApp } from './common/hooks';
 import { StorageManager } from './common/manager';
@@ -38,7 +38,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme={state}>
       <OverlayProvider>
-        <NavigationContainer />
+        <RouterContainer />
         {__DEV__ && <DevRefresh />}
       </OverlayProvider>
     </ThemeProvider>

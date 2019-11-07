@@ -14,4 +14,9 @@ export default {
   navigationBar: {
     statusBarStyle: 'light-content',
   },
+  toast: {
+    titleStyle: {
+      color: '#fff',
+    },
+  },
 };

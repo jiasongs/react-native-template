@@ -5,7 +5,6 @@ import {
   StyleSheet,
   StatusBar,
   ImageBackground,
-  Image,
   Platform,
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -15,8 +14,6 @@ import NavigationAction from './NavigationAction';
 import { Label } from '../Text';
 import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
-// 考虑引入是否合理
-import RouterHelper from '../../routers/RouterHelper';
 
 const MemoRenderBackground = React.memo(RenderImageBackground);
 
@@ -35,12 +32,10 @@ function NavigationBar(props) {
     statusBarStyle,
     animated,
     statusBarHidden,
-    onPressBack,
     titleStyle,
     renderLeftAction,
     renderRightAction,
     backgroundImage,
-    defaultLeftSource,
     title,
     insets,
     extraData,
@@ -57,17 +52,6 @@ function NavigationBar(props) {
   const [leftActionWidth, setLeftActionWidth] = useState(0);
   const [rightActionWidth, setRightActionWidth] = useState(0);
 
-  const _onPressBackFunc = useCallback(
-    (event) => {
-      if (onPressBack) {
-        onPressBack(event);
-      } else {
-        RouterHelper.goBack();
-      }
-    },
-    [onPressBack],
-  );
-
   const onLayout = useCallback((event) => {
     setContainerWidth(event.nativeEvent.layout.width);
   }, []);
@@ -80,25 +64,11 @@ function NavigationBar(props) {
     setRightActionWidth(event.nativeEvent.layout.width);
   }, []);
 
-  const defaultLeftAction = useMemo(() => {
-    const action = themeValue.defaultLeftAction;
-    return [
-      {
-        icon: defaultLeftSource,
-        iconStyle: [{ width: 20, height: 20 }, action.iconStyle],
-        onPress: _onPressBackFunc,
-      },
-    ];
-  }, [_onPressBackFunc, defaultLeftSource, themeValue]);
-
   const newRenderLeftAction = useMemo(() => {
     if (extraData) {
     }
-    if (renderLeftAction === undefined) {
-      return defaultLeftAction;
-    }
     return renderLeftAction;
-  }, [defaultLeftAction, extraData, renderLeftAction]);
+  }, [extraData, renderLeftAction]);
 
   const buildStyles = useMemo(() => {
     const newStyle = [themeValue.style, styles.container];
@@ -202,7 +172,6 @@ NavigationBar.propTypes = {
     PropTypes.element,
   ]),
   titleStyle: Label.propTypes.style,
-  defaultLeftSource: Image.propTypes.source,
   renderLeftAction: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.func,

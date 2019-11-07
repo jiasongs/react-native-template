@@ -36,9 +36,11 @@ function Button(props) {
     onPress,
     children,
     forwardedRef,
+    disabledOnly,
     disabled,
     disabledStyle,
     disabledTitleStyle,
+    disabledIconStyle,
     loading,
     loadingStyle,
     ...others
@@ -76,6 +78,7 @@ function Button(props) {
       if (disabled) {
         newStyle.push(themeValue.solid.disabledStyle);
         newTitleStyle.push(themeValue.solid.disabledTitleStyle);
+        newIconStyle.push(themeValue.solid.disabledIconStyle);
       }
       if (raised) {
         newStyle.push(themeValue.raisedStyle);
@@ -90,6 +93,7 @@ function Button(props) {
       if (disabled) {
         newStyle.push(themeValue.outline.disabledStyle);
         newTitleStyle.push(themeValue.outline.disabledTitleStyle);
+        newIconStyle.push(themeValue.outline.disabledIconStyle);
       }
       if (raised) {
         newStyle.push(themeValue.raisedStyle);
@@ -104,6 +108,7 @@ function Button(props) {
       if (disabled) {
         newStyle.push(themeValue.clear.disabledStyle);
         newTitleStyle.push(themeValue.clear.disabledTitleStyle);
+        newStyle.push(themeValue.clear.disabledIconStyle);
       }
     }
     const buildStyle = [...newStyle, styles.container];
@@ -152,7 +157,11 @@ function Button(props) {
     }
     return {
       style: [...buildStyle, style, disabled ? disabledStyle : null],
-      iconStyle: [...buildIconStyle, iconStyle],
+      iconStyle: [
+        ...buildIconStyle,
+        iconStyle,
+        disabled ? disabledIconStyle : null,
+      ],
       titleStyle: [
         ...buildTitleStyle,
         titleStyle,
@@ -164,6 +173,7 @@ function Button(props) {
     };
   }, [
     disabled,
+    disabledIconStyle,
     disabledStyle,
     disabledTitleStyle,
     icon,
@@ -193,7 +203,7 @@ function Button(props) {
       ref={forwardedRef}
       style={buildStyles.style}
       onPress={_onPress}
-      disabled={loading || disabled}
+      disabled={loading || disabled || disabledOnly}
     >
       {backgroundImage ? (
         <ImageBackground
@@ -251,9 +261,11 @@ Button.propTypes = {
   titleStyle: Label.propTypes.style,
   spacingIconAndTitle: PropTypes.number,
   backgroundImage: PropTypes.number,
+  disabledOnly: PropTypes.bool,
   disabled: PropTypes.bool,
   disabledStyle: ViewPropTypes.style,
   disabledTitleStyle: Label.propTypes.style,
+  disabledIconStyle: Image.propTypes.style,
   loading: PropTypes.bool,
   loadingStyle: ViewPropTypes.style,
   raised: PropTypes.bool,

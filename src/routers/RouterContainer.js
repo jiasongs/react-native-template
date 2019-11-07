@@ -9,7 +9,7 @@ import RouterHelper from './RouterHelper';
 const PersistenceKey = 'PersistenceKey';
 const AppNavigationContainer = createAppContainer(StackNavigator);
 
-function NavigationContainer() {
+function RouterContainer() {
   const navigatorRef = useRef(null);
 
   const persistNavigationState = useCallback((navState) => {
@@ -61,4 +61,4 @@ function NavigationContainer() {
   );
 }
 
-export default React.memo(NavigationContainer);
+export default React.memo(RouterContainer);

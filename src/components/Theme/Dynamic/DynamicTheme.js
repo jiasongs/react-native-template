@@ -101,6 +101,7 @@ export default function(value = {}) {
         disabledTitleStyle: {
           color: primary.color.second,
         },
+        disabledIconStyle: {},
         loadingStyle: {
           ...StyleSheet.absoluteFillObject,
           color: primary.color.reverse,
@@ -134,6 +135,7 @@ export default function(value = {}) {
         disabledTitleStyle: {
           color: primary.color.second,
         },
+        disabledIconStyle: {},
         loadingStyle: {
           ...StyleSheet.absoluteFillObject,
           color: primary.color.main,
@@ -155,6 +157,7 @@ export default function(value = {}) {
         disabledTitleStyle: {
           color: primary.color.second,
         },
+        disabledIconStyle: {},
         loadingStyle: {
           ...StyleSheet.absoluteFillObject,
           color: primary.color.main,

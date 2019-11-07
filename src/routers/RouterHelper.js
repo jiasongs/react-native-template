@@ -27,14 +27,21 @@ export default class RouterHelper {
     if (!this.navigation) {
       // eslint-disable-next-line no-console
       console.error('请先初始化路由');
-      return false;
+      return true;
     }
     const nowTime = new Date().getTime();
     if (nowTime - this.lastActionTime <= this.interval) {
-      return false;
+      return true;
     }
     this.lastActionTime = nowTime;
-    return true;
+    return false;
+  }
+
+  // 拦截路由
+  static interceptRouter(routeName, params) {
+    if (routeName || params) {
+    }
+    return false;
   }
 
   static initRouter(navition) {
@@ -58,21 +65,27 @@ export default class RouterHelper {
 
   // 最好使用这个
   static navigate(routeName, params = {}) {
-    if (!this.checkActionState()) {
+    if (this.checkActionState()) {
+      return;
+    }
+    if (this.interceptRouter(routeName, params)) {
       return;
     }
     this.navigation.navigate(routeName, params);
   }
 
   static push(routeName, params = {}) {
-    if (!this.checkActionState()) {
+    if (this.checkActionState()) {
+      return;
+    }
+    if (this.interceptRouter(routeName, params)) {
       return;
     }
     this.navigation.push(routeName, params);
   }
 
   static goBack(routeName) {
-    if (!this.checkActionState()) {
+    if (this.checkActionState()) {
       return;
     }
     if (routeName) {
@@ -89,28 +102,28 @@ export default class RouterHelper {
   }
 
   static dismiss() {
-    if (!this.checkActionState()) {
+    if (this.checkActionState()) {
       return;
     }
     this.navigation.dismiss();
   }
 
   static pop(number, params = {}) {
-    if (!this.checkActionState()) {
+    if (this.checkActionState()) {
       return;
     }
     this.navigation.pop(number, params);
   }
 
   static popToTop(params = {}) {
-    if (!this.checkActionState()) {
+    if (this.checkActionState()) {
       return;
     }
     this.navigation.popToTop(params);
   }
 
   static replace(routeName, params = {}) {
-    if (!this.checkActionState()) {
+    if (this.checkActionState()) {
       return;
     }
     const replaceAction = StackActions.replace({
@@ -121,7 +134,7 @@ export default class RouterHelper {
   }
 
   static reset(routeName, params = {}) {
-    if (!this.checkActionState()) {
+    if (this.checkActionState()) {
       return;
     }
     this.navigation.reset(
