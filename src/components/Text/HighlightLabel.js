@@ -63,6 +63,9 @@ HighlightLabel.propTypes = {
   highlightStyle: Label.propTypes.style,
 };
 
-HighlightLabel.defaultProps = {};
+HighlightLabel.defaultProps = {
+  title: '',
+  highlightTitle: '',
+};
 
 export default React.memo(HighlightLabel);
