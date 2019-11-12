@@ -39,7 +39,7 @@ function DemoTheme() {
         titleStyle={{ color: themeValue.primary.color.main }}
         onPress={() => {
           ThemeManager.changeTheme(ThemeLight); // 异步
-          StorageManager.save('THEME', ThemeLight);
+          StorageManager.save('THEME1', ThemeLight);
         }}
       />
       <Button
@@ -47,7 +47,7 @@ function DemoTheme() {
         title={'点击切换黑暗主题'}
         onPress={() => {
           ThemeManager.changeTheme(ThemeDark); // 异步
-          StorageManager.save('THEME', ThemeDark);
+          StorageManager.save('THEME1', ThemeDark);
         }}
       />
     </PageContainer>

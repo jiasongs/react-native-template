@@ -27,19 +27,19 @@ const ThemeContext = React.createContext(initialTheme);
 // 用户改变的主题可覆盖 合并之后的主题或之前的主题，优先级1
 
 function ThemeProvider(props) {
-  const { defaultTheme, children } = props;
+  const { defaultTheme, registerStyle, children } = props;
 
   // 初始化系统默认主题
   const [value, setValue] = useState(initialTheme);
 
   useEffect(() => {
-    const listenerName = ThemeManager.addListener((data) => {
+    const listenerName = ThemeManager.addListener((themes) => {
       setValue((preValue) => {
-        return deepmerge(preValue, DynamicTheme(data));
+        return deepmerge(preValue, DynamicTheme(themes, registerStyle));
       });
     });
     return () => listenerName.remove();
-  }, []);
+  }, [registerStyle]);
 
   useEffect(() => {
     ThemeManager.currentTheme = value;
@@ -47,9 +47,9 @@ function ThemeProvider(props) {
 
   useEffect(() => {
     setValue((preValue) => {
-      return deepmerge(preValue, DynamicTheme(defaultTheme));
+      return deepmerge(preValue, DynamicTheme(defaultTheme, registerStyle));
     });
-  }, [defaultTheme]);
+  }, [defaultTheme, registerStyle]);
 
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
@@ -58,10 +58,12 @@ function ThemeProvider(props) {
 
 ThemeProvider.propTypes = {
   defaultTheme: PropTypes.object,
+  registerStyle: PropTypes.object,
 };
 
 ThemeProvider.defaultProps = {
   defaultTheme: {},
+  registerStyle: {},
 };
 
 export { ThemeContext };

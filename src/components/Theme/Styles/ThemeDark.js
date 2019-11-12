@@ -7,16 +7,19 @@ export default {
       second: '#999',
       reverse: '#333',
       disabled: '#e5e6e8',
-      separator: '#999',
+      separator: '#434344',
       badge: '#8b0000',
     },
   },
   navigationBar: {
     statusBarStyle: 'light-content',
   },
-  toast: {
-    titleStyle: {
-      color: '#fff',
+  toast: (primary) => ({
+    style: {
+      backgroundColor: primary.color.second,
     },
-  },
+    titleStyle: {
+      color: primary.color.main,
+    },
+  }),
 };

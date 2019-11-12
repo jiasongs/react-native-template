@@ -14,11 +14,10 @@ function App() {
 
   useEffect(() => {
     async function loadTheme() {
-      const data = await StorageManager.load('THEME');
+      const data = await StorageManager.load('THEME1');
       if (data) {
         setState({
           ...data,
-          customStyle: {},
         });
       }
       SplashScreen.hide();
@@ -36,7 +35,15 @@ function App() {
   });
 
   return (
-    <ThemeProvider defaultTheme={state}>
+    <ThemeProvider
+      defaultTheme={state}
+      registerStyle={{
+        customStyle: (primary) => {
+          console.log('customStyle', primary);
+          return {};
+        },
+      }}
+    >
       <OverlayProvider>
         <RouterContainer />
         {__DEV__ && <DevRefresh />}
