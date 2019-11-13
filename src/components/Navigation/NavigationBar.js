@@ -1,11 +1,12 @@
 'use strict';
-import React, { useRef, useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import {
   View,
   StyleSheet,
   StatusBar,
   ImageBackground,
   Platform,
+  Image,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import deepmerge from 'deepmerge';
@@ -37,17 +38,17 @@ function NavigationBar(props) {
     renderRightAction,
     backgroundImage,
     title,
+    defaultInsets,
     insets,
+    backTitle,
+    backTitleStyle,
+    backIcon,
+    backIconStyle,
+    onPressBack,
     extraData,
   } = props;
 
   const themeValue = useTheme('navigationBar');
-  const defaultInsetsRef = useRef({
-    top: Predefine.statusBarHeight,
-    left: 10,
-    bottom: 0,
-    right: 10,
-  });
   const [containerWidth, setContainerWidth] = useState(0);
   const [leftActionWidth, setLeftActionWidth] = useState(0);
   const [rightActionWidth, setRightActionWidth] = useState(0);
@@ -67,18 +68,38 @@ function NavigationBar(props) {
   const newRenderLeftAction = useMemo(() => {
     if (extraData) {
     }
+    if (typeof renderLeftAction === 'undefined') {
+      return [
+        {
+          title: backTitle,
+          titleStyle: [themeValue.backTitleStyle, backTitleStyle],
+          icon: backIcon,
+          iconStyle: [themeValue.backIconStyle, backIconStyle],
+          onPress: onPressBack,
+        },
+      ];
+    }
     return renderLeftAction;
-  }, [extraData, renderLeftAction]);
+  }, [
+    backIcon,
+    backIconStyle,
+    backTitle,
+    backTitleStyle,
+    extraData,
+    onPressBack,
+    renderLeftAction,
+    themeValue,
+  ]);
 
   const buildStyles = useMemo(() => {
     const newStyle = [themeValue.style, styles.container];
     const newContentStyle = [styles.navContent];
-    const newInsets = deepmerge(defaultInsetsRef.current, insets);
-    defaultInsetsRef.current = newInsets;
+    const newInsets = deepmerge(defaultInsets, insets);
     newStyle.push({
       height: Predefine.navBarHeight + newInsets.top,
     });
     newContentStyle.push({
+      height: Predefine.navBarHeight,
       marginTop: newInsets.top,
       marginLeft: newInsets.left,
       marginRight: newInsets.right,
@@ -90,7 +111,7 @@ function NavigationBar(props) {
       statusBarStyle: themeValue.statusBarStyle,
       titleStyle: [themeValue.titleStyle, titleStyle],
     };
-  }, [themeValue, insets, style, contentStyle, titleStyle]);
+  }, [themeValue, defaultInsets, insets, style, contentStyle, titleStyle]);
 
   return (
     <View style={buildStyles.style} onLayout={onLayout}>
@@ -140,7 +161,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   navContent: {
-    height: Predefine.navBarHeight,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -167,6 +187,7 @@ const styles = StyleSheet.create({
 
 NavigationBar.propTypes = {
   title: PropTypes.oneOfType([
+    PropTypes.number,
     PropTypes.string,
     PropTypes.func,
     PropTypes.element,
@@ -183,9 +204,25 @@ NavigationBar.propTypes = {
     PropTypes.element,
   ]),
   backgroundImage: PropTypes.number,
+  backTitle: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.func,
+    PropTypes.element,
+  ]),
+  backTitleStyle: Label.propTypes.style,
+  backIcon: Image.propTypes.source,
+  backIconStyle: Image.propTypes.style,
+  onPressBack: PropTypes.func,
   statusBarStyle: PropTypes.oneOf(['default', 'light-content', 'dark-content']),
   statusBarColor: PropTypes.string,
   statusBarHidden: PropTypes.bool,
+  defaultInsets: PropTypes.shape({
+    top: PropTypes.number,
+    left: PropTypes.number,
+    bottom: PropTypes.number,
+    right: PropTypes.number,
+  }),
   insets: PropTypes.shape({
     top: PropTypes.number,
     left: PropTypes.number,
@@ -202,6 +239,12 @@ NavigationBar.defaultProps = {
       : 'rgba(0, 0, 0, 0.3)',
   statusBarHidden: false,
   insets: {},
+  defaultInsets: {
+    top: Predefine.statusBarHeight,
+    left: 10,
+    bottom: 0,
+    right: 10,
+  },
 };
 
 export default React.memo(NavigationBar);

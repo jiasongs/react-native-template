@@ -12,7 +12,7 @@ import { Predefine } from '../predefine';
 import Constants from './Constants';
 import {
   LoadingHint,
-  // NavigationBar,
+  NavigationBar,
   ListRow,
   ToastView,
   Checkbox,
@@ -20,6 +20,7 @@ import {
   NetworkError,
 } from '../../components';
 import ListHeaderLoading from '../../components/List/ListHeaderLoading';
+import RouterHelper from '../../routers/RouterHelper';
 
 /**
  * @开启安卓的布局动画
@@ -60,9 +61,11 @@ Predefine.addDefaultProps(TextInput, {
 });
 Predefine.addDefaultProps(TouchableOpacity, { activeOpacity: 0.9 });
 Predefine.addDefaultProps(LoadingHint, { source: Images.json_loading });
-// Predefine.addDefaultProps(NavigationBar, {
-//   defaultLeftSource: Images.icon_nav_left,
-// });
+Predefine.addDefaultProps(NavigationBar, {
+  backIcon: Images.icon_nav_left,
+  backIconStyle: { width: 20, height: 20 },
+  onPressBack: () => RouterHelper.goBack(),
+});
 Predefine.addDefaultProps(ListRow, {
   accessorySource: Images.icon_arrow_right,
 });

@@ -2,8 +2,6 @@
 import deepmerge from 'deepmerge';
 import { ThemeStyle, Primary } from '../Styles';
 
-let prePrimary = {};
-
 // registerStyle中可能有Primary
 export default function(value = {}, registerStyle = {}) {
   const { primary: _primary = {}, ...otherThemes } = value;
@@ -11,11 +9,9 @@ export default function(value = {}, registerStyle = {}) {
     primary: _registerPrimary = {},
     ...otherRegisterStyle
   } = registerStyle;
-  const registerPrimary = deepmerge(Primary, _registerPrimary);
   const registerThemes = deepmerge(ThemeStyle, otherRegisterStyle);
-  const primary = deepmerge(prePrimary, deepmerge(registerPrimary, _primary));
-  // 上次更新的Primary
-  prePrimary = primary;
+  const registerPrimary = deepmerge(Primary, _registerPrimary);
+  const primary = deepmerge(registerPrimary, _primary);
   const newThemes = { primary: primary };
   const newOtherThemes = {};
   for (const key in registerThemes) {

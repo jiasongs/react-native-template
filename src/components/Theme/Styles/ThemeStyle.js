@@ -260,6 +260,12 @@ export default {
       fontSize: 17,
       fontWeight: 'bold',
     },
+    backTitleStyle: {
+      color: primary.color.main,
+    },
+    backIconStyle: {
+      tintColor: primary.color.main,
+    },
   }),
   /**
    * @tabBar
