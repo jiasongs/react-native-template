@@ -1,5 +1,5 @@
 'use strict';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   NavigationBar,
@@ -12,6 +12,8 @@ import {
 } from '../../components';
 
 function DemoForm() {
+  const [checked, setChecked] = useState(false);
+
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'DemoForm（测试）'} />
@@ -23,8 +25,23 @@ function DemoForm() {
         defaultValue={10}
         onChangeValue={() => {}}
       />
-      <Checkbox checked={true} />
-      <Radio checked={true} />
+      {/* <Checkbox
+        checked={checked}
+        onPress={() => {
+          setChecked((pre) => {
+            return !pre;
+          });
+        }}
+      /> */}
+      <Radio
+        title={'单选'}
+        checked={checked}
+        onPress={() => {
+          setChecked((pre) => {
+            return !pre;
+          });
+        }}
+      />
       <Badge style={styles.badge} count={50} countStyle={{}} />
       <Badge type={'square'} style={styles.badge} count={50} countStyle={{}} />
       <Badge type={'dot'} style={styles.badge} count={50} countStyle={{}} />

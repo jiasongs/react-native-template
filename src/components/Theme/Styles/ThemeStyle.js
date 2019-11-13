@@ -414,4 +414,22 @@ export default {
       borderColor: primary.color.main,
     },
   }),
+  /**
+   * @Radio
+   */
+  radio: (primary) => ({
+    solidStyle: {
+      width: 18,
+      height: 18,
+      borderRadius: 18 / 2,
+      borderWidth: 1,
+      borderColor: primary.color.main,
+    },
+    solidInsideStyle: {
+      width: '100%',
+      height: '100%',
+      borderRadius: 18 / 2,
+      backgroundColor: primary.color.main,
+    },
+  }),
 };

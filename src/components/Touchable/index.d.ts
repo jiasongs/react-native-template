@@ -9,15 +9,17 @@ import {
   ViewProps,
 } from 'react-native';
 
+type () => React.ReactElement
+
 export interface ButtonProps extends TouchableOpacityProps, ViewProps {
   type?: 'solid' | 'clear' | 'outline';
-  icon?: ImageSourcePropType;
+  icon?: ImageSourcePropType | React.ReactElement | React.ComponentType<any>;
   iconStyle?: StyleProp<ImageStyle>;
   iconPosition?: 'top' | 'left' | 'bottom' | 'right';
-  title?: string | number;
+  title?: string | number | React.ReactElement | React.ComponentType<any>;
   titleStyle?: StyleProp<TextStyle>;
   spacingIconAndTitle?: number;
-  backgroundImage?: number;
+  backgroundImage?: number | React.ReactElement | React.ComponentType<any>;
   disabledOnly?: boolean;
   disabled?: boolean;
   disabledStyle?: StyleProp<ViewStyle>;

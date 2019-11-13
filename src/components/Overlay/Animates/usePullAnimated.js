@@ -46,8 +46,10 @@ export default function usePullAnimated(props) {
             return 0;
         }
         offsetSizeRef.current = offsetSize;
-        translateRef.current.setValue(offsetSize);
-        opacityRef.current.setValue(1);
+        if (!displayRef.current) {
+          translateRef.current.setValue(offsetSize);
+          opacityRef.current.setValue(1);
+        }
         const duration = animateDurationRef.current;
         const appearAnimates = [
           Animated.spring(translateRef.current, {
@@ -87,6 +89,7 @@ export default function usePullAnimated(props) {
     },
     [
       animateDurationRef,
+      displayRef,
       onProviderAnimated,
       providerContentScale,
       providerContentStyle,

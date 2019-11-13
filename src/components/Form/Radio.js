@@ -1,51 +1,115 @@
 'use strict';
-import React from 'react';
-import { StyleSheet, ViewPropTypes } from 'react-native';
+import React, { useRef, useMemo, useCallback } from 'react';
+import {
+  StyleSheet,
+  ViewPropTypes,
+  View,
+  Animated,
+  Easing,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from '../Touchable';
+import { useTheme } from '../Theme';
 
 function Radio(props) {
-  const { style, title, checked, selectIcon, narmalIcon } = props;
+  const {
+    style,
+    onPress,
+    type,
+    icon,
+    checked,
+    checkedIcon,
+    uncheckedIcon,
+    solidStyle,
+    solidInsideStyle,
+    activeOpacity,
+    spacingIconAndTitle,
+    ...others
+  } = props;
+
+  const themeValue = useTheme('radio');
+  const scaleAnimatedRef = useRef(new Animated.Value(0));
+
+  const onPressCall = useCallback(() => {
+    Animated.timing(scaleAnimatedRef.current, {
+      toValue: checked ? 0 : 0.8,
+      duration: 100,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start();
+    onPress && onPress();
+  }, [checked, onPress]);
+
+  const buildStyles = useMemo(() => {
+    const newSolidStyle = [
+      styles.solidStyle,
+      {
+        marginRight: spacingIconAndTitle,
+      },
+    ];
+    const newSolidInsideStyle = [
+      {
+        transform: [
+          {
+            scale: scaleAnimatedRef.current,
+          },
+        ],
+      },
+      styles.solidInsideStyle,
+    ];
+    return {
+      style: [style],
+      solidStyle: [themeValue.solidStyle, newSolidStyle, solidStyle],
+      solidInsideStyle: [
+        themeValue.solidInsideStyle,
+        newSolidInsideStyle,
+        solidInsideStyle,
+      ],
+    };
+  }, [solidInsideStyle, solidStyle, spacingIconAndTitle, style, themeValue]);
 
   return (
     <Button
-      style={[styles.button, style]}
-      title={title}
-      icon={checked ? selectIcon : narmalIcon}
-      titleStyle={styles.titleStyle}
-      iconStyle={styles.iconStyle}
-      iconPosition={'left'}
-      clickInterval={0}
+      type={'clear'}
+      style={buildStyles.style}
+      icon={
+        !checkedIcon && !uncheckedIcon ? (
+          <View style={buildStyles.solidStyle}>
+            <Animated.View style={buildStyles.solidInsideStyle} />
+          </View>
+        ) : checked ? (
+          checkedIcon
+        ) : (
+          uncheckedIcon
+        )
+      }
+      onPress={onPressCall}
+      clickInterval={100}
       activeOpacity={1.0}
-      disabled={true}
+      {...others}
     />
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    alignSelf: 'flex-start',
+  solidStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  titleStyle: {
-    fontSize: 14,
-    color: '#666666',
-    marginLeft: 10,
-  },
-  iconStyle: {
-    width: 15,
-    height: 15,
-  },
+  solidInsideStyle: {},
 });
 
 Radio.propTypes = {
-  style: ViewPropTypes.style,
+  ...Button.propTypes,
+  solidStyle: ViewPropTypes.style,
+  solidInsideStyle: ViewPropTypes.style,
   checked: PropTypes.bool,
-  narmalIcon: PropTypes.number,
-  selectIcon: PropTypes.number,
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  onPress: PropTypes.func,
+  checkedIcon: PropTypes.number,
+  uncheckedIcon: PropTypes.number,
 };
 
-Radio.defaultProps = {};
+Radio.defaultProps = {
+  ...Button.defaultProps,
+};
 
 export default React.memo(Radio);

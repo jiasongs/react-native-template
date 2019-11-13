@@ -11,6 +11,7 @@ export default function usePopAnimated(props) {
     maskOpacityRef,
     setAnimates,
     onPressMask,
+    displayRef,
   } = useOverlay(props);
 
   const opacityRef = useRef(new Animated.Value(0));
@@ -79,8 +80,11 @@ export default function usePopAnimated(props) {
           default:
             break;
         }
-        opacityRef.current.setValue(0);
-        scaleRef.current.setValue(zoomRate);
+        if (!displayRef.current) {
+          // 未显示初始化
+          opacityRef.current.setValue(0);
+          scaleRef.current.setValue(zoomRate);
+        }
         const duration = animateDurationRef.current;
         const appearAnimates = [
           Animated.timing(opacityRef.current, {
@@ -112,7 +116,7 @@ export default function usePopAnimated(props) {
         });
       }
     },
-    [anchorPoint, animateDurationRef, setAnimates, type],
+    [anchorPoint, animateDurationRef, displayRef, setAnimates, type],
   );
 
   const onLayout = useCallback(

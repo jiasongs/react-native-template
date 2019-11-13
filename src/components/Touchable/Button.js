@@ -20,6 +20,48 @@ const IconPosition = {
   PositionRight: 'right',
 };
 
+function RenderImageBackground(props) {
+  const { style, source } = props;
+  if (React.isValidElement(source)) {
+    return source;
+  } else if (typeof icon === 'function') {
+    return source();
+  } else if (
+    typeof icon === 'number' ||
+    Object.prototype.toString.call(source) === '[object Object]'
+  ) {
+    return <ImageBackground style={style} source={source} />;
+  }
+  return null;
+}
+
+function RenderIcon(props) {
+  const { style, icon } = props;
+  if (React.isValidElement(icon)) {
+    return icon;
+  } else if (typeof icon === 'function') {
+    return icon();
+  } else if (
+    typeof icon === 'number' ||
+    Object.prototype.toString.call(icon) === '[object Object]'
+  ) {
+    return <ImageView style={style} source={icon} />;
+  }
+  return null;
+}
+
+function RenderLabel(props) {
+  const { style, title } = props;
+  if (React.isValidElement(title)) {
+    return title;
+  } else if (typeof title === 'function') {
+    return title();
+  } else if (typeof title === 'number' || typeof title === 'string') {
+    return <Label style={style}>{title}</Label>;
+  }
+  return null;
+}
+
 function Button(props) {
   const {
     style,
@@ -205,18 +247,16 @@ function Button(props) {
       onPress={_onPress}
       disabled={loading || disabled || disabledOnly}
     >
-      {backgroundImage ? (
-        <ImageBackground
-          style={styles.imageBackground}
-          source={backgroundImage}
-        />
+      <RenderImageBackground
+        style={styles.imageBackground}
+        source={backgroundImage}
+      />
+      {iconTopOrLeft ? (
+        <RenderIcon style={buildStyles.iconStyle} icon={icon} />
       ) : null}
-      {icon && iconTopOrLeft ? (
-        <ImageView style={buildStyles.iconStyle} source={icon} />
-      ) : null}
-      {title ? <Label style={buildStyles.titleStyle}>{title}</Label> : null}
-      {icon && !iconTopOrLeft ? (
-        <ImageView style={buildStyles.iconStyle} source={icon} />
+      <RenderLabel style={buildStyles.titleStyle} title={title} />
+      {!iconTopOrLeft ? (
+        <RenderIcon style={buildStyles.iconStyle} icon={icon} />
       ) : null}
       {children}
       {loading ? (
@@ -249,7 +289,11 @@ const styles = StyleSheet.create({
 Button.propTypes = {
   ...TouchableOpacity.propTypes,
   type: PropTypes.oneOf(['solid', 'clear', 'outline']),
-  icon: Image.propTypes.source,
+  icon: PropTypes.oneOfType([
+    Image.propTypes.source,
+    PropTypes.func,
+    PropTypes.element,
+  ]),
   iconStyle: Image.propTypes.style,
   iconPosition: PropTypes.oneOf([
     IconPosition.PositionTop,
@@ -257,10 +301,19 @@ Button.propTypes = {
     IconPosition.PositionBottom,
     IconPosition.PositionRight,
   ]),
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.func,
+    PropTypes.element,
+  ]),
   titleStyle: Label.propTypes.style,
   spacingIconAndTitle: PropTypes.number,
-  backgroundImage: PropTypes.number,
+  backgroundImage: PropTypes.oneOfType([
+    Image.propTypes.source,
+    PropTypes.func,
+    PropTypes.element,
+  ]),
   disabledOnly: PropTypes.bool,
   disabled: PropTypes.bool,
   disabledStyle: ViewPropTypes.style,

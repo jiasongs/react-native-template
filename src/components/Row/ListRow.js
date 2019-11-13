@@ -14,7 +14,10 @@ function RenderIcon(props) {
     return icon;
   } else if (typeof icon === 'function') {
     return icon();
-  } else if (typeof icon === 'number' || typeof icon === 'object') {
+  } else if (
+    typeof icon === 'number' ||
+    Object.prototype.toString.call(icon) === '[object Object]'
+  ) {
     return <ImageView style={iconStyle} source={icon} />;
   }
   return null;
@@ -216,7 +219,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'stretch',
     paddingVertical: 15,
-    paddingHorizontal: 12,
+    paddingHorizontal: 20,
     justifyContent: 'space-between',
   },
   titleSubtitleContainer: {

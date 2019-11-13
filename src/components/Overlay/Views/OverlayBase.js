@@ -37,10 +37,6 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: '#000',
   },
-  contentContainer: {
-    flex: 1,
-    backgroundColor: 'transparent',
-  },
 });
 
 OverlayBase.propTypes = {

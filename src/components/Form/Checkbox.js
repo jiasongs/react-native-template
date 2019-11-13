@@ -10,8 +10,8 @@ function Checkbox(props) {
     title,
     checked,
     defaultChecked,
-    selectIcon,
-    narmalIcon,
+    checkedIcon,
+    uncheckedIcon,
     onPress,
   } = props;
   const [checkState, setCheckState] = useState(defaultChecked);
@@ -26,7 +26,7 @@ function Checkbox(props) {
   }, [checkState, checked, onPress]);
 
   const newChecked = checked === undefined ? checkState : checked;
-  const icon = newChecked ? selectIcon : narmalIcon;
+  const icon = newChecked ? checkedIcon : uncheckedIcon;
   return (
     <Button
       style={[styles.button, style]}
@@ -61,8 +61,8 @@ Checkbox.propTypes = {
   style: ViewPropTypes.style,
   checked: PropTypes.bool,
   defaultChecked: PropTypes.bool,
-  narmalIcon: PropTypes.number,
-  selectIcon: PropTypes.number,
+  checkedIcon: PropTypes.number,
+  uncheckedIcon: PropTypes.number,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   onPress: PropTypes.func,
 };
