@@ -16,6 +16,9 @@ const Predefine = {
   get isIOS() {
     return Platform.OS === 'ios';
   },
+  get isPad() {
+    return Platform.isPad;
+  },
   get isAndroid() {
     return Platform.OS === 'android';
   },

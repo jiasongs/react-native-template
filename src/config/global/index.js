@@ -11,6 +11,7 @@ import { Images } from '../../assets';
 import { Predefine } from '../predefine';
 import Constants from './Constants';
 import {
+  Button,
   LoadingHint,
   NavigationBar,
   ListRow,
@@ -59,7 +60,8 @@ Predefine.addDefaultProps(TextInput, {
   allowFontScaling: false,
   selectionColor: Predefine.overallColor,
 });
-Predefine.addDefaultProps(TouchableOpacity, { activeOpacity: 0.9 });
+Predefine.addDefaultProps(TouchableOpacity, { activeOpacity: 0.6 });
+Predefine.addDefaultProps(Button, { activeOpacity: 0.6 });
 Predefine.addDefaultProps(LoadingHint, { source: Images.json_loading });
 Predefine.addDefaultProps(NavigationBar, {
   backIcon: Images.icon_nav_left,
