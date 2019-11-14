@@ -83,6 +83,7 @@ function ActionSheetView(props) {
 
   const buildStyles = useMemo(() => {
     return {
+      style: [styles.container],
       contentContainer: [themeValue.contentStyle, styles.contentContainer],
       titleStyle: [themeValue.titleStyle, styles.title, titleStyle],
       actionStyle: [themeValue.actionStyle, styles.actionStyle],
@@ -96,7 +97,7 @@ function ActionSheetView(props) {
   }, [themeValue, titleStyle]);
 
   return (
-    <View style={styles.container}>
+    <View style={buildStyles.style}>
       <View style={buildStyles.contentContainer}>
         <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
         <MemoRenderContent

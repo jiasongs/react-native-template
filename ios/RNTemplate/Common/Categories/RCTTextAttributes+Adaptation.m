@@ -36,7 +36,9 @@
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     return size;
   }
-  return (size / 375.0f * [[UIScreen mainScreen] bounds].size.width);
+  CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+  CGFloat width = screenSize.width < screenSize.height ? screenSize.width : screenSize.height;
+  return (size / 375.0f * width);
 }
 
 

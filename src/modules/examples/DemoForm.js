@@ -1,6 +1,6 @@
 'use strict';
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {
   NavigationBar,
   PageContainer,
@@ -10,13 +10,15 @@ import {
   Badge,
   Button,
 } from '../../components';
+import { Predefine } from '../../config/predefine';
 
 function DemoForm() {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState('单选1');
+  const [checkeds, setCheckeds] = useState(['']);
 
   return (
     <PageContainer style={styles.container}>
-      <NavigationBar title={'DemoForm（测试）'} />
+      <NavigationBar title={'DemoForm'} />
       <Stepper
         style={styles.badge}
         min={0}
@@ -25,23 +27,60 @@ function DemoForm() {
         defaultValue={10}
         onChangeValue={() => {}}
       />
-      {/* <Checkbox
-        checked={checked}
-        onPress={() => {
-          setChecked((pre) => {
-            return !pre;
-          });
-        }}
-      /> */}
-      <Radio
-        title={'单选'}
-        checked={checked}
-        onPress={() => {
-          setChecked((pre) => {
-            return !pre;
-          });
-        }}
-      />
+      <View style={Predefine.RCC}>
+        <Checkbox
+          style={{ marginTop: 20 }}
+          disabled={false}
+          title={'多选1'}
+          checked={checkeds.findIndex((item) => item === '多选1') !== -1}
+          onPress={() => {
+            const index = checkeds.findIndex((item) => item === '多选1');
+            const newCheckeds = checkeds.slice();
+            if (index === -1) {
+              newCheckeds.push('多选1');
+            } else {
+              newCheckeds.splice(index, 1);
+            }
+            setCheckeds(newCheckeds);
+          }}
+        />
+        <Checkbox
+          style={{ marginTop: 20, marginLeft: 20 }}
+          disabled={false}
+          title={'多选2'}
+          checked={checkeds.findIndex((item) => item === '多选2') !== -1}
+          onPress={() => {
+            const index = checkeds.findIndex((item) => item === '多选2');
+            const newCheckeds = checkeds.slice();
+            if (index === -1) {
+              newCheckeds.push('多选2');
+            } else {
+              newCheckeds.splice(index, 1);
+            }
+            setCheckeds(newCheckeds);
+          }}
+        />
+      </View>
+      <View style={Predefine.RCC}>
+        <Radio
+          style={{ marginTop: 20 }}
+          disabled={false}
+          title={'单选1'}
+          checked={checked === '单选1'}
+          onPress={() => {
+            setChecked('单选1');
+          }}
+        />
+        <Radio
+          style={{ marginTop: 20, marginLeft: 20 }}
+          disabled={false}
+          title={'单选2'}
+          checked={checked === '单选2'}
+          onPress={() => {
+            setChecked('单选2');
+          }}
+        />
+      </View>
       <Badge style={styles.badge} count={50} countStyle={{}} />
       <Badge type={'square'} style={styles.badge} count={50} countStyle={{}} />
       <Badge type={'dot'} style={styles.badge} count={50} countStyle={{}} />

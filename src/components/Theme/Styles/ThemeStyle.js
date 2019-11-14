@@ -431,5 +431,35 @@ export default {
       borderRadius: 18 / 2,
       backgroundColor: primary.color.main,
     },
+    disabledSolidStyle: {
+      borderColor: primary.color.second,
+    },
+    disabledSolidInsideStyle: {
+      backgroundColor: primary.color.second,
+    },
+  }),
+  /**
+   * @Checkbox
+   */
+  checkbox: (primary) => ({
+    solidStyle: {
+      width: 18,
+      height: 18,
+      borderRadius: 3,
+      borderWidth: 1,
+      borderColor: primary.color.main,
+    },
+    solidInsideStyle: {
+      width: '100%',
+      height: '100%',
+      borderRadius: 3,
+      backgroundColor: primary.color.main,
+    },
+    disabledSolidStyle: {
+      borderColor: primary.color.second,
+    },
+    disabledSolidInsideStyle: {
+      backgroundColor: primary.color.second,
+    },
   }),
 };

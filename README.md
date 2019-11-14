@@ -32,7 +32,6 @@
 # 待完成
 
 - 适配设备旋转，优先级 1
-- Checkbox，Radio，优先级 1
 - 网络请求类模板化，参考 swift 中的 moya 库，使用 hook 重写，优先级 2
 - Stepper，优先级 3
 - 查看大图，查看视频等，基于 Overlay，优先级 4

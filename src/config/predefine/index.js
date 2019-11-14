@@ -29,7 +29,7 @@ const Predefine = {
     return false;
   },
   get isLandscape() {
-    return Dimensions.get('screen').width > Dimensions.get('screen').height;
+    return DeviceInfo.isLandscape;
   },
   get statusBarHeight() {
     if (Platform.OS === 'ios') {

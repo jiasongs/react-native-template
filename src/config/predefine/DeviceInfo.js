@@ -3,4 +3,5 @@ import { Platform } from 'react-native';
 
 export default {
   isNotch: Platform.OS === 'ios' ? RNDeviceInfo.hasNotch() : false,
+  isLandscape: RNDeviceInfo.isLandscapeSync(),
 };

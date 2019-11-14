@@ -1,5 +1,5 @@
 'use strict';
-import React, { useRef, useMemo, useCallback } from 'react';
+import React, { useEffect, useRef, useMemo, useCallback } from 'react';
 import {
   StyleSheet,
   ViewPropTypes,
@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { Button } from '../Touchable';
 import { useTheme } from '../Theme';
 
+// TODO: 缩放比率
 function Radio(props) {
   const {
     style,
@@ -23,59 +24,119 @@ function Radio(props) {
     solidStyle,
     solidInsideStyle,
     activeOpacity,
+    title,
     spacingIconAndTitle,
+    iconPosition,
+    disabledOnly,
+    disabled,
+    disabledSolidStyle,
+    disabledSolidInsideStyle,
     ...others
   } = props;
 
   const themeValue = useTheme('radio');
-  const scaleAnimatedRef = useRef(new Animated.Value(0));
+  const opacityAnimatedRef = useRef(new Animated.Value(1));
+  const scaleAnimatedRef = useRef(new Animated.Value(checked ? 0.8 : 0.1));
+  const duration = 100;
 
   const onPressCall = useCallback(() => {
-    Animated.timing(scaleAnimatedRef.current, {
-      toValue: checked ? 0 : 0.8,
-      duration: 100,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start();
     onPress && onPress();
-  }, [checked, onPress]);
+  }, [onPress]);
 
   const buildStyles = useMemo(() => {
-    const newSolidStyle = [
-      styles.solidStyle,
-      {
-        marginRight: spacingIconAndTitle,
-      },
-    ];
-    const newSolidInsideStyle = [
-      {
-        transform: [
-          {
-            scale: scaleAnimatedRef.current,
-          },
-        ],
-      },
-      styles.solidInsideStyle,
-    ];
+    const newSolidStyle = [themeValue.solidStyle];
+    const newSolidInsideStyle = [themeValue.solidInsideStyle];
+    if (disabled) {
+      newSolidStyle.push(themeValue.disabledSolidStyle);
+      newSolidInsideStyle.push(themeValue.disabledSolidInsideStyle);
+    }
+    newSolidStyle.push(styles.solidStyle);
+    newSolidInsideStyle.push(styles.solidInsideStyle);
+    if (title) {
+      switch (iconPosition) {
+        case 'top':
+          newSolidStyle.push({
+            marginBottom: spacingIconAndTitle,
+          });
+          break;
+        case 'bottom':
+          newSolidStyle.push({
+            marginTop: spacingIconAndTitle,
+          });
+          break;
+        case 'left':
+          newSolidStyle.push({
+            marginRight: spacingIconAndTitle,
+          });
+          break;
+        case 'right':
+          newSolidStyle.push({
+            marginLeft: spacingIconAndTitle,
+          });
+          break;
+        default:
+          break;
+      }
+    }
     return {
       style: [style],
-      solidStyle: [themeValue.solidStyle, newSolidStyle, solidStyle],
+      solidStyle: [
+        newSolidStyle,
+        solidStyle,
+        disabled ? disabledSolidStyle : null,
+      ],
       solidInsideStyle: [
-        themeValue.solidInsideStyle,
         newSolidInsideStyle,
         solidInsideStyle,
+        disabled ? disabledSolidInsideStyle : null,
       ],
     };
-  }, [solidInsideStyle, solidStyle, spacingIconAndTitle, style, themeValue]);
+  }, [
+    disabled,
+    disabledSolidInsideStyle,
+    disabledSolidStyle,
+    iconPosition,
+    solidInsideStyle,
+    solidStyle,
+    spacingIconAndTitle,
+    style,
+    themeValue,
+    title,
+  ]);
+
+  useEffect(() => {
+    opacityAnimatedRef.current.setValue(1);
+    Animated.timing(scaleAnimatedRef.current, {
+      toValue: checked ? 0.8 : 0.1,
+      duration: duration,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start(() => {
+      opacityAnimatedRef.current.setValue(checked ? 1 : 0);
+    });
+  }, [checked]);
 
   return (
     <Button
       type={'clear'}
       style={buildStyles.style}
+      title={title}
       icon={
         !checkedIcon && !uncheckedIcon ? (
           <View style={buildStyles.solidStyle}>
-            <Animated.View style={buildStyles.solidInsideStyle} />
+            <Animated.View
+              style={[
+                buildStyles.solidInsideStyle,
+                {
+                  opacity: opacityAnimatedRef.current,
+                  transform: [
+                    {
+                      scale: scaleAnimatedRef.current,
+                    },
+                  ],
+                },
+              ]}
+            />
           </View>
         ) : checked ? (
           checkedIcon
@@ -84,8 +145,11 @@ function Radio(props) {
         )
       }
       onPress={onPressCall}
-      clickInterval={100}
+      clickInterval={duration + 20}
       activeOpacity={1.0}
+      iconPosition={iconPosition}
+      disabledOnly={disabledOnly}
+      disabled={disabled}
       {...others}
     />
   );
@@ -103,6 +167,8 @@ Radio.propTypes = {
   ...Button.propTypes,
   solidStyle: ViewPropTypes.style,
   solidInsideStyle: ViewPropTypes.style,
+  disabledSolidStyle: ViewPropTypes.style,
+  disabledSolidInsideStyle: ViewPropTypes.style,
   checked: PropTypes.bool,
   checkedIcon: PropTypes.number,
   uncheckedIcon: PropTypes.number,

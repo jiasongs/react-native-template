@@ -1,75 +1,181 @@
 'use strict';
-import React, { useState, useCallback } from 'react';
-import { StyleSheet, ViewPropTypes } from 'react-native';
+import React, { useEffect, useRef, useMemo, useCallback } from 'react';
+import {
+  StyleSheet,
+  ViewPropTypes,
+  View,
+  Animated,
+  Easing,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from '../Touchable';
+import { useTheme } from '../Theme';
 
+// TODO: 缩放比率
 function Checkbox(props) {
   const {
     style,
-    title,
+    onPress,
+    type,
+    icon,
     checked,
-    defaultChecked,
     checkedIcon,
     uncheckedIcon,
-    onPress,
+    solidStyle,
+    solidInsideStyle,
+    activeOpacity,
+    title,
+    spacingIconAndTitle,
+    iconPosition,
+    disabledOnly,
+    disabled,
+    disabledSolidStyle,
+    disabledSolidInsideStyle,
+    ...others
   } = props;
-  const [checkState, setCheckState] = useState(defaultChecked);
 
-  const _onPress = useCallback(() => {
-    let newChecked = false;
-    if (checked === undefined) {
-      newChecked = !checkState;
-      setCheckState(newChecked);
+  const themeValue = useTheme('checkbox');
+  const opacityAnimatedRef = useRef(new Animated.Value(1));
+  const scaleAnimatedRef = useRef(new Animated.Value(checked ? 0.8 : 0.1));
+  const duration = 100;
+
+  const onPressCall = useCallback(() => {
+    onPress && onPress();
+  }, [onPress]);
+
+  const buildStyles = useMemo(() => {
+    const newSolidStyle = [themeValue.solidStyle];
+    const newSolidInsideStyle = [themeValue.solidInsideStyle];
+    if (disabled) {
+      newSolidStyle.push(themeValue.disabledSolidStyle);
+      newSolidInsideStyle.push(themeValue.disabledSolidInsideStyle);
     }
-    onPress && onPress(newChecked);
-  }, [checkState, checked, onPress]);
+    newSolidStyle.push(styles.solidStyle);
+    newSolidInsideStyle.push(styles.solidInsideStyle);
+    if (title) {
+      switch (iconPosition) {
+        case 'top':
+          newSolidStyle.push({
+            marginBottom: spacingIconAndTitle,
+          });
+          break;
+        case 'bottom':
+          newSolidStyle.push({
+            marginTop: spacingIconAndTitle,
+          });
+          break;
+        case 'left':
+          newSolidStyle.push({
+            marginRight: spacingIconAndTitle,
+          });
+          break;
+        case 'right':
+          newSolidStyle.push({
+            marginLeft: spacingIconAndTitle,
+          });
+          break;
+        default:
+          break;
+      }
+    }
+    return {
+      style: [style],
+      solidStyle: [
+        newSolidStyle,
+        solidStyle,
+        disabled ? disabledSolidStyle : null,
+      ],
+      solidInsideStyle: [
+        newSolidInsideStyle,
+        solidInsideStyle,
+        disabled ? disabledSolidInsideStyle : null,
+      ],
+    };
+  }, [
+    disabled,
+    disabledSolidInsideStyle,
+    disabledSolidStyle,
+    iconPosition,
+    solidInsideStyle,
+    solidStyle,
+    spacingIconAndTitle,
+    style,
+    themeValue,
+    title,
+  ]);
 
-  const newChecked = checked === undefined ? checkState : checked;
-  const icon = newChecked ? checkedIcon : uncheckedIcon;
+  useEffect(() => {
+    opacityAnimatedRef.current.setValue(1);
+    Animated.timing(scaleAnimatedRef.current, {
+      toValue: checked ? 0.8 : 0.1,
+      duration: duration,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start(() => {
+      opacityAnimatedRef.current.setValue(checked ? 1 : 0);
+    });
+  }, [checked]);
+
   return (
     <Button
-      style={[styles.button, style]}
+      type={'clear'}
+      style={buildStyles.style}
       title={title}
-      icon={icon}
-      titleStyle={styles.titleStyle}
-      iconStyle={styles.iconStyle}
-      onPress={_onPress}
-      iconPosition={'left'}
-      clickInterval={0}
+      icon={
+        !checkedIcon && !uncheckedIcon ? (
+          <View style={buildStyles.solidStyle}>
+            <Animated.View
+              style={[
+                buildStyles.solidInsideStyle,
+                {
+                  opacity: opacityAnimatedRef.current,
+                  transform: [
+                    {
+                      scale: scaleAnimatedRef.current,
+                    },
+                  ],
+                },
+              ]}
+            />
+          </View>
+        ) : checked ? (
+          checkedIcon
+        ) : (
+          uncheckedIcon
+        )
+      }
+      onPress={onPressCall}
+      clickInterval={duration + 20}
       activeOpacity={1.0}
+      iconPosition={iconPosition}
+      disabledOnly={disabledOnly}
+      disabled={disabled}
+      {...others}
     />
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    alignSelf: 'flex-start',
+  solidStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  titleStyle: {
-    fontSize: 14,
-    color: '#666666',
-    marginLeft: 10,
-  },
-  iconStyle: {
-    width: 15,
-    height: 15,
-  },
+  solidInsideStyle: {},
 });
 
 Checkbox.propTypes = {
-  style: ViewPropTypes.style,
+  ...Button.propTypes,
+  solidStyle: ViewPropTypes.style,
+  solidInsideStyle: ViewPropTypes.style,
+  disabledSolidStyle: ViewPropTypes.style,
+  disabledSolidInsideStyle: ViewPropTypes.style,
   checked: PropTypes.bool,
-  defaultChecked: PropTypes.bool,
   checkedIcon: PropTypes.number,
   uncheckedIcon: PropTypes.number,
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  onPress: PropTypes.func,
 };
 
 Checkbox.defaultProps = {
-  checked: undefined,
-  defaultChecked: false,
+  ...Button.defaultProps,
 };
 
 export default React.memo(Checkbox);
