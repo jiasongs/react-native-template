@@ -47,21 +47,21 @@ export const Images = {
     return require('./icon/icon_toast_warn.png');
   },
   /**
+   * @TABBAR [Tabbar]
+   */
+  get icon_tabbar_example() {
+    return require('./icon/icon_tabbar_example.png');
+  },
+  get icon_tabbar_about() {
+    return require('./icon/icon_tabbar_about.png');
+  },
+  /**
    * @Share [分享]
    */
 
   /**
    * @CHAT [聊天组件]
    */
-
-  /**
-   * @TABBAR [Tabbar]
-   */
-  // icon_tabbar_home: require('./tabbar/icon_tabbar_home.png'),
-  // icon_tabbar_chat: require('./tabbar/icon_tabbar_chat.png'),
-  // icon_tabbar_mine: require('./tabbar/icon_tabbar_mine.png'),
-  // icon_tabbar_home_cur: require('./tabbar/icon_tabbar_home_cur.png'),
-  // icon_tabbar_mine_cur: require('./tabbar/icon_tabbar_mine_cur.png'),
 
   /**
    * @ICONS [项目Icon]

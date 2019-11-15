@@ -279,6 +279,14 @@ export default {
       borderTopColor: primary.color.separator,
       backgroundColor: primary.color.reverse,
     },
+    titleStyle: {
+      inactiveColor: primary.second,
+      activeColor: primary.main,
+    },
+    iconStyle: {
+      inactiveTintColor: primary.second,
+      activeTintColor: primary.main,
+    },
   }),
   /**
    * @ListRow

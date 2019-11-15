@@ -23,18 +23,23 @@ import {
   DemoPermissions,
   DemoForm,
 } from '../modules';
+import { Images } from '../assets';
 
 const TabNavigatorRouter = {
   Example: {
     screen: Example,
     navigationOptions: tabOptions({
       title: '示例',
+      normalIcon: Images.icon_tabbar_example,
+      selectedIcon: Images.icon_tabbar_example,
     }),
   },
   About: {
     screen: About,
     navigationOptions: tabOptions({
       title: '关于',
+      normalIcon: Images.icon_tabbar_about,
+      selectedIcon: Images.icon_tabbar_about,
     }),
   },
 };

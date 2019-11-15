@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import { ImageView } from '../Image';
 import { useTheme } from '../Theme';
 import { Label } from '../Text';
+import { RenderNode } from '../Helpers';
 
 const IconPosition = {
   PositionTop: 'top',
@@ -247,12 +248,19 @@ function Button(props) {
       onPress={_onPress}
       disabled={loading || disabled || disabledOnly}
     >
-      <RenderImageBackground
+      <RenderNode
+        Component={ImageBackground}
+        Node={backgroundImage}
         style={styles.imageBackground}
         source={backgroundImage}
       />
       {iconTopOrLeft ? (
-        <RenderIcon style={buildStyles.iconStyle} icon={icon} />
+        <RenderNode
+          Component={ImageView}
+          Node={icon}
+          style={buildStyles.iconStyle}
+          icon={icon}
+        />
       ) : null}
       <RenderLabel style={buildStyles.titleStyle} title={title} />
       {!iconTopOrLeft ? (
