@@ -8,7 +8,7 @@ export default {
       reverse: '#333',
       disabled: '#e5e6e8',
       separator: '#434344',
-      badge: '#8b0000',
+      warn: '#8b0000',
     },
   },
   navigationBar: {

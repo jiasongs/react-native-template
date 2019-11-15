@@ -35,7 +35,7 @@ function DemoTheme() {
             borderColor: themeValue.primary.color.main,
           },
         ]}
-        title={'点击切换白色主题'}
+        title={'点击切换亮色主题'}
         titleStyle={{ color: themeValue.primary.color.main }}
         onPress={() => {
           ThemeManager.changeTheme(ThemeLight); // 异步
@@ -44,7 +44,7 @@ function DemoTheme() {
       />
       <Button
         style={styles.blackButton}
-        title={'点击切换黑暗主题'}
+        title={'点击切换暗黑主题'}
         onPress={() => {
           ThemeManager.changeTheme(ThemeDark); // 异步
           StorageManager.save('THEME1', ThemeDark);

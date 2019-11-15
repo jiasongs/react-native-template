@@ -2,12 +2,12 @@ import { StyleSheet, Dimensions, Platform } from 'react-native';
 
 export const Primary = {
   color: {
-    main: '#333',
-    second: '#999',
-    reverse: '#fff',
-    disabled: '#e5e6e8',
-    separator: '#eee',
-    badge: '#ff190c',
+    main: '#333', // 主要颜色
+    second: '#999', // 次要颜色
+    reverse: '#fff', // 反转的颜色
+    disabled: '#e5e6e8', // 禁用的颜色
+    separator: '#eee', // 分割线的颜色
+    warn: '#ff190c', // 提醒的颜色
   },
   font: {
     multiple: 1,
@@ -236,7 +236,7 @@ export default {
   toast: (primary) => ({
     style: {
       maxWidth: '70%',
-      backgroundColor: 'rgba(35,24,21,0.8)',
+      backgroundColor: primary.color.second,
     },
     titleStyle: {
       color: primary.color.reverse,
@@ -322,7 +322,7 @@ export default {
   badge: (primary) => ({
     capsule: {
       style: {
-        backgroundColor: primary.color.badge,
+        backgroundColor: primary.color.warn,
         padding: 5,
         minWidth: 23,
         height: 23,
@@ -335,7 +335,7 @@ export default {
     },
     square: {
       style: {
-        backgroundColor: primary.color.badge,
+        backgroundColor: primary.color.warn,
         padding: 5,
         minWidth: 23,
         height: 23,
@@ -348,7 +348,7 @@ export default {
     },
     dot: {
       style: {
-        backgroundColor: primary.color.badge,
+        backgroundColor: primary.color.warn,
         width: 8,
         height: 8,
         borderRadius: 8 / 2,

@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import { Button } from '../Touchable';
 import { useTheme } from '../Theme';
 
-// TODO: 缩放比率
 function Checkbox(props) {
   const {
     style,
@@ -31,12 +30,13 @@ function Checkbox(props) {
     disabled,
     disabledSolidStyle,
     disabledSolidInsideStyle,
+    zoomRate,
     ...others
   } = props;
 
   const themeValue = useTheme('checkbox');
   const opacityAnimatedRef = useRef(new Animated.Value(1));
-  const scaleAnimatedRef = useRef(new Animated.Value(checked ? 0.8 : 0.1));
+  const scaleAnimatedRef = useRef(new Animated.Value(checked ? zoomRate : 0.1));
   const duration = 100;
 
   const onPressCall = useCallback(() => {
@@ -107,14 +107,14 @@ function Checkbox(props) {
   useEffect(() => {
     opacityAnimatedRef.current.setValue(1);
     Animated.timing(scaleAnimatedRef.current, {
-      toValue: checked ? 0.8 : 0.1,
+      toValue: checked ? zoomRate : 0.1,
       duration: duration,
       easing: Easing.linear,
       useNativeDriver: true,
     }).start(() => {
       opacityAnimatedRef.current.setValue(checked ? 1 : 0);
     });
-  }, [checked]);
+  }, [checked, zoomRate]);
 
   return (
     <Button
@@ -172,10 +172,12 @@ Checkbox.propTypes = {
   checked: PropTypes.bool,
   checkedIcon: PropTypes.number,
   uncheckedIcon: PropTypes.number,
+  zoomRate: PropTypes.number,
 };
 
 Checkbox.defaultProps = {
   ...Button.defaultProps,
+  zoomRate: 0.8,
 };
 
 export default React.memo(Checkbox);

@@ -70,6 +70,7 @@ function DemoForm() {
           onPress={() => {
             setChecked('单选1');
           }}
+          zoomRate={0.5}
         />
         <Radio
           style={{ marginTop: 20, marginLeft: 20 }}
