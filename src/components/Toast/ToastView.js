@@ -1,6 +1,6 @@
 'use strict';
 import React, { useRef, useEffect, useMemo } from 'react';
-import { View, StyleSheet, Animated, Easing } from 'react-native';
+import { View, StyleSheet, Animated, Image, Easing } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTheme } from '../Theme';
 import { Label } from '../Text';
@@ -8,6 +8,7 @@ import { Label } from '../Text';
 function RenderIcon(props) {
   const {
     type,
+    iconStyle,
     rotateAnimated,
     successIcon,
     failIcon,
@@ -35,7 +36,7 @@ function RenderIcon(props) {
   if (source) {
     return (
       <Animated.Image
-        style={[styles.loadingImage, { transform: [{ rotate }] }]}
+        style={[iconStyle, { transform: [{ rotate }] }]}
         resizeMode={'contain'}
         source={source}
       />
@@ -44,21 +45,31 @@ function RenderIcon(props) {
   return null;
 }
 
-function RenderText(props) {
-  const { text, titleStyle } = props;
-  if (typeof text === 'string') {
-    return <Label style={titleStyle}>{text}</Label>;
-  } else if (React.isValidElement(text)) {
-    return text;
+function RenderTitle(props) {
+  const { title, titleStyle } = props;
+  if (typeof title === 'string' || typeof title === 'number') {
+    return <Label style={titleStyle}>{title}</Label>;
+  } else if (React.isValidElement(title)) {
+    return title;
   }
   return null;
 }
 
 const MemoRenderIcon = React.memo(RenderIcon);
-const MemoRenderText = React.memo(RenderText);
+const MemoRenderTitle = React.memo(RenderTitle);
 
 function ToastView(props) {
-  const { type, text, successIcon, failIcon, warnIcon, loadingIcon } = props;
+  const {
+    style,
+    type,
+    title,
+    titleStyle,
+    iconStyle,
+    successIcon,
+    failIcon,
+    warnIcon,
+    loadingIcon,
+  } = props;
 
   const themeValue = useTheme('toast');
   const rotateAnimatedRef = useRef(new Animated.Value(0));
@@ -108,22 +119,24 @@ function ToastView(props) {
       };
     }
     return {
-      style: [themeValue.style, styles.container, newStyle],
-      titleStyle: [themeValue.titleStyle, styles.toastText],
+      style: [themeValue.style, styles.container, newStyle, style],
+      titleStyle: [themeValue.titleStyle, styles.toastTitle, titleStyle],
+      iconStyle: [themeValue.iconStyle, styles.toastIcon, iconStyle],
     };
-  }, [type, themeValue]);
+  }, [type, themeValue, style, titleStyle, iconStyle]);
 
   return (
     <View style={buildStyles.style}>
       <MemoRenderIcon
         type={type}
+        iconStyle={buildStyles.iconStyle}
         rotateAnimated={rotateAnimatedRef.current}
         successIcon={successIcon}
         failIcon={failIcon}
         warnIcon={warnIcon}
         loadingIcon={loadingIcon}
       />
-      <MemoRenderText text={text} titleStyle={buildStyles.titleStyle} />
+      <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
     </View>
   );
 }
@@ -133,17 +146,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  loadingImage: {
+  toastTitle: {},
+  toastIcon: {
     width: 48,
     height: 48,
     marginBottom: 10,
   },
-  toastText: {},
 });
 
 ToastView.propTypes = {
   type: PropTypes.oneOf(['message', 'success', 'fail', 'warn', 'loading']),
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  titleStyle: Label.propTypes.style,
+  iconStyle: Image.propTypes.style,
   successIcon: PropTypes.number,
   failIcon: PropTypes.number,
   warnIcon: PropTypes.number,

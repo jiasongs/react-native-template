@@ -236,12 +236,15 @@ export default {
   toast: (primary) => ({
     style: {
       maxWidth: '70%',
-      backgroundColor: primary.color.second,
+      backgroundColor: primary.color.main,
     },
     titleStyle: {
       color: primary.color.reverse,
       fontSize: 14,
       lineHeight: 20,
+    },
+    iconStyle: {
+      tintColor: primary.color.reverse,
     },
   }),
   /**

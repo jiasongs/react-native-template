@@ -14,12 +14,12 @@ export default {
   navigationBar: {
     statusBarStyle: 'light-content',
   },
-  toast: (primary) => ({
-    style: {
-      backgroundColor: primary.color.second,
-    },
-    titleStyle: {
-      color: primary.color.main,
-    },
-  }),
+  // toast: (primary) => ({
+  //   style: {
+  //     backgroundColor: primary.color.second,
+  //   },
+  //   titleStyle: {
+  //     color: primary.color.main,
+  //   },
+  // }),
 };

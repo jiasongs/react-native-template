@@ -19,24 +19,24 @@ export default class ToastManager {
     if (text === 'error') {
       this.warn(text);
     } else {
-      this.showView(<ToastView type={'message'} text={text} />, options);
+      this.showView(<ToastView type={'message'} title={text} />, options);
     }
   }
 
   static success(text, options) {
-    this.showView(<ToastView type={'success'} text={text} />, options);
+    this.showView(<ToastView type={'success'} title={text} />, options);
   }
 
   static fail(text, options) {
-    this.showView(<ToastView type={'fail'} text={text} />, options);
+    this.showView(<ToastView type={'fail'} title={text} />, options);
   }
 
   static warn(text, options) {
-    this.showView(<ToastView type={'warn'} text={text} />, options);
+    this.showView(<ToastView type={'warn'} title={text} />, options);
   }
 
   static loading(text, options) {
-    this.showView(<ToastView type={'loading'} text={text} />, {
+    this.showView(<ToastView type={'loading'} title={text} />, {
       duration: 60000,
       modal: true,
       ...options,
