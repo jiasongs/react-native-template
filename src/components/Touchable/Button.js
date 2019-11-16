@@ -21,48 +21,6 @@ const IconPosition = {
   PositionRight: 'right',
 };
 
-function RenderImageBackground(props) {
-  const { style, source } = props;
-  if (React.isValidElement(source)) {
-    return source;
-  } else if (typeof icon === 'function') {
-    return source();
-  } else if (
-    typeof icon === 'number' ||
-    Object.prototype.toString.call(source) === '[object Object]'
-  ) {
-    return <ImageBackground style={style} source={source} />;
-  }
-  return null;
-}
-
-function RenderIcon(props) {
-  const { style, icon } = props;
-  if (React.isValidElement(icon)) {
-    return icon;
-  } else if (typeof icon === 'function') {
-    return icon();
-  } else if (
-    typeof icon === 'number' ||
-    Object.prototype.toString.call(icon) === '[object Object]'
-  ) {
-    return <ImageView style={style} source={icon} />;
-  }
-  return null;
-}
-
-function RenderLabel(props) {
-  const { style, title } = props;
-  if (React.isValidElement(title)) {
-    return title;
-  } else if (typeof title === 'function') {
-    return title();
-  } else if (typeof title === 'number' || typeof title === 'string') {
-    return <Label style={style}>{title}</Label>;
-  }
-  return null;
-}
-
 function Button(props) {
   const {
     style,
@@ -259,12 +217,22 @@ function Button(props) {
           Component={ImageView}
           Node={icon}
           style={buildStyles.iconStyle}
-          icon={icon}
+          source={icon}
         />
       ) : null}
-      <RenderLabel style={buildStyles.titleStyle} title={title} />
+      <RenderNode
+        Component={Label}
+        Node={title}
+        style={buildStyles.titleStyle}
+        title={title}
+      />
       {!iconTopOrLeft ? (
-        <RenderIcon style={buildStyles.iconStyle} icon={icon} />
+        <RenderNode
+          Component={ImageView}
+          Node={icon}
+          style={buildStyles.iconStyle}
+          source={icon}
+        />
       ) : null}
       {children}
       {loading ? (

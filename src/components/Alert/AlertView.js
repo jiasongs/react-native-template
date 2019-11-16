@@ -11,26 +11,7 @@ import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
 import { useKeyboardSpace } from '../../common/hooks';
 import { Label } from '../Text';
-
-function RenderTitle(props) {
-  const { title, titleStyle } = props;
-  if (React.isValidElement(title)) {
-    return title;
-  } else if (typeof title === 'string' || typeof title === 'number') {
-    return <Label style={[styles.title, titleStyle]}>{title}</Label>;
-  }
-  return null;
-}
-
-function RenderDetail(props) {
-  const { detail, detailStyle } = props;
-  if (React.isValidElement(detail)) {
-    return detail;
-  } else if (typeof detail === 'string' || typeof detail === 'number') {
-    return <Label style={[styles.detail, detailStyle]}>{detail}</Label>;
-  }
-  return null;
-}
+import { RenderNode } from '../Helpers';
 
 function RenderAction(props) {
   const {
@@ -60,10 +41,6 @@ function RenderAction(props) {
     </View>
   );
 }
-
-const MemoRenderTitle = React.memo(RenderTitle);
-const MemoRenderDetail = React.memo(RenderDetail);
-const MemoRenderAction = React.memo(RenderAction);
 
 function AlertView(props) {
   const { title, titleStyle, detail, detailStyle, actions, onPress } = props;
@@ -111,8 +88,8 @@ function AlertView(props) {
   const buildStyles = useMemo(() => {
     return {
       style: [themeValue.style, styles.container],
-      titleStyle: [themeValue.titleStyle, titleStyle],
-      detailStyle: [themeValue.detailStyle, detailStyle],
+      titleStyle: [themeValue.titleStyle, styles.title, titleStyle],
+      detailStyle: [themeValue.detailStyle, styles.detail, detailStyle],
       actionContainerStyle: [
         themeValue.actionContainerStyle,
         styles.actionContainer,
@@ -126,12 +103,19 @@ function AlertView(props) {
   return (
     <View>
       <View style={buildStyles.style} onLayout={onLayout}>
-        <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
-        <MemoRenderDetail
-          detail={detail}
-          detailStyle={buildStyles.detailStyle}
+        <RenderNode
+          Component={Label}
+          Node={title}
+          style={buildStyles.titleStyle}
+          title={title}
         />
-        <MemoRenderAction
+        <RenderNode
+          Component={Label}
+          Node={detail}
+          style={buildStyles.detailStyle}
+          title={detail}
+        />
+        <RenderAction
           style={buildStyles.actionContainerStyle}
           actionStyle={buildStyles.actionStyle}
           actionTitleStyle={buildStyles.actionTitleStyle}

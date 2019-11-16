@@ -5,20 +5,8 @@ import PropTypes from 'prop-types';
 import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
 import { Label } from '../Text';
-
-function RenderTitle(props) {
-  const { title, titleStyle } = props;
-  if (React.isValidElement(title)) {
-    return title;
-  } else if (title) {
-    return (
-      <View style={styles.titleContainer}>
-        <Label style={titleStyle}>{title}</Label>
-      </View>
-    );
-  }
-  return null;
-}
+import { Button } from '..';
+import { RenderNode } from '../Helpers';
 
 function RenderContent(props) {
   const { actionStyle, actionTitleStyle, actions, onPress } = props;
@@ -47,18 +35,7 @@ function RenderContent(props) {
   );
 }
 
-function RenderCancelAction(props) {
-  const { style, titleStyle, onPress } = props;
-  return (
-    <TouchableOpacity style={style} activeOpacity={0.9} onPress={onPress}>
-      <Label style={titleStyle}>取消</Label>
-    </TouchableOpacity>
-  );
-}
-
-const MemoRenderTitle = React.memo(RenderTitle);
 const MemoRenderContent = React.memo(RenderContent);
-const MemoRenderCancelAction = React.memo(RenderCancelAction);
 
 function ActionSheetView(props) {
   const { title, titleStyle, actions, onPress, onCancel } = props;
@@ -99,7 +76,11 @@ function ActionSheetView(props) {
   return (
     <View style={buildStyles.style}>
       <View style={buildStyles.contentContainer}>
-        <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
+        <RenderNode
+          Component={Label}
+          title={title}
+          style={buildStyles.titleStyle}
+        />
         <MemoRenderContent
           actionStyle={buildStyles.actionStyle}
           actionTitleStyle={buildStyles.actionTitleStyle}
@@ -108,10 +89,13 @@ function ActionSheetView(props) {
         />
       </View>
       <View style={styles.sep} />
-      <MemoRenderCancelAction
+      <Button
+        type={'clear'}
         style={buildStyles.cancelActionStyle}
+        title={'取消'}
         titleStyle={buildStyles.cancelTitleStyle}
         onPress={onCancel}
+        activeOpacity={1.0}
       />
     </View>
   );

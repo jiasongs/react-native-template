@@ -7,58 +7,7 @@ import { Button } from '../Touchable';
 import { Label } from '../Text';
 import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
-
-function RenderIcon(props) {
-  const { icon, iconStyle } = props;
-  if (React.isValidElement(icon)) {
-    return icon;
-  } else if (typeof icon === 'function') {
-    return icon();
-  } else if (
-    typeof icon === 'number' ||
-    Object.prototype.toString.call(icon) === '[object Object]'
-  ) {
-    return <ImageView style={iconStyle} source={icon} />;
-  }
-  return null;
-}
-
-function RenderTitle(props) {
-  const { title, titleStyle } = props;
-  if (React.isValidElement(title)) {
-    return title;
-  } else if (typeof title === 'function') {
-    return title();
-  } else if (typeof title === 'string') {
-    return <Label style={titleStyle}>{title}</Label>;
-  }
-  return null;
-}
-
-function RenderSubtitle(props) {
-  const { subtitle, subtitleStyle } = props;
-
-  if (React.isValidElement(subtitle)) {
-    return subtitle;
-  } else if (typeof subtitle === 'function') {
-    return subtitle();
-  } else if (typeof subtitle === 'string') {
-    return <Label style={subtitleStyle}>{subtitle}</Label>;
-  }
-  return null;
-}
-
-function RenderDetail(props) {
-  const { detail, detailStyle } = props;
-  if (React.isValidElement(detail)) {
-    return detail;
-  } else if (typeof detail === 'function') {
-    return detail();
-  } else if (typeof detail === 'string') {
-    return <Label style={[Predefine.MR10, detailStyle]}>{detail}</Label>;
-  }
-  return null;
-}
+import { RenderNode } from '../Helpers';
 
 function RenderAccessory(props) {
   const { accessory, accessorySource, accessoryStyle } = props;
@@ -72,21 +21,13 @@ function RenderAccessory(props) {
         resizeMode={'contain'}
       />
     );
-  } else if (React.isValidElement(accessory)) {
-    return accessory;
-  } else if (typeof accessory === 'function') {
-    return accessory();
   }
-  return null;
+  return <RenderNode Node={accessory} />;
 }
 
 function RenderBottomSeparator(props) {
   const { bottomSeparator, bottomSeparatorStyle } = props;
-  if (React.isValidElement(bottomSeparator)) {
-    return bottomSeparator;
-  } else if (typeof bottomSeparator === 'function') {
-    return bottomSeparator();
-  } else if (typeof bottomSeparator === 'string') {
+  if (typeof bottomSeparator === 'string') {
     if (bottomSeparator === 'none') {
       return null;
     } else if (bottomSeparator === 'full') {
@@ -95,13 +36,9 @@ function RenderBottomSeparator(props) {
       return <View style={[styles.sepIndent, bottomSeparatorStyle]} />;
     }
   }
-  return null;
+  return <RenderNode Node={bottomSeparator} />;
 }
 
-const MemoRenderIcon = React.memo(RenderIcon);
-const MemoRenderTitle = React.memo(RenderTitle);
-const MemoRenderSubtitle = React.memo(RenderSubtitle);
-const MemoRenderDetail = React.memo(RenderDetail);
 const MemoRenderAccessory = React.memo(RenderAccessory);
 const MemoRenderBottomSeparator = React.memo(RenderBottomSeparator);
 
@@ -175,22 +112,33 @@ function ListRow(props) {
     >
       <View style={[styles.contentContainer, contentStyle]}>
         <View style={[Predefine.RCA, { flex: 1 }]}>
-          <MemoRenderIcon icon={icon} iconStyle={buildStyles.iconStyle} />
+          <RenderNode
+            Component={ImageView}
+            Node={icon}
+            style={buildStyles.iconStyle}
+            source={icon}
+          />
           <View style={buildStyles.titleSubtitleContainer}>
-            <MemoRenderTitle
+            <RenderNode
+              Component={Label}
+              Node={title}
               title={title}
-              titleStyle={buildStyles.titleStyle}
+              style={buildStyles.titleStyle}
             />
-            <MemoRenderSubtitle
-              subtitle={subtitle}
-              subtitleStyle={buildStyles.subtitleStyle}
+            <RenderNode
+              Component={Label}
+              Node={subtitle}
+              title={subtitle}
+              style={buildStyles.subtitleStyle}
             />
           </View>
         </View>
         <View style={[Predefine.RCC, styles.detailContainer]}>
-          <MemoRenderDetail
-            detail={detail}
-            detailStyle={buildStyles.detailStyle}
+          <RenderNode
+            Component={Label}
+            Node={detail}
+            title={detail}
+            style={buildStyles.detailStyle}
           />
           <MemoRenderAccessory
             accessoryStyle={accessoryStyle}

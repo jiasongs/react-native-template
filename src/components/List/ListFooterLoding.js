@@ -3,16 +3,7 @@ import React, { useMemo } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 import { Label } from '../Text';
-
-function RenderFooter(props) {
-  const { footer } = props;
-  if (React.isValidElement(footer)) {
-    return footer;
-  } else if (typeof footer === 'function') {
-    return footer();
-  }
-  return null;
-}
+import { RenderNode } from '../Helpers';
 
 function RenderLoading(props) {
   const { loading, enable, allLoad } = props;
@@ -50,7 +41,7 @@ function ListFooterLoding(props) {
 
   return (
     <View style={[styles.container, { opacity: isShowEmpty ? 0 : 1 }]}>
-      <RenderFooter footer={renderFooter} />
+      <RenderNode Node={renderFooter} />
       <RenderLoading loading={loading} enable={enable} allLoad={allLoad} />
     </View>
   );

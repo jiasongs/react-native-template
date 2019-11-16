@@ -3,38 +3,28 @@ import React from 'react';
 import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import NavigationActionItem from './NavigationActionItem';
+import { RenderNode } from '../Helpers';
 
 function RenderContent(props) {
   const { renderAction, extraData } = props;
   if (Array.isArray(renderAction)) {
     return renderAction.map((item, index) => {
-      if (!item) {
-        return null;
-      }
-      if (React.isValidElement(item)) {
-        return React.cloneElement(item, {
-          key: `nav_action${index}`,
-        });
-      }
       return (
-        <NavigationActionItem
+        <RenderNode
           key={`nav_action${index}`}
+          Component={NavigationActionItem}
+          Node={item}
           extraData={extraData}
           {...item}
         />
       );
     });
-  } else if (typeof renderAction === 'function') {
-    return renderAction();
-  } else if (React.isValidElement(renderAction)) {
-    return renderAction;
   }
-  return null;
+  return <RenderNode Node={renderAction} />;
 }
 
 function NavigationAction(props) {
   const { style, onLayout, renderAction, extraData } = props;
-
   return (
     <View style={[styles.actionContainer, style]} onLayout={onLayout}>
       <RenderContent renderAction={renderAction} extraData={extraData} />

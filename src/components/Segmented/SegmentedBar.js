@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 import SegmentedBarItem from './SegmentedBarItem';
 import { useTheme } from '../Theme';
 import { isEqualToLayout, mergeProps } from './Util';
+import { RenderNode } from '../Helpers';
 
 function RenderIndicator(props) {
   const { style, animatedX, interpolate, contentItemWidth } = props;
@@ -48,17 +49,6 @@ function RenderIndicator(props) {
   return <Animated.View style={buildStyles.style} />;
 }
 
-function RenderSidebar(props) {
-  const { sidebar } = props;
-  if (typeof sidebar === 'function') {
-    return sidebar();
-  } else if (React.isValidElement(sidebar)) {
-    return sidebar;
-  }
-  return null;
-}
-
-const MemoRenderSidebar = React.memo(RenderSidebar);
 const MemoRenderIndicator = React.memo(RenderIndicator);
 
 function SegmentedBar(props) {
@@ -238,7 +228,7 @@ function SegmentedBar(props) {
           resizeMode={'stretch'}
         />
       ) : null}
-      {sidebarPosition === 'left' && <MemoRenderSidebar sidebar={sidebar} />}
+      {sidebarPosition === 'left' && <RenderNode Node={sidebar} />}
       <ScrollView
         ref={scrollViewRef}
         onLayout={onLayout}
@@ -268,7 +258,7 @@ function SegmentedBar(props) {
           contentItemWidth={contentItemWidth}
         />
       </ScrollView>
-      {sidebarPosition === 'right' && <MemoRenderSidebar sidebar={sidebar} />}
+      {sidebarPosition === 'right' && <RenderNode Node={sidebar} />}
     </View>
   );
 }

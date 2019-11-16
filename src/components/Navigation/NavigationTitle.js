@@ -3,27 +3,7 @@ import React, { useMemo } from 'react';
 import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { Label } from '../Text';
-
-function RenderContent(props) {
-  const { title, titleStyle, extraData } = props;
-  if (typeof title === 'string') {
-    return (
-      <Label
-        style={[styles.title, titleStyle]}
-        numberOfLines={1}
-        ellipsizeMode={'middle'}
-        extraData={extraData}
-      >
-        {title}
-      </Label>
-    );
-  } else if (typeof title === 'function') {
-    return title();
-  } else if (React.isValidElement(title)) {
-    return title;
-  }
-  return null;
-}
+import { RenderNode } from '../Helpers';
 
 function NavigationTitle(props) {
   const {
@@ -45,9 +25,13 @@ function NavigationTitle(props) {
 
   return (
     <View style={[buildStyles.style]}>
-      <RenderContent
+      <RenderNode
+        Component={Label}
+        Node={title}
+        style={[styles.title, titleStyle]}
         title={title}
-        titleStyle={titleStyle}
+        numberOfLines={1}
+        ellipsizeMode={'middle'}
         extraData={extraData}
       />
     </View>

@@ -4,6 +4,7 @@ import { View, StyleSheet, Animated, Image, Easing } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTheme } from '../Theme';
 import { Label } from '../Text';
+import { RenderNode } from '../Helpers';
 
 function RenderIcon(props) {
   const {
@@ -45,18 +46,7 @@ function RenderIcon(props) {
   return null;
 }
 
-function RenderTitle(props) {
-  const { title, titleStyle } = props;
-  if (typeof title === 'string' || typeof title === 'number') {
-    return <Label style={titleStyle}>{title}</Label>;
-  } else if (React.isValidElement(title)) {
-    return title;
-  }
-  return null;
-}
-
 const MemoRenderIcon = React.memo(RenderIcon);
-const MemoRenderTitle = React.memo(RenderTitle);
 
 function ToastView(props) {
   const {
@@ -136,7 +126,12 @@ function ToastView(props) {
         warnIcon={warnIcon}
         loadingIcon={loadingIcon}
       />
-      <MemoRenderTitle title={title} titleStyle={buildStyles.titleStyle} />
+      <RenderNode
+        Component={Label}
+        Node={title}
+        title={title}
+        style={buildStyles.titleStyle}
+      />
     </View>
   );
 }

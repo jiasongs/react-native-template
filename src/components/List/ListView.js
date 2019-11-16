@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import HeaderLoading from './ListHeaderLoading';
 import FooterLoding from './ListFooterLoding';
 import ListEmpty from './ListEmpty';
+import { RenderNode } from '../Helpers';
 
 // 上拉刷新的状态
 const EndReachedStatus = {
@@ -252,12 +253,7 @@ class ListView extends React.PureComponent {
 
   renderListHeader = () => {
     const { ListHeaderComponent } = this.props;
-    if (React.isValidElement(ListHeaderComponent)) {
-      return ListHeaderComponent;
-    } else if (typeof ListHeaderComponent === 'function') {
-      return ListHeaderComponent();
-    }
-    return null;
+    return <RenderNode Node={ListHeaderComponent} />;
   };
 
   renderFooterLoading = () => {
