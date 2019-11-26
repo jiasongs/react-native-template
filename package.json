@@ -48,7 +48,7 @@
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
-    "eslint": "^6.7.0",
+    "eslint": "^6.7.1",
     "eslint-plugin-eslint-comments": "^3.1.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
