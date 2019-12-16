@@ -23,6 +23,7 @@ import {
   DemoPermissions,
   DemoForm,
 } from '../modules';
+import { Platform } from 'react-native';
 // import { Images } from '../assets';
 
 const TabNavigatorRouter = {
@@ -91,21 +92,30 @@ const StackNavigatorRouter = {
 const StackNavigatorConfig = {
   initialRouteName: 'Tab',
   initialRouteParams: {},
-  defaultNavigationOptions: ({ navigation }) => {
-    return {
-      cardStyle: {},
-      cardShadowEnabled: true,
-      cardOverlayEnabled: true,
-      headerShown: false,
-      animationEnabled: true,
-      gestureEnabled: true,
-      gestureResponseDistance: {
-        horizontal: 25,
-        vertical: 135,
-      },
-      ...transitionConfig(navigation),
-    };
+  cardStyle: {},
+  cardShadowEnabled: true,
+  cardOverlayEnabled: true,
+  transitionConfig: transitionConfig,
+  defaultNavigationOptions: {
+    header: null,
+    gesturesEnabled: Platform.OS === 'ios',
   },
+  // react-navigation-stack@alpha
+  // defaultNavigationOptions: ({ navigation }) => {
+  //   return {
+  //     cardStyle: {},
+  //     cardShadowEnabled: true,
+  //     cardOverlayEnabled: true,
+  //     headerShown: false,
+  //     animationEnabled: true,
+  //     gestureEnabled: true,
+  //     gestureResponseDistance: {
+  //       horizontal: 25,
+  //       vertical: 135,
+  //     },
+  //     ...transitionConfig(navigation),
+  //   };
+  // },
 };
 
 const StackNavigator = createStackNavigator(

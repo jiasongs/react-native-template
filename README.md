@@ -47,7 +47,6 @@
 
 ```
 $ npm install
-$ npm install react-navigation-stack@alpha --save
 $ cd ios && pod install
 $ cd .. && npm run postinstall
 $ npm run ios // npm run android

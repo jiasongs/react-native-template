@@ -18,7 +18,7 @@ function DemoTheme() {
 
   return (
     <PageContainer>
-      <NavigationBar title={'DemoTheme'} insets={{ top: 4 }} />
+      <NavigationBar title={'DemoTheme'} />
       <Label
         style={{ alignSelf: 'center', marginVertical: 20 }}
         title={'文字大小'}
