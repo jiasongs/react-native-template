@@ -13,7 +13,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.7.1",
     "@react-native-community/masked-view": "^0.1.5",
-    "@react-native-community/netinfo": "^5.0.0",
+    "@react-native-community/netinfo": "^5.0.1",
     "@react-native-community/viewpager": "^3.3.0",
     "crypto-js": "^3.1.9-1",
     "lottie-ios": "^3.1.3",
@@ -34,13 +34,13 @@
     "react-native-storage": "^1.0.1",
     "react-native-svg": "^9.13.6",
     "react-native-video": "^5.0.2",
-    "react-native-webview": "^7.6.0",
+    "react-native-webview": "^8.0.1",
     "react-native-wheel-picker-android": "^2.0.5",
     "react-navigation": "^4.0.10",
     "react-navigation-drawer": "^2.3.3",
     "react-navigation-stack": "^1.10.3",
     "react-navigation-tabs": "^2.6.2",
-    "rn-fetch-blob": "^0.11.2"
+    "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -48,7 +48,7 @@
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-plugin-eslint-comments": "^3.1.2",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.17.0",
