@@ -51,7 +51,7 @@ function DemoList() {
       <ListRow
         contentStyle={{ height: 100 }}
         onPress={() => {
-          alert('Z');
+          // alert('Z');
         }}
         title={'Item' + index}
       />

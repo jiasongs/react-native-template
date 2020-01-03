@@ -31,8 +31,6 @@ function DemoOverlay() {
     />
   );
 
-  console.log('zzz');
-
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'DemoOverlay'} />

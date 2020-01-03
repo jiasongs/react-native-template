@@ -47,7 +47,7 @@ function DemoSegmented() {
       />
       <SegmentedView
         onChange={(index) => {
-          console.log('onChange', index);
+          // console.log('onChange', index);
         }}
         initialPage={1}
         indicatorType={'lengThen'}
