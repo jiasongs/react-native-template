@@ -82,6 +82,9 @@ function configSettings(settings) {
           formData.append(key, value);
         }
       }
+      if (Object.keys(newSettings.data).length === 0) {
+        formData.append('placeholder', 'placeholder');
+      }
       newSettings.data = formData;
     } else {
       newSettings.data = JSON.stringify(newSettings.data);
