@@ -83,7 +83,7 @@ function configSettings(settings) {
         }
       }
       if (Object.keys(newSettings.data).length === 0) {
-        formData.append('placeholder', 'placeholder');
+        formData = null;
       }
       newSettings.data = formData;
     } else {
