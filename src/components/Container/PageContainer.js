@@ -1,5 +1,5 @@
 'use strict';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { useNetInfo } from '@react-native-community/netinfo';
@@ -46,6 +46,7 @@ function PageContainer(props) {
   } = props;
 
   const themeValue = useTheme('page');
+  const [height, setHeight] = useState('auto');
 
   const buildStyles = useMemo(() => {
     let notchedScreenStyle;
@@ -67,12 +68,22 @@ function PageContainer(props) {
       notchedScreenStyle = null;
     }
     return {
-      style: [themeValue.style, styles.container, notchedScreenStyle, style],
+      style: [
+        themeValue.style,
+        styles.container,
+        { height: height },
+        notchedScreenStyle,
+        style,
+      ],
     };
-  }, [fitNotchedScreen, fitNotchedScreenType, style, themeValue]);
+  }, [fitNotchedScreen, fitNotchedScreenType, height, style, themeValue.style]);
+
+  const onLayout = useCallback((event) => {
+    setHeight(event.nativeEvent.layout.height - StyleSheet.hairlineWidth);
+  }, []);
 
   return (
-    <View style={buildStyles.style}>
+    <View style={buildStyles.style} onLayout={onLayout}>
       {children}
       <MemoRenderLoadingHint style={loadingStyle} loading={loading} />
       {showNetworkError ? (
