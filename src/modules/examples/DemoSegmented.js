@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 'use strict';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import {
   NavigationBar,
@@ -19,6 +19,18 @@ const pageData = [...new Array(10)];
 function DemoSegmented() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [dataSource, setDataSource] = useState(pageData);
+
+  useEffect(() => {
+    const z = setInterval(() => {
+      console.log('zzzzz');
+      // setActiveIndex((pre) => {
+      //   return pre + 1;
+      // });
+    }, 2000);
+    return () => {
+      clearInterval(z);
+    };
+  }, []);
 
   return (
     <PageContainer style={styles.container}>
@@ -47,6 +59,7 @@ function DemoSegmented() {
       />
       <SegmentedView
         onChange={(index) => {
+          setActiveIndex(index);
           // console.log('onChange', index);
         }}
         initialPage={1}
@@ -55,6 +68,7 @@ function DemoSegmented() {
         indicatorStyle={{}}
         barStyle={{}}
         itemStyle={{}}
+        activeIndex={activeIndex}
       >
         {dataSource.map((item, index) => {
           let title = '你好吗' + index;

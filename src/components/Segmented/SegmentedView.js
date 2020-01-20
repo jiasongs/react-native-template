@@ -90,7 +90,7 @@ function SegmentedView(props) {
         }
       }
     },
-    [contentLayout],
+    [contentLayout.width],
   );
 
   const onPressItem = useCallback(
@@ -127,12 +127,18 @@ function SegmentedView(props) {
       const roundIndex = Math.round(radio);
       setFocusIndex(roundIndex);
     },
-    [contentLayout, setFocusIndex],
+    [contentLayout.width, setFocusIndex],
   );
 
   const onLayout = useCallback((event) => {
     setContentLayout(event.nativeEvent.layout);
   }, []);
+
+  useEffect(() => {
+    if (activeIndex !== -1) {
+      onPressItem(activeIndex);
+    }
+  }, [activeIndex, onPressItem]);
 
   useEffect(() => {
     if (Array.isArray(children)) {
