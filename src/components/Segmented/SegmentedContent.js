@@ -109,6 +109,7 @@ function SegmentedContent(props) {
   if (Platform.OS === 'android') {
     return (
       <AnimatedViewpager
+        {...others}
         ref={forwardedRef}
         style={styles.container}
         onLayout={onLayoutBack}
