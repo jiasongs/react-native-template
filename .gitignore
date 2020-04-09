@@ -71,3 +71,4 @@ android/.project
 
 # IDE
 .vscode
+*.zip
