@@ -79,7 +79,7 @@ function SegmentedView(props) {
   const scrollToIndex = useCallback(
     ({ index, animated }) => {
       if (contentLayout.width !== 0) {
-        const listView = listViewRef.current._component;
+        const listView = listViewRef.current;
         if (Platform.OS === 'android') {
           listView.setPage(index);
         } else {

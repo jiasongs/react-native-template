@@ -3,7 +3,7 @@ import deepmerge from 'deepmerge';
 import { ThemeStyle, Primary } from '../Styles';
 
 // registerStyle中可能有Primary
-export default function(value = {}, registerStyle = {}) {
+export default function (value = {}, registerStyle = {}) {
   const { primary: _primary = {}, ...otherThemes } = value;
   const {
     primary: _registerPrimary = {},

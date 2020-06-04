@@ -17,10 +17,6 @@
 		2DCD954D1E0B4F2C00145EB5 /* RNTemplateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RNTemplateTests.m */; };
 		3137E7000B2F48D6734CAC3F /* libPods-RNTemplate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9202C7FFD37B703F9821336A /* libPods-RNTemplate.a */; };
 		336E11C85E19288A3251D44D /* libPods-RNTemplateTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D0453350300089A8974225 /* libPods-RNTemplateTests.a */; };
-		596ED18D23209BCD0024E181 /* RNTemplate-Bridging-Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596ED18923209BCD0024E181 /* RNTemplate-Bridging-Header.swift */; };
-		596ED18E23209BCD0024E181 /* RNTemplate-Bridging-Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596ED18923209BCD0024E181 /* RNTemplate-Bridging-Header.swift */; };
-		596ED18F23209BCD0024E181 /* RNTemplate-Bridging-Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596ED18923209BCD0024E181 /* RNTemplate-Bridging-Header.swift */; };
-		596ED19023209BCD0024E181 /* RNTemplate-Bridging-Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596ED18923209BCD0024E181 /* RNTemplate-Bridging-Header.swift */; };
 		596ED19123209BCD0024E181 /* RCTTextAttributes+Adaptation.m in Sources */ = {isa = PBXBuildFile; fileRef = 596ED18B23209BCD0024E181 /* RCTTextAttributes+Adaptation.m */; };
 		596ED19223209BCD0024E181 /* RCTTextAttributes+Adaptation.m in Sources */ = {isa = PBXBuildFile; fileRef = 596ED18B23209BCD0024E181 /* RCTTextAttributes+Adaptation.m */; };
 		596ED19323209BCD0024E181 /* RCTTextAttributes+Adaptation.m in Sources */ = {isa = PBXBuildFile; fileRef = 596ED18B23209BCD0024E181 /* RCTTextAttributes+Adaptation.m */; };
@@ -29,7 +25,14 @@
 		596ED19923209BE60024E181 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 596ED19723209BE60024E181 /* AppDelegate.m */; };
 		596ED19A23209BE60024E181 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 596ED19723209BE60024E181 /* AppDelegate.m */; };
 		596ED19B23209BE60024E181 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 596ED19723209BE60024E181 /* AppDelegate.m */; };
-		7A94A274244400B200CEC0D5 /* Tesdt.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A94A273244400B200CEC0D5 /* Tesdt.mm */; };
+		7AF3DF362488E03300789D21 /* RNTemplate-Bridging-Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3DF352488E03300789D21 /* RNTemplate-Bridging-Header.swift */; };
+		7AF3DF372488E03300789D21 /* RNTemplate-Bridging-Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3DF352488E03300789D21 /* RNTemplate-Bridging-Header.swift */; };
+		7AF3DF382488E03300789D21 /* RNTemplate-Bridging-Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3DF352488E03300789D21 /* RNTemplate-Bridging-Header.swift */; };
+		7AF3DF392488E03300789D21 /* RNTemplate-Bridging-Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3DF352488E03300789D21 /* RNTemplate-Bridging-Header.swift */; };
+		7AF3DF3C2488E31C00789D21 /* AppDelegate+Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3DF3B2488E31C00789D21 /* AppDelegate+Debug.m */; };
+		7AF3DF3D2488E31C00789D21 /* AppDelegate+Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3DF3B2488E31C00789D21 /* AppDelegate+Debug.m */; };
+		7AF3DF3E2488E31C00789D21 /* AppDelegate+Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3DF3B2488E31C00789D21 /* AppDelegate+Debug.m */; };
+		7AF3DF3F2488E31C00789D21 /* AppDelegate+Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3DF3B2488E31C00789D21 /* AppDelegate+Debug.m */; };
 		BB286681714C7DD56FA0810C /* libPods-RNTemplate-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B00C5EEDD9FE74C378A81A8 /* libPods-RNTemplate-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
@@ -64,16 +67,16 @@
 		2D02E4901E0B4A5D006451C7 /* RNTemplate-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RNTemplate-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D690A6A3F7CECAC6733250B /* Pods-RNTemplate-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplate-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-RNTemplate-tvOSTests/Pods-RNTemplate-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3E2151558D00CDEA186ED9A9 /* Pods-RNTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplate.release.xcconfig"; path = "Target Support Files/Pods-RNTemplate/Pods-RNTemplate.release.xcconfig"; sourceTree = "<group>"; };
-		596ED18923209BCD0024E181 /* RNTemplate-Bridging-Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RNTemplate-Bridging-Header.swift"; sourceTree = "<group>"; };
 		596ED18B23209BCD0024E181 /* RCTTextAttributes+Adaptation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTTextAttributes+Adaptation.m"; sourceTree = "<group>"; };
 		596ED18C23209BCD0024E181 /* RCTTextAttributes+Adaptation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTTextAttributes+Adaptation.h"; sourceTree = "<group>"; };
 		596ED19623209BE60024E181 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		596ED19723209BE60024E181 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5B00C5EEDD9FE74C378A81A8 /* libPods-RNTemplate-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNTemplate-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3FC32A0CDBA1D4325CB04F /* Pods-RNTemplateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplateTests.release.xcconfig"; path = "Target Support Files/Pods-RNTemplateTests/Pods-RNTemplateTests.release.xcconfig"; sourceTree = "<group>"; };
-		7A2432902337578F00E04C3B /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		7A94A272244400B200CEC0D5 /* Tesdt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tesdt.h; sourceTree = "<group>"; };
-		7A94A273244400B200CEC0D5 /* Tesdt.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Tesdt.mm; sourceTree = "<group>"; };
+		7AF3DF342488E03300789D21 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		7AF3DF352488E03300789D21 /* RNTemplate-Bridging-Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RNTemplate-Bridging-Header.swift"; sourceTree = "<group>"; };
+		7AF3DF3A2488E31C00789D21 /* AppDelegate+Debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Debug.h"; sourceTree = "<group>"; };
+		7AF3DF3B2488E31C00789D21 /* AppDelegate+Debug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Debug.m"; sourceTree = "<group>"; };
 		8265A2AC62EDB94D0981C8EF /* Pods-RNTemplateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplateTests.debug.xcconfig"; path = "Target Support Files/Pods-RNTemplateTests/Pods-RNTemplateTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8D646E5BE39AEF6A5DFC0AE5 /* Pods-RNTemplate-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplate-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-RNTemplate-tvOS/Pods-RNTemplate-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9202C7FFD37B703F9821336A /* libPods-RNTemplate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNTemplate.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,8 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				596ED19523209BE60024E181 /* AppDelegate */,
+				7AF3DF332488E03300789D21 /* Global */,
 				596ED18823209BCD0024E181 /* Common */,
-				598F55BB237CDEAD004A056B /* Config */,
 				13B07FB51A68108700A75B9A /* Assets.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -203,37 +206,21 @@
 			children = (
 				596ED19623209BE60024E181 /* AppDelegate.h */,
 				596ED19723209BE60024E181 /* AppDelegate.m */,
+				7AF3DF3A2488E31C00789D21 /* AppDelegate+Debug.h */,
+				7AF3DF3B2488E31C00789D21 /* AppDelegate+Debug.m */,
 			);
 			name = AppDelegate;
 			path = RNTemplate/AppDelegate;
 			sourceTree = "<group>";
 		};
-		598F55BB237CDEAD004A056B /* Config */ = {
+		7AF3DF332488E03300789D21 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				598F55BC237CDEC2004A056B /* Global */,
-				598F55BD237CDED8004A056B /* Header */,
+				7AF3DF342488E03300789D21 /* PrefixHeader.pch */,
+				7AF3DF352488E03300789D21 /* RNTemplate-Bridging-Header.swift */,
 			);
-			name = Config;
-			path = RNTemplate/Config;
-			sourceTree = "<group>";
-		};
-		598F55BC237CDEC2004A056B /* Global */ = {
-			isa = PBXGroup;
-			children = (
-				7A2432902337578F00E04C3B /* PrefixHeader.pch */,
-			);
-			path = Global;
-			sourceTree = "<group>";
-		};
-		598F55BD237CDED8004A056B /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				596ED18923209BCD0024E181 /* RNTemplate-Bridging-Header.swift */,
-				7A94A272244400B200CEC0D5 /* Tesdt.h */,
-				7A94A273244400B200CEC0D5 /* Tesdt.mm */,
-			);
-			path = Header;
+			name = Global;
+			path = RNTemplate/Global;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -302,6 +289,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				C2398B9139659E11552D0A12 /* [CP] Copy Pods Resources */,
+				C8C75A725CB1F77191FBB8F8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -358,7 +346,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0940;
-				ORGANIZATIONNAME = Facebook;
+				ORGANIZATIONNAME = jiasong;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -551,6 +539,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNTemplate/Pods-RNTemplate-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C8C75A725CB1F77191FBB8F8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RNTemplate/Pods-RNTemplate-frameworks.sh",
+				"${PODS_ROOT}/LookinServer/LookinServer.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LookinServer.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNTemplate/Pods-RNTemplate-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D8595AF64FE56C5B8B5D66D5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -618,9 +624,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF3DF372488E03300789D21 /* RNTemplate-Bridging-Header.swift in Sources */,
 				596ED19923209BE60024E181 /* AppDelegate.m in Sources */,
+				7AF3DF3D2488E31C00789D21 /* AppDelegate+Debug.m in Sources */,
 				00E356F31AD99517003FC87E /* RNTemplateTests.m in Sources */,
-				596ED18E23209BCD0024E181 /* RNTemplate-Bridging-Header.swift in Sources */,
 				596ED19223209BCD0024E181 /* RCTTextAttributes+Adaptation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -629,9 +636,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF3DF362488E03300789D21 /* RNTemplate-Bridging-Header.swift in Sources */,
 				596ED19823209BE60024E181 /* AppDelegate.m in Sources */,
-				596ED18D23209BCD0024E181 /* RNTemplate-Bridging-Header.swift in Sources */,
-				7A94A274244400B200CEC0D5 /* Tesdt.mm in Sources */,
+				7AF3DF3C2488E31C00789D21 /* AppDelegate+Debug.m in Sources */,
 				596ED19123209BCD0024E181 /* RCTTextAttributes+Adaptation.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -641,8 +648,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF3DF382488E03300789D21 /* RNTemplate-Bridging-Header.swift in Sources */,
 				596ED19A23209BE60024E181 /* AppDelegate.m in Sources */,
-				596ED18F23209BCD0024E181 /* RNTemplate-Bridging-Header.swift in Sources */,
+				7AF3DF3E2488E31C00789D21 /* AppDelegate+Debug.m in Sources */,
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
 				596ED19323209BCD0024E181 /* RCTTextAttributes+Adaptation.m in Sources */,
 			);
@@ -652,9 +660,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF3DF392488E03300789D21 /* RNTemplate-Bridging-Header.swift in Sources */,
 				596ED19B23209BE60024E181 /* AppDelegate.m in Sources */,
+				7AF3DF3F2488E31C00789D21 /* AppDelegate+Debug.m in Sources */,
 				2DCD954D1E0B4F2C00145EB5 /* RNTemplateTests.m in Sources */,
-				596ED19023209BCD0024E181 /* RNTemplate-Bridging-Header.swift in Sources */,
 				596ED19423209BCD0024E181 /* RCTTextAttributes+Adaptation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -701,6 +710,10 @@
 				INFOPLIST_FILE = RNTemplateTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DFB_SONARKIT_ENABLED=1",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -725,6 +738,10 @@
 				INFOPLIST_FILE = RNTemplateTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DFB_SONARKIT_ENABLED=1",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -746,9 +763,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = KJ6AEY5JEH;
-				GCC_PREFIX_HEADER = "${PROJECT_NAME}/Config/Global/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "${PROJECT_NAME}/Global/PrefixHeader.pch";
 				INFOPLIST_FILE = RNTemplate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DFB_SONARKIT_ENABLED=1",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -770,9 +791,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KJ6AEY5JEH;
-				GCC_PREFIX_HEADER = "${PROJECT_NAME}/Config/Global/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "${PROJECT_NAME}/Global/PrefixHeader.pch";
 				INFOPLIST_FILE = RNTemplate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DFB_SONARKIT_ENABLED=1",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -801,6 +826,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "RNTemplate-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DFB_SONARKIT_ENABLED=1",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -832,6 +861,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "RNTemplate-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DFB_SONARKIT_ENABLED=1",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -862,6 +895,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "RNTemplate-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DFB_SONARKIT_ENABLED=1",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -893,6 +930,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "RNTemplate-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DFB_SONARKIT_ENABLED=1",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
