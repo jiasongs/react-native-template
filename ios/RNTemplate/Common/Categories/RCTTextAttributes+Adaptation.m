@@ -32,7 +32,7 @@
   return [fontSize fontWithSize:[self scaleSize:fontSize.pointSize]];
 }
 
--(CGFloat)scaleSize:(CGFloat)size {
+- (CGFloat)scaleSize:(CGFloat)size {
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     return size;
   }

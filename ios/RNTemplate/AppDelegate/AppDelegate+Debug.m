@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate+Debug.h"
-#if DEBUG
+#ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
 #import <FlipperKitUserDefaultsPlugin/FKUserDefaultsPlugin.h>
@@ -19,7 +19,7 @@
 @implementation AppDelegate (Debug)
 
 - (void)configureProfiler {
-#if DEBUG
+#ifdef FB_SONARKIT_ENABLED
   FlipperClient *client = [FlipperClient sharedClient];
   SKDescriptorMapper *layoutDescriptorMapper = [[SKDescriptorMapper alloc] initWithDefaults];
   [client addPlugin:[[FlipperKitLayoutPlugin alloc] initWithRootNode:UIApplication.sharedApplication withDescriptorMapper:layoutDescriptorMapper]];
