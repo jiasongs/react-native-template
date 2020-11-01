@@ -1,9 +1,12 @@
 'use strict';
-import { Dimensions, Platform, StatusBar } from 'react-native';
+import { Dimensions, Platform, StatusBar, NativeModules } from 'react-native';
 import DeviceInfo from './DeviceInfo';
 import DefineColors from './DefineColors';
 import DefineStyles from './DefineStyles';
 import { fontSize, scaleSize, addDefaultProps } from './Adaptation';
+
+const StatusBarManager = NativeModules.StatusBarManager;
+const RNCSafeAreaProvider = NativeModules.RNCSafeAreaProvider;
 
 const Predefine = {
   ...DefineColors,
@@ -33,11 +36,7 @@ const Predefine = {
   },
   get statusBarHeight() {
     if (Platform.OS === 'ios') {
-      if (this.isNotchedScreen) {
-        return 44;
-      } else {
-        return 20;
-      }
+      return StatusBarManager.getConstants().HEIGHT;
     } else if (Platform.OS === 'android') {
       if (Platform.Version > 20) {
         return StatusBar.currentHeight;
@@ -47,19 +46,30 @@ const Predefine = {
     return 0;
   },
   get navBarHeight() {
+    if (Platform.OS === 'ios') {
+      return this.isPad
+        ? Platform.Version >= 12.0
+          ? 50
+          : 44
+        : this.isLandscape
+        ? 32
+        : 44;
+    } else if (Platform.OS === 'android') {
+      return 44;
+    }
     return 44;
   },
   get contentTop() {
     return this.statusBarHeight + this.navBarHeight;
   },
   get screenInset() {
-    const isLandscape = this.isLandscape;
-    const isNotchedScreen = this.isNotchedScreen;
+    const insets = RNCSafeAreaProvider.getConstants().initialWindowMetrics
+      .insets;
     return {
-      left: isLandscape && isNotchedScreen ? 44 : 0,
-      right: isLandscape && isNotchedScreen ? 44 : 0,
-      top: this.statusBarHeight,
-      bottom: isNotchedScreen ? (isLandscape ? 24 : 34) : 0,
+      left: insets.left,
+      right: insets.right,
+      top: insets.top,
+      bottom: insets.bottom,
     };
   },
   get screenWidth() {

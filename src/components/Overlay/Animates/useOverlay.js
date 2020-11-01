@@ -66,7 +66,7 @@ export default function useOverlay(props) {
     if (modal) {
       return;
     }
-    if (TextInput.State.currentlyFocusedField()) {
+    if (TextInput.State.currentlyFocusedInput()) {
       Keyboard.dismiss();
       return;
     }

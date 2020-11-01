@@ -9,7 +9,7 @@ const defaultOption = {
   modal: true,
   maskOpacity: 0.0,
   duration: 2000,
-  maskPointerEvents: 'box-only',
+  maskPointerEvents: 'box-none',
 };
 
 export default class ToastManager {

@@ -7,12 +7,11 @@ import {
   Keyboard,
   Platform,
 } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
 import { ThemeColors } from 'react-navigation';
-
 import CrossFadeIcon from 'react-navigation-tabs/src/views/CrossFadeIcon';
 import withDimensions from 'react-navigation-tabs/src/utils/withDimensions';
 import { ThemeContext } from '../Theme';
+import { Predefine } from '../../config/predefine';
 
 const majorVersion = parseInt(Platform.Version, 10);
 const isIos = Platform.OS === 'ios';
@@ -67,7 +66,6 @@ class TabBarBottom extends React.Component {
     showIcon: true,
     allowFontScaling: true,
     adaptive: isIOS11,
-    safeAreaInset: { bottom: 'always', top: 'never' },
   };
 
   state = {
@@ -302,7 +300,6 @@ class TabBarBottom extends React.Component {
       keyboardHidesTabBar,
       onTabPress,
       onTabLongPress,
-      safeAreaInset,
       style,
       tabStyle,
     } = this.props;
@@ -342,17 +339,19 @@ class TabBarBottom extends React.Component {
       marginHorizontal,
       marginVertical,
     };
-
+    const paddingBottom = Predefine.screenInset.bottom;
+    const height =
+      (this._shouldUseHorizontalLabels() && !Platform.isPad
+        ? styles.tabBarCompact
+        : styles.tabBarRegular
+      ).height + paddingBottom;
     const tabBarStyle = [
       styles.tabBar,
       styles.tabBarLight,
       // @ts-ignore
-      this._shouldUseHorizontalLabels() && !Platform.isPad
-        ? styles.tabBarCompact
-        : styles.tabBarRegular,
       innerStyle,
+      { height, paddingBottom },
     ];
-
     return (
       <ThemeContext.Consumer>
         {(context) => {
@@ -377,67 +376,64 @@ class TabBarBottom extends React.Component {
                     }
                   : null,
                 containerStyle,
+                tabBarStyle,
+                context.tabBar.style,
               ]}
               pointerEvents={
                 keyboardHidesTabBar && this.state.keyboard ? 'none' : 'auto'
               }
               onLayout={this._handleLayout}
             >
-              <SafeAreaView
-                style={[tabBarStyle, context.tabBar.style]}
-                forceInset={safeAreaInset}
-              >
-                {routes.map((route, index) => {
-                  const focused = index === navigation.state.index;
-                  const scene = { route, focused };
-                  const accessibilityLabel = this.props.getAccessibilityLabel({
-                    route,
-                  });
+              {routes.map((route, index) => {
+                const focused = index === navigation.state.index;
+                const scene = { route, focused };
+                const accessibilityLabel = this.props.getAccessibilityLabel({
+                  route,
+                });
 
-                  const accessibilityRole = this.props.getAccessibilityRole({
-                    route,
-                  });
+                const accessibilityRole = this.props.getAccessibilityRole({
+                  route,
+                });
 
-                  const accessibilityStates = this.props.getAccessibilityStates(
-                    scene,
-                  );
+                const accessibilityStates = this.props.getAccessibilityStates(
+                  scene,
+                );
 
-                  const testID = this.props.getTestID({ route });
+                const testID = this.props.getTestID({ route });
 
-                  const backgroundColor = focused
-                    ? activeBackgroundColor
-                    : inactiveBackgroundColor;
+                const backgroundColor = focused
+                  ? activeBackgroundColor
+                  : inactiveBackgroundColor;
 
-                  const ButtonComponent =
-                    this.props.getButtonComponent({ route }) ||
-                    TouchableWithoutFeedbackWrapper;
+                const ButtonComponent =
+                  this.props.getButtonComponent({ route }) ||
+                  TouchableWithoutFeedbackWrapper;
 
-                  return (
-                    <ButtonComponent
-                      key={route.key}
-                      route={route}
-                      focused={focused}
-                      onPress={() => onTabPress({ route })}
-                      onLongPress={() => onTabLongPress({ route })}
-                      testID={testID}
-                      accessibilityLabel={accessibilityLabel}
-                      accessibilityRole={accessibilityRole}
-                      accessibilityStates={accessibilityStates}
-                      style={[
-                        styles.tab,
-                        { backgroundColor },
-                        this._shouldUseHorizontalLabels()
-                          ? styles.tabLandscape
-                          : styles.tabPortrait,
-                        tabStyle,
-                      ]}
-                    >
-                      {this._renderIcon(scene)}
-                      {this._renderLabel(scene)}
-                    </ButtonComponent>
-                  );
-                })}
-              </SafeAreaView>
+                return (
+                  <ButtonComponent
+                    key={route.key}
+                    route={route}
+                    focused={focused}
+                    onPress={() => onTabPress({ route })}
+                    onLongPress={() => onTabLongPress({ route })}
+                    testID={testID}
+                    accessibilityLabel={accessibilityLabel}
+                    accessibilityRole={accessibilityRole}
+                    accessibilityStates={accessibilityStates}
+                    style={[
+                      styles.tab,
+                      { backgroundColor },
+                      this._shouldUseHorizontalLabels()
+                        ? styles.tabLandscape
+                        : styles.tabPortrait,
+                      tabStyle,
+                    ]}
+                  >
+                    {this._renderIcon(scene)}
+                    {this._renderLabel(scene)}
+                  </ButtonComponent>
+                );
+              })}
             </Animated.View>
           );
         }}
