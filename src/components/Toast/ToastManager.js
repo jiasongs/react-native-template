@@ -40,6 +40,7 @@ export default class ToastManager {
       duration: 60000,
       modal: true,
       ...options,
+      maskPointerEvents: 'auto',
     });
   }
 

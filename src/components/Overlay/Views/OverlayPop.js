@@ -6,7 +6,13 @@ import OverlayBase from './OverlayBase';
 import { usePopAnimated } from '../Animates';
 
 function OverlayPop(props) {
-  const { style, containerStyle, containerPointerEvents, children } = props;
+  const {
+    style,
+    containerStyle,
+    containerPointerEvents,
+    maskPointerEvents,
+    children,
+  } = props;
 
   const {
     maskOpacityRef,
@@ -61,6 +67,7 @@ function OverlayPop(props) {
       style={buildStyles.baseStyle}
       maskStyle={buildStyles.maskStyle}
       onPressMask={onPressMask}
+      maskPointerEvents={maskPointerEvents}
     >
       <Animated.View
         style={buildStyles.containerStyle}

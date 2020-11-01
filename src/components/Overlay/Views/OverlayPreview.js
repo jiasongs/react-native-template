@@ -6,7 +6,13 @@ import OverlayBase from './OverlayBase';
 import { usePreviewAnimated } from '../Animates';
 
 function OverlayPreview(props) {
-  const { style, containerStyle, containerPointerEvents, children } = props;
+  const {
+    style,
+    containerStyle,
+    containerPointerEvents,
+    maskPointerEvents,
+    children,
+  } = props;
 
   const {
     maskOpacityRef,
@@ -76,6 +82,7 @@ function OverlayPreview(props) {
       style={buildStyles.baseStyle}
       maskStyle={buildStyles.maskStyle}
       onPressMask={onPressMask}
+      maskPointerEvents={maskPointerEvents}
     >
       <Animated.View
         style={buildStyles.containerStyle}

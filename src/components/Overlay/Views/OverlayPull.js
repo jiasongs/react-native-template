@@ -11,6 +11,7 @@ function OverlayPull(props) {
     type,
     style,
     containerStyle,
+    maskPointerEvents,
     containerPointerEvents,
     panGestureEnabled,
     children,
@@ -29,7 +30,7 @@ function OverlayPull(props) {
   } = usePullAnimated(props);
 
   const onGestureEventRef = useRef(
-    (function() {
+    (function () {
       switch (type) {
         case 'left':
         case 'right':
@@ -175,6 +176,7 @@ function OverlayPull(props) {
       style={buildStyles.baseStyle}
       maskStyle={buildStyles.maskStyle}
       onPressMask={onPressMask}
+      maskPointerEvents={maskPointerEvents}
     >
       <PanGestureHandler
         onHandlerStateChange={onHandlerStateChange}
