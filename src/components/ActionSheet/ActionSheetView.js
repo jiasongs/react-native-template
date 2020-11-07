@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
 import { Label } from '../Text';
-import { Button } from '..';
+import { Button } from '../Touchable';
 import { RenderNode } from '../Helpers';
 
 function RenderContent(props) {

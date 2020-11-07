@@ -3,10 +3,14 @@ import { DynamicTheme } from './Dynamic';
 import { ThemeContext, ThemeProvider, ThemeManager } from './Provider';
 import { useTheme } from './Util';
 
-export {
-  DynamicTheme,
+const Themes = {
   ThemeLight,
   ThemeDark,
+};
+
+export {
+  DynamicTheme,
+  Themes,
   ThemeManager,
   ThemeContext,
   ThemeProvider,

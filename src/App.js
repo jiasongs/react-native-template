@@ -2,33 +2,40 @@
 import './config/predefine';
 import './config/global';
 import React, { useState, useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { Appearance } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import RouterContainer from './routers/RouterContainer';
 import {
   OverlayProvider,
   DevRefresh,
   ThemeProvider,
-  ThemeDark,
-  ThemeLight,
+  Themes,
 } from './components';
 import { useBackExitApp } from './common/hooks';
 import { StorageManager } from './common/manager';
 import RouterHelper from './routers/RouterHelper';
 
 function App() {
-  const [state, setState] = useState({});
-
-  const colorScheme = useColorScheme();
+  const [state, setState] = useState(
+    Appearance.getColorScheme() === 'light'
+      ? Themes.ThemeLight
+      : Themes.ThemeDark,
+  );
 
   useEffect(() => {
-    console.log('colorScheme', colorScheme);
-    if (colorScheme === 'light') {
-      setState(ThemeLight);
-    } else {
-      setState(ThemeDark);
-    }
-  }, [colorScheme]);
+    // Appearance.addChangeListener((colorScheme) => {
+    //   console.log('currentState', AppState.currentState);
+    //   if (AppState.currentState === 'background') {
+    //     return;
+    //   }
+    //   console.log('colorScheme', colorScheme);
+    //   if (colorScheme === 'light') {
+    //     setState(ThemeLight);
+    //   } else {
+    //     setState(ThemeDark);
+    //   }
+    // });
+  }, []);
 
   useEffect(() => {
     async function loadTheme() {
@@ -56,8 +63,7 @@ function App() {
     <ThemeProvider
       theme={state}
       registerTheme={{
-        customStyle: (primary) => {
-          console.log('customStyle', primary);
+        customStyle: () => {
           return {};
         },
       }}

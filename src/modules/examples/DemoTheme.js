@@ -7,8 +7,7 @@ import {
   Button,
   Label,
   ThemeManager,
-  ThemeDark,
-  ThemeLight,
+  Themes,
   useTheme,
 } from '../../components';
 import { StorageManager } from '../../common/manager';
@@ -43,16 +42,16 @@ function DemoTheme(props) {
         title={'点击切换亮色主题'}
         titleStyle={{ color: themeValue.primary.color.main }}
         onPress={() => {
-          ThemeManager.changeTheme(ThemeLight); // 异步
-          StorageManager.save('THEME1', ThemeLight);
+          ThemeManager.changeTheme(Themes.ThemeLight); // 异步
+          StorageManager.save('THEME1', Themes.ThemeLight);
         }}
       />
       <Button
         style={styles.blackButton}
         title={'点击切换暗黑主题'}
         onPress={() => {
-          ThemeManager.changeTheme(ThemeDark); // 异步
-          StorageManager.save('THEME1', ThemeDark);
+          ThemeManager.changeTheme(Themes.ThemeDark); // 异步
+          StorageManager.save('THEME1', Themes.ThemeDark);
         }}
       />
     </PageContainer>

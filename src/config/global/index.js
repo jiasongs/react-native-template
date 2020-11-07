@@ -1,11 +1,11 @@
 'use strict';
 import {
   Platform,
-  YellowBox,
   UIManager,
   Text,
   TextInput,
   TouchableOpacity,
+  LogBox,
 } from 'react-native';
 import { Images } from '../../assets';
 import { Predefine } from '../predefine';
@@ -31,12 +31,7 @@ UIManager.setLayoutAnimationEnabledExperimental &&
 /**
  * @屏蔽调试警告
  */
-YellowBox.ignoreWarnings([
-  'Remote debugger is in a background',
-  'Require cycle: node_modules/rn-fetch-blob',
-  'Warning: componentWillMount has been renamed',
-  '-[RCTRootView cancelTouches]',
-]);
+LogBox.ignoreLogs([]);
 /**
  * @屏蔽输出
  */
@@ -65,7 +60,6 @@ Predefine.addDefaultProps(Button, { activeOpacity: 0.6 });
 Predefine.addDefaultProps(LoadingHint, { source: Images.json_loading });
 Predefine.addDefaultProps(NavigationBar, {
   backIcon: Images.icon_nav_left,
-  backIconStyle: { width: 20, height: 20 },
   onPressBack: () => RouterHelper.goBack(),
 });
 Predefine.addDefaultProps(ListRow, {

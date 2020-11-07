@@ -32,8 +32,7 @@ import { SegmentedView, SegmentedScene } from './Segmented';
 import { HighlightLabel, Label } from './Text';
 import {
   DynamicTheme,
-  ThemeLight,
-  ThemeDark,
+  Themes,
   ThemeManager,
   ThemeContext,
   ThemeProvider,
@@ -42,8 +41,7 @@ import {
 
 export {
   DynamicTheme,
-  ThemeLight,
-  ThemeDark,
+  Themes,
   ThemeManager,
   ThemeContext,
   ThemeProvider,

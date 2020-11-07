@@ -268,6 +268,8 @@ export default {
     },
     backIconStyle: {
       tintColor: primary.color.main,
+      width: 17,
+      height: 17,
     },
   }),
   /**
