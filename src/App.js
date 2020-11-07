@@ -2,15 +2,33 @@
 import './config/predefine';
 import './config/global';
 import React, { useState, useEffect } from 'react';
+import { useColorScheme } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import RouterContainer from './routers/RouterContainer';
-import { OverlayProvider, DevRefresh, ThemeProvider } from './components';
+import {
+  OverlayProvider,
+  DevRefresh,
+  ThemeProvider,
+  ThemeDark,
+  ThemeLight,
+} from './components';
 import { useBackExitApp } from './common/hooks';
 import { StorageManager } from './common/manager';
 import RouterHelper from './routers/RouterHelper';
 
 function App() {
   const [state, setState] = useState({});
+
+  const colorScheme = useColorScheme();
+
+  useEffect(() => {
+    console.log('colorScheme', colorScheme);
+    if (colorScheme === 'light') {
+      setState(ThemeLight);
+    } else {
+      setState(ThemeDark);
+    }
+  }, [colorScheme]);
 
   useEffect(() => {
     async function loadTheme() {
@@ -36,8 +54,8 @@ function App() {
 
   return (
     <ThemeProvider
-      defaultTheme={state}
-      registerStyle={{
+      theme={state}
+      registerTheme={{
         customStyle: (primary) => {
           console.log('customStyle', primary);
           return {};

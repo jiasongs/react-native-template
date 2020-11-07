@@ -13,7 +13,7 @@ const ThemeContext = React.createContext(initialTheme);
 
 // 主题优先级
 // 1、用户改变的主题，changeTheme
-// 2、用户设置的默认主题，defaultTheme
+// 2、用户设置的默认主题，theme
 // 3、默认主题
 
 // 流程
@@ -27,7 +27,7 @@ const ThemeContext = React.createContext(initialTheme);
 // 用户改变的主题可覆盖 合并之后的主题或之前的主题，优先级1
 
 function ThemeProvider(props) {
-  const { defaultTheme, registerStyle, children } = props;
+  const { theme, registerTheme, children } = props;
 
   // 初始化系统默认主题
   const [value, setValue] = useState(initialTheme);
@@ -35,11 +35,11 @@ function ThemeProvider(props) {
   useEffect(() => {
     const listenerName = ThemeManager.addListener((themes) => {
       setValue((preValue) => {
-        return deepmerge(preValue, DynamicTheme(themes, registerStyle));
+        return deepmerge(preValue, DynamicTheme(themes, registerTheme));
       });
     });
     return () => listenerName.remove();
-  }, [registerStyle]);
+  }, [registerTheme]);
 
   useEffect(() => {
     ThemeManager.currentTheme = value;
@@ -47,9 +47,9 @@ function ThemeProvider(props) {
 
   useEffect(() => {
     setValue((preValue) => {
-      return deepmerge(preValue, DynamicTheme(defaultTheme, registerStyle));
+      return deepmerge(preValue, DynamicTheme(theme, registerTheme));
     });
-  }, [defaultTheme, registerStyle]);
+  }, [theme, registerTheme]);
 
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
@@ -57,13 +57,13 @@ function ThemeProvider(props) {
 }
 
 ThemeProvider.propTypes = {
-  defaultTheme: PropTypes.object,
-  registerStyle: PropTypes.object,
+  theme: PropTypes.object,
+  registerTheme: PropTypes.object,
 };
 
 ThemeProvider.defaultProps = {
-  defaultTheme: {},
-  registerStyle: {},
+  theme: {},
+  registerTheme: {},
 };
 
 export { ThemeContext };

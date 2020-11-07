@@ -2,14 +2,14 @@
 import deepmerge from 'deepmerge';
 import { ThemeStyle, Primary } from '../Styles';
 
-// registerStyle中可能有Primary
-export default function (value = {}, registerStyle = {}) {
+// registerTheme中可能有Primary
+export default function (value = {}, registerTheme = {}) {
   const { primary: _primary = {}, ...otherThemes } = value;
   const {
     primary: _registerPrimary = {},
-    ...otherRegisterStyle
-  } = registerStyle;
-  const registerThemes = deepmerge(ThemeStyle, otherRegisterStyle);
+    ...otherRegisterTheme
+  } = registerTheme;
+  const registerThemes = deepmerge(ThemeStyle, otherRegisterTheme);
   const registerPrimary = deepmerge(Primary, _registerPrimary);
   const primary = deepmerge(registerPrimary, _primary);
   const newThemes = { primary: primary };
