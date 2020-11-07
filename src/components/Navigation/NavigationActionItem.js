@@ -25,10 +25,10 @@ function NavigationActionItem(props) {
 
 const styles = StyleSheet.create({
   actionTouch: {
-    paddingHorizontal: 7,
+    paddingHorizontal: 8,
     flexDirection: 'row',
     alignItems: 'center',
-    height: 44,
+    height: '100%',
   },
   actionTitle: {
     color: '#333',

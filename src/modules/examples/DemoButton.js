@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { NavigationBar, PageContainer, Button, Label } from '../../components';
 import { Images } from '../../assets';
+import { Predefine } from '../../config/predefine';
 
 function DemoButton() {
   const [loading, setLoading] = useState(false);
@@ -16,6 +17,7 @@ function DemoButton() {
           justifyContent: 'center',
           alignItems: 'center',
         }}
+        contentInset={{ bottom: Predefine.screenInset.bottom }}
       >
         <Button style={styles.button} title={'solid-title'} />
         <Button

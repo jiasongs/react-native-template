@@ -14,17 +14,22 @@ function NavigationTitle(props) {
     containerWidth,
     leftActionWidth,
     rightActionWidth,
+    insets,
   } = props;
 
   const buildStyles = useMemo(() => {
     const widthLR = Math.max(leftActionWidth, rightActionWidth);
+    const insetsLR = Math.max(insets.left, insets.right);
     return {
-      style: [{ width: containerWidth - widthLR * 2 }, style],
+      style: [
+        { width: containerWidth - widthLR * 2 - insetsLR * 2 - 10 },
+        style,
+      ],
     };
-  }, [containerWidth, leftActionWidth, rightActionWidth, style]);
+  }, [containerWidth, insets, leftActionWidth, rightActionWidth, style]);
 
   return (
-    <View style={[buildStyles.style]}>
+    <View style={buildStyles.style}>
       <RenderNode
         Component={Label}
         Node={title}

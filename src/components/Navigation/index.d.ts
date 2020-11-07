@@ -26,7 +26,6 @@ export interface NavigationBarProps extends ViewProps {
   statusBarStyle?: 'default' | 'light-content' | 'dark-content';
   statusBarColor?: string;
   statusBarHidden?: boolean;
-  defaultInsets?: Insets;
   insets?: Insets;
   extraData?: any;
 }
