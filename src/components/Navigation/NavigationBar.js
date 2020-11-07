@@ -7,6 +7,7 @@ import {
   ImageBackground,
   Platform,
   Image,
+  ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import deepmerge from 'deepmerge';
@@ -95,9 +96,6 @@ function NavigationBar(props) {
     const newStyle = [themeValue.style, styles.container];
     const newContentStyle = [styles.navContent];
     const newInsets = deepmerge(defaultInsets, insets);
-    newStyle.push({
-      height: Predefine.navBarHeight + newInsets.top,
-    });
     newContentStyle.push({
       height: Predefine.navBarHeight,
       marginTop: newInsets.top,
@@ -186,6 +184,8 @@ const styles = StyleSheet.create({
 });
 
 NavigationBar.propTypes = {
+  style: ViewPropTypes.style,
+  contentStyle: ViewPropTypes.style,
   title: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,

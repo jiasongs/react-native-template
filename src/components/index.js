@@ -2,7 +2,7 @@ import NetworkError from './Error/NetworkError';
 import LoadingHint from './Loading/LoadingHint';
 import { ImageView, ImageZoomView } from './Image';
 import ListView from './List/ListView';
-import NavigationBar from './Navigation/NavigationBar';
+import { NavigationBar } from './Navigation';
 import { Button } from './Touchable';
 import ListRow from './Row/ListRow';
 import TabBottomBar from './Navigation/TabBottomBar';

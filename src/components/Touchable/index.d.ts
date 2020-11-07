@@ -9,8 +9,6 @@ import {
   ViewProps,
 } from 'react-native';
 
-type () => React.ReactElement
-
 export interface ButtonProps extends TouchableOpacityProps, ViewProps {
   type?: 'solid' | 'clear' | 'outline';
   icon?: ImageSourcePropType | React.ReactElement | React.ComponentType<any>;

@@ -13,12 +13,17 @@ import {
 } from '../../components';
 import { StorageManager } from '../../common/manager';
 
-function DemoTheme() {
+function DemoTheme(props) {
   const themeValue = useTheme();
+  const isModal = props.navigation.getParam('isModal');
 
   return (
     <PageContainer>
-      <NavigationBar title={'DemoTheme'} />
+      <NavigationBar
+        title={'DemoTheme'}
+        contentStyle={isModal ? { height: 56 } : null}
+        insets={isModal ? { top: 0 } : null}
+      />
       <Label
         style={{ alignSelf: 'center', marginVertical: 20 }}
         title={'文字大小'}
