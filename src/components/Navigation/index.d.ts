@@ -9,6 +9,7 @@ import {
   ViewProps,
   Insets
 } from 'react-native';
+import { ButtonProps } from '../Touchable';
 
 export interface NavigationBarProps extends ViewProps {
   style?: StyleProp<ViewStyle>;
@@ -22,6 +23,7 @@ export interface NavigationBarProps extends ViewProps {
   backTitleStyle?: StyleProp<TextStyle>;
   backIcon?: ImageSourcePropType | React.ReactElement | React.ComponentType<any>;
   backIconStyle?: StyleProp<ImageStyle>;
+  backSupplement?: boolean;
   onPressBack?: () => void;
   statusBarStyle?: 'default' | 'light-content' | 'dark-content';
   statusBarColor?: string;
@@ -30,4 +32,9 @@ export interface NavigationBarProps extends ViewProps {
   extraData?: any;
 }
 
+export interface NavigationActionItemProps extends ButtonProps {
+  extraData?: any;
+}
+
 export const NavigationBar: React.ComponentClass<NavigationBarProps>;
+export const NavigationActionItem: React.ComponentClass<NavigationActionItemProps>;

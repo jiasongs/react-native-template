@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   actionContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: '85%',
+    height: '90%',
   },
 });
 

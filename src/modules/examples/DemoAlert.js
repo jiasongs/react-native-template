@@ -7,6 +7,7 @@ import {
   ListRow,
   AlertManager,
   ActionManager,
+  NavigationActionItem,
 } from '../../components';
 
 function DemoAlert() {
@@ -50,7 +51,11 @@ function DemoAlert() {
 
   return (
     <PageContainer style={styles.container}>
-      <NavigationBar title={'DemoAlert'} />
+      <NavigationBar
+        title={'DemoAlert'}
+        renderLeftAction={<NavigationActionItem title={'按钮'} />}
+        backSupplement={true}
+      />
       <ListRow title={'默认弹窗'} onPress={onPress1} />
       <ListRow title={'默认ActionSheet'} onPress={onPress2} />
     </PageContainer>

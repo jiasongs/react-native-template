@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import Webview from 'react-native-webview';
 import PageContainer from '../Container/PageContainer';
 import NavigationBar from '../Navigation/NavigationBar';
+import NavigationActionItem from '../Navigation/NavigationActionItem';
 import { useBackHandler } from '../../common/hooks';
 import RouterHelper from '../../routers/RouterHelper';
 
@@ -95,8 +96,8 @@ function WebBrowser(props) {
         title={navState.title}
         onPressBack={onBack}
         renderRightAction={[
-          { title: '刷新', onPress: onReload },
-          { title: '关闭', onPress: onClose },
+          <NavigationActionItem title={'刷新'} onPress={onReload} />,
+          <NavigationActionItem title={'关闭'} onPress={onClose} />,
         ]}
       />
       <Webview

@@ -9,6 +9,7 @@ import {
   SegmentedScene,
   ListView,
   Label,
+  NavigationActionItem,
 } from '../../components';
 import { Images } from '../../assets';
 import DemoList from './DemoList';
@@ -37,24 +38,24 @@ function DemoSegmented() {
       <NavigationBar
         title={'DemoSegmented'}
         renderRightAction={[
-          {
-            title: '添加',
-            onPress: () => {
+          <NavigationActionItem
+            title={'添加'}
+            onPress={() => {
               setDataSource((preData) => {
                 return preData.concat([...new Array(5)]);
               });
-            },
-          },
-          {
-            title: '减少',
-            onPress: () => {
+            }}
+          />,
+          <NavigationActionItem
+            title={'减少'}
+            onPress={() => {
               setDataSource((preData) => {
                 const newData = preData.slice();
                 newData.splice(0, 1);
                 return newData;
               });
-            },
-          },
+            }}
+          />,
         ]}
       />
       <SegmentedView
@@ -68,7 +69,7 @@ function DemoSegmented() {
         indicatorStyle={{}}
         barStyle={{}}
         itemStyle={{}}
-      // activeIndex={activeIndex}
+        // activeIndex={activeIndex}
       >
         {dataSource.map((item, index) => {
           let title = '你好吗' + index;

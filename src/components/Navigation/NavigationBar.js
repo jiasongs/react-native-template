@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import deepmerge from 'deepmerge';
 import NavigationTitle from './NavigationTitle';
 import NavigationAction from './NavigationAction';
+import NavigationActionItem from './NavigationActionItem';
 import { Label } from '../Text';
 import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
@@ -44,6 +45,7 @@ function NavigationBar(props) {
     backTitleStyle,
     backIcon,
     backIconStyle,
+    backSupplement,
     onPressBack,
     extraData,
   } = props;
@@ -68,21 +70,31 @@ function NavigationBar(props) {
   const newRenderLeftAction = useMemo(() => {
     if (extraData) {
     }
-    if (typeof renderLeftAction === 'undefined') {
-      return [
-        {
-          title: backTitle,
-          titleStyle: [themeValue.backTitleStyle, backTitleStyle],
-          icon: backIcon,
-          iconStyle: [themeValue.backIconStyle, backIconStyle],
-          onPress: onPressBack,
-        },
+    if (typeof renderLeftAction === 'undefined' || backSupplement) {
+      const items = [
+        <NavigationActionItem
+          title={backTitle}
+          titleStyle={[themeValue.backTitleStyle, backTitleStyle]}
+          icon={backIcon}
+          iconStyle={[themeValue.backIconStyle, backIconStyle]}
+          iconPosition={'left'}
+          onPress={onPressBack}
+        />,
       ];
+      if (Array.isArray(renderLeftAction)) {
+        items.push(...renderLeftAction);
+      } else if (React.isValidElement(renderLeftAction)) {
+        items.push(renderLeftAction);
+      } else if (typeof renderLeftAction === 'function') {
+        items.push(renderLeftAction());
+      }
+      return items;
     }
     return renderLeftAction;
   }, [
     backIcon,
     backIconStyle,
+    backSupplement,
     backTitle,
     backTitleStyle,
     extraData,
@@ -220,6 +232,7 @@ NavigationBar.propTypes = {
   backTitleStyle: Label.propTypes.style,
   backIcon: Image.propTypes.source,
   backIconStyle: Image.propTypes.style,
+  backSupplement: PropTypes.bool,
   onPressBack: PropTypes.func,
   statusBarStyle: PropTypes.oneOf(['default', 'light-content', 'dark-content']),
   statusBarColor: PropTypes.string,

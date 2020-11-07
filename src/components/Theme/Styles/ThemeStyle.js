@@ -265,6 +265,7 @@ export default {
     },
     backTitleStyle: {
       color: primary.color.main,
+      fontSize: 14,
     },
     backIconStyle: {
       tintColor: primary.color.main,
