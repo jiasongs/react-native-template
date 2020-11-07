@@ -23,7 +23,7 @@ export interface NavigationBarProps extends ViewProps {
   backTitleStyle?: StyleProp<TextStyle>;
   backIcon?: ImageSourcePropType | React.ReactElement | React.ComponentType<any>;
   backIconStyle?: StyleProp<ImageStyle>;
-  backSupplement?: boolean;
+  backItemSupplement?: boolean;
   onPressBack?: () => void;
   statusBarStyle?: 'default' | 'light-content' | 'dark-content';
   statusBarColor?: string;

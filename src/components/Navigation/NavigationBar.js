@@ -45,7 +45,7 @@ function NavigationBar(props) {
     backTitleStyle,
     backIcon,
     backIconStyle,
-    backSupplement,
+    backItemSupplement,
     onPressBack,
     extraData,
   } = props;
@@ -70,9 +70,10 @@ function NavigationBar(props) {
   const newRenderLeftAction = useMemo(() => {
     if (extraData) {
     }
-    if (typeof renderLeftAction === 'undefined' || backSupplement) {
+    if (typeof renderLeftAction === 'undefined' || backItemSupplement) {
       const items = [
         <NavigationActionItem
+          key={'nav_action_back'}
           title={backTitle}
           titleStyle={[themeValue.backTitleStyle, backTitleStyle]}
           icon={backIcon}
@@ -83,10 +84,8 @@ function NavigationBar(props) {
       ];
       if (Array.isArray(renderLeftAction)) {
         items.push(...renderLeftAction);
-      } else if (React.isValidElement(renderLeftAction)) {
+      } else if (renderLeftAction) {
         items.push(renderLeftAction);
-      } else if (typeof renderLeftAction === 'function') {
-        items.push(renderLeftAction());
       }
       return items;
     }
@@ -94,7 +93,7 @@ function NavigationBar(props) {
   }, [
     backIcon,
     backIconStyle,
-    backSupplement,
+    backItemSupplement,
     backTitle,
     backTitleStyle,
     extraData,
@@ -232,7 +231,7 @@ NavigationBar.propTypes = {
   backTitleStyle: Label.propTypes.style,
   backIcon: Image.propTypes.source,
   backIconStyle: Image.propTypes.style,
-  backSupplement: PropTypes.bool,
+  backItemSupplement: PropTypes.bool,
   onPressBack: PropTypes.func,
   statusBarStyle: PropTypes.oneOf(['default', 'light-content', 'dark-content']),
   statusBarColor: PropTypes.string,

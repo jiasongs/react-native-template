@@ -47,6 +47,7 @@ function DemoSegmented() {
             }}
           />,
           <NavigationActionItem
+            key={'2'}
             title={'减少'}
             onPress={() => {
               setDataSource((preData) => {

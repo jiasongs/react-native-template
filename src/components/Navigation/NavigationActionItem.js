@@ -14,6 +14,7 @@ function NavigationActionItem(props) {
       iconStyle={[styles.actionImage, iconStyle]}
       titleStyle={[styles.actionTitle, titleStyle]}
       spacingIconAndTitle={4}
+      hitSlop={{ top: 0, left: 0, bottom: 0, right: 0 }}
       {...otherProps}
     />
   );
