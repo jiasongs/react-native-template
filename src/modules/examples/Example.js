@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
-import { PageContainer, ListRow, NavigationBar } from '../../components';
+import { PageContainer, ListRow, NavigationBar } from 'react-native-ui-core';
 import RouterHelper from '../../routers/RouterHelper';
 import { RefreshLayout } from 'react-native-refresh';
 

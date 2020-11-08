@@ -8,7 +8,7 @@ import {
 } from 'react-native-gesture-handler';
 
 import Animated, { Easing } from 'react-native-reanimated';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 
 // setInterval(() => {
 //   let iters = 1e8,

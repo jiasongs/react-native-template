@@ -5,15 +5,15 @@ import React, { useState, useEffect } from 'react';
 import { Appearance } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import RouterContainer from './routers/RouterContainer';
+import { useBackExitApp } from './common/hooks';
+import { StorageManager } from './common/manager';
+import RouterHelper from './routers/RouterHelper';
 import {
   OverlayProvider,
   DevRefresh,
   ThemeProvider,
   Themes,
-} from './components';
-import { useBackExitApp } from './common/hooks';
-import { StorageManager } from './common/manager';
-import RouterHelper from './routers/RouterHelper';
+} from 'react-native-ui-core';
 
 function App() {
   const [state, setState] = useState(

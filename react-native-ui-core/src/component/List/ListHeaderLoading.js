@@ -8,7 +8,7 @@ import {
   RefreshHeader,
   RefreshState,
 } from 'react-native-refresh';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 
 function ListHeaderLoading(props) {
   const { refreshing, onRefresh, source, enable } = props;

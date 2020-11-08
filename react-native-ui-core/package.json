@@ -1,0 +1,50 @@
+{
+  "author": {
+    "name": "jiasong"
+  },
+  "bugs": {
+    "url": "https://github.com/jiasongs/react-native-ui-core/issues"
+  },
+  "deprecated": false,
+  "description": "",
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "uikit"
+  ],
+  "homepage": "https://github.com/jiasongs/react-native-ui-core#readme",
+  "license": "MIT",
+  "main": "src/index.js",
+  "name": "react-native-ui-core",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.12.1",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-react-native": "^3.10.0",
+    "prettier": "^2.1.2"
+  },
+  "dependencies": {
+    "react-native": "^0.60.0",
+    "lottie-ios": "^3.1.8",
+    "lottie-react-native": "^3.5.0",
+    "react-native-fast-image": "^8.3.3",
+    "react-native-refresh": "^2.0.15",
+    "react-native-safe-area-context": "^3.1.8",
+    "@react-native-community/viewpager": "^4.2.0",
+    "react-native-reanimated": "^1.13.1",
+    "react-native-webview": "^10.10.0",
+    "react-native-wheel-picker-android": "^2.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiasongs/react-native-ui-core.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.1"
+}

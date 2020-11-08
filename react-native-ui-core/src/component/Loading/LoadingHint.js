@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import LottieView from 'lottie-react-native';
 import PropTypes from 'prop-types';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 
 function LoadingHint(props) {
   const { style, lotteryStyle, loading, source } = props;

@@ -9,8 +9,8 @@ import {
   Radio,
   Badge,
   Button,
-} from '../../components';
-import { Predefine } from '../../config/predefine';
+} from 'react-native-ui-core';
+import { Predefine } from '../../common/predefine';
 
 function DemoForm() {
   const [checked, setChecked] = useState('单选1');

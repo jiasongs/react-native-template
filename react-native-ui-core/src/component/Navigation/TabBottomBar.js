@@ -11,7 +11,7 @@ import { ThemeColors } from 'react-navigation';
 import CrossFadeIcon from 'react-navigation-tabs/src/views/CrossFadeIcon';
 import withDimensions from 'react-navigation-tabs/src/utils/withDimensions';
 import { ThemeContext } from '../Theme';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 
 const majorVersion = parseInt(Platform.Version, 10);
 const isIos = Platform.OS === 'ios';

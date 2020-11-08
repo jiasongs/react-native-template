@@ -1,9 +1,14 @@
 'use strict';
 import React, { useState } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
-import { NavigationBar, PageContainer, Button, Label } from '../../components';
+import {
+  NavigationBar,
+  PageContainer,
+  Button,
+  Label,
+} from 'react-native-ui-core';
 import { Images } from '../../assets';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 
 function DemoButton() {
   const [loading, setLoading] = useState(false);

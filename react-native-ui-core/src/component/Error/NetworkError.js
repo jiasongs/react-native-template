@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { Label } from '../Text';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 
 function NetworkError(props) {
   const { style, onNetworkReload, source } = props;

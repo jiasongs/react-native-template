@@ -4,7 +4,7 @@ import { StyleSheet, NativeModules, Animated } from 'react-native';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import { Button } from '../Touchable';
 import { StorageManager } from '../../common/manager';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 
 const DevSettings = NativeModules.DevSettings;
 const DevMenu = NativeModules.DevMenu;

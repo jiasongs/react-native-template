@@ -8,7 +8,7 @@ import {
   AlertManager,
   ActionManager,
   NavigationActionItem,
-} from '../../components';
+} from 'react-native-ui-core';
 
 function DemoAlert() {
   const onPress1 = useCallback(() => {

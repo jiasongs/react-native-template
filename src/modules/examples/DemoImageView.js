@@ -1,8 +1,8 @@
 'use strict';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { NavigationBar, PageContainer } from '../../components';
-import { ImageView } from '../../components';
+import { NavigationBar, PageContainer } from 'react-native-ui-core';
+import { ImageView } from 'react-native-ui-core';
 import { Images } from '../../assets';
 
 function DemoImageView() {

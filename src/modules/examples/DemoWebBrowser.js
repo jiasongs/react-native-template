@@ -1,7 +1,7 @@
 'use strict';
 import React, { useRef } from 'react';
 import { StyleSheet } from 'react-native';
-import { WebBrowser } from '../../components';
+import { WebBrowser } from 'react-native-ui-core';
 
 function DemoWebBrowser() {
   const webViewRef = useRef();

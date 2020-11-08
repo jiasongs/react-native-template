@@ -16,7 +16,7 @@ import NavigationAction from './NavigationAction';
 import NavigationActionItem from './NavigationActionItem';
 import { Label } from '../Text';
 import { useTheme } from '../Theme';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 
 const MemoRenderBackground = React.memo(RenderImageBackground);
 

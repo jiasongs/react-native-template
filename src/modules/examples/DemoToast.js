@@ -6,7 +6,7 @@ import {
   PageContainer,
   ListRow,
   ToastManager,
-} from '../../components';
+} from 'react-native-ui-core';
 
 function DemoToast() {
   return (

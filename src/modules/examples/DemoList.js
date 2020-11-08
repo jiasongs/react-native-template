@@ -6,7 +6,7 @@ import {
   PageContainer,
   ListView,
   ListRow,
-} from '../../components';
+} from 'react-native-ui-core';
 import { useHomeList } from '../../services';
 
 function DemoList() {

@@ -1,8 +1,8 @@
 'use strict';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { NavigationBar, PageContainer } from '../../components';
-import { Card } from '../../components';
+import { NavigationBar, PageContainer } from 'react-native-ui-core';
+import { Card } from 'react-native-ui-core';
 
 function DemoCard() {
   return (

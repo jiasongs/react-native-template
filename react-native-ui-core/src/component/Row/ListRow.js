@@ -6,7 +6,7 @@ import { ImageView } from '../Image';
 import { Button } from '../Touchable';
 import { Label } from '../Text';
 import { useTheme } from '../Theme';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 import { RenderNode } from '../Helpers';
 
 function RenderAccessory(props) {

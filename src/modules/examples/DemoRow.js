@@ -1,7 +1,12 @@
 'use strict';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { NavigationBar, PageContainer, ListRow, Badge } from '../../components';
+import {
+  NavigationBar,
+  PageContainer,
+  ListRow,
+  Badge,
+} from 'react-native-ui-core';
 import { Images } from '../../assets';
 
 function DemoRow() {

@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 import { Label } from '../Text';
 
 function ListEmpty(props) {

@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button } from '../Touchable';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 import { useTheme } from '../Theme';
 import { ImageView } from '../Image';
 import { Label } from '../Text';

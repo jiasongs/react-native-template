@@ -19,8 +19,8 @@ import {
   Checkbox,
   ListView,
   NetworkError,
-} from '../../components';
-import ListHeaderLoading from '../../components/List/ListHeaderLoading';
+} from 'react-native-ui-core';
+import ListHeaderLoading from 'react-native-ui-core/List/ListHeaderLoading';
 import RouterHelper from '../../routers/RouterHelper';
 
 /**

@@ -6,7 +6,7 @@ import {
   PageContainer,
   PopoverPreview,
   Label,
-} from '../../components';
+} from 'react-native-ui-core';
 import { Images } from '../../assets';
 
 const actions = [

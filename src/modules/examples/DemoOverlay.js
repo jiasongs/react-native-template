@@ -8,9 +8,9 @@ import {
   Button,
   OverlayManager,
   ImageZoomView,
-} from '../../components';
+} from 'react-native-ui-core';
 import { Images } from '../../assets';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 
 function DemoOverlay() {
   const viewRef = useRef();

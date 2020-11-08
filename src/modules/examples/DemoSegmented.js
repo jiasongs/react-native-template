@@ -10,7 +10,7 @@ import {
   ListView,
   Label,
   NavigationActionItem,
-} from '../../components';
+} from 'react-native-ui-core';
 import { Images } from '../../assets';
 import DemoList from './DemoList';
 

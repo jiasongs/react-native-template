@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTheme } from '../Theme';
-import { Predefine } from '../../config/predefine';
+import { Predefine } from '../../common/predefine';
 import { useKeyboardSpace } from '../../common/hooks';
 import { Label } from '../Text';
 import { RenderNode } from '../Helpers';

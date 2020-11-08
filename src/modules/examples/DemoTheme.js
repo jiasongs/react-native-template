@@ -9,7 +9,7 @@ import {
   ThemeManager,
   Themes,
   useTheme,
-} from '../../components';
+} from 'react-native-ui-core';
 import { StorageManager } from '../../common/manager';
 
 function DemoTheme(props) {
