@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { Label } from '../Text';
-import { RenderNode } from '../Helpers';
+import { ComponentProxy } from '../Helpers';
 
 function NavigationTitle(props) {
   const {
@@ -30,7 +30,7 @@ function NavigationTitle(props) {
 
   return (
     <View style={buildStyles.style}>
-      <RenderNode
+      <ComponentProxy
         Component={Label}
         Node={title}
         style={[styles.title, titleStyle]}

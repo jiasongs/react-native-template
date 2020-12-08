@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function RenderNode(props) {
+function ComponentProxy(props) {
   const { Component, Node, ...others } = props;
   if (React.isValidElement(Node)) {
     return Node;
@@ -14,11 +14,11 @@ function RenderNode(props) {
   }
 }
 
-RenderNode.propTypes = {
+ComponentProxy.propTypes = {
   Component: PropTypes.any,
   Node: PropTypes.any,
 };
 
-RenderNode.defaultProps = {};
+ComponentProxy.defaultProps = {};
 
-export default React.memo(RenderNode);
+export default React.memo(ComponentProxy);

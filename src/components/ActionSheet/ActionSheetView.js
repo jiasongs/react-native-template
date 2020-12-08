@@ -6,7 +6,7 @@ import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
 import { Label } from '../Text';
 import { Button } from '../Touchable';
-import { RenderNode } from '../Helpers';
+import { ComponentProxy } from '../Helpers';
 
 function RenderContent(props) {
   const { actionStyle, actionTitleStyle, actions, onPress } = props;
@@ -76,7 +76,7 @@ function ActionSheetView(props) {
   return (
     <View style={buildStyles.style}>
       <View style={buildStyles.contentContainer}>
-        <RenderNode
+        <ComponentProxy
           Component={Label}
           title={title}
           style={buildStyles.titleStyle}

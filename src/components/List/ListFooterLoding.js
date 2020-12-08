@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 import { Label } from '../Text';
-import { RenderNode } from '../Helpers';
+import { ComponentProxy } from '../Helpers';
 
 function RenderLoading(props) {
   const { loading, enable, allLoad } = props;
@@ -41,7 +41,7 @@ function ListFooterLoding(props) {
 
   return (
     <View style={[styles.container, { opacity: isShowEmpty ? 0 : 1 }]}>
-      <RenderNode Node={renderFooter} />
+      <ComponentProxy Node={renderFooter} />
       <RenderLoading loading={loading} enable={enable} allLoad={allLoad} />
     </View>
   );

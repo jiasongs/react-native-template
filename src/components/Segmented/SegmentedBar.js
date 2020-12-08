@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import SegmentedBarItem from './SegmentedBarItem';
 import { useTheme } from '../Theme';
 import { isEqualToLayout, mergeProps } from './Util';
-import { RenderNode } from '../Helpers';
+import { ComponentProxy } from '../Helpers';
 
 function RenderIndicator(props) {
   const { style, animatedX, interpolate, contentItemWidth } = props;
@@ -228,7 +228,7 @@ function SegmentedBar(props) {
           resizeMode={'stretch'}
         />
       ) : null}
-      {sidebarPosition === 'left' && <RenderNode Node={sidebar} />}
+      {sidebarPosition === 'left' && <ComponentProxy Node={sidebar} />}
       <ScrollView
         ref={scrollViewRef}
         onLayout={onLayout}
@@ -258,7 +258,7 @@ function SegmentedBar(props) {
           contentItemWidth={contentItemWidth}
         />
       </ScrollView>
-      {sidebarPosition === 'right' && <RenderNode Node={sidebar} />}
+      {sidebarPosition === 'right' && <ComponentProxy Node={sidebar} />}
     </View>
   );
 }

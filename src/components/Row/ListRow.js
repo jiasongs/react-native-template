@@ -7,7 +7,7 @@ import { Button } from '../Touchable';
 import { Label } from '../Text';
 import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
-import { RenderNode } from '../Helpers';
+import { ComponentProxy } from '../Helpers';
 
 function RenderAccessory(props) {
   const { accessory, accessorySource, accessoryStyle } = props;
@@ -22,7 +22,7 @@ function RenderAccessory(props) {
       />
     );
   }
-  return <RenderNode Node={accessory} />;
+  return <ComponentProxy Node={accessory} />;
 }
 
 function RenderBottomSeparator(props) {
@@ -36,7 +36,7 @@ function RenderBottomSeparator(props) {
       return <View style={[styles.sepIndent, bottomSeparatorStyle]} />;
     }
   }
-  return <RenderNode Node={bottomSeparator} />;
+  return <ComponentProxy Node={bottomSeparator} />;
 }
 
 const MemoRenderAccessory = React.memo(RenderAccessory);
@@ -112,20 +112,20 @@ function ListRow(props) {
     >
       <View style={[styles.contentContainer, contentStyle]}>
         <View style={[Predefine.RCA, { flex: 1 }]}>
-          <RenderNode
+          <ComponentProxy
             Component={ImageView}
             Node={icon}
             style={buildStyles.iconStyle}
             source={icon}
           />
           <View style={buildStyles.titleSubtitleContainer}>
-            <RenderNode
+            <ComponentProxy
               Component={Label}
               Node={title}
               title={title}
               style={buildStyles.titleStyle}
             />
-            <RenderNode
+            <ComponentProxy
               Component={Label}
               Node={subtitle}
               title={subtitle}
@@ -134,7 +134,7 @@ function ListRow(props) {
           </View>
         </View>
         <View style={[Predefine.RCC, styles.detailContainer]}>
-          <RenderNode
+          <ComponentProxy
             Component={Label}
             Node={detail}
             title={detail}

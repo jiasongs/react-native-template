@@ -11,7 +11,7 @@ import { useTheme } from '../Theme';
 import { Predefine } from '../../config/predefine';
 import { useKeyboardSpace } from '../../common/hooks';
 import { Label } from '../Text';
-import { RenderNode } from '../Helpers';
+import { ComponentProxy } from '../Helpers';
 
 function RenderAction(props) {
   const {
@@ -71,8 +71,8 @@ function AlertView(props) {
         viewLayoutRef.current = event.nativeEvent.layout;
         setMaxY(
           (Predefine.screenHeight - viewLayoutRef.current.height) / 2 +
-            viewLayoutRef.current.height +
-            40,
+          viewLayoutRef.current.height +
+          40,
         );
       }
     },
@@ -103,13 +103,13 @@ function AlertView(props) {
   return (
     <View>
       <View style={buildStyles.style} onLayout={onLayout}>
-        <RenderNode
+        <ComponentProxy
           Component={Label}
           Node={title}
           style={buildStyles.titleStyle}
           title={title}
         />
-        <RenderNode
+        <ComponentProxy
           Component={Label}
           Node={detail}
           style={buildStyles.detailStyle}

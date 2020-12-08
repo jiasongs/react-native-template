@@ -3,14 +3,14 @@ import React from 'react';
 import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import NavigationActionItem from './NavigationActionItem';
-import { RenderNode } from '../Helpers';
+import { ComponentProxy } from '../Helpers';
 
 function RenderContent(props) {
   const { renderAction, extraData } = props;
   if (Array.isArray(renderAction)) {
     return renderAction.map((item, index) => {
       return (
-        <RenderNode
+        <ComponentProxy
           key={`nav_action${index}`}
           Component={NavigationActionItem}
           Node={item}
@@ -20,7 +20,7 @@ function RenderContent(props) {
       );
     });
   }
-  return <RenderNode Node={renderAction} />;
+  return <ComponentProxy Node={renderAction} />;
 }
 
 function NavigationAction(props) {

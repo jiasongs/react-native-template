@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { ImageView } from '../Image';
 import { useTheme } from '../Theme';
 import { Label } from '../Text';
-import { RenderNode } from '../Helpers';
+import { ComponentProxy } from '../Helpers';
 
 const IconPosition = {
   PositionTop: 'top',
@@ -206,28 +206,28 @@ function Button(props) {
       onPress={_onPress}
       disabled={loading || disabled || disabledOnly}
     >
-      <RenderNode
+      <ComponentProxy
         Component={ImageBackground}
         Node={backgroundImage}
         style={styles.imageBackground}
         source={backgroundImage}
       />
       {iconTopOrLeft ? (
-        <RenderNode
+        <ComponentProxy
           Component={ImageView}
           Node={icon}
           style={buildStyles.iconStyle}
           source={icon}
         />
       ) : null}
-      <RenderNode
+      <ComponentProxy
         Component={Label}
         Node={title}
         style={buildStyles.titleStyle}
         title={title}
       />
       {!iconTopOrLeft ? (
-        <RenderNode
+        <ComponentProxy
           Component={ImageView}
           Node={icon}
           style={buildStyles.iconStyle}

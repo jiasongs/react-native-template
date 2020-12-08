@@ -4,7 +4,7 @@ import { View, StyleSheet, Animated, Image, Easing } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTheme } from '../Theme';
 import { Label } from '../Text';
-import { RenderNode } from '../Helpers';
+import { ComponentProxy } from '../Helpers';
 
 function RenderIcon(props) {
   const {
@@ -80,7 +80,8 @@ function ToastView(props) {
       useNativeDriver: true,
     });
     loopAnimatedRef.current = Animated.loop(timingAnimated, { iterations: -1 });
-    loopAnimatedRef.current.start(() => {});
+    // eslint-disable-next-line prettier/prettier
+    loopAnimatedRef.current.start(() => { });
   }
 
   function stopRotateAnimated() {
@@ -126,7 +127,7 @@ function ToastView(props) {
         warnIcon={warnIcon}
         loadingIcon={loadingIcon}
       />
-      <RenderNode
+      <ComponentProxy
         Component={Label}
         Node={title}
         title={title}

@@ -1,3 +1,3 @@
-import RenderNode from './RenderNode';
+import ComponentProxy from './ComponentProxy';
 
-export { RenderNode };
+export { ComponentProxy };

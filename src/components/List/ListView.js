@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import HeaderLoading from './ListHeaderLoading';
 import FooterLoding from './ListFooterLoding';
 import ListEmpty from './ListEmpty';
-import { RenderNode } from '../Helpers';
+import { ComponentProxy } from '../Helpers';
 
 // 上拉刷新的状态
 const EndReachedStatus = {
@@ -253,7 +253,7 @@ class ListView extends React.PureComponent {
 
   renderListHeader = () => {
     const { ListHeaderComponent } = this.props;
-    return <RenderNode Node={ListHeaderComponent} />;
+    return <ComponentProxy Node={ListHeaderComponent} />;
   };
 
   renderFooterLoading = () => {
