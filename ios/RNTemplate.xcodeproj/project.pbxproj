@@ -7,44 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13B07FBF1A68108700A75B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Assets.xcassets */; };
-		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		3137E7000B2F48D6734CAC3F /* libPods-RNTemplate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9202C7FFD37B703F9821336A /* libPods-RNTemplate.a */; };
-		596ED19123209BCD0024E181 /* RCTTextAttributes+Adaptation.m in Sources */ = {isa = PBXBuildFile; fileRef = 596ED18B23209BCD0024E181 /* RCTTextAttributes+Adaptation.m */; };
+		13B07FC11A68108700A75B9A /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.mm */; };
+		1C48DF511DB8AB907D587439 /* libPods-RNTemplate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0CC5AF50AC7A7A1089EF51 /* libPods-RNTemplate.a */; };
 		596ED19823209BE60024E181 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 596ED19723209BE60024E181 /* AppDelegate.m */; };
-		7AF3DF362488E03300789D21 /* RNTemplate-Bridging-Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3DF352488E03300789D21 /* RNTemplate-Bridging-Header.swift */; };
+		7A1EDB18257F0F9600B6046A /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1EDB17257F0F9600B6046A /* JavaScriptCore.framework */; };
+		7A1EDBF9257F143100B6046A /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1EDBF8257F143100B6046A /* Empty.swift */; };
+		7A1EDC50257F18C200B6046A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A1EDC4F257F18C200B6046A /* Assets.xcassets */; };
 		7AF3DF3C2488E31C00789D21 /* AppDelegate+Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3DF3B2488E31C00789D21 /* AppDelegate+Debug.m */; };
 		7AF86B1124F8B28500D3AB0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AF86B1024F8B28500D3AB0C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		13B07F961A680F5B00A75B9A /* RNTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FB51A68108700A75B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = RNTemplate/Assets.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RNTemplate/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RNTemplate/main.m; sourceTree = "<group>"; };
-		28D0453350300089A8974225 /* libPods-RNTemplateTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNTemplateTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D690A6A3F7CECAC6733250B /* Pods-RNTemplate-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplate-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-RNTemplate-tvOSTests/Pods-RNTemplate-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = RNTemplate/main.mm; sourceTree = "<group>"; };
 		3E2151558D00CDEA186ED9A9 /* Pods-RNTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplate.release.xcconfig"; path = "Target Support Files/Pods-RNTemplate/Pods-RNTemplate.release.xcconfig"; sourceTree = "<group>"; };
-		596ED18B23209BCD0024E181 /* RCTTextAttributes+Adaptation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTTextAttributes+Adaptation.m"; sourceTree = "<group>"; };
-		596ED18C23209BCD0024E181 /* RCTTextAttributes+Adaptation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTTextAttributes+Adaptation.h"; sourceTree = "<group>"; };
 		596ED19623209BE60024E181 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		596ED19723209BE60024E181 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5B00C5EEDD9FE74C378A81A8 /* libPods-RNTemplate-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNTemplate-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E3FC32A0CDBA1D4325CB04F /* Pods-RNTemplateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplateTests.release.xcconfig"; path = "Target Support Files/Pods-RNTemplateTests/Pods-RNTemplateTests.release.xcconfig"; sourceTree = "<group>"; };
+		7A0CC5AF50AC7A7A1089EF51 /* libPods-RNTemplate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNTemplate.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A1EDB17257F0F9600B6046A /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		7A1EDBF7257F143000B6046A /* RNTemplate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNTemplate-Bridging-Header.h"; sourceTree = "<group>"; };
+		7A1EDBF8257F143100B6046A /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
+		7A1EDBFD257F154200B6046A /* RNTemplate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RNTemplate.entitlements; path = RNTemplate/RNTemplate.entitlements; sourceTree = "<group>"; };
+		7A1EDC4F257F18C200B6046A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = RNTemplate/Assets.xcassets; sourceTree = "<group>"; };
 		7AF3DF342488E03300789D21 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		7AF3DF352488E03300789D21 /* RNTemplate-Bridging-Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RNTemplate-Bridging-Header.swift"; sourceTree = "<group>"; };
 		7AF3DF3A2488E31C00789D21 /* AppDelegate+Debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Debug.h"; sourceTree = "<group>"; };
 		7AF3DF3B2488E31C00789D21 /* AppDelegate+Debug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Debug.m"; sourceTree = "<group>"; };
 		7AF86B1024F8B28500D3AB0C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RNTemplate/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8265A2AC62EDB94D0981C8EF /* Pods-RNTemplateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplateTests.debug.xcconfig"; path = "Target Support Files/Pods-RNTemplateTests/Pods-RNTemplateTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8D646E5BE39AEF6A5DFC0AE5 /* Pods-RNTemplate-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplate-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-RNTemplate-tvOS/Pods-RNTemplate-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		9202C7FFD37B703F9821336A /* libPods-RNTemplate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNTemplate.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		95088F2EA4B0C1BF6A884CAC /* libPods-RNTemplate-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNTemplate-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6707CEA26B30CECE9AD0BAB /* Pods-RNTemplate-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplate-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-RNTemplate-tvOSTests/Pods-RNTemplate-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		EDFB2AED043105ABCDFCBFE0 /* Pods-RNTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplate.debug.xcconfig"; path = "Target Support Files/Pods-RNTemplate/Pods-RNTemplate.debug.xcconfig"; sourceTree = "<group>"; };
-		FAD4C89B2229D23CC2D89D6B /* Pods-RNTemplate-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplate-tvOS.release.xcconfig"; path = "Target Support Files/Pods-RNTemplate-tvOS/Pods-RNTemplate-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3137E7000B2F48D6734CAC3F /* libPods-RNTemplate.a in Frameworks */,
+				7A1EDB18257F0F9600B6046A /* JavaScriptCore.framework in Frameworks */,
+				1C48DF511DB8AB907D587439 /* libPods-RNTemplate.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,11 +55,11 @@
 			children = (
 				596ED19523209BE60024E181 /* AppDelegate */,
 				7AF3DF332488E03300789D21 /* Global */,
-				596ED18823209BCD0024E181 /* Common */,
-				13B07FB51A68108700A75B9A /* Assets.xcassets */,
-				7AF86B1024F8B28500D3AB0C /* LaunchScreen.storyboard */,
+				7A1EDC4F257F18C200B6046A /* Assets.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB71A68108700A75B9A /* main.m */,
+				7AF86B1024F8B28500D3AB0C /* LaunchScreen.storyboard */,
+				13B07FB71A68108700A75B9A /* main.mm */,
+				7A1EDBFD257F154200B6046A /* RNTemplate.entitlements */,
 			);
 			name = RNTemplate;
 			sourceTree = "<group>";
@@ -76,12 +67,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				9202C7FFD37B703F9821336A /* libPods-RNTemplate.a */,
-				95088F2EA4B0C1BF6A884CAC /* libPods-RNTemplate-tvOS.a */,
-				5B00C5EEDD9FE74C378A81A8 /* libPods-RNTemplate-tvOSTests.a */,
-				28D0453350300089A8974225 /* libPods-RNTemplateTests.a */,
+				7A1EDB17257F0F9600B6046A /* JavaScriptCore.framework */,
+				7A0CC5AF50AC7A7A1089EF51 /* libPods-RNTemplate.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -91,32 +78,8 @@
 			children = (
 				EDFB2AED043105ABCDFCBFE0 /* Pods-RNTemplate.debug.xcconfig */,
 				3E2151558D00CDEA186ED9A9 /* Pods-RNTemplate.release.xcconfig */,
-				8D646E5BE39AEF6A5DFC0AE5 /* Pods-RNTemplate-tvOS.debug.xcconfig */,
-				FAD4C89B2229D23CC2D89D6B /* Pods-RNTemplate-tvOS.release.xcconfig */,
-				3D690A6A3F7CECAC6733250B /* Pods-RNTemplate-tvOSTests.debug.xcconfig */,
-				B6707CEA26B30CECE9AD0BAB /* Pods-RNTemplate-tvOSTests.release.xcconfig */,
-				8265A2AC62EDB94D0981C8EF /* Pods-RNTemplateTests.debug.xcconfig */,
-				5E3FC32A0CDBA1D4325CB04F /* Pods-RNTemplateTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		596ED18823209BCD0024E181 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				596ED18A23209BCD0024E181 /* Categories */,
-			);
-			name = Common;
-			path = RNTemplate/Common;
-			sourceTree = "<group>";
-		};
-		596ED18A23209BCD0024E181 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				596ED18C23209BCD0024E181 /* RCTTextAttributes+Adaptation.h */,
-				596ED18B23209BCD0024E181 /* RCTTextAttributes+Adaptation.m */,
-			);
-			path = Categories;
 			sourceTree = "<group>";
 		};
 		596ED19523209BE60024E181 /* AppDelegate */ = {
@@ -134,8 +97,9 @@
 		7AF3DF332488E03300789D21 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				7A1EDBF8257F143100B6046A /* Empty.swift */,
 				7AF3DF342488E03300789D21 /* PrefixHeader.pch */,
-				7AF3DF352488E03300789D21 /* RNTemplate-Bridging-Header.swift */,
+				7A1EDBF7257F143000B6046A /* RNTemplate-Bridging-Header.h */,
 			);
 			name = Global;
 			path = RNTemplate/Global;
@@ -206,7 +170,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = KJ6AEY5JEH;
-						LastSwiftMigration = 1020;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -234,8 +198,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A1EDC50257F18C200B6046A /* Assets.xcassets in Resources */,
 				7AF86B1124F8B28500D3AB0C /* LaunchScreen.storyboard in Resources */,
-				13B07FBF1A68108700A75B9A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +218,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		5065737D8CFB11B63330068F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -342,11 +306,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AF3DF362488E03300789D21 /* RNTemplate-Bridging-Header.swift in Sources */,
 				596ED19823209BE60024E181 /* AppDelegate.m in Sources */,
+				7A1EDBF9257F143100B6046A /* Empty.swift in Sources */,
 				7AF3DF3C2488E31C00789D21 /* AppDelegate+Debug.m in Sources */,
-				596ED19123209BCD0024E181 /* RCTTextAttributes+Adaptation.m in Sources */,
-				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				13B07FC11A68108700A75B9A /* main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,12 +322,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = RNTemplate/RNTemplate.entitlements;
+				CURRENT_PROJECT_VERSION = 1.0.0.1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = KJ6AEY5JEH;
 				GCC_PREFIX_HEADER = "${PROJECT_NAME}/Global/PrefixHeader.pch";
 				INFOPLIST_FILE = RNTemplate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -376,8 +342,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = RNTemplate;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNTemplate/Global/RNTemplate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -388,11 +358,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = RNTemplate/RNTemplate.entitlements;
+				CURRENT_PROJECT_VERSION = 1.0.0.1;
 				DEVELOPMENT_TEAM = KJ6AEY5JEH;
 				GCC_PREFIX_HEADER = "${PROJECT_NAME}/Global/PrefixHeader.pch";
 				INFOPLIST_FILE = RNTemplate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -404,7 +377,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = RNTemplate;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNTemplate/Global/RNTemplate-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

@@ -1,5 +1,5 @@
 //
-//  main.m
+//  main.mm
 //  RNTemplate
 //
 //  Created by jiasong on 2020/6/4.
