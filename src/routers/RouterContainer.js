@@ -1,36 +1,36 @@
 'use strict';
 import React, { useRef, useCallback } from 'react';
-import { Platform } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import { createAppContainer } from 'react-navigation';
-import { StackNavigator } from './RouterConfig';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import RouterHelper from './RouterHelper';
 
-const PersistenceKey = 'PersistenceKey';
-const AppNavigationContainer = createAppContainer(StackNavigator);
+import {
+  About,
+  DemoAlert,
+  DemoButton,
+  DemoContainer,
+  DemoImageView,
+  DemoRow,
+  DemoList,
+  DemoOverlay,
+  DemoPicker,
+  DemoToast,
+  DemoTheme,
+  Example,
+  DemoSegmented,
+  DemoCard,
+  DemoWebBrowser,
+  DemoPopover,
+  DemoPermissions,
+  DemoForm,
+} from '../modules';
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function RouterContainer() {
   const navigatorRef = useRef(null);
-
-  const persistNavigationState = useCallback((navState) => {
-    return AsyncStorage.setItem(PersistenceKey, JSON.stringify(navState));
-  }, []);
-
-  const loadNavigationState = useCallback(async () => {
-    setTimeout(() => {
-      const navition = navigatorRef.current._navigation;
-      RouterHelper.initRouter(navition);
-    }, 300);
-    return new Promise((resolve, reject) => {
-      AsyncStorage.getItem(PersistenceKey)
-        .then((data) => {
-          resolve(JSON.parse(data));
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }, []);
 
   const onNavigationStateChange = useCallback(() => {
     const navition = navigatorRef.current._navigation;
@@ -48,16 +48,12 @@ function RouterContainer() {
   }, []);
 
   return (
-    <AppNavigationContainer
-      ref={captureRef}
-      onNavigationStateChange={onNavigationStateChange}
-      persistNavigationState={
-        __DEV__ && Platform.OS === 'ios' ? persistNavigationState : null
-      }
-      loadNavigationState={
-        __DEV__ && Platform.OS === 'ios' ? loadNavigationState : null
-      }
-    />
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={Example} />
+        <Tab.Screen name="Settings" component={About} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 

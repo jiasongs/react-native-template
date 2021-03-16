@@ -1,5 +1,5 @@
 'use strict';
-import { StackActions, NavigationActions } from 'react-navigation';
+import { StackActions } from '@react-navigation/routers';
 
 export default class RouterHelper {
   /**

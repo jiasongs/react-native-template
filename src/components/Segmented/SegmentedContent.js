@@ -1,7 +1,7 @@
 'use strict';
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Animated, FlatList, Platform, StyleSheet } from 'react-native';
-import Viewpager from '@react-native-community/viewpager';
+import Viewpager from 'react-native-pager-view';
 import SegmentedContentScene from './SegmentedContentScene';
 
 const AnimatedViewpager = Animated.createAnimatedComponent(Viewpager);
