@@ -6,7 +6,6 @@ import PageContainer from '../Container/PageContainer';
 import NavigationBar from '../Navigation/NavigationBar';
 import NavigationActionItem from '../Navigation/NavigationActionItem';
 import { useBackHandler } from '../../common/hooks';
-import RouterHelper from '../../routers/RouterHelper';
 
 const State = {
   canGoBack: false,
@@ -44,7 +43,7 @@ function WebBrowser(props) {
     if (navStateRef.current.canGoBack) {
       webViewRef.current.goBack();
     } else {
-      RouterHelper.goBack();
+      console.warn('需要处理router');
     }
   }, []);
 
@@ -53,7 +52,7 @@ function WebBrowser(props) {
   }, []);
 
   const onClose = useCallback(() => {
-    RouterHelper.goBack();
+    console.warn('需要处理router');
   }, []);
 
   const onNavStateChange = useCallback(

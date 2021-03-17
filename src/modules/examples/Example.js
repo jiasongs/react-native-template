@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { PageContainer, ListRow, NavigationBar } from '../../components';
-import RouterHelper from '../../routers/RouterHelper';
 import { RefreshLayout } from 'react-native-refresh';
 
-function Example() {
+function Example(props) {
+  const { navigation } = props;
   return (
     <PageContainer style={styles.container}>
       <NavigationBar title={'Example'} renderLeftAction={null} />
@@ -12,53 +12,51 @@ function Example() {
         <ScrollView>
           <ListRow
             title={'Theme'}
-            onPress={() =>
-              RouterHelper.navigate('DemoTheme', { isModal: true })
-            }
+            onPress={() => navigation.navigate('DemoTheme', { isModal: true })}
           />
           <ListRow
             title={'Alert'}
-            onPress={() => RouterHelper.navigate('DemoAlert')}
+            onPress={() => navigation.navigate('DemoAlert')}
           />
           <ListRow
             title={'Button'}
-            onPress={() => RouterHelper.navigate('DemoButton')}
+            onPress={() => navigation.navigate('DemoButton')}
           />
           <ListRow
             title={'Toast'}
-            onPress={() => RouterHelper.navigate('DemoToast')}
+            onPress={() => navigation.navigate('DemoToast')}
           />
           <ListRow
             title={'Overlay'}
-            onPress={() => RouterHelper.navigate('DemoOverlay')}
+            onPress={() => navigation.navigate('DemoOverlay')}
           />
           <ListRow
             title={'List'}
-            onPress={() => RouterHelper.navigate('DemoList')}
+            onPress={() => navigation.navigate('DemoList')}
           />
           <ListRow
             title={'ImageView'}
-            onPress={() => RouterHelper.navigate('DemoImageView')}
+            onPress={() => navigation.navigate('DemoImageView')}
           />
           <ListRow
             title={'Card'}
-            onPress={() => RouterHelper.navigate('DemoCard')}
+            onPress={() => navigation.navigate('DemoCard')}
           />
           <ListRow
             title={'ListRow'}
-            onPress={() => RouterHelper.navigate('DemoRow')}
+            onPress={() => navigation.navigate('DemoRow')}
           />
           <ListRow
             title={'Segmented'}
-            onPress={() => RouterHelper.navigate('DemoSegmented')}
+            onPress={() => navigation.navigate('DemoSegmented')}
           />
           <ListRow
             title={'Popover'}
-            onPress={() => RouterHelper.navigate('DemoPopover')}
+            onPress={() => navigation.navigate('DemoPopover')}
           />
           <ListRow
             title={'Form'}
-            onPress={() => RouterHelper.navigate('DemoForm')}
+            onPress={() => navigation.navigate('DemoForm')}
           />
         </ScrollView>
       </RefreshLayout>

@@ -13,7 +13,6 @@ import {
 } from './components';
 import { useBackExitApp } from './common/hooks';
 import { StorageManager } from './common/manager';
-import RouterHelper from './routers/RouterHelper';
 
 function App() {
   const [state, setState] = useState(
@@ -51,7 +50,8 @@ function App() {
   }, []);
 
   useBackExitApp(() => {
-    const routerStacks = RouterHelper.routerStacks;
+    console.warn('需要处理router');
+    const routerStacks = [];
     if (routerStacks.length === 1) {
       return true;
     } else {

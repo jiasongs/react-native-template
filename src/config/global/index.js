@@ -21,7 +21,6 @@ import {
   NetworkError,
 } from '../../components';
 import ListHeaderLoading from '../../components/List/ListHeaderLoading';
-import RouterHelper from '../../routers/RouterHelper';
 
 /**
  * @开启安卓的布局动画
@@ -60,7 +59,9 @@ Predefine.addDefaultProps(Button, { activeOpacity: 0.6 });
 Predefine.addDefaultProps(LoadingHint, { source: Images.json_loading });
 Predefine.addDefaultProps(NavigationBar, {
   backIcon: Images.icon_nav_left,
-  onPressBack: () => RouterHelper.goBack(),
+  onPressBack: () => {
+    console.warn('需要处理router');
+  },
 });
 Predefine.addDefaultProps(ListRow, {
   accessorySource: Images.icon_arrow_right,
