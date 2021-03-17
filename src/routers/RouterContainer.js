@@ -26,8 +26,30 @@ import {
   DemoForm,
 } from '../modules';
 
-const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function TabNavigator() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="示例" component={Example} />
+      <Tab.Screen name="关于" component={About} />
+    </Tab.Navigator>
+  );
+}
+
+const Stack = createStackNavigator();
+
+function StackNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={TabNavigator}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 function RouterContainer() {
   const navigatorRef = useRef(null);
@@ -38,6 +60,7 @@ function RouterContainer() {
   }, []);
 
   const captureRef = useCallback((navigator) => {
+    console.log('navigator', navigator);
     if (navigator) {
       const navition = navigator._navigation;
       RouterHelper.initRouter(navition);
@@ -48,11 +71,8 @@ function RouterContainer() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={Example} />
-        <Tab.Screen name="Settings" component={About} />
-      </Tab.Navigator>
+    <NavigationContainer ref={captureRef}>
+      <StackNavigator />
     </NavigationContainer>
   );
 }
